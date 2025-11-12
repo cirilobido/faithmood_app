@@ -8,7 +8,6 @@ import '../../core/core_exports.dart';
 import '../../routes/app_routes_names.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/widgets_exports.dart';
-import '../forgot_password/_forgot_password_view_model.dart';
 import '_login_view_model.dart';
 
 class LoginView extends ConsumerStatefulWidget {
@@ -133,7 +132,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 prefixIconWidget: SvgPicture.asset(
                   AppIcons.emailIcon,
                   colorFilter: ColorFilter.mode(
-                    AppColors.icon,
+                    AppColors.iconPrimary,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -152,7 +151,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 prefixIconWidget: SvgPicture.asset(
                   AppIcons.keyIcon,
                   colorFilter: ColorFilter.mode(
-                    AppColors.icon,
+                    AppColors.iconPrimary,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -167,7 +166,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     colorFilter: ColorFilter.mode(
                       _showPassword
                           ? theme.colorScheme.secondary
-                          : AppColors.icon,
+                          : AppColors.iconPrimary,
                       BlendMode.srcIn,
                     ),
                   ),

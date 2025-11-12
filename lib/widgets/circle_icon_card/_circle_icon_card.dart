@@ -33,6 +33,10 @@ class CircleIconCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final backgroundColor = this.backgroundColor ?? theme.cardColor;
+    final iconColor = this.iconColor ?? theme.primaryIconTheme.color;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -54,10 +58,7 @@ class CircleIconCard extends StatelessWidget {
               width: iconSize ?? AppSizes.iconSizeMedium,
               height: iconSize ?? AppSizes.iconSizeMedium,
               colorFilter: iconColor != null
-                  ? ColorFilter.mode(
-                      iconColor ?? AppColors.icon,
-                      BlendMode.srcIn,
-                    )
+                  ? ColorFilter.mode(iconColor, BlendMode.srcIn)
                   : null,
             ),
           ),
@@ -66,11 +67,7 @@ class CircleIconCard extends StatelessWidget {
           SizedBox(height: spacing),
           Text(
             label!,
-            style:
-                labelStyle ??
-                Theme.of(
-                  context,
-                ).textTheme.labelMedium?.copyWith(color: AppColors.textPrimary),
+            style: labelStyle ?? Theme.of(context).textTheme.labelMedium,
           ),
         ],
       ],

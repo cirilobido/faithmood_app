@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
     if (type == ButtonType.error) {
       return AppColors.error;
     }
-    return AppColors.buttonBackground;
+    return AppColors.primary;
   }
 
   Color _getForegroundColor() {
@@ -52,7 +52,7 @@ class CustomButton extends StatelessWidget {
     if (type == ButtonType.error) {
       return AppColors.textPrimary;
     }
-    return AppColors.textPrimaryWhite;
+    return AppColors.textPrimary;
   }
 
   Color _getForegroundOutlinedColor() {

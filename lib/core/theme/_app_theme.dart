@@ -33,7 +33,6 @@ abstract class AppTheme {
 
         outline: AppColors.border,
         outlineVariant: AppColors.divider,
-
       ),
       appBarTheme: baseTheme.appBarTheme.copyWith(
         backgroundColor: AppColors.cardPrimary,
@@ -42,9 +41,12 @@ abstract class AppTheme {
         ),
         foregroundColor: AppColors.textPrimary,
       ),
-      inputDecorationTheme: _inputDecorationTheme(textTheme: textTheme),
-      iconTheme: IconThemeData(color: AppColors.iconPrimary),
-      primaryIconTheme: IconThemeData(color: AppColors.primary),
+      inputDecorationTheme: _inputDecorationTheme(
+        textTheme: textTheme,
+        isDark: false,
+      ),
+      iconTheme: IconThemeData(color: AppColors.iconSecondary),
+      primaryIconTheme: IconThemeData(color: AppColors.iconPrimary),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         backgroundColor: AppColors.bottomNavBackground,
@@ -62,6 +64,89 @@ abstract class AppTheme {
       dialogTheme: baseTheme.dialogTheme.copyWith(
         backgroundColor: AppColors.cardPrimary,
         titleTextStyle: textTheme.titleLarge?.copyWith(
+          color: AppColors.textPrimary,
+        ),
+        contentTextStyle: textTheme.bodyLarge?.copyWith(
+          color: AppColors.textSecondary,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+        ),
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: AppColors.secondary,
+        circularTrackColor: AppColors.secondary,
+      ),
+      checkboxTheme: CheckboxThemeData(
+        visualDensity: VisualDensity.compact,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        fillColor: WidgetStatePropertyAll<Color>(AppColors.background),
+        checkColor: WidgetStatePropertyAll<Color>(AppColors.background),
+        side: BorderSide(color: AppColors.secondary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+        ),
+      ),
+    );
+  }
+
+  static ThemeData darkTheme() {
+    final baseTheme = ThemeData.light();
+    final textTheme = _getTextTheme(baseTheme.textTheme, true);
+    return baseTheme.copyWith(
+      textTheme: textTheme,
+      elevatedButtonTheme: _getElevatedButtonTheme(textTheme, true),
+      textButtonTheme: _getTextButtonTheme(true),
+      outlinedButtonTheme: _getOutlineButtonTheme(true),
+      scaffoldBackgroundColor: AppColors.dBackground,
+      primaryColor: AppColors.dPrimary,
+      colorScheme: const ColorScheme.light(
+        surface: AppColors.dBackground,
+        surfaceTint: AppColors.dBackground,
+        onSurface: AppColors.dBottomNavBackground,
+
+        primary: AppColors.dPrimary,
+        onPrimary: AppColors.dPrimary,
+        secondary: AppColors.dSecondary,
+        tertiary: AppColors.dTertiary,
+        error: AppColors.dError,
+
+        primaryContainer: AppColors.dCardPrimary,
+        onPrimaryContainer: AppColors.dCardPrimary,
+
+        outline: AppColors.dBorder,
+        outlineVariant: AppColors.divider,
+      ),
+      appBarTheme: baseTheme.appBarTheme.copyWith(
+        backgroundColor: AppColors.dCardPrimary,
+        titleTextStyle: baseTheme.textTheme.titleLarge?.copyWith(
+          color: AppColors.dTextPrimary,
+        ),
+        foregroundColor: AppColors.dTextPrimary,
+      ),
+      inputDecorationTheme: _inputDecorationTheme(
+        textTheme: textTheme,
+        isDark: false,
+      ),
+      iconTheme: IconThemeData(color: AppColors.dIconSecondary),
+      primaryIconTheme: IconThemeData(color: AppColors.dIconPrimary),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: AppColors.dBottomNavBackground,
+        selectedItemColor: AppColors.dPrimary,
+        unselectedItemColor: AppColors.dTextSecondary,
+        selectedLabelStyle: textTheme.bodySmall?.copyWith(
+          color: AppColors.dPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        unselectedLabelStyle: textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w400,
+        ),
+        showUnselectedLabels: true,
+      ),
+      dialogTheme: baseTheme.dialogTheme.copyWith(
+        backgroundColor: AppColors.dCardPrimary,
+        titleTextStyle: textTheme.titleLarge?.copyWith(
           color: AppColors.dTextPrimary,
         ),
         contentTextStyle: textTheme.bodyLarge?.copyWith(
@@ -72,16 +157,15 @@ abstract class AppTheme {
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: AppColors.secondary,
-        circularTrackColor: AppColors.secondary,
-
+        color: AppColors.dSecondary,
+        circularTrackColor: AppColors.dSecondary,
       ),
       checkboxTheme: CheckboxThemeData(
         visualDensity: VisualDensity.compact,
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        fillColor: WidgetStatePropertyAll<Color>(AppColors.background),
-        checkColor: WidgetStatePropertyAll<Color>(AppColors.background),
-        side: BorderSide(color: AppColors.secondary),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        fillColor: WidgetStatePropertyAll<Color>(AppColors.dBackground),
+        checkColor: WidgetStatePropertyAll<Color>(AppColors.dBackground),
+        side: BorderSide(color: AppColors.dSecondary),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         ),
@@ -137,14 +221,30 @@ abstract class AppTheme {
     ),
   );
 
-  static InputDecorationTheme _inputDecorationTheme({TextTheme? textTheme}) {
+  static InputDecorationTheme _inputDecorationTheme({
+    TextTheme? textTheme,
+    bool isDark = false,
+  }) {
     final baseTextTheme = textTheme;
+    final backgroundColor = isDark
+        ? AppColors.dInputBackground
+        : AppColors.inputBackground;
+    final borderColor = isDark ? AppColors.dBorder : AppColors.border;
+
+    final enabledColor = borderColor;
+    final focusColor = isDark ? AppColors.dPrimary : AppColors.primary;
+    final errorColor = isDark ? AppColors.dError : AppColors.error;
+    final disabledColor = isDark
+        ? AppColors.dDisabledBorder
+        : AppColors.disabledBorder;
+    final hintColor = isDark ? AppColors.dTextHint : AppColors.dTextHint;
+
     OutlineInputBorder border({Color? color}) {
       return OutlineInputBorder(
         borderRadius: const BorderRadius.all(
           Radius.circular(AppSizes.radiusSmall),
         ),
-        borderSide: BorderSide(width: 1, color: color ?? AppColors.border),
+        borderSide: BorderSide(width: 1, color: color ?? borderColor),
       );
     }
 
@@ -153,31 +253,28 @@ abstract class AppTheme {
       isDense: true,
       isCollapsed: true,
       filled: true,
-      fillColor: AppColors.inputBackground,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-        borderSide: BorderSide.none,
-      ),
+      fillColor: backgroundColor,
+      border: border(),
       //Enabled Border
-      enabledBorder: border(color: AppColors.inputBorder),
+      enabledBorder: border(color: enabledColor),
 
       //Focus Border
-      focusedBorder: border(color: AppColors.primary),
+      focusedBorder: border(color: focusColor),
 
       //Error Border
-      errorBorder: border(color: AppColors.error),
+      errorBorder: border(color: errorColor),
 
       //Error Focus Border
-      focusedErrorBorder: border(color: AppColors.primary),
+      focusedErrorBorder: border(color: focusColor),
 
       // Disabled Border
-      disabledBorder: border(),
+      disabledBorder: border(color: disabledColor),
       floatingLabelStyle: baseTextTheme?.bodyMedium?.copyWith(
         fontWeight: FontWeight.w600,
       ),
       hintStyle: baseTextTheme?.bodyMedium?.copyWith(
         fontWeight: FontWeight.normal,
-        color: AppColors.textHint,
+        color: hintColor,
       ),
       counterStyle: baseTextTheme?.bodySmall,
       prefixIconConstraints: BoxConstraints(
@@ -189,8 +286,9 @@ abstract class AppTheme {
 
   static TextTheme _getTextTheme(TextTheme baseTextTheme, bool isDark) {
     final color = isDark ? AppColors.dTextPrimary : AppColors.textPrimary;
-    final colorSecondary =
-    isDark ? AppColors.dTextSecondary : AppColors.textSecondary;
+    final colorSecondary = isDark
+        ? AppColors.dTextSecondary
+        : AppColors.textSecondary;
     return baseTextTheme.copyWith(
       displayLarge: baseTextTheme.displayLarge?.copyWith(
         fontFamily: _fontFamily,

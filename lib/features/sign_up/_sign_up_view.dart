@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/core_exports.dart';
@@ -319,7 +318,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               focusNode: _emailFocusNode,
               prefixIconWidget: SvgPicture.asset(
                 AppIcons.emailIcon,
-                colorFilter: ColorFilter.mode(AppColors.icon, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(AppColors.iconPrimary, BlendMode.srcIn),
               ),
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validations: [FieldTypeValidation.email],
@@ -340,7 +339,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               obscureText: !_showPassword,
               prefixIconWidget: SvgPicture.asset(
                 AppIcons.keyIcon,
-                colorFilter: ColorFilter.mode(AppColors.icon, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(AppColors.iconPrimary, BlendMode.srcIn),
               ),
               suffixIconWidget: IconButton(
                 onPressed: () {
@@ -351,7 +350,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 icon: SvgPicture.asset(
                   _showPassword ? AppIcons.eyeIcon : AppIcons.eyeClosedIcon,
                   colorFilter: ColorFilter.mode(
-                    _showPassword ? theme.colorScheme.primary : AppColors.icon,
+                    _showPassword ? theme.colorScheme.primary : AppColors.iconPrimary,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -375,7 +374,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               obscureText: !_showConfirmPassword,
               prefixIconWidget: SvgPicture.asset(
                 AppIcons.keyIcon,
-                colorFilter: ColorFilter.mode(AppColors.icon, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(AppColors.iconPrimary, BlendMode.srcIn),
               ),
               suffixIconWidget: IconButton(
                 onPressed: () {
@@ -390,7 +389,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                   colorFilter: ColorFilter.mode(
                     _showConfirmPassword
                         ? theme.colorScheme.primary
-                        : AppColors.icon,
+                        : AppColors.iconPrimary,
                     BlendMode.srcIn,
                   ),
                 ),

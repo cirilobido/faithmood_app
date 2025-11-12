@@ -281,7 +281,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 prefixIconWidget: SvgPicture.asset(
                   AppIcons.keyIcon,
                   colorFilter: ColorFilter.mode(
-                    AppColors.icon,
+                    AppColors.iconPrimary,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -296,7 +296,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                     colorFilter: ColorFilter.mode(
                       _showPassword
                           ? theme.colorScheme.secondary
-                          : AppColors.icon,
+                          : AppColors.iconPrimary,
                       BlendMode.srcIn,
                     ),
                   ),

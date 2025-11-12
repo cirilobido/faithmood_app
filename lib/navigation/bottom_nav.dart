@@ -67,7 +67,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         height: AppSizes.bottomNavHeight,
         decoration: BoxDecoration(
           border: Border(
-            top: BorderSide(color: AppColors.bottomNavDivider, width: 0.5),
+            top: BorderSide(color: theme.colorScheme.outlineVariant, width: 0.5),
           ),
         ),
         child: BottomNavigationBar(

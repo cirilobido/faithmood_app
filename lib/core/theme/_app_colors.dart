@@ -28,6 +28,10 @@ abstract class AppColors {
   static const border = Color(0xffE0E0E0);
   static const divider = Color(0xffE5E5E5);
 
+  static const disabledBackground = Color(0xffE0E0E0);
+  static const disabledText = Color(0xff9E9E9E);
+  static const disabledBorder = Color(0xffD6D6D6);
+
 
   //---------------Dark Colors---------------//
   static const dBackground = Color(0xff121212);
@@ -55,6 +59,10 @@ abstract class AppColors {
 
   static const dBorder = Color(0xff2E2E2E);
   static const dDivider = Color(0xff2A2A2A);
+
+  static const dDisabledBackground = Color(0xff2A2A2A);
+  static const dDisabledText = Color(0xff777777);
+  static const dDisabledBorder = Color(0xff3A3A3A);
 
 
   //---------------Extra Colors---------------//
