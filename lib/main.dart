@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,48 +14,95 @@ import 'package:url_strategy/url_strategy.dart';
 import 'core/core_exports.dart';
 import 'dev_utils/_logger.dart';
 import 'routes/app_routes.dart';
-import 'firebase_options.dart';
 import 'generated/l10n.dart';
+// import 'firebase_options.dart';
 
 Future<void> main() async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  /*NATIVE SPLASH RELATED*/
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  final binding = WidgetsFlutterBinding.ensureInitialized();
 
+  // Keep native splash visible during initialization
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
+
+  // Global error handling
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    devLogger('🔥 Flutter Error: ${details.exceptionAsString()}');
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    devLogger('🔥 Unhandled platform error: $error\n$stack');
+    return true;
+  };
+
+  // Run inside a guarded zone to catch any top-level async errors
+  await runZonedGuarded<Future<void>>(
+    () async {
+      await _initializeCore();
+
+      FlutterNativeSplash.remove();
+
+      runApp(const ProviderScope(child: FaithMoodApp()));
+    },
+    (error, stack) {
+      devLogger('🔥 Uncaught Zone Error: $error\n$stack');
+    },
+  );
+}
+
+Future<void> _initializeCore() async {
+  // URL strategy
   setPathUrlStrategy();
-  WidgetsFlutterBinding.ensureInitialized();
 
-  /*TIMEZONE RELATED*/
-  tzdata.initializeTimeZones();
-  final TimezoneInfo timeZoneName = await FlutterTimezone.getLocalTimezone();
-  tz.setLocalLocation(tz.getLocation(timeZoneName.identifier));
-
-  /*FIREBASE RELATED*/
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  final notifications = LocalNotificationsService.instance();
-  await notifications.init();
+  // Timezone setup
   try {
-    await notifications.restoreDailyNotification();
-  } catch (e) {
-    devLogger(e.toString());
+    tzdata.initializeTimeZones();
+    final TimezoneInfo timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName.identifier));
+  } catch (e, s) {
+    devLogger('⚠️ Timezone initialization failed: $e\n$s');
   }
-  final firebaseMessagingService = FirebaseMessagingService.instance();
-  await firebaseMessagingService.init(localNotificationsService: notifications);
 
-  /*GOOGLE ADS RELATED*/
-  RequestConfiguration requestConfiguration = RequestConfiguration();
-  if (kDebugMode) {
-    requestConfiguration = RequestConfiguration(
-      // TODO: For testing purposes only
-      // testDeviceIds: ['4F0049DA39CCE71E36C811DE510D1997'],
+  // Firebase setup
+  try {
+    // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    final notifications = LocalNotificationsService.instance();
+    await notifications.init();
+
+    try {
+      await notifications.restoreDailyNotification();
+    } catch (e, s) {
+      devLogger('⚠️ Failed to restore daily notification: $e\n$s');
+    }
+
+    final firebaseMessagingService = FirebaseMessagingService.instance();
+    await firebaseMessagingService.init(
+      localNotificationsService: notifications,
     );
+  } catch (e, s) {
+    devLogger('⚠️ Firebase or Notifications initialization failed: $e\n$s');
   }
 
-  MobileAds.instance.updateRequestConfiguration(requestConfiguration);
+  // Google Ads setup
+  try {
+    RequestConfiguration requestConfiguration = RequestConfiguration();
+    if (kDebugMode) {
+      requestConfiguration = RequestConfiguration(
+        // For testing only
+        testDeviceIds: ['4F0049DA39CCE71E36C811DE510D1997'],
+      );
+    }
 
-  await MobileAds.instance.initialize();
+    MobileAds.instance.updateRequestConfiguration(requestConfiguration);
 
-  runApp(const ProviderScope(child: FaithMoodApp()));
+    await MobileAds.instance.initialize().timeout(
+      const Duration(seconds: 6),
+      onTimeout: () {
+        devLogger('⚠️ Google Ads initialization timeout');
+        return InitializationStatus({});
+      },
+    );
+  } catch (e, s) {
+    devLogger('⚠️ Google Ads initialization failed: $e\n$s');
+  }
 }
 
 class FaithMoodApp extends ConsumerStatefulWidget {
@@ -65,15 +113,6 @@ class FaithMoodApp extends ConsumerStatefulWidget {
 }
 
 class _AppState extends ConsumerState<FaithMoodApp> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      /*NATIVE SPLASH RELATED*/
-      FlutterNativeSplash.remove();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final appTheme = ref.watch(appThemeProvider);

@@ -8,6 +8,20 @@ enum ButtonType { primary, secondary, tertiary, error }
 
 enum CustomStyle { filled, outlined, borderless }
 
+class _ButtonColorScheme {
+  final Color background;
+  final Color foreground;
+  final Color outlinedForeground;
+  final Color border;
+
+  const _ButtonColorScheme({
+    required this.background,
+    required this.foreground,
+    required this.outlinedForeground,
+    required this.border,
+  });
+}
+
 class CustomButton extends StatelessWidget {
   final String title;
   final ButtonType type;
@@ -26,70 +40,70 @@ class CustomButton extends StatelessWidget {
     this.isLoading = false,
   });
 
-  Color _getBackgroundColor() {
+  _ButtonColorScheme _resolveColors(ButtonType type, bool isDark) {
+    switch (type) {
+      case ButtonType.secondary:
+        return _ButtonColorScheme(
+          background: isDark ? AppColors.dSecondary : AppColors.secondary,
+          foreground: AppColors.textPrimary,
+          outlinedForeground: isDark
+              ? AppColors.dSecondary
+              : AppColors.secondary,
+          border: isDark ? AppColors.dSecondary : AppColors.secondary,
+        );
+
+      case ButtonType.tertiary:
+        return _ButtonColorScheme(
+          background: isDark ? AppColors.dTertiary : AppColors.tertiary,
+          foreground: AppColors.textPrimary,
+          outlinedForeground: isDark
+              ? AppColors.dTertiary
+              : AppColors.tertiary,
+          border: isDark ? AppColors.dTertiary : AppColors.tertiary,
+        );
+
+      case ButtonType.error:
+        return _ButtonColorScheme(
+          background: isDark ? AppColors.dError : AppColors.error,
+          foreground: isDark ? AppColors.dTextPrimary : AppColors.textPrimary,
+          outlinedForeground: isDark ? AppColors.dError : AppColors.error,
+          border: isDark ? AppColors.dError : AppColors.error,
+        );
+
+      default:
+        return _ButtonColorScheme(
+          background: isDark ? AppColors.dPrimary : AppColors.primary,
+          foreground: AppColors.textPrimary,
+          outlinedForeground: isDark ? AppColors.dPrimary : AppColors.primary,
+          border: isDark ? AppColors.dPrimary : AppColors.primary,
+        );
+    }
+  }
+
+  Color _getBackgroundColor(bool isDark) {
     if (style == CustomStyle.outlined || style == CustomStyle.borderless) {
       return Colors.transparent;
     }
-    if (type == ButtonType.secondary) {
-      return AppColors.secondary;
-    }
-    if (type == ButtonType.tertiary) {
-      return Colors.transparent;
-    }
-    if (type == ButtonType.error) {
-      return AppColors.error;
-    }
-    return AppColors.primary;
+    return _resolveColors(type, isDark).background;
   }
 
-  Color _getForegroundColor() {
-    if (type == ButtonType.secondary) {
-      return AppColors.dTextPrimary;
-    }
-    if (type == ButtonType.tertiary) {
-      return AppColors.primary;
-    }
-    if (type == ButtonType.error) {
-      return AppColors.textPrimary;
-    }
-    return AppColors.textPrimary;
+  Color _getForegroundColor(bool isDark) =>
+      _resolveColors(type, isDark).foreground;
+
+  Color _getForegroundOutlinedColor(bool isDark) =>
+      _resolveColors(type, isDark).outlinedForeground;
+
+  Color _getBorderColor(bool isDark) {
+    if (style == CustomStyle.borderless) return Colors.transparent;
+    return _resolveColors(type, isDark).border;
   }
 
-  Color _getForegroundOutlinedColor() {
-    if (type == ButtonType.secondary) {
-      return AppColors.secondary;
-    }
-    if (type == ButtonType.tertiary) {
-      return AppColors.textPrimary;
-    }
-    if (type == ButtonType.error) {
-      return AppColors.error;
-    }
-    return AppColors.primary;
-  }
-
-  Color _getBorderColor() {
-    if (style == CustomStyle.borderless) {
-      return Colors.transparent;
-    }
-    if (type == ButtonType.secondary) {
-      return AppColors.secondary;
-    }
-    if (type == ButtonType.tertiary) {
-      return AppColors.textPrimary;
-    }
-    if (type == ButtonType.error) {
-      return AppColors.error;
-    }
-    return AppColors.primary;
-  }
-
-  Widget? _getIconWidget() {
+  Widget? _getIconWidget(bool isDark) {
     if (isLoading) {
       return SizedBox.square(
         dimension: AppSizes.iconSizeRegular,
         child: CircularProgressIndicator(
-          color: _getForegroundColor(),
+          color: _getForegroundColor(isDark),
           strokeWidth: 1,
         ),
       );
@@ -101,7 +115,10 @@ class CustomButton extends StatelessWidget {
       if (icon != null && !isLoading)
         SvgPicture.asset(
           icon!,
-          colorFilter: ColorFilter.mode(_getForegroundColor(), BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(
+            _getForegroundColor(isDark),
+            BlendMode.srcIn,
+          ),
           height: AppSizes.iconSizeRegular,
           width: AppSizes.iconSizeRegular,
         ),
@@ -112,20 +129,21 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     if (style == CustomStyle.outlined || style == CustomStyle.borderless) {
       return OutlinedButton.icon(
         style: theme.outlinedButtonTheme.style?.copyWith(
           side: WidgetStatePropertyAll(
-            BorderSide(color: _getBorderColor(), width: 1.5),
+            BorderSide(color: _getBorderColor(isDark), width: 1.5),
           ),
         ),
         onPressed: isLoading ? null : onTap,
-        icon: _getIconWidget(),
+        icon: _getIconWidget(isDark),
         label: Center(
           child: Text(
             title,
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: _getForegroundOutlinedColor(),
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: _getForegroundOutlinedColor(isDark),
             ),
           ),
         ),
@@ -133,16 +151,16 @@ class CustomButton extends StatelessWidget {
     }
     return TextButton.icon(
       style: theme.textButtonTheme.style?.copyWith(
-        backgroundColor: WidgetStatePropertyAll(_getBackgroundColor()),
-        foregroundColor: WidgetStatePropertyAll(_getForegroundColor()),
+        backgroundColor: WidgetStatePropertyAll(_getBackgroundColor(isDark)),
+        foregroundColor: WidgetStatePropertyAll(_getForegroundColor(isDark)),
       ),
-      icon: _getIconWidget(),
+      icon: _getIconWidget(isDark),
       onPressed: isLoading ? null : onTap,
       label: Center(
         child: Text(
           title,
-          style: theme.textTheme.titleMedium?.copyWith(
-            color: _getForegroundColor(),
+          style: theme.textTheme.titleLarge?.copyWith(
+            color: _getForegroundColor(isDark),
           ),
         ),
       ),

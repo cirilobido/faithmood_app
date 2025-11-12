@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.faithmood.christianfaithjournal.faithmood_app"
+    namespace = "com.faithmood.christianfaithjournal"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "29.0.14033849"
 

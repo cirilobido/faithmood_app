@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide AnimatedContainer;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,28 +29,32 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+
     final lang = S.of(context);
     final state = ref.watch(welcomeViewModelProvider);
     return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingMedium,
+          vertical: AppSizes.paddingLarge,
+        ),
         child: Center(
           child: Stack(
             alignment: Alignment.center,
             children: [
               SizedBox.expand(
-                child: Center(
-                  child: Image.asset(
-                    AppIcons.greenGradientImage,
-                    fit: BoxFit.fitWidth,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: AppSizes.spacingXXLarge),
+                  child: Center(
+                    child:
+                    AnimatedContainer(
+                      mode: AnimationMode.pulse,
+                      child: Image.asset(
+                        AppIcons.greenGradientImage,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              SizedBox.expand(
-                child: Image.asset(
-                  AppIcons.welcomePetImage,
-                  fit: BoxFit.cover,
                 ),
               ),
               Column(
@@ -65,9 +69,7 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
                           _pageControllerIndex = index.toDouble();
                         });
                       },
-                      children: [
-                        _welcomeContent(),
-                      ],
+                      children: [_welcomeContent()],
                     ),
                   ),
                   Padding(
@@ -102,56 +104,54 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
   }
 
   void _handleNextPage() async {
-      final viewModel = ref.read(welcomeViewModelProvider.notifier);
-      await viewModel.setIsFirstTimeOpenFalse();
-      context.go(Routes.signUp);
-
+    final viewModel = ref.read(welcomeViewModelProvider.notifier);
+    await viewModel.setIsFirstTimeOpenFalse();
+    context.go(Routes.signUp);
   }
 
   Widget _title(String title) {
     final theme = Theme.of(context);
     return Text(
       title,
-      style: theme.textTheme.displayLarge?.copyWith(
-        color: AppColors.primary,
-      ),
+      style: theme.textTheme.headlineLarge,
+      textAlign: TextAlign.center,
     );
   }
 
   Widget _subtitle(String subtitle) {
     final theme = Theme.of(context);
-    final parts = subtitle.split('#');
-    return RichText(
-      text: TextSpan(
-        style: theme.textTheme.headlineLarge?.copyWith(
-          color: AppColors.textPrimary,
-        ),
-        children: [
-          TextSpan(text: parts.isNotEmpty ? parts[0] : ''),
-          if (parts.length > 1)
-            TextSpan(
-              text: parts[1],
-              style: theme.textTheme.headlineLarge?.copyWith(
-                color: AppColors.secondary,
-              ),
-            ),
-          if (parts.length > 2)
-            TextSpan(text: parts[2]),
-        ],
+    final isDark = theme.brightness == Brightness.dark;
+    return Text(
+      subtitle,
+      style: theme.textTheme.titleLarge?.copyWith(
+        fontWeight: FontWeight.normal,
+        color: isDark ? AppColors.dTextSecondary : AppColors.textSecondary,
       ),
+      textAlign: TextAlign.center,
     );
   }
 
   Widget _welcomeContent() {
     final lang = S.of(context);
+    final screenWidth = MediaQuery.sizeOf(context).width;
     return Padding(
       padding: EdgeInsets.all(AppSizes.paddingMedium),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _title(lang.welcomeTitle1),
-          const SizedBox(height: AppSizes.spacingSmall),
-          _subtitle(lang.welcomeMessage1),
+          _title('Welcome to your new space of faith'),
+          const SizedBox(height: AppSizes.spacingMedium),
+          _subtitle('A place to connect with yourself and with God every day.'),
+          const SizedBox(height: AppSizes.spacingMedium),
+          AnimatedContainer(
+            mode: AnimationMode.floating,
+            duration: const Duration(seconds: 4),
+            floatRange: 10,
+            child: Image.asset(
+              AppIcons.welcomePetImage,
+              width: screenWidth * 0.8,
+            ),
+          ),
         ],
       ),
     );

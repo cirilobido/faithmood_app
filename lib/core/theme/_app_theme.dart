@@ -74,8 +74,7 @@ abstract class AppTheme {
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: AppColors.secondary,
-        circularTrackColor: AppColors.secondary,
+        color: AppColors.primary,
       ),
       checkboxTheme: CheckboxThemeData(
         visualDensity: VisualDensity.compact,
@@ -157,8 +156,7 @@ abstract class AppTheme {
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: AppColors.dSecondary,
-        circularTrackColor: AppColors.dSecondary,
+        color: AppColors.dPrimary,
       ),
       checkboxTheme: CheckboxThemeData(
         visualDensity: VisualDensity.compact,

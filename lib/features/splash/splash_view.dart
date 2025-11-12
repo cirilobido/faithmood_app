@@ -25,12 +25,11 @@ class SplashView extends ConsumerStatefulWidget {
 }
 
 class _SplashViewState extends ConsumerState<SplashView> {
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // _init();
+      _init();
     });
   }
 
@@ -87,32 +86,46 @@ class _SplashViewState extends ConsumerState<SplashView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final screenWidth = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: Stack(
+        alignment: Alignment.center,
         children: [
-          SizedBox.expand(
-            child: Center(
-              child: Image.asset(
-                AppIcons.splashGradientImage,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Image.asset(AppIcons.appLogo, width: screenWidth * 0.2),
-          Padding(
-            padding: const EdgeInsets.all(AppSizes.paddingMedium),
-            child: SizedBox(
-              width: AppSizes.iconSizeMedium,
-              height: AppSizes.iconSizeMedium,
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  theme.colorScheme.primary,
+          if (!isDark)
+            SizedBox.expand(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  AppIcons.splashGradientImage,
+                  fit: BoxFit.cover,
                 ),
               ),
+            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(AppIcons.appLogo, width: screenWidth * 0.6),
+              Padding(
+                padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                child: SizedBox(
+                  width: AppSizes.iconSizeMedium,
+                  height: AppSizes.iconSizeMedium,
+                  child: CircularProgressIndicator(strokeWidth: 3),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: AppSizes.paddingLarge,
+                horizontal: AppSizes.paddingMedium,
+              ),
+              child: Text('Faith Mood', style: theme.textTheme.headlineMedium),
             ),
           ),
         ],
