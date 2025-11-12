@@ -10,7 +10,7 @@ class AppThemeProvider extends ChangeNotifier {
 
   AppThemeProvider();
 
-  final ThemeMode _themeMode = ThemeMode.dark;
+  final ThemeMode _themeMode = ThemeMode.light;
 
   ThemeMode get themeMode => _themeMode;
 

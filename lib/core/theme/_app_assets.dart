@@ -2,9 +2,10 @@ abstract class AppIcons {
   // 🖼️ PNG
   static const appLogo = 'assets/logo/logo_transparent.png';
   static const logoSecondary = 'assets/logo/logo_secondary.png';
-  static const welcomeWomanImage = 'assets/img/welcome_woman.png';
-  static const welcomeManImage = 'assets/img/welcome_man.png';
-  static const welcomeWomanGreenImage = 'assets/img/welcome_woman_green.png';
+  static const welcomePetImage = 'assets/img/img_welcome_pet.png';
+  static const greenGradientImage = 'assets/img/img_green_gradient.png';
+  static const splashGradientImage = 'assets/img/im_gradient_splash.png';
+
   static const errorImage = 'assets/img/img_error.png';
   static const shieldCheckImage = 'assets/img/img_shield_check.png';
 

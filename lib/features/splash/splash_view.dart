@@ -30,7 +30,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _init();
+      // _init();
     });
   }
 
@@ -86,32 +86,36 @@ class _SplashViewState extends ConsumerState<SplashView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final screenWidth = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(AppIcons.appLogo, width: screenWidth * 0.2),
-              Padding(
-                padding: const EdgeInsets.all(AppSizes.paddingMedium),
-                child: SizedBox(
-                  width: AppSizes.iconSizeMedium,
-                  height: AppSizes.iconSizeMedium,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      AppColors.secondary,
-                    ),
-                  ),
+      backgroundColor: theme.colorScheme.surface,
+      body: Stack(
+        children: [
+          SizedBox.expand(
+            child: Center(
+              child: Image.asset(
+                AppIcons.splashGradientImage,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Image.asset(AppIcons.appLogo, width: screenWidth * 0.2),
+          Padding(
+            padding: const EdgeInsets.all(AppSizes.paddingMedium),
+            child: SizedBox(
+              width: AppSizes.iconSizeMedium,
+              height: AppSizes.iconSizeMedium,
+              child: CircularProgressIndicator(
+                strokeWidth: 3,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  theme.colorScheme.primary,
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
