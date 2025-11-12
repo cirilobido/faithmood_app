@@ -7,30 +7,33 @@ import 'package:faithmood_app/core/core_exports.dart';
 abstract class AppTheme {
   static const _fontFamily = 'Quicksand';
 
-  static ThemeData appTheme() {
-    final baseTheme = ThemeData.dark();
-    final textTheme = _getTextTheme(baseTheme.textTheme);
+  static ThemeData lightTheme() {
+    final baseTheme = ThemeData.light();
+    final textTheme = _getTextTheme(baseTheme.textTheme, false);
     return baseTheme.copyWith(
       textTheme: textTheme,
       elevatedButtonTheme: _getElevatedButtonTheme(textTheme, false),
       textButtonTheme: _getTextButtonTheme(false),
       outlinedButtonTheme: _getOutlineButtonTheme(false),
-      scaffoldBackgroundColor: Colors.transparent,
+      scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.primary,
       colorScheme: const ColorScheme.light(
         surface: AppColors.background,
         surfaceTint: AppColors.background,
+        onSurface: AppColors.bottomNavBackground,
+
         primary: AppColors.primary,
         onPrimary: AppColors.primary,
         secondary: AppColors.secondary,
+        tertiary: AppColors.tertiary,
         error: AppColors.error,
+
         primaryContainer: AppColors.cardPrimary,
         onPrimaryContainer: AppColors.cardPrimary,
-        outline: AppColors.divider,
-        outlineVariant: AppColors.textPrimary,
-      ),
-      drawerTheme: baseTheme.drawerTheme.copyWith(
-        backgroundColor: AppColors.background,
+
+        outline: AppColors.border,
+        outlineVariant: AppColors.divider,
+
       ),
       appBarTheme: baseTheme.appBarTheme.copyWith(
         backgroundColor: AppColors.cardPrimary,
@@ -40,7 +43,7 @@ abstract class AppTheme {
         foregroundColor: AppColors.textPrimary,
       ),
       inputDecorationTheme: _inputDecorationTheme(textTheme: textTheme),
-      iconTheme: IconThemeData(color: AppColors.icon),
+      iconTheme: IconThemeData(color: AppColors.iconPrimary),
       primaryIconTheme: IconThemeData(color: AppColors.primary),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
@@ -59,11 +62,9 @@ abstract class AppTheme {
       dialogTheme: baseTheme.dialogTheme.copyWith(
         backgroundColor: AppColors.cardPrimary,
         titleTextStyle: textTheme.titleLarge?.copyWith(
-          fontSize: 22,
           color: AppColors.dTextPrimary,
         ),
         contentTextStyle: textTheme.bodyLarge?.copyWith(
-          fontSize: 16,
           color: AppColors.dTextPrimary,
         ),
         shape: RoundedRectangleBorder(
@@ -72,6 +73,8 @@ abstract class AppTheme {
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: AppColors.secondary,
+        circularTrackColor: AppColors.secondary,
+
       ),
       checkboxTheme: CheckboxThemeData(
         visualDensity: VisualDensity.compact,
@@ -101,7 +104,7 @@ abstract class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizes.radiusFull),
         ),
-        backgroundColor: AppColors.buttonBackground,
+        backgroundColor: AppColors.primary,
         foregroundColor: AppColors.textPrimary,
         textStyle: baseTextTheme.bodyLarge?.copyWith(
           fontWeight: FontWeight.w600,
@@ -114,7 +117,7 @@ abstract class AppTheme {
     style: TextButton.styleFrom(
       padding: _buttonPadding,
       visualDensity: _buttonDensity,
-      backgroundColor: AppColors.buttonBackground,
+      backgroundColor: AppColors.primary,
       foregroundColor: AppColors.textPrimary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.radiusFull),
@@ -129,7 +132,7 @@ abstract class AppTheme {
       ),
       visualDensity: _buttonDensity,
       padding: _buttonPadding,
-      side: BorderSide(color: AppColors.buttonBackground),
+      side: BorderSide(color: AppColors.primary),
       foregroundColor: AppColors.textPrimary,
     ),
   );
@@ -184,9 +187,10 @@ abstract class AppTheme {
     );
   }
 
-  static TextTheme _getTextTheme(TextTheme baseTextTheme) {
-    final color = AppColors.textPrimary;
-    final colorSecondary = AppColors.textSecondary;
+  static TextTheme _getTextTheme(TextTheme baseTextTheme, bool isDark) {
+    final color = isDark ? AppColors.dTextPrimary : AppColors.textPrimary;
+    final colorSecondary =
+    isDark ? AppColors.dTextSecondary : AppColors.textSecondary;
     return baseTextTheme.copyWith(
       displayLarge: baseTextTheme.displayLarge?.copyWith(
         fontFamily: _fontFamily,

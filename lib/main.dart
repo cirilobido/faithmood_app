@@ -82,8 +82,8 @@ class _AppState extends ConsumerState<FaithMoodApp> {
     return MaterialApp.router(
       title: 'FaithMood',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.appTheme(),
-      darkTheme: AppTheme.appTheme(),
+      theme: AppTheme.lightTheme(),
+      darkTheme: AppTheme.darkTheme(),
       themeMode: appTheme.themeMode,
       locale: appLang.currentLocale,
       localizationsDelegates: const [
