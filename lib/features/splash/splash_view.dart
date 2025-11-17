@@ -91,44 +91,46 @@ class _SplashViewState extends ConsumerState<SplashView> {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          if (!isDark)
-            SizedBox.expand(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Image.asset(
-                  AppIcons.splashGradientImage,
-                  fit: BoxFit.cover,
+      body: SizedBox.expand(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (!isDark)
+              SizedBox.expand(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset(
+                    AppIcons.splashGradientImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(AppIcons.appLogo, width: screenWidth * 0.6),
-              Padding(
-                padding: const EdgeInsets.all(AppSizes.paddingMedium),
-                child: SizedBox(
-                  width: AppSizes.iconSizeMedium,
-                  height: AppSizes.iconSizeMedium,
-                  child: CircularProgressIndicator(strokeWidth: 3),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(AppIcons.appLogo, width: screenWidth * 0.6),
+                Padding(
+                  padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                  child: SizedBox(
+                    width: AppSizes.iconSizeMedium,
+                    height: AppSizes.iconSizeMedium,
+                    child: CircularProgressIndicator(strokeWidth: 3),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSizes.paddingLarge,
-                horizontal: AppSizes.paddingMedium,
-              ),
-              child: Text('Faith Mood', style: theme.textTheme.headlineMedium),
+              ],
             ),
-          ),
-        ],
+            Positioned(
+              bottom: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppSizes.paddingLarge,
+                  horizontal: AppSizes.paddingMedium,
+                ),
+                child: Text('Faith Mood', style: theme.textTheme.headlineMedium),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

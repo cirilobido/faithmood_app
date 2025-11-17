@@ -79,10 +79,11 @@ abstract class AppTheme {
       checkboxTheme: CheckboxThemeData(
         visualDensity: VisualDensity.compact,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        fillColor: WidgetStatePropertyAll<Color>(AppColors.background),
-        checkColor: WidgetStatePropertyAll<Color>(AppColors.background),
-        side: BorderSide(color: AppColors.secondary),
+        fillColor: WidgetStatePropertyAll<Color>(AppColors.secondary),
+        checkColor: WidgetStatePropertyAll<Color>(AppColors.cardPrimary),
+        side: BorderSide(color: AppColors.border, width: 1),
         shape: RoundedRectangleBorder(
+          side: BorderSide(color: AppColors.secondary, width: 1),
           borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         ),
       ),
@@ -90,7 +91,7 @@ abstract class AppTheme {
   }
 
   static ThemeData darkTheme() {
-    final baseTheme = ThemeData.light();
+    final baseTheme = ThemeData.dark();
     final textTheme = _getTextTheme(baseTheme.textTheme, true);
     return baseTheme.copyWith(
       textTheme: textTheme,
@@ -99,7 +100,7 @@ abstract class AppTheme {
       outlinedButtonTheme: _getOutlineButtonTheme(true),
       scaffoldBackgroundColor: AppColors.dBackground,
       primaryColor: AppColors.dPrimary,
-      colorScheme: const ColorScheme.light(
+      colorScheme: const ColorScheme.dark(
         surface: AppColors.dBackground,
         surfaceTint: AppColors.dBackground,
         onSurface: AppColors.dBottomNavBackground,
@@ -125,7 +126,7 @@ abstract class AppTheme {
       ),
       inputDecorationTheme: _inputDecorationTheme(
         textTheme: textTheme,
-        isDark: false,
+        isDark: true,
       ),
       iconTheme: IconThemeData(color: AppColors.dIconSecondary),
       primaryIconTheme: IconThemeData(color: AppColors.dIconPrimary),
@@ -161,10 +162,11 @@ abstract class AppTheme {
       checkboxTheme: CheckboxThemeData(
         visualDensity: VisualDensity.compact,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        fillColor: WidgetStatePropertyAll<Color>(AppColors.dBackground),
-        checkColor: WidgetStatePropertyAll<Color>(AppColors.dBackground),
-        side: BorderSide(color: AppColors.dSecondary),
+        fillColor: WidgetStatePropertyAll<Color>(AppColors.dSecondary),
+        checkColor: WidgetStatePropertyAll<Color>(AppColors.dCardPrimary),
+        side: BorderSide(color: AppColors.dBorder, width: 1),
         shape: RoundedRectangleBorder(
+          side: BorderSide(color: AppColors.dSecondary, width: 1),
           borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         ),
       ),
@@ -326,26 +328,28 @@ abstract class AppTheme {
       titleMedium: baseTextTheme.titleMedium?.copyWith(
         fontFamily: _fontFamily,
         fontWeight: FontWeight.w700,
+        fontSize: 18,
         color: color,
       ),
       titleSmall: baseTextTheme.titleSmall?.copyWith(
         fontFamily: _fontFamily,
         fontWeight: FontWeight.w700,
+        fontSize: 16,
         color: color,
       ),
       bodyLarge: baseTextTheme.bodyLarge?.copyWith(
         fontFamily: _fontFamily,
+        fontWeight: FontWeight.w500,
         fontSize: 16,
         color: color,
       ),
       bodyMedium: baseTextTheme.bodyMedium?.copyWith(
         fontFamily: _fontFamily,
-        fontSize: 16,
         color: color,
       ),
       bodySmall: baseTextTheme.bodySmall?.copyWith(
         fontFamily: _fontFamily,
-        color: AppColors.textSecondary,
+        color: color,
       ),
       labelLarge: baseTextTheme.labelLarge?.copyWith(
         fontFamily: _fontFamily,

@@ -13,12 +13,13 @@ class GradientProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final gradient = _getGradientColors();
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
       child: Stack(
         children: [
-          Container(color: AppColors.background, height: AppSizes.spacingSmall),
+          Container(color: theme.colorScheme.tertiary.withValues(alpha: 0.2), height: AppSizes.spacingSmall),
           FractionallySizedBox(
             alignment: Alignment.centerLeft,
             widthFactor: value.clamp(0.0, 1.0),

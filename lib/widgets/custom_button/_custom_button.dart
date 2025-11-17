@@ -29,6 +29,7 @@ class CustomButton extends StatelessWidget {
   final String? icon;
   final VoidCallback onTap;
   final bool isLoading;
+  final bool isShortText;
 
   const CustomButton({
     super.key,
@@ -38,6 +39,7 @@ class CustomButton extends StatelessWidget {
     this.type = ButtonType.primary,
     this.style = CustomStyle.filled,
     this.isLoading = false,
+    this.isShortText = false,
   });
 
   _ButtonColorScheme _resolveColors(ButtonType type, bool isDark) {
@@ -56,9 +58,7 @@ class CustomButton extends StatelessWidget {
         return _ButtonColorScheme(
           background: isDark ? AppColors.dTertiary : AppColors.tertiary,
           foreground: AppColors.textPrimary,
-          outlinedForeground: isDark
-              ? AppColors.dTertiary
-              : AppColors.tertiary,
+          outlinedForeground: isDark ? AppColors.dTertiary : AppColors.tertiary,
           border: isDark ? AppColors.dTertiary : AppColors.tertiary,
         );
 
@@ -130,6 +130,9 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final textTheme = isShortText
+        ? theme.textTheme.titleSmall
+        : theme.textTheme.titleLarge;
     if (style == CustomStyle.outlined || style == CustomStyle.borderless) {
       return OutlinedButton.icon(
         style: theme.outlinedButtonTheme.style?.copyWith(
@@ -142,7 +145,7 @@ class CustomButton extends StatelessWidget {
         label: Center(
           child: Text(
             title,
-            style: theme.textTheme.titleLarge?.copyWith(
+            style: textTheme?.copyWith(
               color: _getForegroundOutlinedColor(isDark),
             ),
           ),
@@ -159,9 +162,7 @@ class CustomButton extends StatelessWidget {
       label: Center(
         child: Text(
           title,
-          style: theme.textTheme.titleLarge?.copyWith(
-            color: _getForegroundColor(isDark),
-          ),
+          style: textTheme?.copyWith(color: _getForegroundColor(isDark)),
         ),
       ),
     );

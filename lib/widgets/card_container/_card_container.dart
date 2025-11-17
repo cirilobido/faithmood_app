@@ -9,13 +9,15 @@ class CardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSizes.paddingMedium),
       decoration: BoxDecoration(
-        color: AppColors.cardPrimary,
+        color: theme.colorScheme.onSurface,
         border: Border.all(
-          color: AppColors.border,
+          color: theme.colorScheme.outline,
           width: AppSizes.borderWithSmall,
         ),
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),

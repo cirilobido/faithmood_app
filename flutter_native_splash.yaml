@@ -3,9 +3,15 @@ flutter_native_splash:
   ios: true
   web: false
 
-  color: "#344451"
-  image: assets/img/img_splash_logo.png
+  color: "#f8f9fa"
+  color_dark: "#121212"
+  color_android: "#f8f9fa"
+  color_dark_android: "#121212"
+  color_ios: "#f8f9fa"
+  color_dark_ios: "#121212"
+  image: assets/logo/img_splash_logo.png
 
   android_12:
-    color: "#344451"
-    image: assets/img/img_android_12_splash_logo.png
+    color: "#f8f9fa"
+    color_dark: "#121212"
+    image: assets/logo/img_android_12_splash_logo.png

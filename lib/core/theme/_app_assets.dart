@@ -3,17 +3,23 @@ abstract class AppIcons {
   static const appLogo = 'assets/logo/logo_transparent.png';
   static const logoSecondary = 'assets/logo/logo_secondary.png';
   static const welcomePetImage = 'assets/img/img_welcome_pet.png';
+  static const happyPetImage = 'assets/img/img_happy_pet.png';
   static const greenGradientImage = 'assets/img/img_green_gradient.png';
+  static const greenGradientOvalImage = 'assets/img/img_green_gradient_oval.png';
+  static const greenChartImage = 'assets/img/img_chart.png';
   static const splashGradientImage = 'assets/img/im_gradient_splash.png';
+  static const person1Image = 'assets/img/img_person_1.png';
+  static const person2Image = 'assets/img/img_person_2.png';
+  static const person3Image = 'assets/img/img_person_3.png';
+  static const person4Image = 'assets/img/img_person_4.png';
 
   static const errorImage = 'assets/img/img_error.png';
   static const shieldCheckImage = 'assets/img/img_shield_check.png';
 
   // 🎨 SVG
-  // static const arrowRightIcon = 'assets/icons/ic_arrow_right.svg';
-  // static const arrowLeftIcon = 'assets/icons/ic_arrow_left.svg';
-  // static const closeIcon = 'assets/icons/ic_close.svg';
-  // static const addIcon = 'assets/icons/ic_add.svg';
+  static const arrowLeftIcon = 'assets/icons/ic_arrow_left.svg';
+  static const closeIcon = 'assets/icons/ic_close.svg';
+  static const addIcon = 'assets/icons/ic_add.svg';
   static const eyeIcon = 'assets/icons/ic_eye.svg';
   static const eyeClosedIcon = 'assets/icons/ic_closed_eye.svg';
   static const emailIcon = 'assets/icons/ic_mail.svg';
@@ -23,16 +29,13 @@ abstract class AppIcons {
   static const googleIcon = 'assets/icons/ic_google.svg';
   static const facebookIcon = 'assets/icons/ic_facebook.svg';
   static const appleIcon = 'assets/icons/ic_apple.svg';
-  // static const megaphoneIcon = 'assets/icons/ic_megaphone.svg';
-  // static const sendIcon = 'assets/icons/ic_send.svg';
-  // static const whatsAppIcon = 'assets/icons/ic_whatsapp.svg';
-  // static const instagramIcon = 'assets/icons/ic_instagram.svg';
-  // static const messengerIcon = 'assets/icons/ic_fb_messenger.svg';
-  // static const messageSentIcon = 'assets/icons/ic_message_sent.svg';
-  // static const messagePendingIcon = 'assets/icons/ic_message_pending.svg';
-  // static const messageCancelledIcon = 'assets/icons/ic_message_cancelled.svg';
-  // static const storageIcon = 'assets/icons/ic_storage.svg';
-  // static const filesIcon = 'assets/icons/ic_files.svg';
+  static const bellBlueIcon = 'assets/icons/ic_bell_blue.svg';
+  static const greenFigureIcon = 'assets/icons/ic_green_figure.svg';
+  static const starIcon = 'assets/icons/ic_star.svg';
+  static const star5Icon = 'assets/icons/ic_5_stars.svg';
+  static const starsRatingIcon = 'assets/icons/ic_stars_rating.svg';
+  static const oatLeftIcon = 'assets/icons/ic_oat_left.svg';
+  static const oatRightIcon = 'assets/icons/ic_oat_right.svg';
 }
 
 abstract class AppAnimations {

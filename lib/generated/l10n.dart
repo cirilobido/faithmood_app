@@ -928,6 +928,591 @@ class S {
   String get sms {
     return Intl.message('SMS', name: 'sms', desc: '', args: []);
   }
+
+  /// `Welcome to your new space of faith`
+  String get welcomeTitle {
+    return Intl.message(
+      'Welcome to your new space of faith',
+      name: 'welcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A place to connect with yourself and with God every day.`
+  String get welcomeSubtitle {
+    return Intl.message(
+      'A place to connect with yourself and with God every day.',
+      name: 'welcomeSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s Build Your Profile`
+  String get profilePageTitle {
+    return Intl.message(
+      'Let’s Build Your Profile',
+      name: 'profilePageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tell us a little about yourself.`
+  String get profilePageSubtitle {
+    return Intl.message(
+      'Tell us a little about yourself.',
+      name: 'profilePageSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get age {
+    return Intl.message('Age', name: 'age', desc: '', args: []);
+  }
+
+  /// `💭 What would you like to find in this experience?`
+  String get experiencePageTitle {
+    return Intl.message(
+      '💭 What would you like to find in this experience?',
+      name: 'experiencePageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `Select your Language`
+  String get selectYourLanguage {
+    return Intl.message(
+      'Select your Language',
+      name: 'selectYourLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🕊️ Find inner peace `
+  String get experienceQ1 {
+    return Intl.message(
+      '🕊️ Find inner peace ',
+      name: 'experienceQ1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `💭 Learn to manage my emotions`
+  String get experienceQ2 {
+    return Intl.message(
+      '💭 Learn to manage my emotions',
+      name: 'experienceQ2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🙏 Strengthen my faith`
+  String get experienceQ3 {
+    return Intl.message(
+      '🙏 Strengthen my faith',
+      name: 'experienceQ3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `✨ Have a moment with God every day`
+  String get experienceQ4 {
+    return Intl.message(
+      '✨ Have a moment with God every day',
+      name: 'experienceQ4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🔥 Extremely committed`
+  String get committedQ1 {
+    return Intl.message(
+      '🔥 Extremely committed',
+      name: 'committedQ1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `💪 Very committed`
+  String get committedQ2 {
+    return Intl.message(
+      '💪 Very committed',
+      name: 'committedQ2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🌿 Somewhat committed`
+  String get committedQ3 {
+    return Intl.message(
+      '🌿 Somewhat committed',
+      name: 'committedQ3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🌧️ A little`
+  String get committedQ4 {
+    return Intl.message(
+      '🌧️ A little',
+      name: 'committedQ4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `👀 Just exploring`
+  String get committedQ5 {
+    return Intl.message(
+      '👀 Just exploring',
+      name: 'committedQ5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🙌 How committed are you with your faith?`
+  String get committedPageTitle {
+    return Intl.message(
+      '🙌 How committed are you with your faith?',
+      name: 'committedPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age is required!`
+  String get ageIsRequired {
+    return Intl.message(
+      'Age is required!',
+      name: 'ageIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🌿 Have you ever used a faith journal app before?`
+  String get everUsedBeforeTitle {
+    return Intl.message(
+      '🌿 Have you ever used a faith journal app before?',
+      name: 'everUsedBeforeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🙏 Yes, I have used one before`
+  String get everUsedBeforeQ1 {
+    return Intl.message(
+      '🙏 Yes, I have used one before',
+      name: 'everUsedBeforeQ1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `✨ No, this is my first time`
+  String get everUsedBeforeQ2 {
+    return Intl.message(
+      '✨ No, this is my first time',
+      name: 'everUsedBeforeQ2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🕊️ I’ve tried something similar`
+  String get everUsedBeforeQ3 {
+    return Intl.message(
+      '🕊️ I’ve tried something similar',
+      name: 'everUsedBeforeQ3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🌱 Join others growing stronger in faith`
+  String get joinOthersTitle {
+    return Intl.message(
+      '🌱 Join others growing stronger in faith',
+      name: 'joinOthersTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grow in Faith`
+  String get growInFaith {
+    return Intl.message(
+      'Grow in Faith',
+      name: 'growInFaith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3 Days`
+  String get days3 {
+    return Intl.message('3 Days', name: 'days3', desc: '', args: []);
+  }
+
+  /// `15 Days`
+  String get days15 {
+    return Intl.message('15 Days', name: 'days15', desc: '', args: []);
+  }
+
+  /// `30 Days`
+  String get days30 {
+    return Intl.message('30 Days', name: 'days30', desc: '', args: []);
+  }
+
+  /// `+80% of those who use FaithMood feel their faith grow within 30 days.`
+  String get joinOthersSubtitle {
+    return Intl.message(
+      '+80% of those who use FaithMood feel their faith grow within 30 days.',
+      name: 'joinOthersSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `📖 Have you ever followed a guided plan to strengthen your faith?`
+  String get guidedPlanTitle {
+    return Intl.message(
+      '📖 Have you ever followed a guided plan to strengthen your faith?',
+      name: 'guidedPlanTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🙏 Yes, several times`
+  String get guidedPlanQ1 {
+    return Intl.message(
+      '🙏 Yes, several times',
+      name: 'guidedPlanQ1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `📘 Once or twice`
+  String get guidedPlanQ2 {
+    return Intl.message(
+      '📘 Once or twice',
+      name: 'guidedPlanQ2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🌱 No, it’ll be my first time`
+  String get guidedPlanQ3 {
+    return Intl.message(
+      '🌱 No, it’ll be my first time',
+      name: 'guidedPlanQ3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🔔 Stay connected with your purpose`
+  String get askNotificationTitle {
+    return Intl.message(
+      '🔔 Stay connected with your purpose',
+      name: 'askNotificationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.`
+  String get askNotificationSubtitle {
+    return Intl.message(
+      'We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.',
+      name: 'askNotificationSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maybe later`
+  String get maybeLater {
+    return Intl.message('Maybe later', name: 'maybeLater', desc: '', args: []);
+  }
+
+  /// `Allow Notifications`
+  String get allowNotifications {
+    return Intl.message(
+      'Allow Notifications',
+      name: 'allowNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leave Rating`
+  String get leaveRating {
+    return Intl.message(
+      'Leave Rating',
+      name: 'leaveRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start For Free`
+  String get startFreeTrial {
+    return Intl.message(
+      'Start For Free',
+      name: 'startFreeTrial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🙏 We’re preparing your space...`
+  String get preparingPageTitle {
+    return Intl.message(
+      '🙏 We’re preparing your space...',
+      name: 'preparingPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The Lord gives you strength when you need it most.`
+  String get preparingPageSubtitle {
+    return Intl.message(
+      'The Lord gives you strength when you need it most.',
+      name: 'preparingPageSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personalizing your profile...`
+  String get preparingPageT1 {
+    return Intl.message(
+      'Personalizing your profile...',
+      name: 'preparingPageT1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting up your emotions journey...`
+  String get preparingPageT2 {
+    return Intl.message(
+      'Setting up your emotions journey...',
+      name: 'preparingPageT2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final touches for your experience...`
+  String get preparingPageT3 {
+    return Intl.message(
+      'Final touches for your experience...',
+      name: 'preparingPageT3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `✔️ No payment required now`
+  String get noPaymentRequiredNow {
+    return Intl.message(
+      '✔️ No payment required now',
+      name: 'noPaymentRequiredNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just ### per month - Cancel anytime`
+  String get just449PerMonthCancelAnytime {
+    return Intl.message(
+      'Just ### per month - Cancel anytime',
+      name: 'just449PerMonthCancelAnytime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `✨ Your journey is just beginning`
+  String get paywallTitle {
+    return Intl.message(
+      '✨ Your journey is just beginning',
+      name: 'paywallTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discover a calm, ad-free space made to nurture your faith through reflection and growth.`
+  String get paywallSubtitle {
+    return Intl.message(
+      'Discover a calm, ad-free space made to nurture your faith through reflection and growth.',
+      name: 'paywallSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A friend’s recommendation`
+  String get socialDiscoverQ9 {
+    return Intl.message(
+      'A friend’s recommendation',
+      name: 'socialDiscoverQ9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Church / community`
+  String get socialDiscoverQ10 {
+    return Intl.message(
+      'Church / community',
+      name: 'socialDiscoverQ10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Searching for Christian apps`
+  String get socialDiscoverQ11 {
+    return Intl.message(
+      'Searching for Christian apps',
+      name: 'socialDiscoverQ11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `⭐ How did you hear about the app?`
+  String get socialDiscoverTitle {
+    return Intl.message(
+      '⭐ How did you hear about the app?',
+      name: 'socialDiscoverTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The Lord is my shepherd; I shall not want.`
+  String get psaml231Verse {
+    return Intl.message(
+      'The Lord is my shepherd; I shall not want.',
+      name: 'psaml231Verse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Psalm 23:1`
+  String get psalm231 {
+    return Intl.message('Psalm 23:1', name: 'psalm231', desc: '', args: []);
+  }
+
+  /// `📖 Guided Faith Plans`
+  String get guidedFaithPlans {
+    return Intl.message(
+      '📖 Guided Faith Plans',
+      name: 'guidedFaithPlans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `💭 Unlimited Mood Track`
+  String get unlimitedMoodTrack {
+    return Intl.message(
+      '💭 Unlimited Mood Track',
+      name: 'unlimitedMoodTrack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `✨ Advance Progress Tracker`
+  String get advanceProgressTracker {
+    return Intl.message(
+      '✨ Advance Progress Tracker',
+      name: 'advanceProgressTracker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🚫 Ad-Free Experience`
+  String get adfreeExperience {
+    return Intl.message(
+      '🚫 Ad-Free Experience',
+      name: 'adfreeExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `🎉 Enjoying your experience so far?`
+  String get ratingContentTitle {
+    return Intl.message(
+      '🎉 Enjoying your experience so far?',
+      name: 'ratingContentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share your thoughts — your feedback inspires others 🙏`
+  String get ratingContentSubtitle {
+    return Intl.message(
+      'Share your thoughts — your feedback inspires others 🙏',
+      name: 'ratingContentSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FaithMood was made for people like you`
+  String get ratingContentDesc {
+    return Intl.message(
+      'FaithMood was made for people like you',
+      name: 'ratingContentDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It’s my favorite moment of the day — just me and God.`
+  String get ratingContentP4Rating {
+    return Intl.message(
+      'It’s my favorite moment of the day — just me and God.',
+      name: 'ratingContentP4Rating',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

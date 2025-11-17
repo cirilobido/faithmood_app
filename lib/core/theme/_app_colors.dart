@@ -21,6 +21,7 @@ abstract class AppColors {
 
   static const iconPrimary = Color(0xFF212121);
   static const iconSecondary = Color(0xFF757575);
+  static const iconTertiary = Color(0xFFD5D5D5);
 
   static const inputBorder = Color(0xffE0E0E0);
   static const inputBackground = Color(0xffffffff);
@@ -53,6 +54,7 @@ abstract class AppColors {
 
   static const dIconPrimary = Color(0xFFE0E0E0);
   static const dIconSecondary = Color(0xFF9E9E9E);
+  static const dIconTertiary = Color(0xFF3B3B3B);
 
   static const dInputBorder = Color(0xff2E2E2E);
   static const dInputBackground = Color(0xff1C1C1C);
