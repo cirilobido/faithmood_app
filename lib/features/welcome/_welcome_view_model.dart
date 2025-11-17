@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 import '../../core/core_exports.dart';
 import '../../dev_utils/dev_utils_exports.dart';
 import '../../generated/l10n.dart';
+import '../../routes/app_routes_names.dart';
 import '_welcome_state.dart';
 
 final welcomeViewModelProvider =
@@ -118,12 +121,13 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
     _updateProgress();
   }
 
-  void nextPage() {
+  bool nextPage() {
     final next = state.currentPage + 1;
-    if (next >= backendPageOrder.length) return;
+    if (next >= backendPageOrder.length) return false;
 
     updateState(currentPage: next);
     _updateProgress();
+    return true;
   }
 
   void previousPage() {
@@ -148,12 +152,124 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
 
     if (backendIndex == 1) {
       InputValidations.validateName(context, nameController.text.trim());
-      if (ageController.text.trim().isEmpty || int.parse(ageController.text) <= 0) {
+      if (ageController.text.trim().isEmpty ||
+          int.parse(ageController.text) <= 0) {
         return lang.ageIsRequired;
       }
     }
-    // TODO: VALIDATIONS FOR PAGES
+    if (backendIndex == 2 && selectedExperience.isEmpty) {
+      return lang.selectAnOption;
+    }
+    if (backendIndex == 3 && selectedCommitted == null) {
+      return lang.selectAnOption;
+    }
+    if (backendIndex == 4 && selectedEverUsed == null) {
+      return lang.selectAnOption;
+    }
+    if (backendIndex == 6 && selectedGuidedPlan == null) {
+      return lang.selectAnOption;
+    }
+    if (backendIndex == 10 && selectedSocial == null) {
+      return lang.selectAnOption;
+    }
+    // TODO: ADD PAYMENT
     return null;
+  }
+
+  Future<void> requestNotificationPermission() async {
+    try {
+      updateState(isLoading: true);
+      await FirebaseMessagingService.instance().requestPermission();
+      firebaseAnalyticProvider.logEvent(
+        name: 'allow_notifications_tap',
+        parameters: {'screen': 'welcome_screen'},
+      );
+    } catch (e, s) {
+      devLogger('⚠️ Notification permission failed: $e\n$s');
+      firebaseAnalyticProvider.logEvent(
+        name: 'allow_notifications_failed',
+        parameters: {'screen': 'welcome_screen', 'error': e.toString()},
+      );
+    } finally {
+      updateState(isLoading: false);
+    }
+  }
+
+  Future<void> rateApp(BuildContext context) async {
+    final backendIndex = getCurrentBackendIndex();
+    _logNextSuccess(backendIndex);
+    try {
+      final InAppReview inAppReview = InAppReview.instance;
+      if (await inAppReview.isAvailable()) {
+        firebaseAnalyticProvider.logEvent(
+          name: 'request_review',
+          parameters: {'screen': 'welcome_screen'},
+        );
+        await inAppReview.requestReview();
+      } else {
+        firebaseAnalyticProvider.logEvent(
+          name: 'open_store_listing_review',
+          parameters: {'screen': 'welcome_screen'},
+        );
+        await inAppReview.openStoreListing(
+          appStoreId: settingsProvider.settings?.rateUrlIos,
+        );
+      }
+    } catch (e, s) {
+      devLogger('⚠️ Rate app failed: $e\n$s');
+      firebaseAnalyticProvider.logEvent(
+        name: 'error_request_review',
+        parameters: {'screen': 'welcome_screen', 'error': e.toString()},
+      );
+    } finally {
+      await finishOnboarding(
+        context,
+        completedBackendIndex: backendIndex,
+      );
+    }
+  }
+
+  Future<void> goToNextOrFinish(BuildContext context) async {
+    final backendIndex = getCurrentBackendIndex();
+    _logNextSuccess(backendIndex);
+    final advanced = nextPage();
+    if (!advanced) {
+      await finishOnboarding(
+        context,
+        completedBackendIndex: backendIndex,
+      );
+    }
+  }
+
+  Future<void> finishOnboarding(
+    BuildContext context, {
+    int? completedBackendIndex,
+  }) async {
+    final backendIndex = completedBackendIndex ?? getCurrentBackendIndex();
+    _logOnboardingFinished(backendIndex);
+    await setIsFirstTimeOpenFalse();
+    if (!context.mounted) return;
+    context.push(Routes.home);
+  }
+
+  void _logNextSuccess(int backendIndex) {
+    firebaseAnalyticProvider.logEvent(
+      name: 'welcome_next_success',
+      parameters: {
+        'screen': 'welcome_screen',
+        'backend_index': backendIndex,
+      },
+    );
+  }
+
+  void _logOnboardingFinished(int backendIndex) {
+    firebaseAnalyticProvider.logEvent(
+      name: 'welcome_finish_onboarding',
+      parameters: {
+        'screen': 'welcome_screen',
+        'last_backend_index': backendIndex,
+      },
+    );
   }
 
   @override

@@ -90,6 +90,8 @@ class FirebaseMessagingService {
     devLogger('User granted permission: ${result.authorizationStatus}');
   }
 
+  Future<void> requestPermission() => _requestPermission();
+
   /// Handles messages received while the app is in the foreground
   void _onForegroundMessage(RemoteMessage message) {
     devLogger('Foreground message received: ${message.data.toString()}');

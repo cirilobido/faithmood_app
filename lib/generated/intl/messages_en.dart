@@ -267,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
+    "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Select your Language",
     ),

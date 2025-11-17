@@ -51,8 +51,24 @@ class WelcomeView extends ConsumerWidget {
                       );
                       return;
                     }
-                    vm.nextPage();
+                    vm.goToNextOrFinish(context);
                   },
+                  onPrimaryTapOverride: pageIndex == 7
+                      ? () {
+                          vm.requestNotificationPermission().whenComplete(() {
+                            vm.goToNextOrFinish(context);
+                          });
+                        }
+                      : pageIndex == 11
+                          ? () {
+                              vm.rateApp(context);
+                            }
+                          : null,
+                  onSecondaryTap: (pageIndex == 7 || pageIndex == 11)
+                      ? () {
+                          vm.goToNextOrFinish(context);
+                        }
+                      : null,
                 ),
                 const SizedBox(height: AppSizes.spacingLarge),
               ],

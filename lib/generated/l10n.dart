@@ -1513,6 +1513,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Select an Option`
+  String get selectAnOption {
+    return Intl.message(
+      'Select an Option',
+      name: 'selectAnOption',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

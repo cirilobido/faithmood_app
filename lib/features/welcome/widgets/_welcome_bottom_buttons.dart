@@ -7,12 +7,16 @@ class WelcomeBottomButtons extends StatelessWidget {
   final int index;
   final bool isLoading;
   final VoidCallback onNext;
+  final VoidCallback? onPrimaryTapOverride;
+  final VoidCallback? onSecondaryTap;
 
   const WelcomeBottomButtons({
     super.key,
     required this.index,
     required this.isLoading,
     required this.onNext,
+    this.onPrimaryTapOverride,
+    this.onSecondaryTap,
   });
 
   @override
@@ -55,7 +59,7 @@ class WelcomeBottomButtons extends StatelessWidget {
               isLoading: isLoading,
               type: ButtonType.primary,
               style: CustomStyle.filled,
-              onTap: onNext,
+              onTap: onPrimaryTapOverride ?? onNext,
             ),
 
           if (index == 9) ...[
@@ -77,7 +81,7 @@ class WelcomeBottomButtons extends StatelessWidget {
               type: ButtonType.primary,
               style: CustomStyle.borderless,
               isShortText: true,
-              onTap: onNext,
+              onTap: onSecondaryTap ?? onNext,
             ),
           ],
         ],
