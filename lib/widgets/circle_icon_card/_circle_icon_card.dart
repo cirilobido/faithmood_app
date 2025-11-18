@@ -34,8 +34,8 @@ class CircleIconCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final backgroundColor = this.backgroundColor ?? theme.cardColor;
-    final iconColor = this.iconColor ?? theme.primaryIconTheme.color;
+    final backgroundColor = this.backgroundColor ?? theme.colorScheme.primaryContainer;
+    final iconColor = this.iconColor ?? theme.iconTheme.color;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

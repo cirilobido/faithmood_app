@@ -186,7 +186,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
             children: [
               Text(lang.verifyCode, style: theme.textTheme.displaySmall),
               const SizedBox(height: AppSizes.spacingMedium),
-              Text(lang.verifyCodeMessage, style: theme.textTheme.bodyMedium),
+              Text(lang.verifyCodeMessage, style: theme.textTheme.bodyLarge),
               const SizedBox(height: AppSizes.spacingLarge),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,7 +309,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 },
                 child: Text(
                   lang.resendCode,
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w500,
                     color: AppColors.secondary,
                   ),

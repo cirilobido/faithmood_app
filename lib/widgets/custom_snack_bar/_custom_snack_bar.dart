@@ -15,7 +15,7 @@ class CustomSnackBar {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: backgroundColor ?? AppColors.primary,
-        content: Text(message, style: textStyle ?? theme.textTheme.bodyMedium),
+        content: Text(message, style: textStyle ?? theme.textTheme.bodyLarge),
         behavior: behavior,
         duration: duration,
       ),

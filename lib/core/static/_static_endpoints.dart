@@ -1,7 +1,9 @@
 abstract class Endpoints {
-  static const base = "https://faithmood.up.railway.app/api/";
-  // static const base = "http://localhost:4221/api/";
-  // static const base = "https://864ed657db97.ngrok-free.app/api/";
+  // static const base = "https://faithmood.up.railway.app/api/"; // Production server
+  // static const base = "http://localhost:4221/api/"; // For local backend - works on iOS Simulator and desktop
+  static const base = "http://192.168.100.41:4221/api/"; // For Android Emulator (10.0.2.2 points to host machine)
+  // static const base = "http://192.168.x.x:4221/api/"; // For physical device - replace x.x with your computer's local IP
+  // static const base = "https://864ed657db97.ngrok-free.app/api/"; // For mobile testing with local backend via ngrok
 
   static const settings = 'settings';
   static const plans = 'settings/plans';

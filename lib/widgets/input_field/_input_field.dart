@@ -109,7 +109,7 @@ class InputField extends StatelessWidget {
         child: Icon(
           iconData,
           size: AppSizes.iconSizeRegular,
-          color: AppColors.textHint,
+          color: theme.iconTheme.color,
         ),
       );
     }
@@ -131,7 +131,7 @@ class InputField extends StatelessWidget {
               style:
                   labelStyle ??
                   theme.textTheme.labelLarge?.copyWith(
-                    color: AppColors.textPrimary,
+                    color: theme.textTheme.labelSmall?.color
                   ),
               children: [
                 if (required)

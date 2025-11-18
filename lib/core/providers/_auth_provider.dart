@@ -29,12 +29,9 @@ class AuthProvider extends ChangeNotifier {
   get currentPlan => _currentPlan;
 
   Future<void> registerUser(AuthRequest params) async {
-    final firebaseMessagingService = FirebaseMessagingService.instance();
-    final token = await firebaseMessagingService.getToken();
-    params = params.copyWith(fcmToken: token);
     try {
       final result = await _useCase.registerUser(
-        params.copyWith(fcmToken: token),
+        params,
       );
       switch (result) {
         case Success(value: final value):

@@ -23,12 +23,41 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
+    "adfreeExperience": MessageLookupByLibrary.simpleMessage(
+      "🚫 Ad-Free Experience",
+    ),
+    "advanceProgressTracker": MessageLookupByLibrary.simpleMessage(
+      "✨ Advance Progress Tracker",
+    ),
+    "age": MessageLookupByLibrary.simpleMessage("Age"),
+    "ageIsRequired": MessageLookupByLibrary.simpleMessage("Age is required!"),
+    "allowNotifications": MessageLookupByLibrary.simpleMessage(
+      "Allow Notifications",
+    ),
     "and": MessageLookupByLibrary.simpleMessage("y"),
+    "askNotificationSubtitle": MessageLookupByLibrary.simpleMessage(
+      "We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.",
+    ),
+    "askNotificationTitle": MessageLookupByLibrary.simpleMessage(
+      "🔔 Stay connected with your purpose",
+    ),
     "back": MessageLookupByLibrary.simpleMessage("Atrás"),
     "campains": MessageLookupByLibrary.simpleMessage("Campañas"),
     "campainsUsage": MessageLookupByLibrary.simpleMessage("Campañas"),
     "cancelada": MessageLookupByLibrary.simpleMessage("Cancelada"),
     "cancelled": MessageLookupByLibrary.simpleMessage("Cancelado"),
+    "committedPageTitle": MessageLookupByLibrary.simpleMessage(
+      "🙌 How committed are you with your faith?",
+    ),
+    "committedQ1": MessageLookupByLibrary.simpleMessage(
+      "🔥 Extremely committed",
+    ),
+    "committedQ2": MessageLookupByLibrary.simpleMessage("💪 Very committed"),
+    "committedQ3": MessageLookupByLibrary.simpleMessage(
+      "🌿 Somewhat committed",
+    ),
+    "committedQ4": MessageLookupByLibrary.simpleMessage("🌧️ A little"),
+    "committedQ5": MessageLookupByLibrary.simpleMessage("👀 Just exploring"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Confirmar Contraseña",
     ),
@@ -37,10 +66,40 @@ class MessageLookup extends MessageLookupByLibrary {
     "createAnAccount": MessageLookupByLibrary.simpleMessage("Crear una cuenta"),
     "createCampaign": MessageLookupByLibrary.simpleMessage("Crear Campaña"),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
+    "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
+    "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
+    "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
+    ),
+    "everUsedBeforeQ1": MessageLookupByLibrary.simpleMessage(
+      "🙏 Yes, I have used one before",
+    ),
+    "everUsedBeforeQ2": MessageLookupByLibrary.simpleMessage(
+      "✨ No, this is my first time",
+    ),
+    "everUsedBeforeQ3": MessageLookupByLibrary.simpleMessage(
+      "🕊️ I’ve tried something similar",
+    ),
+    "everUsedBeforeTitle": MessageLookupByLibrary.simpleMessage(
+      "🌿 Have you ever used a faith journal app before?",
+    ),
+    "experiencePageTitle": MessageLookupByLibrary.simpleMessage(
+      "💭 What would you like to find in this experience?",
+    ),
+    "experienceQ1": MessageLookupByLibrary.simpleMessage(
+      "🕊️ Find inner peace ",
+    ),
+    "experienceQ2": MessageLookupByLibrary.simpleMessage(
+      "💭 Learn to manage my emotions",
+    ),
+    "experienceQ3": MessageLookupByLibrary.simpleMessage(
+      "🙏 Strengthen my faith",
+    ),
+    "experienceQ4": MessageLookupByLibrary.simpleMessage(
+      "✨ Have a moment with God every day",
     ),
     "expirada": MessageLookupByLibrary.simpleMessage("Expirada"),
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
@@ -50,6 +109,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "¿Olvidaste tu contraseña?",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "growInFaith": MessageLookupByLibrary.simpleMessage("Grow in Faith"),
+    "guidedFaithPlans": MessageLookupByLibrary.simpleMessage(
+      "📖 Guided Faith Plans",
+    ),
+    "guidedPlanQ1": MessageLookupByLibrary.simpleMessage(
+      "🙏 Yes, several times",
+    ),
+    "guidedPlanQ2": MessageLookupByLibrary.simpleMessage("📘 Once or twice"),
+    "guidedPlanQ3": MessageLookupByLibrary.simpleMessage(
+      "🌱 No, it’ll be my first time",
+    ),
+    "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
+      "📖 Have you ever followed a guided plan to strengthen your faith?",
+    ),
     "history": MessageLookupByLibrary.simpleMessage("Historial"),
     "home": MessageLookupByLibrary.simpleMessage("Inicio"),
     "iAgreeToChangeMyPassword": MessageLookupByLibrary.simpleMessage(
@@ -69,11 +142,22 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Correo electrónico o contraseña inválidos. Inténtalo de nuevo.",
         ),
+    "joinOthersSubtitle": MessageLookupByLibrary.simpleMessage(
+      "+80% of those who use FaithMood feel their faith grow within 30 days.",
+    ),
+    "joinOthersTitle": MessageLookupByLibrary.simpleMessage(
+      "🌱 Join others growing stronger in faith",
+    ),
+    "just449PerMonthCancelAnytime": MessageLookupByLibrary.simpleMessage(
+      "Just ### per month - Cancel anytime",
+    ),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
         MessageLookupByLibrary.simpleMessage(
           "El nombre debe tener al menos 3 caracteres",
         ),
+    "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
     "loginErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Tu correo o contraseña no coinciden. Verifica tus datos e inténtalo de nuevo.",
     ),
@@ -81,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hola, bienvenido de nuevo!",
     ),
     "manually": MessageLookupByLibrary.simpleMessage("Manualmente"),
+    "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
     "message": MessageLookupByLibrary.simpleMessage("Mensaje"),
     "metodoDePago": MessageLookupByLibrary.simpleMessage("Método de pago"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
@@ -90,6 +175,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "newPassword": MessageLookupByLibrary.simpleMessage("Nueva contraseña"),
     "noCampaignsYet": MessageLookupByLibrary.simpleMessage(
       "Aún no hay campañas disponibles.",
+    ),
+    "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
+      "✔️ No payment required now",
     ),
     "or": MessageLookupByLibrary.simpleMessage("o"),
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
@@ -114,6 +202,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tu contraseña ha sido restaurada correctamente.",
     ),
     "paypal": MessageLookupByLibrary.simpleMessage("Paypal"),
+    "paywallSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Discover a calm, ad-free space made to nurture your faith through reflection and growth.",
+    ),
+    "paywallTitle": MessageLookupByLibrary.simpleMessage(
+      "✨ Your journey is just beginning",
+    ),
     "pending": MessageLookupByLibrary.simpleMessage("Pendiente"),
     "phone": MessageLookupByLibrary.simpleMessage("Teléfono"),
     "phoneNumberDigitsError": MessageLookupByLibrary.simpleMessage(
@@ -123,6 +217,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "El teléfono debe tener entre 10 y 15 dígitos",
     ),
     "plan": MessageLookupByLibrary.simpleMessage("Plan"),
+    "preparingPageSubtitle": MessageLookupByLibrary.simpleMessage(
+      "The Lord gives you strength when you need it most.",
+    ),
+    "preparingPageT1": MessageLookupByLibrary.simpleMessage(
+      "Personalizing your profile...",
+    ),
+    "preparingPageT2": MessageLookupByLibrary.simpleMessage(
+      "Setting up your emotions journey...",
+    ),
+    "preparingPageT3": MessageLookupByLibrary.simpleMessage(
+      "Final touches for your experience...",
+    ),
+    "preparingPageTitle": MessageLookupByLibrary.simpleMessage(
+      "🙏 We’re preparing your space...",
+    ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage(
       "Política de privacidad",
     ),
@@ -133,7 +242,29 @@ class MessageLookup extends MessageLookupByLibrary {
       "Al continuar, aceptas nuestra",
     ),
     "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
+    "profilePageSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Tell us a little about yourself.",
+    ),
+    "profilePageTitle": MessageLookupByLibrary.simpleMessage(
+      "Let’s Build Your Profile",
+    ),
     "proximoCobro": MessageLookupByLibrary.simpleMessage("Próximo cobro"),
+    "psalm231": MessageLookupByLibrary.simpleMessage("Psalm 23:1"),
+    "psaml231Verse": MessageLookupByLibrary.simpleMessage(
+      "The Lord is my shepherd; I shall not want.",
+    ),
+    "ratingContentDesc": MessageLookupByLibrary.simpleMessage(
+      "FaithMood was made for people like you",
+    ),
+    "ratingContentP4Rating": MessageLookupByLibrary.simpleMessage(
+      "It’s my favorite moment of the day — just me and God.",
+    ),
+    "ratingContentSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Share your thoughts — your feedback inspires others 🙏",
+    ),
+    "ratingContentTitle": MessageLookupByLibrary.simpleMessage(
+      "🎉 Enjoying your experience so far?",
+    ),
     "recipient": MessageLookupByLibrary.simpleMessage("Destinatario"),
     "registrationErrorMessage": MessageLookupByLibrary.simpleMessage(
       "No pudimos completar tu registro en este momento. Inténtalo de nuevo y si el problema persiste, vuelve más tarde.",
@@ -144,6 +275,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
+    "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
+    "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
+      "Select your Language",
+    ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
     "signIn": MessageLookupByLibrary.simpleMessage("Iniciar sesión"),
     "signInNow": MessageLookupByLibrary.simpleMessage("Iniciar sesión ahora"),
@@ -159,12 +294,25 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Saltar"),
     "sms": MessageLookupByLibrary.simpleMessage("SMS"),
+    "socialDiscoverQ10": MessageLookupByLibrary.simpleMessage(
+      "Church / community",
+    ),
+    "socialDiscoverQ11": MessageLookupByLibrary.simpleMessage(
+      "Searching for Christian apps",
+    ),
+    "socialDiscoverQ9": MessageLookupByLibrary.simpleMessage(
+      "A friend’s recommendation",
+    ),
+    "socialDiscoverTitle": MessageLookupByLibrary.simpleMessage(
+      "⭐ How did you hear about the app?",
+    ),
     "somethingWentWrongWhileSendingTheOtpCodePleaseTry":
         MessageLookupByLibrary.simpleMessage(
           "Ocurrió un error al enviar el código OTP. Inténtalo de nuevo más tarde.",
         ),
     "sorryAboutThis": MessageLookupByLibrary.simpleMessage("Lo sentimos"),
     "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "startFreeTrial": MessageLookupByLibrary.simpleMessage("Start For Free"),
     "status": MessageLookupByLibrary.simpleMessage("Estado"),
     "storage": MessageLookupByLibrary.simpleMessage("Storage"),
     "storageUsage": MessageLookupByLibrary.simpleMessage(
@@ -180,6 +328,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Este campo es obligatorio",
     ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
+    "unlimitedMoodTrack": MessageLookupByLibrary.simpleMessage(
+      "💭 Unlimited Mood Track",
+    ),
     "update": MessageLookupByLibrary.simpleMessage("Actualizar"),
     "updateAvailable": MessageLookupByLibrary.simpleMessage(
       "Actualización disponible",
@@ -214,6 +365,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "welcomeMessage3": MessageLookupByLibrary.simpleMessage(
       "#Automatiza hoy# y haz crecer tu empresa.",
+    ),
+    "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "A place to connect with yourself and with God every day.",
+    ),
+    "welcomeTitle": MessageLookupByLibrary.simpleMessage(
+      "Welcome to your new space of faith",
     ),
     "welcomeTitle1": MessageLookupByLibrary.simpleMessage("Innovar"),
     "welcomeTitle2": MessageLookupByLibrary.simpleMessage("Impulsar"),
