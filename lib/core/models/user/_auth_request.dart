@@ -15,6 +15,7 @@ class AuthRequest {
   final String? newPassword;
   final String? fcmToken;
   final String? timezone;
+  final bool? notificationsEnabled;
 
   AuthRequest({
     this.id,
@@ -27,6 +28,7 @@ class AuthRequest {
     this.newPassword,
     this.fcmToken,
     this.timezone,
+    this.notificationsEnabled,
   });
 
   factory AuthRequest.fromJson(Map<String, dynamic> json) =>
@@ -45,6 +47,7 @@ class AuthRequest {
     String? newPassword,
     String? fcmToken,
     String? timezone,
+    bool? notificationsEnabled,
   }) {
     return AuthRequest(
       id: id ?? this.id,
@@ -57,6 +60,7 @@ class AuthRequest {
       newPassword: newPassword ?? this.newPassword,
       fcmToken: fcmToken ?? this.fcmToken,
       timezone: timezone ?? this.timezone,
+      notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
     );
   }
 }

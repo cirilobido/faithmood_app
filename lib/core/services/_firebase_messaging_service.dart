@@ -21,6 +21,7 @@ class FirebaseMessagingService {
   final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
 
   /// Initialize Firebase Messaging and sets up all message listeners
+  /// Note: Permission request is handled separately during onboarding
   Future<void> init({
     required LocalNotificationsService localNotificationsService,
   }) async {
@@ -30,8 +31,8 @@ class FirebaseMessagingService {
     // Handle FCM token
     _handlePushNotificationsToken();
 
-    // Request user permission for notifications
-    _requestPermission();
+    // Don't request permission here - it will be requested during onboarding
+    // Permission is requested when user clicks "Allow" on the notification permission page
 
     // Register handler for background messages (app terminated)
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -91,6 +92,18 @@ class FirebaseMessagingService {
   }
 
   Future<void> requestPermission() => _requestPermission();
+
+  /// Checks if notifications are enabled
+  Future<bool> areNotificationsEnabled() async {
+    try {
+      final settings = await FirebaseMessaging.instance.getNotificationSettings();
+      return settings.authorizationStatus == AuthorizationStatus.authorized ||
+          settings.authorizationStatus == AuthorizationStatus.provisional;
+    } catch (e) {
+      devLogger('⚠️ Error checking notification status: $e');
+      return false;
+    }
+  }
 
   /// Handles messages received while the app is in the foreground
   void _onForegroundMessage(RemoteMessage message) {

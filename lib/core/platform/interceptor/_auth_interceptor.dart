@@ -30,7 +30,7 @@ class AuthInterceptor implements Interceptor {
     final authToken = await authDao.getCurrentUserToken();
     var headers = {
       "Authorization": "Bearer $authToken",
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
     };
     options.headers.addAll(headers);
 
@@ -49,7 +49,7 @@ class AuthInterceptor implements Interceptor {
         final retryRequest = err.requestOptions;
         var headers = {
           "Authorization": "Bearer $newToken",
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         };
         retryRequest.headers.addAll(headers);
 
@@ -99,7 +99,7 @@ class AuthInterceptor implements Interceptor {
         "${Endpoints.base}${Endpoints.refreshToken}",
         data: {"token": currentToken},
         options: Options(
-          headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          headers: {"Content-Type": "application/json"},
         ),
       );
 

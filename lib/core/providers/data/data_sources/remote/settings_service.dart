@@ -27,8 +27,6 @@ class SettingsServiceImpl implements SettingsService {
 
   @override
   Future<Settings?> getSettings() async {
-    // TODO: Fix when backend endpoint is ready
-    return Settings();
     try {
       final request = await requestProcessor.process(
         request: httpClient.get(Endpoints.settings),

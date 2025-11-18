@@ -10,29 +10,38 @@ class User {
   final String? deviceId;
   final String? name;
   final String? email;
-  final String? password;
-  final String? newPassword;
   final int? age;
   final Lang? lang;
   final PlanName? planType;
-  final int? maxDailyRequest;
-  final int? countDreams;
-  final int? todayDreams;
   final bool? isActive;
+  final DateTime? subscriptionEndsAt;
+  final int? level;
+  final int? experiencePoints;
+  final String? fcmToken;
+  final DateTime? lastLogin;
+  final DateTime? createdAt;
+  final UserSettings? settings;
+  final dynamic lastMoodLog;
+  final dynamic lastDevotional;
+
   User({
     this.id,
     this.deviceId,
     this.name,
     this.email,
-    this.password,
-    this.newPassword,
     this.age,
     this.lang,
     this.planType,
-    this.maxDailyRequest,
-    this.countDreams,
-    this.todayDreams,
     this.isActive,
+    this.subscriptionEndsAt,
+    this.level,
+    this.experiencePoints,
+    this.fcmToken,
+    this.lastLogin,
+    this.createdAt,
+    this.settings,
+    this.lastMoodLog,
+    this.lastDevotional,
   });
 
   factory User.fromJson(Map<String, dynamic> json) =>
@@ -45,34 +54,38 @@ class User {
     String? deviceId,
     String? name,
     String? email,
-    String? password,
-    String? newPassword,
     int? age,
     Lang? lang,
     PlanName? planType,
-    int? maxDailyRequest,
-    int? countDreams,
-    int? todayDreams,
     bool? isActive,
-    String? adaptyProfileId,
-    String? subscriptionStatus,
     DateTime? subscriptionEndsAt,
-    DateTime? lastAdaptyCheck,
+    int? level,
+    int? experiencePoints,
+    String? fcmToken,
+    DateTime? lastLogin,
+    DateTime? createdAt,
+    UserSettings? settings,
+    dynamic lastMoodLog,
+    dynamic lastDevotional,
   }) {
     return User(
       id: id ?? this.id,
       deviceId: deviceId ?? this.deviceId,
       name: name ?? this.name,
       email: email ?? this.email,
-      password: password ?? this.password,
-      newPassword: newPassword ?? this.newPassword,
       age: age ?? this.age,
       lang: lang ?? this.lang,
       planType: planType ?? this.planType,
-      maxDailyRequest: maxDailyRequest ?? this.maxDailyRequest,
-      countDreams: countDreams ?? this.countDreams,
-      todayDreams: todayDreams ?? this.todayDreams,
       isActive: isActive ?? this.isActive,
+      subscriptionEndsAt: subscriptionEndsAt ?? this.subscriptionEndsAt,
+      level: level ?? this.level,
+      experiencePoints: experiencePoints ?? this.experiencePoints,
+      fcmToken: fcmToken ?? this.fcmToken,
+      lastLogin: lastLogin ?? this.lastLogin,
+      createdAt: createdAt ?? this.createdAt,
+      settings: settings ?? this.settings,
+      lastMoodLog: lastMoodLog ?? this.lastMoodLog,
+      lastDevotional: lastDevotional ?? this.lastDevotional,
     );
   }
 }

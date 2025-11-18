@@ -1,6 +1,5 @@
 // 🐦 Flutter imports:
 import 'dart:async';
-import 'dart:io';
 
 // 📦 Package imports:
 import 'package:go_router/go_router.dart';
@@ -42,10 +41,8 @@ class _SplashViewState extends ConsumerState<SplashView> {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       final appVersion = Version.parse(packageInfo.version);
       if (appVersion < serverVersion) {
-        final updateUrl = Platform.isAndroid
-            ? appSetting?.appUpdateUrlAndroid
-            : appSetting?.appUpdateUrlIos;
-        showUpdateAppDialog(storeUrl: updateUrl ?? appSetting?.aboutUrl ?? '');
+        final updateUrl = appSetting?.updateBaseUrl;
+        showUpdateAppDialog(storeUrl: updateUrl ?? '');
         return;
       }
     } catch (e) {

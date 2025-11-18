@@ -13,6 +13,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'core/core_exports.dart';
 import 'dev_utils/_logger.dart';
+import 'firebase_options.dart';
 import 'routes/app_routes.dart';
 import 'generated/l10n.dart';
 // import 'firebase_options.dart';
@@ -63,7 +64,7 @@ Future<void> _initializeCore() async {
 
   // Firebase setup
   try {
-    // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     final notifications = LocalNotificationsService.instance();
     await notifications.init();
 

@@ -17,6 +17,7 @@ AuthRequest _$AuthRequestFromJson(Map<String, dynamic> json) => AuthRequest(
   newPassword: json['newPassword'] as String?,
   fcmToken: json['fcmToken'] as String?,
   timezone: json['timezone'] as String?,
+  notificationsEnabled: json['notificationsEnabled'] as bool?,
 );
 
 Map<String, dynamic> _$AuthRequestToJson(AuthRequest instance) =>
@@ -31,6 +32,8 @@ Map<String, dynamic> _$AuthRequestToJson(AuthRequest instance) =>
       if (instance.newPassword case final value?) 'newPassword': value,
       if (instance.fcmToken case final value?) 'fcmToken': value,
       if (instance.timezone case final value?) 'timezone': value,
+      if (instance.notificationsEnabled case final value?)
+        'notificationsEnabled': value,
     };
 
 const _$LangEnumMap = {Lang.en: 'en', Lang.es: 'es', Lang.pt: 'pt'};

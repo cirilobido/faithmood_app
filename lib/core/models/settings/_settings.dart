@@ -4,51 +4,63 @@ part '_settings.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class Settings {
-
-  @JsonKey(name: 'currentVersion')
-  final String? appVersion;
-  final int? maxCharsDreamFree;
-  final int? maxCharsDreamPro;
+  final int? maxCharsNoteFree;
+  final int? maxCharsNotePro;
+  final int? aiDailyLimitFree;
+  final int? aiDailyLimitPro;
   final int? fullAdsInterval;
   final bool? showBannerAds;
   final bool? showVideoAds;
-
-  @JsonKey(name: 'updateUrl')
-  final String? appUpdateUrlAndroid;
-  final String? appUpdateUrlIos;
-  @JsonKey(name: 'rateUrl')
-  final String? rateUrlAndroid;
-  final String? rateUrlIos;
-  final String? storeSubUrl;
-  final String? storeSubUrlIos;
+  final List<int>? onboardingScreens;
+  final bool? showDevotionals;
+  final bool? showMoods;
+  final int? rateRequestAfter;
+  final int? payRequestAfter;
+  final int? minAppRatingPrompt;
+  final bool? maintenanceMode;
+  @JsonKey(name: 'currentVersion')
+  final String? appVersion;
+  final String? minSupportedVersion;
+  final bool? forceUpdate;
+  final Map<String, dynamic>? featureFlags;
+  final String? updateBaseUrl;
+  final String? supportUrl;
   final String? followUrl;
   final String? shareUrl;
-  final String? contactUrl;
   final String? termsUrl;
   final String? privacyUrl;
-  final String? aboutUrl;
-  final String? reportUrl;
+  final List<String>? appLanguages;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Settings({
-    this.appVersion,
-    this.maxCharsDreamFree,
-    this.maxCharsDreamPro,
+    this.maxCharsNoteFree,
+    this.maxCharsNotePro,
+    this.aiDailyLimitFree,
+    this.aiDailyLimitPro,
     this.fullAdsInterval,
     this.showBannerAds,
     this.showVideoAds,
-    this.appUpdateUrlAndroid,
-    this.appUpdateUrlIos,
-    this.rateUrlAndroid,
-    this.rateUrlIos,
-    this.storeSubUrl,
-    this.storeSubUrlIos,
+    this.onboardingScreens,
+    this.showDevotionals,
+    this.showMoods,
+    this.rateRequestAfter,
+    this.payRequestAfter,
+    this.minAppRatingPrompt,
+    this.maintenanceMode,
+    this.appVersion,
+    this.minSupportedVersion,
+    this.forceUpdate,
+    this.featureFlags,
+    this.updateBaseUrl,
+    this.supportUrl,
     this.followUrl,
     this.shareUrl,
-    this.contactUrl,
     this.termsUrl,
     this.privacyUrl,
-    this.aboutUrl,
-    this.reportUrl
+    this.appLanguages,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) =>

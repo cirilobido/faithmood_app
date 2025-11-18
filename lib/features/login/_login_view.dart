@@ -19,9 +19,13 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   // TODO: EMAIL AND PASS FOR TESTING
-  final TextEditingController _emailController = TextEditingController(text: 'testaccount@example.com');
+  final TextEditingController _emailController = TextEditingController(
+    text: 'testaccount@example.com',
+  );
   final FocusNode _emailFocusNode = FocusNode();
-  final TextEditingController _passController = TextEditingController(text: '@Rnd0121');
+  final TextEditingController _passController = TextEditingController(
+    text: '@Rnd0121',
+  );
   final FocusNode _passFocusNode = FocusNode();
   bool _showPassword = false;
 
@@ -36,25 +40,18 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Widget build(BuildContext context) {
     final lang = S.of(context);
     final state = ref.watch(loginViewModelProvider);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: AppSizes.paddingMedium,
-                  left: AppSizes.paddingMedium,
-                  right: AppSizes.paddingMedium,
-                ),
-                child: Image.asset(
-                  AppIcons.logoSecondary,
-                  height: AppSizes.iconSizeLarge,
-                ),
-              ),
+              SizedBox(height: AppSizes.spacingXXLarge,),
               Expanded(child: _mailAndPassContent()),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -85,11 +82,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     SizedBox(height: AppSizes.spacingSmall),
                     CustomButton(
                       title: lang.createAnAccount,
-                      type: ButtonType.secondary,
+                      type: ButtonType.primary,
                       style: CustomStyle.borderless,
+                      isShortText: true,
                       onTap: () {
                         if (context.mounted) {
-                          context.go(Routes.signUp);
+                          context.go(Routes.welcome);
                         }
                       },
                     ),
@@ -115,14 +113,15 @@ class _LoginViewState extends ConsumerState<LoginView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(lang.emailPassword, style: theme.textTheme.displaySmall),
+              Text(lang.emailPassword, style: theme.textTheme.headlineLarge),
               Text(
-                S.of(context).loginGreetingMessage,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
+                lang.loginGreetingMessage,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  color: theme.textTheme.labelSmall?.color!,
                 ),
               ),
-              const SizedBox(height: AppSizes.spacingLarge),
+              const SizedBox(height: AppSizes.spacingXLarge),
               InputField(
                 required: true,
                 hintText: 'user@gmail.com',
@@ -132,14 +131,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 prefixIconWidget: SvgPicture.asset(
                   AppIcons.emailIcon,
                   colorFilter: ColorFilter.mode(
-                    AppColors.iconPrimary,
+                    theme.iconTheme.color!,
                     BlendMode.srcIn,
                   ),
                 ),
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 validations: [FieldTypeValidation.email],
               ),
-              const SizedBox(height: AppSizes.spacingMedium),
+              const SizedBox(height: AppSizes.spacingLarge),
               InputField(
                 required: true,
                 hintText: '---------',
@@ -151,7 +150,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 prefixIconWidget: SvgPicture.asset(
                   AppIcons.keyIcon,
                   colorFilter: ColorFilter.mode(
-                    AppColors.iconPrimary,
+                    theme.iconTheme.color!,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -166,7 +165,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     colorFilter: ColorFilter.mode(
                       _showPassword
                           ? theme.colorScheme.secondary
-                          : AppColors.iconPrimary,
+                          : theme.iconTheme.color!,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -197,7 +196,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     lang.forgotYourPassword,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: AppColors.primary,
+                      color: theme.colorScheme.primary,
                     ),
                   ),
                 ),
@@ -208,7 +207,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   lang.orLoginWith,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.labelLarge?.copyWith(
-                    color: AppColors.textHint,
+                    color: theme.textTheme.labelSmall?.color!,
                   ),
                 ),
               ),
@@ -218,16 +217,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 children: [
                   CircleIconCard(
                     iconPath: AppIcons.googleIcon,
+                    iconColor: theme.iconTheme.color!,
                     onTap: () => devLogger('Google tapped'),
                   ),
                   const SizedBox(width: AppSizes.spacingLarge),
                   CircleIconCard(
-                    iconPath: AppIcons.facebookIcon,
-                    onTap: () => devLogger('Facebook tapped'),
-                  ),
-                  const SizedBox(width: AppSizes.spacingLarge),
-                  CircleIconCard(
                     iconPath: AppIcons.appleIcon,
+                    iconColor: theme.iconTheme.color!,
                     onTap: () => devLogger('Apple tapped'),
                   ),
                 ],
