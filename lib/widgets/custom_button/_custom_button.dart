@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/core_exports.dart';
 
 /// primary, secondary, tertiary, error
-enum ButtonType { primary, secondary, tertiary, error }
+enum ButtonType { primary, secondary, tertiary, error, neutral }
 
 enum CustomStyle { filled, outlined, borderless }
 
@@ -68,6 +68,14 @@ class CustomButton extends StatelessWidget {
           foreground: isDark ? AppColors.dTextPrimary : AppColors.textPrimary,
           outlinedForeground: isDark ? AppColors.dError : AppColors.error,
           border: isDark ? AppColors.dError : AppColors.error,
+        );
+
+      case ButtonType.neutral:
+        return _ButtonColorScheme(
+          background: isDark ? AppColors.background : AppColors.dBackground,
+          foreground: isDark ? AppColors.textPrimary : AppColors.dTextPrimary,
+          outlinedForeground: isDark ? AppColors.background : AppColors.dBackground,
+          border: isDark ? AppColors.background : AppColors.dBackground,
         );
 
       default:
@@ -136,6 +144,7 @@ class CustomButton extends StatelessWidget {
     if (style == CustomStyle.outlined || style == CustomStyle.borderless) {
       return OutlinedButton.icon(
         style: theme.outlinedButtonTheme.style?.copyWith(
+          visualDensity: isShortText ? VisualDensity.compact : null,
           side: WidgetStatePropertyAll(
             BorderSide(color: _getBorderColor(isDark), width: 1.5),
           ),
@@ -154,6 +163,7 @@ class CustomButton extends StatelessWidget {
     }
     return TextButton.icon(
       style: theme.textButtonTheme.style?.copyWith(
+        visualDensity: isShortText ? VisualDensity.compact : null,
         backgroundColor: WidgetStatePropertyAll(_getBackgroundColor(isDark)),
         foregroundColor: WidgetStatePropertyAll(_getForegroundColor(isDark)),
       ),

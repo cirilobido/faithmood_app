@@ -41,7 +41,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
     final lang = S.of(context);
     final state = ref.watch(loginViewModelProvider);
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,

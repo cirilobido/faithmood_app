@@ -9,4 +9,12 @@ class Constant {
   static const dailyNotificationHourKey = 'daily_hour';
   static const dailyNotificationMinuteKey = 'daily_minute';
   static const reminderTimeKey = 'reminder_time';
+  
+  static const dailyVerseKey = 'daily_verse';
+  static const dailyVerseDateKey = 'daily_verse_date';
+  
+  static const dailyDevotionalKey = 'daily_devotional';
+  static const dailyDevotionalDateKey = 'daily_devotional_date';
+  
+  static const settingsKey = 'settings';
 }

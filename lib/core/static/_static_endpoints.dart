@@ -20,4 +20,10 @@ abstract class Endpoints {
   static const user = 'user';
 
   static const dreams = 'dreams';
+
+  static const verse = 'verse';
+  static String dailyVerse(String lang) => '$verse/daily?lang=$lang';
+
+  static const devotional = 'devotional';
+  static String dailyDevotional(String lang) => '$devotional/today?lang=$lang';
 }

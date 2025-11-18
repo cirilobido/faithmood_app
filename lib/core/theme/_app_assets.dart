@@ -25,6 +25,9 @@ abstract class AppIcons {
   static const emailIcon = 'assets/icons/ic_mail.svg';
   static const keyIcon = 'assets/icons/ic_key.svg';
   static const homeIcon = 'assets/icons/ic_home.svg';
+  static const openBookIcon = 'assets/icons/ic_open_book.svg';
+  static const journalIcon = 'assets/icons/ic_journal.svg';
+  static const profileIcon = 'assets/icons/ic_profile.svg';
   static const userIcon = 'assets/icons/ic_user.svg';
   static const googleIcon = 'assets/icons/ic_google.svg';
   static const facebookIcon = 'assets/icons/ic_facebook.svg';
@@ -36,6 +39,7 @@ abstract class AppIcons {
   static const starsRatingIcon = 'assets/icons/ic_stars_rating.svg';
   static const oatLeftIcon = 'assets/icons/ic_oat_left.svg';
   static const oatRightIcon = 'assets/icons/ic_oat_right.svg';
+  static const dottedCircleIcon = 'assets/icons/ic_dotted_circle.svg';
 }
 
 abstract class AppAnimations {
