@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/core_exports.dart';
 
 /// primary, secondary, tertiary, error
-enum ButtonType { primary, secondary, tertiary, error }
+enum ButtonType { primary, secondary, tertiary, error, neutral }
 
 enum CustomStyle { filled, outlined, borderless }
 
@@ -70,6 +70,14 @@ class CustomButton extends StatelessWidget {
           border: isDark ? AppColors.dError : AppColors.error,
         );
 
+      case ButtonType.neutral:
+        return _ButtonColorScheme(
+          background: isDark ? AppColors.background : AppColors.dBackground,
+          foreground: isDark ? AppColors.textPrimary : AppColors.dTextPrimary,
+          outlinedForeground: isDark ? AppColors.background : AppColors.dBackground,
+          border: isDark ? AppColors.background : AppColors.dBackground,
+        );
+
       default:
         return _ButtonColorScheme(
           background: isDark ? AppColors.dPrimary : AppColors.primary,
@@ -104,7 +112,7 @@ class CustomButton extends StatelessWidget {
         dimension: AppSizes.iconSizeRegular,
         child: CircularProgressIndicator(
           color: _getForegroundColor(isDark),
-          strokeWidth: 1,
+          strokeWidth: 2,
         ),
       );
     }
@@ -136,6 +144,7 @@ class CustomButton extends StatelessWidget {
     if (style == CustomStyle.outlined || style == CustomStyle.borderless) {
       return OutlinedButton.icon(
         style: theme.outlinedButtonTheme.style?.copyWith(
+          visualDensity: isShortText ? VisualDensity.compact : null,
           side: WidgetStatePropertyAll(
             BorderSide(color: _getBorderColor(isDark), width: 1.5),
           ),
@@ -154,6 +163,7 @@ class CustomButton extends StatelessWidget {
     }
     return TextButton.icon(
       style: theme.textButtonTheme.style?.copyWith(
+        visualDensity: isShortText ? VisualDensity.compact : null,
         backgroundColor: WidgetStatePropertyAll(_getBackgroundColor(isDark)),
         foregroundColor: WidgetStatePropertyAll(_getForegroundColor(isDark)),
       ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // 🌎 Project imports:
+import '../../core/core_exports.dart';
 import '../../features/features_exports.dart';
 import '../navigation/bottom_nav.dart';
 import 'app_routes_names.dart';
@@ -63,12 +64,23 @@ abstract class AppRoutes {
           GoRoute(
             path: Routes.home,
             pageBuilder: (context, state) =>
-                NoTransitionPage<void>(child: Container()),
+                NoTransitionPage<void>(child: const HomeView()),
           ),
           GoRoute(
             path: Routes.devotional,
             pageBuilder: (context, state) {
-              return NoTransitionPage<void>(child: Container());
+              return NoTransitionPage<void>(child: const CategoriesView());
+            },
+          ),
+          GoRoute(
+            path: Routes.categoryDevotionals,
+            pageBuilder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>?;
+              final category = extra?['category_devotionals'] as DevotionalCategory?;
+              final tag = extra?['tag'] as DevotionalTag?;
+              return NoTransitionPage<void>(
+                child: CategoryDevotionalsView(category: category, tag: tag),
+              );
             },
           ),
           GoRoute(

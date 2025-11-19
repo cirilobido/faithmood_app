@@ -46,6 +46,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "campainsUsage": MessageLookupByLibrary.simpleMessage("Campañas"),
     "cancelada": MessageLookupByLibrary.simpleMessage("Cancelada"),
     "cancelled": MessageLookupByLibrary.simpleMessage("Cancelado"),
+    "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
+      "Capture your thoughts each day.",
+    ),
+    "chooseYourNextStep": MessageLookupByLibrary.simpleMessage(
+      "Choose Your Next Step",
+    ),
     "committedPageTitle": MessageLookupByLibrary.simpleMessage(
       "🙌 How committed are you with your faith?",
     ),
@@ -71,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
+    "category_devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Password"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
@@ -104,14 +111,24 @@ class MessageLookup extends MessageLookupByLibrary {
       "✨ Have a moment with God every day",
     ),
     "expirada": MessageLookupByLibrary.simpleMessage("Expirada"),
+    "explore": MessageLookupByLibrary.simpleMessage("Explore"),
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
+    "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
+      "FFollow guided daily category_devotionals",
+    ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
+    "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
+      "Find a plan that fits your journey.",
+    ),
     "firstName": MessageLookupByLibrary.simpleMessage("Nombre"),
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
       "Forgot Your Password?",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "growInFaith": MessageLookupByLibrary.simpleMessage("Grow in Faith"),
+    "growWithGuidance": MessageLookupByLibrary.simpleMessage(
+      "Grow with Guidance",
+    ),
     "guidedFaithPlans": MessageLookupByLibrary.simpleMessage(
       "📖 Guided Faith Plans",
     ),
@@ -173,6 +190,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "noCampaignsYet": MessageLookupByLibrary.simpleMessage(
       "Aún no hay campañas disponibles.",
+    ),
+    "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
+      "No categories available",
+    ),
+    "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No category_devotionals available",
     ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No payment required now",
@@ -260,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "🎉 Enjoying your experience so far?",
     ),
     "recipient": MessageLookupByLibrary.simpleMessage("Destinatario"),
+    "reflectNow": MessageLookupByLibrary.simpleMessage("Reflect Now"),
     "registrationErrorMessage": MessageLookupByLibrary.simpleMessage(
       "We couldn’t complete your registration this time. Please try again, and if the issue continues, come back a little later.",
     ),
@@ -268,6 +292,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
+    "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Select your Language",
     ),
@@ -320,9 +345,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "This field is required",
     ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
+    "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
+      "Unable to load categories",
+    ),
+    "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
+      "Unable to load category_devotionals",
+    ),
+    "unableToLoadVersePleaseTryAgainLater":
+        MessageLookupByLibrary.simpleMessage(
+          "Unable to load verse. Please try again later.",
+        ),
     "unlimitedMoodTrack": MessageLookupByLibrary.simpleMessage(
       "💭 Unlimited Mood Track",
     ),
+    "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
     "update": MessageLookupByLibrary.simpleMessage("Update"),
     "updateAvailable": MessageLookupByLibrary.simpleMessage("Update available"),
     "updateAvailableMessage": MessageLookupByLibrary.simpleMessage(
@@ -343,6 +379,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "verifyCodeMessage": MessageLookupByLibrary.simpleMessage(
       "A 6-digit code has been sent to the email you provided. This code will expire in 5 minutes.",
     ),
+    "verseOfTheDay": MessageLookupByLibrary.simpleMessage("Verse of the day"),
+    "viewMore": MessageLookupByLibrary.simpleMessage("View More"),
     "weWillSendYouAnEmailWithACodeTo": MessageLookupByLibrary.simpleMessage(
       "We will send you an email with a code to reset your password.",
     ),
@@ -372,6 +410,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "youHaveToEnterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "You have to enter a valid email.",
     ),
+    "yourJournal": MessageLookupByLibrary.simpleMessage("Your Journal"),
     "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Your Password is"),
+    "yourWeekInEmotions": MessageLookupByLibrary.simpleMessage(
+      "Your Week in Emotions",
+    ),
   };
 }

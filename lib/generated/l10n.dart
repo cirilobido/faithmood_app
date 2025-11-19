@@ -1523,6 +1523,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Devotionals`
+  String get devotionals {
+    return Intl.message('Devotionals', name: 'category_devotionals', desc: '', args: []);
+  }
+
+  /// `Find a plan that fits your journey.`
+  String get findAPlanThatFitsYourJourney {
+    return Intl.message(
+      'Find a plan that fits your journey.',
+      name: 'findAPlanThatFitsYourJourney',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View More`
+  String get viewMore {
+    return Intl.message('View More', name: 'viewMore', desc: '', args: []);
+  }
+
+  /// `Select Tag`
+  String get selectTag {
+    return Intl.message('Select Tag', name: 'selectTag', desc: '', args: []);
+  }
+
+  /// `Unable to load categories`
+  String get unableToLoadCategories {
+    return Intl.message(
+      'Unable to load categories',
+      name: 'unableToLoadCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No categories available`
+  String get noCategoriesAvailable {
+    return Intl.message(
+      'No categories available',
+      name: 'noCategoriesAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unlock Now`
+  String get unlockNow {
+    return Intl.message('Unlock Now', name: 'unlockNow', desc: '', args: []);
+  }
+
+  /// `Reflect Now`
+  String get reflectNow {
+    return Intl.message('Reflect Now', name: 'reflectNow', desc: '', args: []);
+  }
+
+  /// `Explore`
+  String get explore {
+    return Intl.message('Explore', name: 'explore', desc: '', args: []);
+  }
+
+  /// `Your Week in Emotions`
+  String get yourWeekInEmotions {
+    return Intl.message(
+      'Your Week in Emotions',
+      name: 'yourWeekInEmotions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verse of the day`
+  String get verseOfTheDay {
+    return Intl.message(
+      'Verse of the day',
+      name: 'verseOfTheDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load verse. Please try again later.`
+  String get unableToLoadVersePleaseTryAgainLater {
+    return Intl.message(
+      'Unable to load verse. Please try again later.',
+      name: 'unableToLoadVersePleaseTryAgainLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Your Next Step`
+  String get chooseYourNextStep {
+    return Intl.message(
+      'Choose Your Next Step',
+      name: 'chooseYourNextStep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Journal`
+  String get yourJournal {
+    return Intl.message(
+      'Your Journal',
+      name: 'yourJournal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Capture your thoughts each day.`
+  String get captureYourThoughtsEachDay {
+    return Intl.message(
+      'Capture your thoughts each day.',
+      name: 'captureYourThoughtsEachDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FFollow guided daily category_devotionals`
+  String get ffollowGuidedDailyDevotionals {
+    return Intl.message(
+      'FFollow guided daily category_devotionals',
+      name: 'ffollowGuidedDailyDevotionals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grow with Guidance`
+  String get growWithGuidance {
+    return Intl.message(
+      'Grow with Guidance',
+      name: 'growWithGuidance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load category_devotionals`
+  String get unableToLoadDevotionals {
+    return Intl.message(
+      'Unable to load category_devotionals',
+      name: 'unableToLoadDevotionals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No category_devotionals available`
+  String get noDevotionalsAvailable {
+    return Intl.message(
+      'No category_devotionals available',
+      name: 'noDevotionalsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

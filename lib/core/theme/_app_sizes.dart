@@ -3,6 +3,7 @@ abstract class AppSizes {
   static const welcomeFigureIconSize = 220.0;
   static const welcomeBellIconSize = 190.0;
   static const dialogIconSize = 148.0;
+  static const premiumIconSize = 88.0;
   static const logoIconSize = 64.0;
   static const iconSizeXXLarge = 48.0;
   static const iconSizeXLarge = 36.0;
@@ -37,5 +38,11 @@ abstract class AppSizes {
 
   //---------------Extra---------------//
   static const bottomNavHeight = 80.0;
+  static const bottomNavSelectorWidth = 48.0;
+  static const bottomNavSelectorHeight = 4.0;
   static const borderWithSmall = 1.0;
+  static const homeWeekItemsWidth = 48.0;
+  static const homeWeekItemsContainerHeight = 90.0;
+  static const tagChipHeight = 32.0;
+  static const categoryCardHeight = 180.0;
 }

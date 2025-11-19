@@ -20,4 +20,28 @@ abstract class Endpoints {
   static const user = 'user';
 
   static const dreams = 'dreams';
+
+  static const verse = 'verse';
+  static String dailyVerse(String lang) => '$verse/daily?lang=$lang';
+
+  static const devotional = 'devotional';
+  static String dailyDevotional(String lang) => '$devotional/today?lang=$lang';
+  static String devotionalsByCategory(int categoryId, String lang, {int? page, int? limit}) {
+    final queryParams = <String>['lang=$lang'];
+    if (page != null) queryParams.add('page=$page');
+    if (limit != null) queryParams.add('limit=$limit');
+    return '$devotional/category/$categoryId?${queryParams.join('&')}';
+  }
+  
+  static const categories = 'categories';
+  static String getCategories(String lang) => '$categories/?lang=$lang';
+  
+  static const tags = 'tags';
+  static String getTags(String lang) => '$tags?lang=$lang';
+  static String devotionalsByTag(int tagId, String lang, {int? page, int? limit}) {
+    final queryParams = <String>['lang=$lang'];
+    if (page != null) queryParams.add('page=$page');
+    if (limit != null) queryParams.add('limit=$limit');
+    return '$tags/$tagId/devotionals?${queryParams.join('&')}';
+  }
 }
