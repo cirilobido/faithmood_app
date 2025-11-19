@@ -18,3 +18,4 @@ export 'devotional/_devotional_verse.dart';
 export 'devotional/_tags_response.dart';
 export 'devotional/_categories_response.dart';
 export 'devotional/_devotionals_response.dart';
+export 'devotional/_devotional_log_request.dart';

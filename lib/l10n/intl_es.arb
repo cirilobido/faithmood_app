@@ -192,6 +192,18 @@
   "captureYourThoughtsEachDay": "Capture your thoughts each day.",
   "ffollowGuidedDailyDevotionals": "FFollow guided daily devotionals",
   "growWithGuidance": "Grow with Guidance",
-  "unableToLoadDevotionals": "Unable to load devotionals",
-  "noDevotionalsAvailable": "No devotionals available"
+  "unableToLoadDevotionals": "No se pudieron cargar las devocionales",
+  "noDevotionalsAvailable": "No hay devocionales disponibles",
+  "devotional": "Devocional",
+  "tags": "Etiquetas",
+  "keyLearnings": "Aprendizajes Clave",
+  "relevantVerses": "Versículos Relevantes",
+  "myReflection": "Mi Reflexión",
+  "whatsOnYourHeartToday": "¿Qué hay en tu corazón hoy?",
+  "saveNotes": "Guardar Nota",
+  "unsavedNoteTitle": "Nota Sin Guardar",
+  "unsavedNoteMessage": "Tienes una nota sin guardar. ¿Te gustaría guardarla antes de salir?",
+  "continueWithoutNote": "Continuar Sin Nota",
+  "noteSavedSuccessfully": "Nota guardada exitosamente",
+  "errorSavingNote": "Error al guardar la nota"
 }

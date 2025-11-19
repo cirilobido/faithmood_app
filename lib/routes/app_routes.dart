@@ -76,10 +76,23 @@ abstract class AppRoutes {
             path: Routes.categoryDevotionals,
             pageBuilder: (context, state) {
               final extra = state.extra as Map<String, dynamic>?;
-              final category = extra?['category_devotionals'] as DevotionalCategory?;
+              final category = extra?['category'] as DevotionalCategory?;
               final tag = extra?['tag'] as DevotionalTag?;
               return NoTransitionPage<void>(
                 child: CategoryDevotionalsView(category: category, tag: tag),
+              );
+            },
+          ),
+          GoRoute(
+            path: Routes.devotionalDetails,
+            pageBuilder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>?;
+              final devotionalId = extra?['devotionalId'] as int?;
+              if (devotionalId == null) {
+                return NoTransitionPage<void>(child: Container());
+              }
+              return NoTransitionPage<void>(
+                child: DevotionalDetailsView(devotionalId: devotionalId),
               );
             },
           ),

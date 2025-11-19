@@ -155,73 +155,11 @@ class CategoriesView extends ConsumerWidget {
           }
           // Otherwise, show the tag chip
           final tag = visibleTags[index];
-          return _buildTagChip(context, theme, tag);
+          return Container(
+            margin: const EdgeInsets.only(right: AppSizes.spacingSmall),
+            child: DevotionalTagChip(tag: tag),
+          );
         },
-      ),
-    );
-  }
-
-  Widget _buildTagChip(
-    BuildContext context,
-    ThemeData theme,
-    DevotionalTag tag, {
-    bool closeModalOnTap = false,
-  }) {
-    // Parse color if available
-    Color? tagColor;
-    if (tag.color != null && tag.color!.isNotEmpty) {
-      try {
-        tagColor = Color(int.parse(tag.color!.replaceFirst('#', '0xFF')));
-      } catch (_) {
-        tagColor = null;
-      }
-    }
-
-    return Container(
-      margin: const EdgeInsets.only(right: AppSizes.spacingSmall),
-      child: GestureDetector(
-        onTap: () {
-          if (closeModalOnTap && context.mounted) {
-            Navigator.of(context).pop();
-          }
-          if (context.mounted) {
-            context.push(Routes.categoryDevotionals, extra: {'tag': tag});
-          }
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingSmall,
-            vertical: AppSizes.paddingXXSmall,
-          ),
-          decoration: BoxDecoration(
-            color:
-                tagColor?.withValues(alpha: 0.1) ??
-                theme.colorScheme.primary.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(AppSizes.radiusFull),
-            border: Border.all(
-              color:
-                  tagColor?.withValues(alpha: 0.3) ??
-                  theme.colorScheme.primary.withValues(alpha: 0.3),
-              width: AppSizes.borderWithSmall,
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (tag.icon != null) ...[
-                Text(tag.icon!, style: theme.textTheme.bodyMedium),
-                const SizedBox(width: AppSizes.spacingXSmall),
-              ],
-              Text(
-                tag.name ?? '',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: tagColor ?? theme.colorScheme.primary,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -285,11 +223,17 @@ class CategoriesView extends ConsumerWidget {
                       alignment: WrapAlignment.center,
                       runAlignment: WrapAlignment.center,
                       children: allTags.map((tag) {
-                        return _buildTagChip(
-                          modalContext,
-                          theme,
-                          tag,
-                          closeModalOnTap: true,
+                        return DevotionalTagChip(
+                          tag: tag,
+                          onTap: () {
+                            Navigator.of(modalContext).pop();
+                            if (context.mounted) {
+                              context.push(
+                                Routes.categoryDevotionals,
+                                extra: {'tag': tag},
+                              );
+                            }
+                          },
                         );
                       }).toList(),
                     ),
@@ -359,103 +303,116 @@ class CategoriesView extends ConsumerWidget {
     final subtitle = category.description ?? '';
     final ctaText = isPremium ? lang.unlockNow : lang.explore;
 
-    return ClipRRect(
+    return InkWell(
+      onTap: isPremium
+          ? null
+          : () {
+              context.push(
+                Routes.categoryDevotionals,
+                extra: {'category': category},
+              );
+            },
       borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-      child: Stack(
-        children: [
-          // Fondo dinámico
-          if (coverImage != null && coverImage.isNotEmpty)
-            Positioned.fill(
-              child: CachedNetworkImage(
-                imageUrl: coverImage,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => Container(
-                  color: theme.colorScheme.secondary.withValues(alpha: 0.4),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  color: theme.colorScheme.secondary.withValues(alpha: 0.4),
-                ),
-              ),
-            ),
-
-          // Blur
-          Positioned.fill(
-            child: Container(
-              margin: const EdgeInsets.all(AppSizes.paddingMedium),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface.withValues(alpha: 0.9),
-                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-              ),
-              child: ImageFiltered(
-                imageFilter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                child: Container(),
-              ),
-            ),
-          ),
-
-          // Contenido
-          Container(
-            padding: const EdgeInsets.all(AppSizes.paddingLarge),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Textos + botón
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /// Título
-                      Text(
-                        category.title ?? '',
-                        style: theme.textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: AppSizes.spacingXSmall),
-
-                      /// Descripción
-                      Text(
-                        subtitle,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: theme.textTheme.labelSmall?.color,
-                        ),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-
-                      const SizedBox(height: AppSizes.spacingMedium),
-
-                      /// Botón
-                      CustomButton(
-                        title: ctaText,
-                        type: ButtonType.neutral,
-                        isShortText: true,
-                        icon: isPremium ? AppIcons.lockIcon : null,
-                        onTap: () {
-                          if (!isPremium) {
-                            context.push(
-                              Routes.categoryDevotionals,
-                              extra: {'category_devotionals': category},
-                            );
-                          }
-                        },
-                      ),
-                    ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+        child: Stack(
+          children: [
+            // Fondo dinámico
+            if (coverImage != null && coverImage.isNotEmpty)
+              Positioned.fill(
+                child: CachedNetworkImage(
+                  imageUrl: coverImage,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    color: theme.colorScheme.secondary.withValues(alpha: 0.4),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: theme.colorScheme.secondary.withValues(alpha: 0.4),
                   ),
                 ),
+              ),
 
-                // Emoji (opcional)
-                if (category.iconEmoji != null &&
-                    category.iconEmoji!.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(left: AppSizes.spacingSmall),
-                    child: Text(
-                      category.iconEmoji!,
-                      style: theme.textTheme.displaySmall,
+            // Blur
+            Positioned.fill(
+              child: Container(
+                margin: const EdgeInsets.all(AppSizes.paddingMedium),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surface.withValues(alpha: 0.9),
+                  borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+                ),
+                child: ImageFiltered(
+                  imageFilter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                  child: Container(),
+                ),
+              ),
+            ),
+
+            // Contenido
+            Container(
+              padding: const EdgeInsets.all(AppSizes.paddingLarge),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Textos + botón
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// Título
+                        Text(
+                          category.title ?? '',
+                          style: theme.textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: AppSizes.spacingXSmall),
+
+                        /// Descripción
+                        Text(
+                          subtitle,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.textTheme.labelSmall?.color,
+                          ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+
+                        const SizedBox(height: AppSizes.spacingMedium),
+
+                        /// Botón
+                        CustomButton(
+                          title: ctaText,
+                          type: ButtonType.neutral,
+                          isShortText: true,
+                          icon: isPremium ? AppIcons.lockIcon : null,
+                          onTap: () {
+                            if (!isPremium) {
+                              context.push(
+                                Routes.categoryDevotionals,
+                                extra: {'category': category},
+                              );
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ),
-              ],
+
+                  // Emoji (opcional)
+                  if (category.iconEmoji != null &&
+                      category.iconEmoji!.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: AppSizes.spacingSmall,
+                      ),
+                      child: Text(
+                        category.iconEmoji!,
+                        style: theme.textTheme.displaySmall,
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

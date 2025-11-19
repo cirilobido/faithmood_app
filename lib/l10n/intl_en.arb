@@ -193,5 +193,17 @@
   "ffollowGuidedDailyDevotionals": "FFollow guided daily devotionals",
   "growWithGuidance": "Grow with Guidance",
   "unableToLoadDevotionals": "Unable to load devotionals",
-  "noDevotionalsAvailable": "No devotionals available"
+  "noDevotionalsAvailable": "No devotionals available",
+  "devotional": "Devotional",
+  "tags": "Tags",
+  "keyLearnings": "Key Learnings",
+  "relevantVerses": "Relevant Verses",
+  "myReflection": "My Reflection",
+  "whatsOnYourHeartToday": "What's on your heart today?",
+  "saveNotes": "Save Note",
+  "unsavedNoteTitle": "Unsaved Note",
+  "unsavedNoteMessage": "You have an unsaved note. Would you like to save it before leaving?",
+  "continueWithoutNote": "Continue Without Note",
+  "noteSavedSuccessfully": "Note saved successfully",
+  "errorSavingNote": "Error saving note"
 }

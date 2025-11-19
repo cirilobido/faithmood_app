@@ -44,6 +44,8 @@ abstract class AppIcons {
   static const oatRightIcon = 'assets/icons/ic_oat_right.svg';
   static const dottedCircleIcon = 'assets/icons/ic_dotted_circle.svg';
   static const searchIcon = 'assets/icons/ic_search.svg';
+  static const bookmarkIcon = 'assets/icons/ic_bookmark.svg';
+  static const bookmarkFilledIcon = 'assets/icons/ic_bookmark_filled.svg';
 }
 
 abstract class AppAnimations {

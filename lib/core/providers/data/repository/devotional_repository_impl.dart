@@ -83,6 +83,15 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
   }
 
   @override
+  Future<Devotional?> getDevotionalById(int id, String lang) async {
+    try {
+      return await devotionalService.getDevotionalById(id, lang);
+    } catch (e) {
+      throw Exception('Error getting devotional by id');
+    }
+  }
+
+  @override
   Future<DevotionalsResponse?> getDevotionalsByCategory(int categoryId, String lang, {int? page, int? limit}) async {
     try {
       return await devotionalService.getDevotionalsByCategory(categoryId, lang, page: page, limit: limit);
@@ -97,6 +106,15 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
       return await devotionalService.getDevotionalsByTag(tagId, lang, page: page, limit: limit);
     } catch (e) {
       throw Exception('Error getting category_devotionals by tag');
+    }
+  }
+
+  @override
+  Future<bool> saveDevotionalLog(int userId, DevotionalLogRequest request) async {
+    try {
+      return await devotionalService.saveDevotionalLog(userId, request);
+    } catch (e) {
+      throw Exception('Error saving devotional log');
     }
   }
 }

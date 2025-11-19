@@ -69,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
     "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
+    "continueWithoutNote": MessageLookupByLibrary.simpleMessage(
+      "Continue Without Note",
+    ),
     "createAnAccount": MessageLookupByLibrary.simpleMessage(
       "Create an Account",
     ),
@@ -77,11 +80,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
-    "category_devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
+    "devotional": MessageLookupByLibrary.simpleMessage("Devotional"),
+    "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Password"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
+    ),
+    "errorSavingNote": MessageLookupByLibrary.simpleMessage(
+      "Error saving note",
     ),
     "everUsedBeforeQ1": MessageLookupByLibrary.simpleMessage(
       "🙏 Yes, I have used one before",
@@ -114,7 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "explore": MessageLookupByLibrary.simpleMessage("Explore"),
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
     "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
-      "FFollow guided daily category_devotionals",
+      "FFollow guided daily devotionals",
     ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
@@ -166,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "just449PerMonthCancelAnytime": MessageLookupByLibrary.simpleMessage(
       "Just ### per month - Cancel anytime",
     ),
+    "keyLearnings": MessageLookupByLibrary.simpleMessage("Key Learnings"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
@@ -183,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
     "message": MessageLookupByLibrary.simpleMessage("Mensaje"),
     "metodoDePago": MessageLookupByLibrary.simpleMessage("Método de pago"),
+    "myReflection": MessageLookupByLibrary.simpleMessage("My Reflection"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "Name must be at least 3 characters long",
     ),
@@ -195,10 +204,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "No categories available",
     ),
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
-      "No category_devotionals available",
+      "No devotionals available",
     ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No payment required now",
+    ),
+    "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Note saved successfully",
     ),
     "or": MessageLookupByLibrary.simpleMessage("o"),
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
@@ -287,9 +299,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "registrationErrorMessage": MessageLookupByLibrary.simpleMessage(
       "We couldn’t complete your registration this time. Please try again, and if the issue continues, come back a little later.",
     ),
+    "relevantVerses": MessageLookupByLibrary.simpleMessage("Relevant Verses"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
+    "saveNotes": MessageLookupByLibrary.simpleMessage("Save Note"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
@@ -340,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
+    "tags": MessageLookupByLibrary.simpleMessage("Tags"),
     "termsOfUse": MessageLookupByLibrary.simpleMessage("Terms of Use."),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required",
@@ -349,7 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unable to load categories",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
-      "Unable to load category_devotionals",
+      "Unable to load devotionals",
     ),
     "unableToLoadVersePleaseTryAgainLater":
         MessageLookupByLibrary.simpleMessage(
@@ -359,6 +374,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "💭 Unlimited Mood Track",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
+    "unsavedNoteMessage": MessageLookupByLibrary.simpleMessage(
+      "You have an unsaved note. Would you like to save it before leaving?",
+    ),
+    "unsavedNoteTitle": MessageLookupByLibrary.simpleMessage("Unsaved Note"),
     "update": MessageLookupByLibrary.simpleMessage("Update"),
     "updateAvailable": MessageLookupByLibrary.simpleMessage("Update available"),
     "updateAvailableMessage": MessageLookupByLibrary.simpleMessage(
@@ -403,6 +422,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "welcomeTitle1": MessageLookupByLibrary.simpleMessage("Innovate"),
     "welcomeTitle2": MessageLookupByLibrary.simpleMessage("Boost"),
     "welcomeTitle3": MessageLookupByLibrary.simpleMessage("Scale"),
+    "whatsOnYourHeartToday": MessageLookupByLibrary.simpleMessage(
+      "What\'s on your heart today?",
+    ),
     "whatsYourName": MessageLookupByLibrary.simpleMessage("What’s Your Name?"),
     "whatsYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "¿Cuál es tu número de teléfono?",

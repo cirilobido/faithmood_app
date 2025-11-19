@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
+import '../../../routes/app_routes_names.dart';
 import '../../../widgets/widgets_exports.dart';
 import '_category_devotionals_view_model.dart';
 import '_category_devotionals_state.dart';
@@ -149,7 +151,12 @@ class _CategoryDevotionalsViewState
                   devotional: devotional,
                   fallbackIcon: widget.tag?.icon ?? widget.category?.iconEmoji,
                   onTap: () {
-                    // TODO: Navigate to devotional detail
+                    if (devotional.id != null) {
+                      context.push(
+                        Routes.devotionalDetails,
+                        extra: {'devotionalId': devotional.id},
+                      );
+                    }
                   },
                 );
               },

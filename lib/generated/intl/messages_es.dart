@@ -69,17 +69,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
     "continueText": MessageLookupByLibrary.simpleMessage("Continuar"),
+    "continueWithoutNote": MessageLookupByLibrary.simpleMessage(
+      "Continuar Sin Nota",
+    ),
     "createAnAccount": MessageLookupByLibrary.simpleMessage("Crear una cuenta"),
     "createCampaign": MessageLookupByLibrary.simpleMessage("Crear Campaña"),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
-    "category_devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
+    "devotional": MessageLookupByLibrary.simpleMessage("Devocional"),
+    "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
+    ),
+    "errorSavingNote": MessageLookupByLibrary.simpleMessage(
+      "Error al guardar la nota",
     ),
     "everUsedBeforeQ1": MessageLookupByLibrary.simpleMessage(
       "🙏 Yes, I have used one before",
@@ -112,7 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "explore": MessageLookupByLibrary.simpleMessage("Explore"),
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
     "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
-      "FFollow guided daily category_devotionals",
+      "FFollow guided daily devotionals",
     ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
@@ -168,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "just449PerMonthCancelAnytime": MessageLookupByLibrary.simpleMessage(
       "Just ### per month - Cancel anytime",
     ),
+    "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizajes Clave"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
@@ -185,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
     "message": MessageLookupByLibrary.simpleMessage("Mensaje"),
     "metodoDePago": MessageLookupByLibrary.simpleMessage("Método de pago"),
+    "myReflection": MessageLookupByLibrary.simpleMessage("Mi Reflexión"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "El nombre debe tener al menos 3 caracteres",
     ),
@@ -197,10 +206,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "No categories available",
     ),
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
-      "No category_devotionals available",
+      "No hay devocionales disponibles",
     ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No payment required now",
+    ),
+    "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Nota guardada exitosamente",
     ),
     "or": MessageLookupByLibrary.simpleMessage("o"),
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
@@ -293,11 +305,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "registrationErrorMessage": MessageLookupByLibrary.simpleMessage(
       "No pudimos completar tu registro en este momento. Inténtalo de nuevo y si el problema persiste, vuelve más tarde.",
     ),
+    "relevantVerses": MessageLookupByLibrary.simpleMessage(
+      "Versículos Relevantes",
+    ),
     "resendCode": MessageLookupByLibrary.simpleMessage("Reenviar código"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
     ),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
+    "saveNotes": MessageLookupByLibrary.simpleMessage("Guardar Nota"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
@@ -348,6 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
+    "tags": MessageLookupByLibrary.simpleMessage("Etiquetas"),
     "termsOfUse": MessageLookupByLibrary.simpleMessage("Términos de uso."),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "Este campo es obligatorio",
@@ -357,7 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unable to load categories",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
-      "Unable to load category_devotionals",
+      "No se pudieron cargar las devocionales",
     ),
     "unableToLoadVersePleaseTryAgainLater":
         MessageLookupByLibrary.simpleMessage(
@@ -367,6 +384,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "💭 Unlimited Mood Track",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
+    "unsavedNoteMessage": MessageLookupByLibrary.simpleMessage(
+      "Tienes una nota sin guardar. ¿Te gustaría guardarla antes de salir?",
+    ),
+    "unsavedNoteTitle": MessageLookupByLibrary.simpleMessage(
+      "Nota Sin Guardar",
+    ),
     "update": MessageLookupByLibrary.simpleMessage("Actualizar"),
     "updateAvailable": MessageLookupByLibrary.simpleMessage(
       "Actualización disponible",
@@ -413,6 +436,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "welcomeTitle1": MessageLookupByLibrary.simpleMessage("Innovar"),
     "welcomeTitle2": MessageLookupByLibrary.simpleMessage("Impulsar"),
     "welcomeTitle3": MessageLookupByLibrary.simpleMessage("Escalar"),
+    "whatsOnYourHeartToday": MessageLookupByLibrary.simpleMessage(
+      "¿Qué hay en tu corazón hoy?",
+    ),
     "whatsYourName": MessageLookupByLibrary.simpleMessage(
       "¿Cuál es tu nombre?",
     ),

@@ -18,6 +18,7 @@ abstract class Endpoints {
   static const syncSubscription = 'subscription/sync';
 
   static const user = 'user';
+  static String saveDevotionalLog(int userId) => '$user/devotional/logs/$userId';
 
   static const dreams = 'dreams';
 
@@ -26,6 +27,7 @@ abstract class Endpoints {
 
   static const devotional = 'devotional';
   static String dailyDevotional(String lang) => '$devotional/today?lang=$lang';
+  static String getDevotionalById(int id, String lang) => '$devotional/$id?lang=$lang';
   static String devotionalsByCategory(int categoryId, String lang, {int? page, int? limit}) {
     final queryParams = <String>['lang=$lang'];
     if (page != null) queryParams.add('page=$page');

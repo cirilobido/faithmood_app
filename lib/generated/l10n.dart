@@ -1526,7 +1526,7 @@ class S {
 
   /// `Devotionals`
   String get devotionals {
-    return Intl.message('Devotionals', name: 'category_devotionals', desc: '', args: []);
+    return Intl.message('Devotionals', name: 'devotionals', desc: '', args: []);
   }
 
   /// `Find a plan that fits your journey.`
@@ -1644,10 +1644,10 @@ class S {
     );
   }
 
-  /// `FFollow guided daily category_devotionals`
+  /// `FFollow guided daily devotionals`
   String get ffollowGuidedDailyDevotionals {
     return Intl.message(
-      'FFollow guided daily category_devotionals',
+      'FFollow guided daily devotionals',
       name: 'ffollowGuidedDailyDevotionals',
       desc: '',
       args: [],
@@ -1664,21 +1664,126 @@ class S {
     );
   }
 
-  /// `Unable to load category_devotionals`
+  /// `Unable to load devotionals`
   String get unableToLoadDevotionals {
     return Intl.message(
-      'Unable to load category_devotionals',
+      'Unable to load devotionals',
       name: 'unableToLoadDevotionals',
       desc: '',
       args: [],
     );
   }
 
-  /// `No category_devotionals available`
+  /// `No devotionals available`
   String get noDevotionalsAvailable {
     return Intl.message(
-      'No category_devotionals available',
+      'No devotionals available',
       name: 'noDevotionalsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Devotional`
+  String get devotional {
+    return Intl.message('Devotional', name: 'devotional', desc: '', args: []);
+  }
+
+  /// `Tags`
+  String get tags {
+    return Intl.message('Tags', name: 'tags', desc: '', args: []);
+  }
+
+  /// `Key Learnings`
+  String get keyLearnings {
+    return Intl.message(
+      'Key Learnings',
+      name: 'keyLearnings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Relevant Verses`
+  String get relevantVerses {
+    return Intl.message(
+      'Relevant Verses',
+      name: 'relevantVerses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Reflection`
+  String get myReflection {
+    return Intl.message(
+      'My Reflection',
+      name: 'myReflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's on your heart today?`
+  String get whatsOnYourHeartToday {
+    return Intl.message(
+      'What\'s on your heart today?',
+      name: 'whatsOnYourHeartToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Note`
+  String get saveNotes {
+    return Intl.message('Save Note', name: 'saveNotes', desc: '', args: []);
+  }
+
+  /// `Unsaved Note`
+  String get unsavedNoteTitle {
+    return Intl.message(
+      'Unsaved Note',
+      name: 'unsavedNoteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have an unsaved note. Would you like to save it before leaving?`
+  String get unsavedNoteMessage {
+    return Intl.message(
+      'You have an unsaved note. Would you like to save it before leaving?',
+      name: 'unsavedNoteMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Without Note`
+  String get continueWithoutNote {
+    return Intl.message(
+      'Continue Without Note',
+      name: 'continueWithoutNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note saved successfully`
+  String get noteSavedSuccessfully {
+    return Intl.message(
+      'Note saved successfully',
+      name: 'noteSavedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error saving note`
+  String get errorSavingNote {
+    return Intl.message(
+      'Error saving note',
+      name: 'errorSavingNote',
       desc: '',
       args: [],
     );

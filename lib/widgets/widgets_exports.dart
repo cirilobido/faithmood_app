@@ -16,3 +16,5 @@ export 'category_tag_image/_category_tag_image.dart';
 export 'page_header/_page_header.dart';
 export 'loading_indicator/_loading_indicator.dart';
 export 'error_empty_state/_error_empty_state.dart';
+export 'devotional_tag_chip/_devotional_tag_chip.dart';
+export 'save_note_modal/_save_note_modal.dart';
