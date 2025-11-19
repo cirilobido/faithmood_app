@@ -4,6 +4,7 @@ abstract class AppIcons {
   static const logoSecondary = 'assets/logo/logo_secondary.png';
   static const welcomePetImage = 'assets/img/img_welcome_pet.png';
   static const happyPetImage = 'assets/img/img_happy_pet.png';
+  static const sadPetImage = 'assets/img/img_sad_pet.png';
   static const greenGradientImage = 'assets/img/img_green_gradient.png';
   static const greenGradientOvalImage = 'assets/img/img_green_gradient_oval.png';
   static const greenChartImage = 'assets/img/img_chart.png';
@@ -18,6 +19,7 @@ abstract class AppIcons {
 
   // 🎨 SVG
   static const arrowLeftIcon = 'assets/icons/ic_arrow_left.svg';
+  static const arrowRightIcon = 'assets/icons/ic_arrow_right.svg';
   static const closeIcon = 'assets/icons/ic_close.svg';
   static const addIcon = 'assets/icons/ic_add.svg';
   static const eyeIcon = 'assets/icons/ic_eye.svg';

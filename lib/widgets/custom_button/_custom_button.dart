@@ -112,7 +112,7 @@ class CustomButton extends StatelessWidget {
         dimension: AppSizes.iconSizeRegular,
         child: CircularProgressIndicator(
           color: _getForegroundColor(isDark),
-          strokeWidth: 1,
+          strokeWidth: 2,
         ),
       );
     }

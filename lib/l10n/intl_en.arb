@@ -191,5 +191,7 @@
   "yourJournal": "Your Journal",
   "captureYourThoughtsEachDay": "Capture your thoughts each day.",
   "ffollowGuidedDailyDevotionals": "FFollow guided daily devotionals",
-  "growWithGuidance": "Grow with Guidance"
+  "growWithGuidance": "Grow with Guidance",
+  "unableToLoadDevotionals": "Unable to load devotionals",
+  "noDevotionalsAvailable": "No devotionals available"
 }

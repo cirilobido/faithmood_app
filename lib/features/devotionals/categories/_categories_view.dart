@@ -4,20 +4,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../core/core_exports.dart';
-import '../../generated/l10n.dart';
-import '../../widgets/widgets_exports.dart';
-import '_devotionals_view_model.dart';
-import '_devotionals_state.dart';
+import '../../../core/core_exports.dart';
+import '../../../generated/l10n.dart';
+import '../../../routes/app_routes_names.dart';
+import '../../../widgets/widgets_exports.dart';
+import '_categories_view_model.dart';
+import '_categories_state.dart';
 
-class DevotionalsView extends ConsumerWidget {
-  const DevotionalsView({super.key});
+class CategoriesView extends ConsumerWidget {
+  const CategoriesView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final vm = ref.read(devotionalsViewModelProvider.notifier);
-    final state = ref.watch(devotionalsViewModelProvider);
+    final vm = ref.read(categoriesViewModelProvider.notifier);
+    final state = ref.watch(categoriesViewModelProvider);
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -83,8 +85,8 @@ class DevotionalsView extends ConsumerWidget {
   Widget _buildSearchBar(
     BuildContext context,
     ThemeData theme,
-    DevotionalsViewModel vm,
-    DevotionalsState state,
+    CategoriesViewModel vm,
+    CategoriesState state,
   ) {
     final lang = S.of(context);
     return InputField(
@@ -98,15 +100,13 @@ class DevotionalsView extends ConsumerWidget {
   Widget _buildTagsFilter(
     BuildContext context,
     ThemeData theme,
-    DevotionalsViewModel vm,
-    DevotionalsState state,
+    CategoriesViewModel vm,
+    CategoriesState state,
   ) {
     if (state.isLoadingTags) {
-      return Center(
-        child: SizedBox(
-          width: AppSizes.iconSizeMedium,
-          height: AppSizes.iconSizeMedium,
-          child: CircularProgressIndicator(strokeWidth: 2),
+      return const Center(
+        child: LoadingIndicator(
+          padding: EdgeInsets.all(AppSizes.paddingMedium),
         ),
       );
     }
@@ -125,7 +125,6 @@ class DevotionalsView extends ConsumerWidget {
           // If this is the last item and we have more tags, show "View More" button
           if (hasMoreTags && index == visibleTags.length) {
             return Container(
-              margin: const EdgeInsets.only(left: AppSizes.spacingSmall),
               alignment: Alignment.center,
               child: GestureDetector(
                 onTap: () =>
@@ -182,10 +181,11 @@ class DevotionalsView extends ConsumerWidget {
       margin: const EdgeInsets.only(right: AppSizes.spacingSmall),
       child: GestureDetector(
         onTap: () {
-          // TODO: Navigate to devotionals filtered by this tag
-          // Example: context.push(Routes.devotionalsByTag, extra: tag.key);
           if (closeModalOnTap && context.mounted) {
             Navigator.of(context).pop();
+          }
+          if (context.mounted) {
+            context.push(Routes.categoryDevotionals, extra: {'tag': tag});
           }
         },
         child: Container(
@@ -229,8 +229,8 @@ class DevotionalsView extends ConsumerWidget {
   void _showTagsModal(
     BuildContext context,
     ThemeData theme,
-    DevotionalsViewModel vm,
-    DevotionalsState state,
+    CategoriesViewModel vm,
+    CategoriesState state,
     List<DevotionalTag> allTags,
   ) {
     showDialog(
@@ -261,8 +261,9 @@ class DevotionalsView extends ConsumerWidget {
                         style: theme.textTheme.titleSmall,
                       ),
                     ),
-                    IconButton(
-                      icon: SvgPicture.asset(
+                    InkWell(
+                      onTap: () => Navigator.of(modalContext).pop(),
+                      child: SvgPicture.asset(
                         AppIcons.closeIcon,
                         width: AppSizes.iconSizeMedium,
                         colorFilter: ColorFilter.mode(
@@ -270,7 +271,6 @@ class DevotionalsView extends ConsumerWidget {
                           BlendMode.srcIn,
                         ),
                       ),
-                      onPressed: () => Navigator.of(modalContext).pop(),
                     ),
                   ],
                 ),
@@ -307,37 +307,22 @@ class DevotionalsView extends ConsumerWidget {
   Widget _buildCategoriesSection(
     BuildContext context,
     ThemeData theme,
-    DevotionalsState state,
-    DevotionalsViewModel vm,
+    CategoriesState state,
+    CategoriesViewModel vm,
   ) {
     final lang = S.of(context);
     if (state.isLoading) {
-      return Center(
-        child: SizedBox(
-          width: AppSizes.iconSizeMedium,
-          height: AppSizes.iconSizeMedium,
-          child: CircularProgressIndicator(strokeWidth: 2),
+      return const Center(
+        child: LoadingIndicator(
+          padding: EdgeInsets.all(AppSizes.paddingMedium),
         ),
       );
     }
 
     if (state.error) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSizes.paddingLarge),
-          child: Column(
-            children: [
-              Icon(Icons.error_outline, color: theme.colorScheme.error),
-              const SizedBox(height: AppSizes.spacingSmall),
-              Text(
-                lang.unableToLoadCategories,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.textTheme.labelSmall?.color,
-                ),
-              ),
-            ],
-          ),
-        ),
+      return ErrorState(
+        message: lang.unableToLoadCategories,
+        imagePath: AppIcons.sadPetImage,
       );
     }
 
@@ -345,18 +330,10 @@ class DevotionalsView extends ConsumerWidget {
     final filteredCategories = vm.getFilteredCategories();
 
     if (filteredCategories.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSizes.paddingLarge),
-          child: Text(
-            state.searchQuery.trim().isEmpty
-                ? lang.noCategoriesAvailable
-                : '${lang.noCategoriesAvailable} "${state.searchQuery}"',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.textTheme.labelSmall?.color,
-            ),
-          ),
-        ),
+      return EmptyState(
+        message: state.searchQuery.trim().isEmpty
+            ? lang.noCategoriesAvailable
+            : '${lang.noCategoriesAvailable} "${state.searchQuery}"',
       );
     }
 
@@ -452,7 +429,14 @@ class DevotionalsView extends ConsumerWidget {
                         type: ButtonType.neutral,
                         isShortText: true,
                         icon: isPremium ? AppIcons.lockIcon : null,
-                        onTap: () {},
+                        onTap: () {
+                          if (!isPremium) {
+                            context.push(
+                              Routes.categoryDevotionals,
+                              extra: {'category_devotionals': category},
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

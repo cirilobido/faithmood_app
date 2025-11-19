@@ -75,7 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
-    "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
+    "category_devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
@@ -112,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "explore": MessageLookupByLibrary.simpleMessage("Explore"),
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
     "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
-      "FFollow guided daily devotionals",
+      "FFollow guided daily category_devotionals",
     ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
@@ -195,6 +195,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
       "No categories available",
+    ),
+    "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No category_devotionals available",
     ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No payment required now",
@@ -352,6 +355,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tryAgain": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
     "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Unable to load categories",
+    ),
+    "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
+      "Unable to load category_devotionals",
     ),
     "unableToLoadVersePleaseTryAgainLater":
         MessageLookupByLibrary.simpleMessage(

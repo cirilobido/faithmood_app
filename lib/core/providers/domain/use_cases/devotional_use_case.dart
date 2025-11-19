@@ -21,6 +21,24 @@ class DevotionalUseCase extends FutureUseCase<dynamic, dynamic> {
     }
   }
 
+  Future<Result<DevotionalsResponse, Exception>> getDevotionalsByCategory(int categoryId, String lang, {int? page, int? limit}) async {
+    try {
+      final result = await repository.getDevotionalsByCategory(categoryId, lang, page: page, limit: limit);
+      return Success(result ?? DevotionalsResponse(results: []));
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<DevotionalsResponse, Exception>> getDevotionalsByTag(int tagId, String lang, {int? page, int? limit}) async {
+    try {
+      final result = await repository.getDevotionalsByTag(tagId, lang, page: page, limit: limit);
+      return Success(result ?? DevotionalsResponse(results: []));
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
   @override
   Future<Result<dynamic, Exception>> run(params) {
     throw UnimplementedError();

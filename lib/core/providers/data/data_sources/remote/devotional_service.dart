@@ -14,13 +14,28 @@ final devotionalServiceProvider = Provider<DevotionalService>((ref) {
 
 abstract class DevotionalService {
   Future<Devotional?> getDailyDevotional(String lang);
+  Future<DevotionalsResponse?> getDevotionalsByCategory(
+    int categoryId,
+    String lang, {
+    int? page,
+    int? limit,
+  });
+  Future<DevotionalsResponse?> getDevotionalsByTag(
+    int tagId,
+    String lang, {
+    int? page,
+    int? limit,
+  });
 }
 
 class DevotionalServiceImpl implements DevotionalService {
   final Dio httpClient;
   final RequestProcessor requestProcessor;
 
-  DevotionalServiceImpl({required this.httpClient, required this.requestProcessor});
+  DevotionalServiceImpl({
+    required this.httpClient,
+    required this.requestProcessor,
+  });
 
   @override
   Future<Devotional?> getDailyDevotional(String lang) async {
@@ -38,5 +53,66 @@ class DevotionalServiceImpl implements DevotionalService {
       throw Exception();
     }
   }
-}
 
+  @override
+  Future<DevotionalsResponse?> getDevotionalsByCategory(
+    int categoryId,
+    String lang, {
+    int? page,
+    int? limit,
+  }) async {
+    try {
+      final request =
+          await requestProcessor.process(
+                request: httpClient.get(
+                  Endpoints.devotionalsByCategory(
+                    categoryId,
+                    lang,
+                    page: page,
+                    limit: limit,
+                  ),
+                ),
+                jsonMapper: (data) {
+                  return DevotionalsResponse.fromJson(
+                    data as Map<String, dynamic>,
+                  );
+                },
+              )
+              as DevotionalsResponse?;
+      return request;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<DevotionalsResponse?> getDevotionalsByTag(
+    int tagId,
+    String lang, {
+    int? page,
+    int? limit,
+  }) async {
+    try {
+      final request =
+          await requestProcessor.process(
+                request: httpClient.get(
+                  Endpoints.devotionalsByTag(
+                    tagId,
+                    lang,
+                    page: page,
+                    limit: limit,
+                  ),
+                ),
+                jsonMapper: (data) {
+                  return DevotionalsResponse.fromJson(
+                    data as Map<String, dynamic>,
+                  );
+                },
+              )
+              as DevotionalsResponse?;
+      return request;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+}

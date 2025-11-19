@@ -1526,7 +1526,7 @@ class S {
 
   /// `Devotionals`
   String get devotionals {
-    return Intl.message('Devotionals', name: 'devotionals', desc: '', args: []);
+    return Intl.message('Devotionals', name: 'category_devotionals', desc: '', args: []);
   }
 
   /// `Find a plan that fits your journey.`
@@ -1644,10 +1644,10 @@ class S {
     );
   }
 
-  /// `FFollow guided daily devotionals`
+  /// `FFollow guided daily category_devotionals`
   String get ffollowGuidedDailyDevotionals {
     return Intl.message(
-      'FFollow guided daily devotionals',
+      'FFollow guided daily category_devotionals',
       name: 'ffollowGuidedDailyDevotionals',
       desc: '',
       args: [],
@@ -1659,6 +1659,26 @@ class S {
     return Intl.message(
       'Grow with Guidance',
       name: 'growWithGuidance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load category_devotionals`
+  String get unableToLoadDevotionals {
+    return Intl.message(
+      'Unable to load category_devotionals',
+      name: 'unableToLoadDevotionals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No category_devotionals available`
+  String get noDevotionalsAvailable {
+    return Intl.message(
+      'No category_devotionals available',
+      name: 'noDevotionalsAvailable',
       desc: '',
       args: [],
     );

@@ -10,4 +10,5 @@ abstract class Routes {
   static const journal = '/journal';
   static const profile = '/profile';
   static const settings = '/settings';
+  static const categoryDevotionals = '/category_devotionals-category_devotionals';
 }

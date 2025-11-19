@@ -118,177 +118,193 @@ class HomeView extends ConsumerWidget {
                 ),
               ),
               child: const Center(
-                child: CircularProgressIndicator(),
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                  child: SizedBox(
+                    width: AppSizes.iconSizeMedium,
+                    height: AppSizes.iconSizeMedium,
+                    child: CircularProgressIndicator(strokeWidth: 3),
+                  ),
+                ),
               ),
             )
           : state.errorDevotional
-              ? Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.tertiary.withOpacity(0.3),
-                        AppColors.secondary.withOpacity(0.3),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+          ? Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.tertiary.withOpacity(0.3),
+                    AppColors.secondary.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.error_outline, color: AppColors.primary),
+                    const SizedBox(height: AppSizes.spacingXSmall),
+                    Text(
+                      'Unable to load devotional',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.textTheme.labelSmall?.color,
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.error_outline, color: AppColors.primary),
-                        const SizedBox(height: AppSizes.spacingXSmall),
-                        Text(
-                          'Unable to load devotional',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.textTheme.labelSmall?.color,
+                  ],
+                ),
+              ),
+            )
+          : GestureDetector(
+              onTap: () {
+                // Navigation can be added later
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+                  gradient: coverImage != null
+                      ? null
+                      : LinearGradient(
+                          colors: [
+                            AppColors.tertiary.withOpacity(0.3),
+                            AppColors.secondary.withOpacity(0.3),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                ),
+                child: Stack(
+                  children: [
+                    if (coverImage != null)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.radiusNormal,
+                        ),
+                        child: Image.network(
+                          coverImage,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.tertiary.withOpacity(0.3),
+                                    AppColors.secondary.withOpacity(0.3),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    // Gradient overlay for better text readability
+                    if (coverImage != null)
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            AppSizes.radiusNormal,
+                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black.withOpacity(0.3),
+                              Colors.black.withOpacity(0.5),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                )
-              : GestureDetector(
-                  onTap: () {
-                    // Navigation can be added later
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-                      gradient: coverImage != null
-                          ? null
-                          : LinearGradient(
-                              colors: [
-                                AppColors.tertiary.withOpacity(0.3),
-                                AppColors.secondary.withOpacity(0.3),
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                    ),
-                    child: Stack(
-                      children: [
-                        if (coverImage != null)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-                            child: Image.network(
-                              coverImage,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (categoryTitle != null)
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: AppSizes.paddingSmall,
+                                    vertical: AppSizes.paddingXXSmall,
+                                  ),
                                   decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        AppColors.tertiary.withOpacity(0.3),
-                                        AppColors.secondary.withOpacity(0.3),
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
+                                    color: theme.colorScheme.primary
+                                        .withOpacity(0.8),
+                                    borderRadius: BorderRadius.circular(
+                                      AppSizes.radiusSmall,
                                     ),
                                   ),
-                                );
-                              },
-                            ),
-                          ),
-                        // Gradient overlay for better text readability
-                        if (coverImage != null)
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.black.withOpacity(0.3),
-                                  Colors.black.withOpacity(0.5),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),
-                        Padding(
-                          padding: const EdgeInsets.all(AppSizes.paddingMedium),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  if (categoryTitle != null)
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: AppSizes.paddingSmall,
-                                        vertical: AppSizes.paddingXXSmall,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: theme.colorScheme.primary.withOpacity(0.8),
-                                        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-                                      ),
-                                      child: Text(
-                                        categoryTitle,
-                                        style: theme.textTheme.labelSmall?.copyWith(
-                                          color: theme.colorScheme.onPrimary,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
+                                  child: Text(
+                                    categoryTitle,
+                                    style: theme.textTheme.labelSmall?.copyWith(
+                                      color: theme.colorScheme.onPrimary,
+                                      fontWeight: FontWeight.w600,
                                     ),
-                                  if (isPremium)
-                                    Container(
-                                      padding: const EdgeInsets.all(AppSizes.paddingXXSmall),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.secondary.withOpacity(0.8),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.star,
-                                        size: 16,
-                                        color: theme.colorScheme.onSecondary,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  if (title.isNotEmpty)
-                                    Text(
-                                      title,
-                                      style: theme.textTheme.titleMedium?.copyWith(
-                                        color: coverImage != null
-                                            ? Colors.white
-                                            : theme.textTheme.titleMedium?.color,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  if (content.isNotEmpty) ...[
-                                    const SizedBox(height: AppSizes.spacingXSmall),
-                                    Text(
-                                      content,
-                                      style: theme.textTheme.bodySmall?.copyWith(
-                                        color: coverImage != null
-                                            ? Colors.white.withOpacity(0.9)
-                                            : theme.textTheme.bodySmall?.color,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ],
-                              ),
+                                  ),
+                                ),
+                              if (isPremium)
+                                Container(
+                                  padding: const EdgeInsets.all(
+                                    AppSizes.paddingXXSmall,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.secondary.withOpacity(0.8),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.star,
+                                    size: 16,
+                                    color: theme.colorScheme.onSecondary,
+                                  ),
+                                ),
                             ],
                           ),
-                        ),
-                      ],
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (title.isNotEmpty)
+                                Text(
+                                  title,
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: coverImage != null
+                                        ? Colors.white
+                                        : theme.textTheme.titleMedium?.color,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              if (content.isNotEmpty) ...[
+                                const SizedBox(height: AppSizes.spacingXSmall),
+                                Text(
+                                  content,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: coverImage != null
+                                        ? Colors.white.withOpacity(0.9)
+                                        : theme.textTheme.bodySmall?.color,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+              ),
+            ),
     );
   }
 
@@ -401,61 +417,68 @@ class HomeView extends ConsumerWidget {
               ? const Center(
                   child: Padding(
                     padding: EdgeInsets.all(AppSizes.paddingLarge),
-                    child: CircularProgressIndicator(),
+                    child: Padding(
+                      padding: EdgeInsets.all(AppSizes.paddingMedium),
+                      child: SizedBox(
+                        width: AppSizes.iconSizeMedium,
+                        height: AppSizes.iconSizeMedium,
+                        child: CircularProgressIndicator(strokeWidth: 3),
+                      ),
+                    ),
                   ),
                 )
               : verseText.isNotEmpty
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          lang.verseOfTheDay,
-                          style: theme.textTheme.titleMedium?.copyWith(
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      lang.verseOfTheDay,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: theme.textTheme.labelSmall?.color!,
+                      ),
+                    ),
+                    const SizedBox(height: AppSizes.spacingSmall),
+                    Text(
+                      '"$verseText"',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    if (verseRef.isNotEmpty) ...[
+                      const SizedBox(height: AppSizes.spacingSmall),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          verseRef,
+                          textAlign: TextAlign.end,
+                          style: theme.textTheme.bodyMedium?.copyWith(
                             color: theme.textTheme.labelSmall?.color!,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                        const SizedBox(height: AppSizes.spacingSmall),
-                        Text(
-                          '"$verseText"',
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                        if (verseRef.isNotEmpty) ...[
-                          const SizedBox(height: AppSizes.spacingSmall),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              verseRef,
-                              textAlign: TextAlign.end,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.textTheme.labelSmall?.color!,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
-                    )
-                  : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              lang.verseOfTheDay,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                color: theme.textTheme.labelSmall?.color!,
-                              ),
-                            ),
-                            const SizedBox(height: AppSizes.spacingSmall),
-                            Text(
-                              lang.unableToLoadVersePleaseTryAgainLater,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.textTheme.labelSmall?.color!,
-                              ),
-                            ),
-                          ],
-                        ),
+                      ),
+                    ],
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      lang.verseOfTheDay,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: theme.textTheme.labelSmall?.color!,
+                      ),
+                    ),
+                    const SizedBox(height: AppSizes.spacingSmall),
+                    Text(
+                      lang.unableToLoadVersePleaseTryAgainLater,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.textTheme.labelSmall?.color!,
+                      ),
+                    ),
+                  ],
+                ),
         ),
       ],
     );
@@ -573,7 +596,7 @@ class HomeView extends ConsumerWidget {
             child: Stack(
               children: [
                 SizedBox(
-                  width: 200,
+                  width: AppSizes.welcomeBellIconSize,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -581,13 +604,15 @@ class HomeView extends ConsumerWidget {
                         '✨ Your journey is begins today',
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: AppSizes.spacingSmall),
                       Text(
-                        'Unlock more devotionals, guided plans, moods, and an ad-free experience.',
+                        'Unlock more category_devotionals, guided plans, moods, and an ad-free experience.',
                         style: theme.textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.w500,
+                          color: AppColors.textPrimary,
                         ),
                       ),
                     ],

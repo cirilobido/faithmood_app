@@ -18,6 +18,7 @@ class Devotional {
   final String? reflection;
   final List<DevotionalVerse>? verses;
   final List<DevotionalTag>? tags;
+  final String? iconEmoji;
 
   Devotional({
     this.id,
@@ -30,6 +31,7 @@ class Devotional {
     this.reflection,
     this.verses,
     this.tags,
+    this.iconEmoji,
   });
 
   factory Devotional.fromJson(Map<String, dynamic> json) =>

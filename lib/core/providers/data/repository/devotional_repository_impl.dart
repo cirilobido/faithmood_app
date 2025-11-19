@@ -81,5 +81,23 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
       throw Exception('Error getting daily devotional from RIMP!');
     }
   }
+
+  @override
+  Future<DevotionalsResponse?> getDevotionalsByCategory(int categoryId, String lang, {int? page, int? limit}) async {
+    try {
+      return await devotionalService.getDevotionalsByCategory(categoryId, lang, page: page, limit: limit);
+    } catch (e) {
+      throw Exception('Error getting category_devotionals by category_devotionals');
+    }
+  }
+
+  @override
+  Future<DevotionalsResponse?> getDevotionalsByTag(int tagId, String lang, {int? page, int? limit}) async {
+    try {
+      return await devotionalService.getDevotionalsByTag(tagId, lang, page: page, limit: limit);
+    } catch (e) {
+      throw Exception('Error getting category_devotionals by tag');
+    }
+  }
 }
 
