@@ -125,10 +125,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     final theme = Theme.of(context);
     final color = isSelected
         ? theme.colorScheme.primary
-        : theme.textTheme.bodyLarge?.color;
+        : theme.textTheme.labelSmall?.color;
     final textColor = isSelected
         ? theme.colorScheme.primary
-        : theme.textTheme.bodyLarge?.color;
+        : theme.textTheme.labelSmall?.color;
 
     return Expanded(
       child: InkWell(

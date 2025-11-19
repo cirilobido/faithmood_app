@@ -68,7 +68,7 @@ abstract class AppRoutes {
           GoRoute(
             path: Routes.devotional,
             pageBuilder: (context, state) {
-              return NoTransitionPage<void>(child: Container());
+              return NoTransitionPage<void>(child: const DevotionalsView());
             },
           ),
           GoRoute(

@@ -24,6 +24,7 @@ abstract class AppIcons {
   static const eyeClosedIcon = 'assets/icons/ic_closed_eye.svg';
   static const emailIcon = 'assets/icons/ic_mail.svg';
   static const keyIcon = 'assets/icons/ic_key.svg';
+  static const lockIcon = 'assets/icons/ic_lock.svg';
   static const homeIcon = 'assets/icons/ic_home.svg';
   static const openBookIcon = 'assets/icons/ic_open_book.svg';
   static const journalIcon = 'assets/icons/ic_journal.svg';
@@ -40,6 +41,7 @@ abstract class AppIcons {
   static const oatLeftIcon = 'assets/icons/ic_oat_left.svg';
   static const oatRightIcon = 'assets/icons/ic_oat_right.svg';
   static const dottedCircleIcon = 'assets/icons/ic_dotted_circle.svg';
+  static const searchIcon = 'assets/icons/ic_search.svg';
 }
 
 abstract class AppAnimations {

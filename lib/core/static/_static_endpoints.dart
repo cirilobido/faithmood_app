@@ -26,4 +26,10 @@ abstract class Endpoints {
 
   static const devotional = 'devotional';
   static String dailyDevotional(String lang) => '$devotional/today?lang=$lang';
+  
+  static const categories = 'categories';
+  static String getCategories(String lang) => '$categories/?lang=$lang';
+  
+  static const tags = 'tags';
+  static String getTags(String lang) => '$tags?lang=$lang';
 }

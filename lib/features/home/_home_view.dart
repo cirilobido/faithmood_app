@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/core_exports.dart';
+import '../../generated/l10n.dart';
 import '../../widgets/widgets_exports.dart';
 import '_home_view_model.dart';
 import '_home_state.dart';
@@ -292,6 +293,8 @@ class HomeView extends ConsumerWidget {
   }
 
   Widget _buildWeekEmotionsSection(BuildContext context, ThemeData theme) {
+    final lang = S.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -303,7 +306,7 @@ class HomeView extends ConsumerWidget {
                 Text('💫', style: theme.textTheme.titleMedium),
                 const SizedBox(width: AppSizes.spacingSmall),
                 Text(
-                  'Your Week in Emotions',
+                  lang.yourWeekInEmotions,
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: theme.textTheme.labelSmall?.color!,
                   ),
@@ -314,7 +317,7 @@ class HomeView extends ConsumerWidget {
         ),
         const SizedBox(height: AppSizes.spacingMedium),
         SizedBox(
-          height: 90,
+          height: AppSizes.homeWeekItemsContainerHeight,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 7,
@@ -379,6 +382,7 @@ class HomeView extends ConsumerWidget {
     bool isDark,
     HomeState state,
   ) {
+    final lang = S.of(context);
     final vm = ref.read(homeViewModelProvider.notifier);
     final verseText = vm.getVerseText();
     final verseRef = vm.getVerseRef();
@@ -405,7 +409,7 @@ class HomeView extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Verse of the day',
+                          lang.verseOfTheDay,
                           style: theme.textTheme.titleMedium?.copyWith(
                             color: theme.textTheme.labelSmall?.color!,
                           ),
@@ -434,52 +438,20 @@ class HomeView extends ConsumerWidget {
                         ],
                       ],
                     )
-                  : state.error
-                      ? Column(
+                  : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Verse of the day',
+                              lang.verseOfTheDay,
                               style: theme.textTheme.titleMedium?.copyWith(
                                 color: theme.textTheme.labelSmall?.color!,
                               ),
                             ),
                             const SizedBox(height: AppSizes.spacingSmall),
                             Text(
-                              'Unable to load verse. Please try again later.',
+                              lang.unableToLoadVersePleaseTryAgainLater,
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.textTheme.labelSmall?.color!,
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Verse of the day',
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                color: theme.textTheme.labelSmall?.color!,
-                              ),
-                            ),
-                            const SizedBox(height: AppSizes.spacingSmall),
-                            Text(
-                              '"Trust in the Lord with all your heart."',
-                              style: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                            const SizedBox(height: AppSizes.spacingSmall),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'Proverbs 3:5',
-                                textAlign: TextAlign.end,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.textTheme.labelSmall?.color!,
-                                  fontWeight: FontWeight.w700,
-                                ),
                               ),
                             ),
                           ],
@@ -494,11 +466,13 @@ class HomeView extends ConsumerWidget {
     ThemeData theme,
     bool isDark,
   ) {
+    final lang = S.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Choose Your Next Step',
+          lang.chooseYourNextStep,
           style: theme.textTheme.titleMedium?.copyWith(
             color: theme.textTheme.labelSmall?.color!,
           ),
@@ -507,8 +481,8 @@ class HomeView extends ConsumerWidget {
         _buildActionCard(
           context,
           theme,
-          'Grow with Guidance',
-          'Follow step-by-step faith journeys.',
+          lang.growWithGuidance,
+          lang.ffollowGuidedDailyDevotionals,
           theme.colorScheme.tertiary,
           AppIcons.openBookIcon,
         ),
@@ -516,8 +490,8 @@ class HomeView extends ConsumerWidget {
         _buildActionCard(
           context,
           theme,
-          'Your Journal',
-          'Capture your thoughts each day.',
+          lang.yourJournal,
+          lang.captureYourThoughtsEachDay,
           theme.colorScheme.primary,
           AppIcons.journalIcon,
         ),

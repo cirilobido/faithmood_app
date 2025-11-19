@@ -17,4 +17,6 @@ class Constant {
   static const dailyDevotionalDateKey = 'daily_devotional_date';
   
   static const settingsKey = 'settings';
+  static const categoriesKey = 'categories';
+  static const tagsKey = 'tags';
 }

@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+All copyWith in the state, done in any viewModel, should be in the updateState method
