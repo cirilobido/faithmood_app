@@ -18,5 +18,9 @@ class Constant {
   
   static const settingsKey = 'settings';
   static const categoriesKey = 'categories';
+  static const categoriesDateKey = 'categories_date';
   static const tagsKey = 'tags';
+  static const devotionalDetailsKey = 'devotional_details';
+  static const devotionalDetailsDateKey = 'devotional_details_date';
+  static const categoryDevotionalsKey = 'category_devotionals';
 }

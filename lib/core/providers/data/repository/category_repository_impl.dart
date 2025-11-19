@@ -20,25 +20,42 @@ class CategoryRepositoryImpl implements CategoryRepository {
     required this.categoryDao,
   });
 
+  bool _isCacheValid(String? cachedDate) {
+    if (cachedDate == null) return false;
+    try {
+      final cachedDateTime = DateTime.parse(cachedDate);
+      final now = DateTime.now();
+      final difference = now.difference(cachedDateTime);
+      return difference.inDays < 7;
+    } catch (_) {
+      return false;
+    }
+  }
+
   @override
   Future<List<DevotionalCategory>> getCategories(String lang) async {
     try {
-      // Always try to fetch from backend first
+      final cachedDate = await categoryDao.getCategoriesDate(lang);
+      
+      if (_isCacheValid(cachedDate)) {
+        final cachedCategories = await categoryDao.getCategories(lang);
+        if (cachedCategories != null && cachedCategories.isNotEmpty) {
+          return cachedCategories;
+        }
+      }
+      
       final result = await categoryService.getCategories(lang);
       
-      // Save the new categories for future use (cache)
       if (result.isNotEmpty) {
         await categoryDao.saveCategories(result, lang);
       }
       
       return result;
     } catch (apiError) {
-      // If API call fails, fall back to cached categories
       final cachedCategories = await categoryDao.getCategories(lang);
       if (cachedCategories != null && cachedCategories.isNotEmpty) {
         return cachedCategories;
       }
-      // If no cached categories and API fails, rethrow the error
       throw Exception('Error getting categories from RIMP!');
     }
   }

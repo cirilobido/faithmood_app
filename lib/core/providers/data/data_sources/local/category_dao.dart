@@ -12,6 +12,7 @@ abstract class CategoryDao {
   Future<bool?> saveCategories(List<DevotionalCategory> categories, String lang);
   Future<List<DevotionalCategory>?> getCategories(String lang);
   Future<bool?> deleteCategories(String lang);
+  Future<String?> getCategoriesDate(String lang);
 }
 
 class CategoryDaoImpl implements CategoryDao {
@@ -20,6 +21,7 @@ class CategoryDaoImpl implements CategoryDao {
   CategoryDaoImpl({required this.secureStorage});
 
   String _getCategoriesKey(String lang) => '${Constant.categoriesKey}_$lang';
+  String _getCategoriesDateKey(String lang) => '${Constant.categoriesDateKey}_$lang';
 
   @override
   Future<List<DevotionalCategory>?> getCategories(String lang) async {
@@ -47,13 +49,24 @@ class CategoryDaoImpl implements CategoryDao {
       key: _getCategoriesKey(lang),
       value: categoriesJsonEncoded,
     );
+    final now = DateTime.now().toIso8601String();
+    await secureStorage.saveValue(
+      key: _getCategoriesDateKey(lang),
+      value: now,
+    );
     return true;
   }
 
   @override
   Future<bool> deleteCategories(String lang) async {
     await secureStorage.deleteValue(key: _getCategoriesKey(lang));
+    await secureStorage.deleteValue(key: _getCategoriesDateKey(lang));
     return true;
+  }
+
+  @override
+  Future<String?> getCategoriesDate(String lang) async {
+    return await secureStorage.getValue(key: _getCategoriesDateKey(lang));
   }
 }
 

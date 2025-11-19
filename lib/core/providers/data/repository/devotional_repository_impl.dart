@@ -82,11 +82,42 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
     }
   }
 
+  bool _isCacheValid(String? cachedDate) {
+    if (cachedDate == null) return false;
+    try {
+      final cachedDateTime = DateTime.parse(cachedDate);
+      final now = DateTime.now();
+      final difference = now.difference(cachedDateTime);
+      return difference.inDays < 7;
+    } catch (_) {
+      return false;
+    }
+  }
+
   @override
   Future<Devotional?> getDevotionalById(int id, String lang) async {
     try {
-      return await devotionalService.getDevotionalById(id, lang);
+      final cachedDate = await devotionalDao.getDevotionalDetailsDate(id, lang);
+      
+      if (_isCacheValid(cachedDate)) {
+        final cachedDevotional = await devotionalDao.getDevotionalDetails(id, lang);
+        if (cachedDevotional != null) {
+          return cachedDevotional;
+        }
+      }
+      
+      final result = await devotionalService.getDevotionalById(id, lang);
+      
+      if (result != null) {
+        await devotionalDao.saveDevotionalDetails(result, id, lang);
+      }
+      
+      return result;
     } catch (e) {
+      final cachedDevotional = await devotionalDao.getDevotionalDetails(id, lang);
+      if (cachedDevotional != null) {
+        return cachedDevotional;
+      }
       throw Exception('Error getting devotional by id');
     }
   }
@@ -94,8 +125,18 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
   @override
   Future<DevotionalsResponse?> getDevotionalsByCategory(int categoryId, String lang, {int? page, int? limit}) async {
     try {
-      return await devotionalService.getDevotionalsByCategory(categoryId, lang, page: page, limit: limit);
+      final result = await devotionalService.getDevotionalsByCategory(categoryId, lang, page: page, limit: limit);
+      
+      if (result != null) {
+        await devotionalDao.saveCategoryDevotionals(result, categoryId, lang);
+      }
+      
+      return result;
     } catch (e) {
+      final cachedResponse = await devotionalDao.getCategoryDevotionals(categoryId, lang);
+      if (cachedResponse != null) {
+        return cachedResponse;
+      }
       throw Exception('Error getting category_devotionals by category_devotionals');
     }
   }
@@ -103,8 +144,18 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
   @override
   Future<DevotionalsResponse?> getDevotionalsByTag(int tagId, String lang, {int? page, int? limit}) async {
     try {
-      return await devotionalService.getDevotionalsByTag(tagId, lang, page: page, limit: limit);
+      final result = await devotionalService.getDevotionalsByTag(tagId, lang, page: page, limit: limit);
+      
+      if (result != null) {
+        await devotionalDao.saveCategoryDevotionals(result, 0, lang, tagId: tagId);
+      }
+      
+      return result;
     } catch (e) {
+      final cachedResponse = await devotionalDao.getCategoryDevotionals(0, lang, tagId: tagId);
+      if (cachedResponse != null) {
+        return cachedResponse;
+      }
       throw Exception('Error getting category_devotionals by tag');
     }
   }
