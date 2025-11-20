@@ -9,6 +9,7 @@ class MoodSessionRequest {
   final int? spiritualMoodId;
   final String? note;
   final int? emotionLevel;
+  final String? lang;
 
   MoodSessionRequest({
     this.userId,
@@ -16,6 +17,7 @@ class MoodSessionRequest {
     this.spiritualMoodId,
     this.note,
     this.emotionLevel,
+    this.lang,
   });
 
   factory MoodSessionRequest.fromJson(Map<String, dynamic> json) =>

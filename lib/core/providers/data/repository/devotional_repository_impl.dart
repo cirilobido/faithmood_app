@@ -168,5 +168,41 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
       throw Exception('Error saving devotional log');
     }
   }
+
+  @override
+  Future<DevotionalLogsResponse?> getDevotionalLogs(int userId, Map<String, dynamic>? queryParams) async {
+    try {
+      return await devotionalService.getDevotionalLogs(userId, queryParams);
+    } catch (e) {
+      throw Exception('Error getting devotional logs');
+    }
+  }
+
+  @override
+  Future<DevotionalLog?> getDevotionalLogDetail(int userId, int id, String lang) async {
+    try {
+      return await devotionalService.getDevotionalLogDetail(userId, id, lang);
+    } catch (e) {
+      throw Exception('Error getting devotional log detail');
+    }
+  }
+
+  @override
+  Future<DevotionalLog?> updateDevotionalLog(int userId, int id, DevotionalLogUpdateRequest request) async {
+    try {
+      return await devotionalService.updateDevotionalLog(userId, id, request);
+    } catch (e) {
+      throw Exception('Error updating devotional log');
+    }
+  }
+
+  @override
+  Future<bool> deleteDevotionalLog(int userId, int id) async {
+    try {
+      return await devotionalService.deleteDevotionalLog(userId, id);
+    } catch (e) {
+      throw Exception('Error deleting devotional log');
+    }
+  }
 }
 

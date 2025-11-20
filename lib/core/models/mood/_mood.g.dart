@@ -16,6 +16,9 @@ Mood _$MoodFromJson(Map<String, dynamic> json) => Mood(
   tags: (json['tags'] as List<dynamic>?)
       ?.map((e) => MoodTag.fromJson(e as Map<String, dynamic>))
       .toList(),
+  translations: (json['translations'] as List<dynamic>?)
+      ?.map((e) => MoodTranslation.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$MoodToJson(Mood instance) => <String, dynamic>{
@@ -26,4 +29,5 @@ Map<String, dynamic> _$MoodToJson(Mood instance) => <String, dynamic>{
   if (instance.category case final value?) 'category': value,
   if (instance.icon case final value?) 'icon': value,
   if (instance.tags case final value?) 'tags': value,
+  if (instance.translations case final value?) 'translations': value,
 };

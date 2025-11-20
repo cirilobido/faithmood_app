@@ -144,7 +144,7 @@ class CustomButton extends StatelessWidget {
     if (style == CustomStyle.outlined || style == CustomStyle.borderless) {
       return OutlinedButton.icon(
         style: theme.outlinedButtonTheme.style?.copyWith(
-          visualDensity: isShortText ? VisualDensity.compact : null,
+          visualDensity: isShortText ? VisualDensity.standard : null,
           side: WidgetStatePropertyAll(
             BorderSide(color: _getBorderColor(isDark), width: 1.5),
           ),
@@ -163,7 +163,7 @@ class CustomButton extends StatelessWidget {
     }
     return TextButton.icon(
       style: theme.textButtonTheme.style?.copyWith(
-        visualDensity: isShortText ? VisualDensity.compact : null,
+        visualDensity: isShortText ? VisualDensity.standard : null,
         backgroundColor: WidgetStatePropertyAll(_getBackgroundColor(isDark)),
         foregroundColor: WidgetStatePropertyAll(_getForegroundColor(isDark)),
       ),

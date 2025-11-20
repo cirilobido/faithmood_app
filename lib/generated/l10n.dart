@@ -909,9 +909,9 @@ class S {
     return Intl.message('Contact', name: 'contact', desc: '', args: []);
   }
 
-  /// `Fecha`
+  /// `Date`
   String get date {
-    return Intl.message('Fecha', name: 'date', desc: '', args: []);
+    return Intl.message('Date', name: 'date', desc: '', args: []);
   }
 
   /// `Aún no hay campañas disponibles.`
@@ -1959,6 +1959,361 @@ class S {
     return Intl.message(
       'Go to Journal',
       name: 'goToJournal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Journal`
+  String get myJournal {
+    return Intl.message('My Journal', name: 'myJournal', desc: '', args: []);
+  }
+
+  /// `Search journals...`
+  String get searchJournals {
+    return Intl.message(
+      'Search journals...',
+      name: 'searchJournals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Moods`
+  String get moods {
+    return Intl.message('Moods', name: 'moods', desc: '', args: []);
+  }
+
+  /// `Sort by Date`
+  String get sortByDate {
+    return Intl.message('Sort by Date', name: 'sortByDate', desc: '', args: []);
+  }
+
+  /// `Filter by Mood`
+  String get filterByMood {
+    return Intl.message(
+      'Filter by Mood',
+      name: 'filterByMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Entries`
+  String get allEntries {
+    return Intl.message('All Entries', name: 'allEntries', desc: '', args: []);
+  }
+
+  /// `No journal entries`
+  String get noJournalEntries {
+    return Intl.message(
+      'No journal entries',
+      name: 'noJournalEntries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load journal entries`
+  String get unableToLoadJournalEntries {
+    return Intl.message(
+      'Unable to load journal entries',
+      name: 'unableToLoadJournalEntries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply Filters`
+  String get applyFilters {
+    return Intl.message(
+      'Apply Filters',
+      name: 'applyFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear Filters`
+  String get clearFilters {
+    return Intl.message(
+      'Clear Filters',
+      name: 'clearFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort By`
+  String get sortBy {
+    return Intl.message('Sort By', name: 'sortBy', desc: '', args: []);
+  }
+
+  /// `Order`
+  String get order {
+    return Intl.message('Order', name: 'order', desc: '', args: []);
+  }
+
+  /// `Ascending`
+  String get ascending {
+    return Intl.message('Ascending', name: 'ascending', desc: '', args: []);
+  }
+
+  /// `Descending`
+  String get descending {
+    return Intl.message('Descending', name: 'descending', desc: '', args: []);
+  }
+
+  /// `Start Date`
+  String get startDate {
+    return Intl.message('Start Date', name: 'startDate', desc: '', args: []);
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message('End Date', name: 'endDate', desc: '', args: []);
+  }
+
+  /// `Emotional Mood`
+  String get emotionalMood {
+    return Intl.message(
+      'Emotional Mood',
+      name: 'emotionalMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spiritual Mood`
+  String get spiritualMood {
+    return Intl.message(
+      'Spiritual Mood',
+      name: 'spiritualMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message('All', name: 'all', desc: '', args: []);
+  }
+
+  /// `With Note`
+  String get withNote {
+    return Intl.message('With Note', name: 'withNote', desc: '', args: []);
+  }
+
+  /// `Without Note`
+  String get withoutNote {
+    return Intl.message(
+      'Without Note',
+      name: 'withoutNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More Filters`
+  String get moreFilters {
+    return Intl.message(
+      'More Filters',
+      name: 'moreFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emotions`
+  String get emotions {
+    return Intl.message('Emotions', name: 'emotions', desc: '', args: []);
+  }
+
+  /// `Date Range`
+  String get dateRange {
+    return Intl.message('Date Range', name: 'dateRange', desc: '', args: []);
+  }
+
+  /// `No emotional moods available`
+  String get noEmotionalMoodsAvailable {
+    return Intl.message(
+      'No emotional moods available',
+      name: 'noEmotionalMoodsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No spiritual moods available`
+  String get noSpiritualMoodsAvailable {
+    return Intl.message(
+      'No spiritual moods available',
+      name: 'noSpiritualMoodsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found`
+  String get noSearchResults {
+    return Intl.message(
+      'No results found',
+      name: 'noSearchResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `With Notes`
+  String get withNotes {
+    return Intl.message('With Notes', name: 'withNotes', desc: '', args: []);
+  }
+
+  /// `Journal Entry`
+  String get journalEntry {
+    return Intl.message(
+      'Journal Entry',
+      name: 'journalEntry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feeling`
+  String get feeling {
+    return Intl.message('Feeling', name: 'feeling', desc: '', args: []);
+  }
+
+  /// `Spirit`
+  String get spirit {
+    return Intl.message('Spirit', name: 'spirit', desc: '', args: []);
+  }
+
+  /// `My Thoughts`
+  String get myThoughts {
+    return Intl.message('My Thoughts', name: 'myThoughts', desc: '', args: []);
+  }
+
+  /// `Verse for the Day`
+  String get verseForTheDay {
+    return Intl.message(
+      'Verse for the Day',
+      name: 'verseForTheDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today's Encouragement`
+  String get todayEncouragement {
+    return Intl.message(
+      'Today\'s Encouragement',
+      name: 'todayEncouragement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load mood entry`
+  String get unableToLoadMoodEntry {
+    return Intl.message(
+      'Unable to load mood entry',
+      name: 'unableToLoadMoodEntry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message('Edit', name: 'edit', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Delete Mood Entry`
+  String get deleteMoodEntry {
+    return Intl.message(
+      'Delete Mood Entry',
+      name: 'deleteMoodEntry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this mood entry? This action cannot be undone.`
+  String get deleteMoodEntryMessage {
+    return Intl.message(
+      'Are you sure you want to delete this mood entry? This action cannot be undone.',
+      name: 'deleteMoodEntryMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message('Confirm', name: 'confirm', desc: '', args: []);
+  }
+
+  /// `Deleting...`
+  String get deleting {
+    return Intl.message('Deleting...', name: 'deleting', desc: '', args: []);
+  }
+
+  /// `Mood entry deleted successfully`
+  String get moodEntryDeleted {
+    return Intl.message(
+      'Mood entry deleted successfully',
+      name: 'moodEntryDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting mood entry`
+  String get errorDeletingMoodEntry {
+    return Intl.message(
+      'Error deleting mood entry',
+      name: 'errorDeletingMoodEntry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `Saving...`
+  String get saving {
+    return Intl.message('Saving...', name: 'saving', desc: '', args: []);
+  }
+
+  /// `Mood entry updated successfully`
+  String get moodEntryUpdated {
+    return Intl.message(
+      'Mood entry updated successfully',
+      name: 'moodEntryUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating mood entry`
+  String get errorUpdatingMoodEntry {
+    return Intl.message(
+      'Error updating mood entry',
+      name: 'errorUpdatingMoodEntry',
       desc: '',
       args: [],
     );

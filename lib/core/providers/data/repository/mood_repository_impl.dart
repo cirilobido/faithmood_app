@@ -69,4 +69,40 @@ class MoodRepositoryImpl implements MoodRepository {
       throw Exception('Error creating mood session');
     }
   }
+
+  @override
+  Future<MoodSessionsResponse?> getMoodSessions(int userId, Map<String, dynamic>? queryParams) async {
+    try {
+      return await moodService.getMoodSessions(userId, queryParams);
+    } catch (e) {
+      throw Exception('Error getting mood sessions');
+    }
+  }
+
+  @override
+  Future<MoodSession?> getMoodSessionDetail(int userId, String sessionId, String lang) async {
+    try {
+      return await moodService.getMoodSessionDetail(userId, sessionId, lang);
+    } catch (e) {
+      throw Exception('Error getting mood session detail');
+    }
+  }
+
+  @override
+  Future<bool> deleteMoodSession(int userId, String sessionId) async {
+    try {
+      return await moodService.deleteMoodSession(userId, sessionId);
+    } catch (e) {
+      throw Exception('Error deleting mood session');
+    }
+  }
+
+  @override
+  Future<MoodSession?> updateMoodSession(int userId, String sessionId, MoodSessionRequest request) async {
+    try {
+      return await moodService.updateMoodSession(userId, sessionId, request);
+    } catch (e) {
+      throw Exception('Error updating mood session');
+    }
+  }
 }

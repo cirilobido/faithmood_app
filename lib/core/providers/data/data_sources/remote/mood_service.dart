@@ -15,6 +15,10 @@ final moodServiceProvider = Provider<MoodService>((ref) {
 abstract class MoodService {
   Future<MoodsResponse?> getMoods(String lang);
   Future<MoodSessionResponse?> createMoodSession(int userId, MoodSessionRequest request);
+  Future<MoodSessionsResponse?> getMoodSessions(int userId, Map<String, dynamic>? queryParams);
+  Future<MoodSession?> getMoodSessionDetail(int userId, String sessionId, String lang);
+  Future<bool> deleteMoodSession(int userId, String sessionId);
+  Future<MoodSession?> updateMoodSession(int userId, String sessionId, MoodSessionRequest request);
 }
 
 class MoodServiceImpl implements MoodService {
@@ -53,6 +57,69 @@ class MoodServiceImpl implements MoodService {
           return MoodSessionResponse.fromJson(data as Map<String, dynamic>);
         },
       ) as MoodSessionResponse?;
+      return response;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<MoodSessionsResponse?> getMoodSessions(int userId, Map<String, dynamic>? queryParams) async {
+    try {
+      final response = await requestProcessor.process(
+        request: httpClient.get(Endpoints.getMoodSessions(userId, queryParams: queryParams)),
+        jsonMapper: (data) {
+          return MoodSessionsResponse.fromJson(data as Map<String, dynamic>);
+        },
+      ) as MoodSessionsResponse?;
+      return response;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<MoodSession?> getMoodSessionDetail(int userId, String sessionId, String lang) async {
+    try {
+      final response = await requestProcessor.process(
+        request: httpClient.get(Endpoints.getMoodSessionDetail(userId, sessionId, lang)),
+        jsonMapper: (data) {
+          return MoodSession.fromJson(data as Map<String, dynamic>);
+        },
+      ) as MoodSession?;
+      return response;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> deleteMoodSession(int userId, String sessionId) async {
+    try {
+      await requestProcessor.process(
+        request: httpClient.delete(Endpoints.deleteMoodSession(userId, sessionId)),
+        jsonMapper: (data) {
+          return true;
+        },
+      );
+      return true;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<MoodSession?> updateMoodSession(int userId, String sessionId, MoodSessionRequest request) async {
+    try {
+      final response = await requestProcessor.process(
+        request: httpClient.put(
+          Endpoints.updateMoodSession(userId, sessionId),
+          data: request.toJson(),
+        ),
+        jsonMapper: (data) {
+          return MoodSession.fromJson(data as Map<String, dynamic>);
+        },
+      ) as MoodSession?;
       return response;
     } catch (e) {
       throw Exception();

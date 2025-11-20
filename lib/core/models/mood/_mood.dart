@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '_mood_tag.dart';
+import '_mood_translation.dart';
 
 part '_mood.g.dart';
 
@@ -13,6 +14,7 @@ class Mood {
   final String? category;
   final String? icon;
   final List<MoodTag>? tags;
+  final List<MoodTranslation>? translations;
 
   Mood({
     this.id,
@@ -22,6 +24,7 @@ class Mood {
     this.category,
     this.icon,
     this.tags,
+    this.translations,
   });
 
   factory Mood.fromJson(Map<String, dynamic> json) => _$MoodFromJson(json);

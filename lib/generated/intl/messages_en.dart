@@ -32,10 +32,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "age": MessageLookupByLibrary.simpleMessage("Age"),
     "ageIsRequired": MessageLookupByLibrary.simpleMessage("Age is required!"),
+    "all": MessageLookupByLibrary.simpleMessage("All"),
+    "allEntries": MessageLookupByLibrary.simpleMessage("All Entries"),
     "allowNotifications": MessageLookupByLibrary.simpleMessage(
       "Allow Notifications",
     ),
     "and": MessageLookupByLibrary.simpleMessage("and"),
+    "applyFilters": MessageLookupByLibrary.simpleMessage("Apply Filters"),
+    "ascending": MessageLookupByLibrary.simpleMessage("Ascending"),
     "askNotificationSubtitle": MessageLookupByLibrary.simpleMessage(
       "We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.",
     ),
@@ -45,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "campains": MessageLookupByLibrary.simpleMessage("Campañas"),
     "campainsUsage": MessageLookupByLibrary.simpleMessage("Campañas"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelada": MessageLookupByLibrary.simpleMessage("Cancelada"),
     "cancelled": MessageLookupByLibrary.simpleMessage("Cancelado"),
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
@@ -56,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseYourNextStep": MessageLookupByLibrary.simpleMessage(
       "Choose Your Next Step",
     ),
+    "clearFilters": MessageLookupByLibrary.simpleMessage("Clear Filters"),
     "committedPageTitle": MessageLookupByLibrary.simpleMessage(
       "🙌 How committed are you with your faith?",
     ),
@@ -68,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "committedQ4": MessageLookupByLibrary.simpleMessage("🌧️ A little"),
     "committedQ5": MessageLookupByLibrary.simpleMessage("👀 Just exploring"),
+    "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Confirmar Contraseña",
     ),
@@ -80,22 +87,42 @@ class MessageLookup extends MessageLookupByLibrary {
       "Create an Account",
     ),
     "createCampaign": MessageLookupByLibrary.simpleMessage("Crear Campaña"),
-    "date": MessageLookupByLibrary.simpleMessage("Fecha"),
+    "date": MessageLookupByLibrary.simpleMessage("Date"),
+    "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteMoodEntry": MessageLookupByLibrary.simpleMessage(
+      "Delete Mood Entry",
+    ),
+    "deleteMoodEntryMessage": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this mood entry? This action cannot be undone.",
+    ),
+    "deleting": MessageLookupByLibrary.simpleMessage("Deleting..."),
+    "descending": MessageLookupByLibrary.simpleMessage("Descending"),
     "devotional": MessageLookupByLibrary.simpleMessage("Devotional"),
     "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
+    "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Password"),
+    "emotionalMood": MessageLookupByLibrary.simpleMessage("Emotional Mood"),
+    "emotions": MessageLookupByLibrary.simpleMessage("Emotions"),
+    "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
+    ),
+    "errorDeletingMoodEntry": MessageLookupByLibrary.simpleMessage(
+      "Error deleting mood entry",
     ),
     "errorSavingMood": MessageLookupByLibrary.simpleMessage(
       "Error saving mood. Please try again.",
     ),
     "errorSavingNote": MessageLookupByLibrary.simpleMessage(
       "Error saving note",
+    ),
+    "errorUpdatingMoodEntry": MessageLookupByLibrary.simpleMessage(
+      "Error updating mood entry",
     ),
     "everUsedBeforeQ1": MessageLookupByLibrary.simpleMessage(
       "🙏 Yes, I have used one before",
@@ -127,10 +154,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "expirada": MessageLookupByLibrary.simpleMessage("Expirada"),
     "explore": MessageLookupByLibrary.simpleMessage("Explore"),
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
+    "feeling": MessageLookupByLibrary.simpleMessage("Feeling"),
     "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
       "FFollow guided daily devotionals",
     ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
+    "filterByMood": MessageLookupByLibrary.simpleMessage("Filter by Mood"),
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
       "Find a plan that fits your journey.",
     ),
@@ -187,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "joinOthersTitle": MessageLookupByLibrary.simpleMessage(
       "🌱 Join others growing stronger in faith",
     ),
+    "journalEntry": MessageLookupByLibrary.simpleMessage("Journal Entry"),
     "just449PerMonthCancelAnytime": MessageLookupByLibrary.simpleMessage(
       "Just ### per month - Cancel anytime",
     ),
@@ -214,7 +244,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "moodAddedSuccessfullyMessage": MessageLookupByLibrary.simpleMessage(
       "You have successfully logged your first mood.",
     ),
+    "moodEntryDeleted": MessageLookupByLibrary.simpleMessage(
+      "Mood entry deleted successfully",
+    ),
+    "moodEntryUpdated": MessageLookupByLibrary.simpleMessage(
+      "Mood entry updated successfully",
+    ),
+    "moods": MessageLookupByLibrary.simpleMessage("Moods"),
+    "moreFilters": MessageLookupByLibrary.simpleMessage("More Filters"),
+    "myJournal": MessageLookupByLibrary.simpleMessage("My Journal"),
     "myReflection": MessageLookupByLibrary.simpleMessage("My Reflection"),
+    "myThoughts": MessageLookupByLibrary.simpleMessage("My Thoughts"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "Name must be at least 3 characters long",
     ),
@@ -230,8 +270,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
       "No devotionals available",
     ),
+    "noEmotionalMoodsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No emotional moods available",
+    ),
+    "noJournalEntries": MessageLookupByLibrary.simpleMessage(
+      "No journal entries",
+    ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No payment required now",
+    ),
+    "noSearchResults": MessageLookupByLibrary.simpleMessage("No results found"),
+    "noSpiritualMoodsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No spiritual moods available",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Note saved successfully",
@@ -239,6 +289,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "optional": MessageLookupByLibrary.simpleMessage("(Optional)"),
     "or": MessageLookupByLibrary.simpleMessage("o"),
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
+    "order": MessageLookupByLibrary.simpleMessage("Order"),
     "otpCode": MessageLookupByLibrary.simpleMessage("OTP Code"),
     "passMinCharacters": MessageLookupByLibrary.simpleMessage("6 characters"),
     "passOneLetter": MessageLookupByLibrary.simpleMessage("One letter"),
@@ -334,8 +385,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveNotes": MessageLookupByLibrary.simpleMessage("Save Note"),
+    "saving": MessageLookupByLibrary.simpleMessage("Saving..."),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
+    "searchJournals": MessageLookupByLibrary.simpleMessage(
+      "Search journals...",
+    ),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
       "Select the state that resonates with your spiritual side.",
@@ -376,7 +432,12 @@ class MessageLookup extends MessageLookupByLibrary {
           "Something went wrong while sending the otp code, please try again later.",
         ),
     "sorryAboutThis": MessageLookupByLibrary.simpleMessage("Sorry about this"),
+    "sortBy": MessageLookupByLibrary.simpleMessage("Sort By"),
+    "sortByDate": MessageLookupByLibrary.simpleMessage("Sort by Date"),
+    "spirit": MessageLookupByLibrary.simpleMessage("Spirit"),
+    "spiritualMood": MessageLookupByLibrary.simpleMessage("Spiritual Mood"),
     "start": MessageLookupByLibrary.simpleMessage("Start"),
+    "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
     "startFreeTrial": MessageLookupByLibrary.simpleMessage("Start For Free"),
     "status": MessageLookupByLibrary.simpleMessage("Estado"),
     "storage": MessageLookupByLibrary.simpleMessage("Storage"),
@@ -394,12 +455,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "This field is required",
     ),
     "tip": MessageLookupByLibrary.simpleMessage("Tip"),
+    "todayEncouragement": MessageLookupByLibrary.simpleMessage(
+      "Today\'s Encouragement",
+    ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
     "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Unable to load categories",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
       "Unable to load devotionals",
+    ),
+    "unableToLoadJournalEntries": MessageLookupByLibrary.simpleMessage(
+      "Unable to load journal entries",
+    ),
+    "unableToLoadMoodEntry": MessageLookupByLibrary.simpleMessage(
+      "Unable to load mood entry",
     ),
     "unableToLoadMoods": MessageLookupByLibrary.simpleMessage(
       "Unable to load moods",
@@ -436,6 +506,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "verifyCodeMessage": MessageLookupByLibrary.simpleMessage(
       "A 6-digit code has been sent to the email you provided. This code will expire in 5 minutes.",
     ),
+    "verseForTheDay": MessageLookupByLibrary.simpleMessage("Verse for the Day"),
     "verseOfTheDay": MessageLookupByLibrary.simpleMessage("Verse of the day"),
     "viewMore": MessageLookupByLibrary.simpleMessage("View More"),
     "weWillSendYouAnEmailWithACodeTo": MessageLookupByLibrary.simpleMessage(
@@ -470,6 +541,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
       "Where is your heart today?",
     ),
+    "withNote": MessageLookupByLibrary.simpleMessage("With Note"),
+    "withNotes": MessageLookupByLibrary.simpleMessage("With Notes"),
+    "withoutNote": MessageLookupByLibrary.simpleMessage("Without Note"),
     "writeWhatsOnYourHeart": MessageLookupByLibrary.simpleMessage(
       "Write what\'s on your heart — how you felt, what you learned, or what you prayed for today.",
     ),

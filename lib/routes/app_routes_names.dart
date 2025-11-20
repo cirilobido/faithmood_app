@@ -12,4 +12,6 @@ abstract class Routes {
   static const settings = '/settings';
   static const categoryDevotionals = '/category-devotionals';
   static const devotionalDetails = '/devotional-details';
+  static const moodEntryDetails = '/mood-entry-details';
+  static const devotionalLogDetails = '/devotional-log-details';
 }

@@ -13,6 +13,7 @@ MoodSessionRequest _$MoodSessionRequestFromJson(Map<String, dynamic> json) =>
       spiritualMoodId: (json['spiritualMoodId'] as num?)?.toInt(),
       note: json['note'] as String?,
       emotionLevel: (json['emotionLevel'] as num?)?.toInt(),
+      lang: json['lang'] as String?,
     );
 
 Map<String, dynamic> _$MoodSessionRequestToJson(MoodSessionRequest instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$MoodSessionRequestToJson(MoodSessionRequest instance) =>
       if (instance.spiritualMoodId case final value?) 'spiritualMoodId': value,
       if (instance.note case final value?) 'note': value,
       if (instance.emotionLevel case final value?) 'emotionLevel': value,
+      if (instance.lang case final value?) 'lang': value,
     };

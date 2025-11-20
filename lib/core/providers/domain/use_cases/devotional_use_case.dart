@@ -57,6 +57,42 @@ class DevotionalUseCase extends FutureUseCase<dynamic, dynamic> {
     }
   }
 
+  Future<Result<DevotionalLogsResponse?, Exception>> getDevotionalLogs(int userId, Map<String, dynamic>? queryParams) async {
+    try {
+      final result = await repository.getDevotionalLogs(userId, queryParams);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<DevotionalLog?, Exception>> getDevotionalLogDetail(int userId, int id, String lang) async {
+    try {
+      final result = await repository.getDevotionalLogDetail(userId, id, lang);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<DevotionalLog?, Exception>> updateDevotionalLog(int userId, int id, DevotionalLogUpdateRequest request) async {
+    try {
+      final result = await repository.updateDevotionalLog(userId, id, request);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<bool, Exception>> deleteDevotionalLog(int userId, int id) async {
+    try {
+      final result = await repository.deleteDevotionalLog(userId, id);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
   @override
   Future<Result<dynamic, Exception>> run(params) {
     throw UnimplementedError();

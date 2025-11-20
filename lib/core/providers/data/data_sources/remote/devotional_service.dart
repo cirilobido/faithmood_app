@@ -28,6 +28,10 @@ abstract class DevotionalService {
     int? limit,
   });
   Future<bool> saveDevotionalLog(int userId, DevotionalLogRequest request);
+  Future<DevotionalLogsResponse?> getDevotionalLogs(int userId, Map<String, dynamic>? queryParams);
+  Future<DevotionalLog?> getDevotionalLogDetail(int userId, int id, String lang);
+  Future<DevotionalLog?> updateDevotionalLog(int userId, int id, DevotionalLogUpdateRequest request);
+  Future<bool> deleteDevotionalLog(int userId, int id);
 }
 
 class DevotionalServiceImpl implements DevotionalService {
@@ -150,6 +154,67 @@ class DevotionalServiceImpl implements DevotionalService {
         jsonMapper: (data) => true,
       );
       return result == true;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<DevotionalLogsResponse?> getDevotionalLogs(int userId, Map<String, dynamic>? queryParams) async {
+    try {
+      final response = await requestProcessor.process(
+        request: httpClient.get(Endpoints.getDevotionalLogs(userId, queryParams: queryParams)),
+        jsonMapper: (data) {
+          return DevotionalLogsResponse.fromJson(data as Map<String, dynamic>);
+        },
+      ) as DevotionalLogsResponse?;
+      return response;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<DevotionalLog?> getDevotionalLogDetail(int userId, int id, String lang) async {
+    try {
+      final response = await requestProcessor.process(
+        request: httpClient.get(Endpoints.getDevotionalLogDetail(userId, id, lang)),
+        jsonMapper: (data) {
+          return DevotionalLog.fromJson(data as Map<String, dynamic>);
+        },
+      ) as DevotionalLog?;
+      return response;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<DevotionalLog?> updateDevotionalLog(int userId, int id, DevotionalLogUpdateRequest request) async {
+    try {
+      final response = await requestProcessor.process(
+        request: httpClient.put(
+          Endpoints.updateDevotionalLog(userId, id),
+          data: request.toJson(),
+        ),
+        jsonMapper: (data) {
+          return DevotionalLog.fromJson(data as Map<String, dynamic>);
+        },
+      ) as DevotionalLog?;
+      return response;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> deleteDevotionalLog(int userId, int id) async {
+    try {
+      await requestProcessor.process(
+        request: httpClient.delete(Endpoints.deleteDevotionalLog(userId, id)),
+        jsonMapper: (data) => true,
+      );
+      return true;
     } catch (e) {
       throw Exception();
     }

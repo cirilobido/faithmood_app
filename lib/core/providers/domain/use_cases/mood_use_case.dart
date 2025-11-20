@@ -30,6 +30,42 @@ class MoodUseCase extends FutureUseCase<dynamic, dynamic> {
     }
   }
 
+  Future<Result<MoodSessionsResponse?, Exception>> getMoodSessions(int userId, Map<String, dynamic>? queryParams) async {
+    try {
+      final result = await repository.getMoodSessions(userId, queryParams);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<MoodSession?, Exception>> getMoodSessionDetail(int userId, String sessionId, String lang) async {
+    try {
+      final result = await repository.getMoodSessionDetail(userId, sessionId, lang);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<bool, Exception>> deleteMoodSession(int userId, String sessionId) async {
+    try {
+      final result = await repository.deleteMoodSession(userId, sessionId);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<MoodSession?, Exception>> updateMoodSession(int userId, String sessionId, MoodSessionRequest request) async {
+    try {
+      final result = await repository.updateMoodSession(userId, sessionId, request);
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
   @override
   Future<Result<dynamic, Exception>> run(params) {
     throw UnimplementedError();

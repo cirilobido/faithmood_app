@@ -115,12 +115,12 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
     updateState(note: text);
   }
 
-  Future<bool> saveMood() async {
+  Future<String?> saveMood() async {
     try {
       final userId = authProvider.user?.id;
       if (userId == null) {
         devLogger('Error: User ID is null');
-        return false;
+        return null;
       }
 
       final emotionalMoodId = state.selectedEmotionalMood?.id;
@@ -128,15 +128,18 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
 
       if (emotionalMoodId == null || spiritualMoodId == null) {
         devLogger('Error: Mood IDs are missing');
-        return false;
+        return null;
       }
 
+      final userLang = authProvider.user?.lang?.name ?? 'en';
+      
       final request = MoodSessionRequest(
         userId: userId,
         emotionalMoodId: emotionalMoodId,
         spiritualMoodId: spiritualMoodId,
         note: state.note.trim().isEmpty ? null : state.note.trim(),
         emotionLevel: null,
+        lang: userLang,
       );
 
       final result = await moodUseCase.createMoodSession(userId, request);
@@ -149,17 +152,17 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
               key: Constant.hasAddedMoodKey,
               value: 'true',
             );
-            return true;
+            return response?.sessionId;
           }
         case Failure(exception: final exception):
           {
             devLogger('Error saving mood: $exception');
-            return false;
+            return null;
           }
       }
     } catch (e) {
       devLogger('Error saving mood: $e');
-      return false;
+      return null;
     }
   }
 }

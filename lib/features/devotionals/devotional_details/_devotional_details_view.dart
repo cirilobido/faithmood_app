@@ -84,7 +84,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   context: context,
                   initialNote: state.reflectionText,
                 );
-                
+
                 if (note != null) {
                   final success = await vm.saveReflection(note: note);
                   if (success && context.mounted) {
@@ -210,9 +210,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
               },
               Text(
                 devotional.reflection!,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.textTheme.labelSmall?.color,
-                ),
+                style: theme.textTheme.bodyLarge,
               ),
             ),
           ],

@@ -87,6 +87,14 @@ abstract class AppTheme {
           borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         ),
       ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: AppColors.cardPrimary,
+        textStyle: textTheme.bodyMedium?.copyWith(
+          color: AppColors.textPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      datePickerTheme: _getDatePickerTheme(textTheme, false),
     );
   }
 
@@ -170,6 +178,14 @@ abstract class AppTheme {
           borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         ),
       ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: AppColors.dCardPrimary,
+        textStyle: textTheme.bodyMedium?.copyWith(
+          color: AppColors.dTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      datePickerTheme: _getDatePickerTheme(textTheme, true),
     );
   }
 
@@ -362,6 +378,139 @@ abstract class AppTheme {
       labelSmall: baseTextTheme.labelSmall?.copyWith(
         fontFamily: _fontFamily,
         color: colorSecondary,
+      ),
+    );
+  }
+
+  static DatePickerThemeData _getDatePickerTheme(TextTheme textTheme, bool isDark) {
+    final backgroundColor = isDark ? AppColors.dCardPrimary : AppColors.cardPrimary;
+    final primaryColor = isDark ? AppColors.dPrimary : AppColors.primary;
+    final onPrimaryColor = isDark ? AppColors.dCardPrimary : AppColors.cardPrimary;
+    final textColor = isDark ? AppColors.dTextPrimary : AppColors.textPrimary;
+    final textSecondaryColor = isDark ? AppColors.dTextSecondary : AppColors.textSecondary;
+
+    return DatePickerThemeData(
+      backgroundColor: backgroundColor,
+      surfaceTintColor: backgroundColor,
+      headerBackgroundColor: backgroundColor,
+      headerForegroundColor: textColor,
+      headerHeadlineStyle: textTheme.titleLarge?.copyWith(
+        color: textColor,
+        fontWeight: FontWeight.w700,
+      ),
+      headerHelpStyle: textTheme.titleMedium?.copyWith(
+        color: textSecondaryColor,
+      ),
+      weekdayStyle: textTheme.bodyMedium?.copyWith(
+        color: textSecondaryColor,
+        fontWeight: FontWeight.w600,
+      ),
+      dayStyle: textTheme.bodyLarge?.copyWith(
+        color: textColor,
+      ),
+      dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return onPrimaryColor;
+        }
+        if (states.contains(WidgetState.disabled)) {
+          return textSecondaryColor.withValues(alpha: 0.38);
+        }
+        return textColor;
+      }),
+      dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return primaryColor;
+        }
+        if (states.contains(WidgetState.hovered)) {
+          return primaryColor.withValues(alpha: 0.08);
+        }
+        if (states.contains(WidgetState.focused)) {
+          return primaryColor.withValues(alpha: 0.12);
+        }
+        return Colors.transparent;
+      }),
+      dayOverlayColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.hovered)) {
+          return primaryColor.withValues(alpha: 0.08);
+        }
+        if (states.contains(WidgetState.focused)) {
+          return primaryColor.withValues(alpha: 0.12);
+        }
+        return Colors.transparent;
+      }),
+      todayForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return onPrimaryColor;
+        }
+        return primaryColor;
+      }),
+      todayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return primaryColor;
+        }
+        return Colors.transparent;
+      }),
+      todayBorder: BorderSide(
+        color: primaryColor,
+        width: 1,
+      ),
+      yearStyle: textTheme.bodyLarge?.copyWith(
+        color: textColor,
+      ),
+      yearForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return onPrimaryColor;
+        }
+        if (states.contains(WidgetState.disabled)) {
+          return textSecondaryColor.withValues(alpha: 0.38);
+        }
+        return textColor;
+      }),
+      yearBackgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return primaryColor;
+        }
+        if (states.contains(WidgetState.hovered)) {
+          return primaryColor.withValues(alpha: 0.08);
+        }
+        if (states.contains(WidgetState.focused)) {
+          return primaryColor.withValues(alpha: 0.12);
+        }
+        return Colors.transparent;
+      }),
+      rangeSelectionBackgroundColor: primaryColor.withValues(alpha: 0.12),
+      rangeSelectionOverlayColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.hovered)) {
+          return primaryColor.withValues(alpha: 0.08);
+        }
+        return Colors.transparent;
+      }),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+      ),
+      rangePickerShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+      ),
+      rangePickerHeaderBackgroundColor: backgroundColor,
+      rangePickerHeaderForegroundColor: textColor,
+      rangePickerHeaderHeadlineStyle: textTheme.titleLarge?.copyWith(
+        color: textColor,
+        fontWeight: FontWeight.w700,
+      ),
+      rangePickerHeaderHelpStyle: textTheme.titleMedium?.copyWith(
+        color: textSecondaryColor,
+      ),
+      cancelButtonStyle: TextButton.styleFrom(
+        foregroundColor: primaryColor,
+        backgroundColor: backgroundColor,
+        textStyle: textTheme.bodyLarge?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      confirmButtonStyle: TextButton.styleFrom(
+        textStyle: textTheme.bodyLarge?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

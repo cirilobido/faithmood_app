@@ -50,4 +50,44 @@ abstract class Endpoints {
   static const mood = 'mood';
   static String getMoods(String lang) => '$mood?lang=$lang';
   static String createMoodSession(int userId) => '$user/mood/session/$userId';
+  static String getMoodSessions(int userId, {Map<String, dynamic>? queryParams}) {
+    final baseUrl = '$user/mood/session/$userId';
+    if (queryParams == null || queryParams.isEmpty) {
+      return baseUrl;
+    }
+    final queryString = queryParams.entries
+        .where((entry) => entry.value != null)
+        .map((entry) => '${entry.key}=${entry.value}')
+        .join('&');
+    return queryString.isNotEmpty ? '$baseUrl?$queryString' : baseUrl;
+  }
+  static String getMoodSessionDetail(int userId, String sessionId, String lang) {
+    return '$user/mood/session/details/$userId/$sessionId?lang=$lang';
+  }
+  static String deleteMoodSession(int userId, String sessionId) {
+    return '$user/mood/session/$userId/$sessionId';
+  }
+  static String updateMoodSession(int userId, String sessionId) {
+    return '$user/mood/session/$userId/$sessionId';
+  }
+  static String getDevotionalLogs(int userId, {Map<String, dynamic>? queryParams}) {
+    final baseUrl = '$user/devotional/logs/$userId';
+    if (queryParams == null || queryParams.isEmpty) {
+      return baseUrl;
+    }
+    final queryString = queryParams.entries
+        .where((entry) => entry.value != null)
+        .map((entry) => '${entry.key}=${entry.value}')
+        .join('&');
+    return queryString.isNotEmpty ? '$baseUrl?$queryString' : baseUrl;
+  }
+  static String getDevotionalLogDetail(int userId, int id, String lang) {
+    return '$user/devotional/logs/details/$userId/$id?lang=$lang';
+  }
+  static String updateDevotionalLog(int userId, int id) {
+    return '$user/devotional/logs/$userId/$id';
+  }
+  static String deleteDevotionalLog(int userId, int id) {
+    return '$user/devotional/logs/$userId/$id';
+  }
 }

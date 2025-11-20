@@ -99,7 +99,7 @@ abstract class AppRoutes {
           GoRoute(
             path: Routes.journal,
             pageBuilder: (context, state) {
-              return NoTransitionPage<void>(child: Container());
+              return NoTransitionPage<void>(child: const JournalView());
             },
           ),
           GoRoute(
@@ -108,6 +108,32 @@ abstract class AppRoutes {
                 NoTransitionPage<void>(child: Container()),
           ),
         ],
+      ),
+      GoRoute(
+        path: Routes.moodEntryDetails,
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final sessionId = extra?['sessionId'] as String?;
+          if (sessionId == null) {
+            return NoTransitionPage<void>(child: Container());
+          }
+          return NoTransitionPage<void>(
+            child: MoodEntryDetailsView(sessionId: sessionId),
+          );
+        },
+      ),
+      GoRoute(
+        path: Routes.devotionalLogDetails,
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final id = extra?['id'] as int?;
+          if (id == null) {
+            return NoTransitionPage<void>(child: Container());
+          }
+          return NoTransitionPage<void>(
+            child: DevotionalLogDetailsView(id: id),
+          );
+        },
       ),
       GoRoute(
         path: Routes.addMood,

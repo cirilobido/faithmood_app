@@ -119,13 +119,46 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
                       );
                     }
                   } else {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext dialogContext) {
+                        return PopScope(
+                          canPop: false,
+                          child: AlertDialog(
+                            backgroundColor: theme.colorScheme.surface,
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const LoadingIndicator(),
+                                const SizedBox(height: AppSizes.spacingMedium),
+                                Text(
+                                  lang.saving,
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+
                     final hasAddedMood = await ref.read(hasAddedMoodProvider.future);
-                    final success = await vm.saveMood();
-                    if (success && context.mounted) {
+                    final sessionId = await vm.saveMood();
+
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
+
+                    if (sessionId != null && context.mounted) {
                       if (!hasAddedMood) {
-                        _showSuccessModal(context, theme, lang);
+                        _showSuccessModal(context, theme, lang, sessionId);
                       } else {
                         context.pop();
+                        context.push(
+                          Routes.moodEntryDetails,
+                          extra: {'sessionId': sessionId},
+                        );
                       }
                     } else if (context.mounted) {
                       CustomSnackBar.show(
@@ -144,7 +177,7 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
     );
   }
 
-  void _showSuccessModal(BuildContext context, ThemeData theme, S lang) {
+  void _showSuccessModal(BuildContext context, ThemeData theme, S lang, String sessionId) {
     CustomDialogModal.show(
       context: context,
       title: lang.moodAddedSuccessfully,
@@ -152,7 +185,11 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
       buttonTitle: lang.goToJournal,
       iconPath: AppIcons.happyPetImage,
       onPrimaryTap: () async {
-        context.go(Routes.journal);
+        context.pop();
+        context.push(
+          Routes.moodEntryDetails,
+          extra: {'sessionId': sessionId},
+        );
       },
     );
   }

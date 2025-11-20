@@ -46,6 +46,8 @@ abstract class AppIcons {
   static const searchIcon = 'assets/icons/ic_search.svg';
   static const bookmarkIcon = 'assets/icons/ic_bookmark.svg';
   static const bookmarkFilledIcon = 'assets/icons/ic_bookmark_filled.svg';
+  static const calendarIcon = 'assets/icons/ic_calendar.svg';
+  static const moreVerticalIcon = 'assets/icons/ic_options.svg';
 }
 
 abstract class AppAnimations {

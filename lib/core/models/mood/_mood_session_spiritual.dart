@@ -1,0 +1,46 @@
+import 'package:json_annotation/json_annotation.dart';
+
+import '_mood.dart';
+
+part '_mood_session_spiritual.g.dart';
+
+@JsonSerializable(includeIfNull: false)
+class MoodSessionSpiritual {
+  final int? id;
+  final int? userId;
+  final int? moodId;
+  final String? note;
+  final String? sessionId;
+  final String? aiReflection;
+  final int? aiVerseId;
+  final int? emotionLevel;
+  final String? lang;
+  final bool? isPrivate;
+  final bool? isActive;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final Mood? mood;
+
+  MoodSessionSpiritual({
+    this.id,
+    this.userId,
+    this.moodId,
+    this.note,
+    this.sessionId,
+    this.aiReflection,
+    this.aiVerseId,
+    this.emotionLevel,
+    this.lang,
+    this.isPrivate,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.mood,
+  });
+
+  factory MoodSessionSpiritual.fromJson(Map<String, dynamic> json) =>
+      _$MoodSessionSpiritualFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MoodSessionSpiritualToJson(this);
+}
+
