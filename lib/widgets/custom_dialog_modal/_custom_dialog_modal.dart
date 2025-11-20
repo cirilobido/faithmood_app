@@ -14,14 +14,17 @@ class CustomDialogModal {
     String? iconPath,
     bool dismissible = true,
   }) {
+    final theme = Theme.of(context);
     return showDialog(
       context: context,
       barrierDismissible: dismissible,
       builder: (BuildContext context) {
         return AlertDialog(
           alignment: Alignment.center,
-          title: Text(title),
-          content: Text(content),
+          title: Text(title, style: theme.textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+          content: Text(content, style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
           icon: (iconPath != null)
               ? Image.asset(iconPath, height: AppSizes.dialogIconSize)
               : null,

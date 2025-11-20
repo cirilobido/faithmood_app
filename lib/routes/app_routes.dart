@@ -109,6 +109,15 @@ abstract class AppRoutes {
           ),
         ],
       ),
+      GoRoute(
+        path: Routes.addMood,
+        pageBuilder: (context, state) {
+          return buildSlidePage(
+            key: state.pageKey,
+            child: AddMoodView(),
+          );
+        },
+      ),
     ],
   );
 }

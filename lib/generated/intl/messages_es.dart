@@ -23,6 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
+    "addToMyJournal": MessageLookupByLibrary.simpleMessage(
+      "Agregar a Mi Diario",
+    ),
     "adfreeExperience": MessageLookupByLibrary.simpleMessage(
       "🚫 Ad-Free Experience",
     ),
@@ -48,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancelled": MessageLookupByLibrary.simpleMessage("Cancelado"),
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
       "Capture your thoughts each day.",
+    ),
+    "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
+      "Elige el estado de ánimo que mejor refleje tu corazón en este momento.",
     ),
     "chooseYourNextStep": MessageLookupByLibrary.simpleMessage(
       "Choose Your Next Step",
@@ -84,6 +90,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
+    ),
+    "errorSavingMood": MessageLookupByLibrary.simpleMessage(
+      "Error al guardar el estado de ánimo. Por favor intenta de nuevo.",
     ),
     "errorSavingNote": MessageLookupByLibrary.simpleMessage(
       "Error al guardar la nota",
@@ -130,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "¿Olvidaste tu contraseña?",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "goToJournal": MessageLookupByLibrary.simpleMessage("Ir al Diario"),
     "growInFaith": MessageLookupByLibrary.simpleMessage("Grow in Faith"),
     "growWithGuidance": MessageLookupByLibrary.simpleMessage(
       "Grow with Guidance",
@@ -147,13 +157,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
       "📖 Have you ever followed a guided plan to strengthen your faith?",
     ),
+    "heyHowAreYouFeelingToday": MessageLookupByLibrary.simpleMessage(
+      "Hey ###, how are you feeling today?",
+    ),
     "history": MessageLookupByLibrary.simpleMessage("Historial"),
     "home": MessageLookupByLibrary.simpleMessage("Inicio"),
+    "howWouldYouDescribeYourDay": MessageLookupByLibrary.simpleMessage(
+      "¿Cómo describirías tu día?",
+    ),
     "iAgreeToChangeMyPassword": MessageLookupByLibrary.simpleMessage(
       "¡Acepto cambiar mi contraseña!",
     ),
     "iHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "Ya tengo una cuenta",
+    ),
+    "imGratefulFor": MessageLookupByLibrary.simpleMessage(
+      "Estoy agradecido por...",
     ),
     "inTheApp": MessageLookupByLibrary.simpleMessage("en la app."),
     "informationSafeMessage": MessageLookupByLibrary.simpleMessage(
@@ -193,12 +212,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
     "message": MessageLookupByLibrary.simpleMessage("Mensaje"),
     "metodoDePago": MessageLookupByLibrary.simpleMessage("Método de pago"),
+    "moodAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Felicitaciones",
+    ),
+    "moodAddedSuccessfullyMessage": MessageLookupByLibrary.simpleMessage(
+      "Has registrado exitosamente tu primer estado de ánimo.",
+    ),
     "myReflection": MessageLookupByLibrary.simpleMessage("Mi Reflexión"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "El nombre debe tener al menos 3 caracteres",
     ),
     "neverStored": MessageLookupByLibrary.simpleMessage("NUNCA SE ALMACENA"),
     "newPassword": MessageLookupByLibrary.simpleMessage("Nueva contraseña"),
+    "next": MessageLookupByLibrary.simpleMessage("Siguiente"),
     "noCampaignsYet": MessageLookupByLibrary.simpleMessage(
       "Aún no hay campañas disponibles.",
     ),
@@ -214,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Nota guardada exitosamente",
     ),
+    "optional": MessageLookupByLibrary.simpleMessage("(Opcional)"),
     "or": MessageLookupByLibrary.simpleMessage("o"),
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
     "otpCode": MessageLookupByLibrary.simpleMessage("Código OTP"),
@@ -252,6 +279,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "El teléfono debe tener entre 10 y 15 dígitos",
     ),
     "plan": MessageLookupByLibrary.simpleMessage("Plan"),
+    "pleaseSelectEmotionalMood": MessageLookupByLibrary.simpleMessage(
+      "Por favor selecciona un estado de ánimo emocional",
+    ),
+    "pleaseSelectSpiritualMood": MessageLookupByLibrary.simpleMessage(
+      "Por favor selecciona un estado de ánimo espiritual",
+    ),
     "preparingPageSubtitle": MessageLookupByLibrary.simpleMessage(
       "The Lord gives you strength when you need it most.",
     ),
@@ -316,6 +349,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveNotes": MessageLookupByLibrary.simpleMessage("Guardar Nota"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
+    "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
+      "Selecciona el estado que resuene con tu lado espiritual.",
+    ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Select your Language",
@@ -369,12 +405,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "Este campo es obligatorio",
     ),
+    "tip": MessageLookupByLibrary.simpleMessage("Consejo"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
     "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Unable to load categories",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
       "No se pudieron cargar las devocionales",
+    ),
+    "unableToLoadMoods": MessageLookupByLibrary.simpleMessage(
+      "No se pudieron cargar los estados de ánimo",
     ),
     "unableToLoadVersePleaseTryAgainLater":
         MessageLookupByLibrary.simpleMessage(
@@ -444,6 +484,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "whatsYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "¿Cuál es tu número de teléfono?",
+    ),
+    "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
+      "¿Dónde está tu corazón hoy?",
+    ),
+    "writeWhatsOnYourHeart": MessageLookupByLibrary.simpleMessage(
+      "Escribe lo que hay en tu corazón: cómo te sentiste, qué aprendiste o por qué oraste hoy.",
+    ),
+    "youCanRevisitThisNote": MessageLookupByLibrary.simpleMessage(
+      "Puedes revisar esta nota más tarde en tu Diario.",
     ),
     "youHaveToEnterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "Debes ingresar un correo electrónico válido.",

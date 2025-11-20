@@ -7,3 +7,4 @@ export 'home/_home_view.dart';
 export 'devotionals/categories/_categories_view.dart';
 export 'devotionals/category_devotionals/_category_devotionals_view.dart';
 export 'devotionals/devotional_details/_devotional_details_view.dart';
+export 'mood/add_mood/_add_mood_view.dart';

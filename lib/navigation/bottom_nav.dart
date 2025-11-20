@@ -20,7 +20,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   static const List<String> _routes = [
     Routes.home,
     Routes.devotional,
-    Routes.mood,
+    Routes.addMood,
     Routes.journal,
     Routes.profile,
   ];
@@ -32,7 +32,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
 
   void _onItemTapped(int index) {
     if (index == 2) {
-      // Plus icon - handle differently if needed
+      context.push(_routes[index]);
       return;
     }
     if (_selectedIndex != index) {
@@ -170,30 +170,33 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
 
   Widget _buildPlusButton({required BuildContext context}) {
     final theme = Theme.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: AppSizes.iconSizeXXLarge,
-          height: AppSizes.iconSizeXXLarge,
-          margin: const EdgeInsets.symmetric(horizontal: AppSizes.spacingSmall),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: theme.colorScheme.primary.withValues(alpha: 0.2),
-          ),
-          child: SvgPicture.asset(
-            AppIcons.addIcon,
-            colorFilter: ColorFilter.mode(
-              theme.colorScheme.primary,
-              BlendMode.srcIn,
-            ),
+    return InkWell(
+      onTap: () => _onItemTapped(2),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
             width: AppSizes.iconSizeXXLarge,
             height: AppSizes.iconSizeXXLarge,
+            margin: const EdgeInsets.symmetric(horizontal: AppSizes.spacingSmall),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: theme.colorScheme.primary.withValues(alpha: 0.2),
+            ),
+            child: SvgPicture.asset(
+              AppIcons.addIcon,
+              colorFilter: ColorFilter.mode(
+                theme.colorScheme.primary,
+                BlendMode.srcIn,
+              ),
+              width: AppSizes.iconSizeXXLarge,
+              height: AppSizes.iconSizeXXLarge,
+            ),
           ),
-        ),
-        const SizedBox(height: AppSizes.spacingMedium),
-      ],
+          const SizedBox(height: AppSizes.spacingMedium),
+        ],
+      ),
     );
   }
 

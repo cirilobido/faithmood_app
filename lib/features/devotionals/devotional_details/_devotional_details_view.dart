@@ -93,7 +93,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                       message: S.of(context).noteSavedSuccessfully,
                     );
                     if (context.mounted) {
-                      WidgetsBinding.instance.handlePopRoute();
+                      Navigator.of(context).pop();
                     }
                   } else if (context.mounted) {
                     CustomSnackBar.show(

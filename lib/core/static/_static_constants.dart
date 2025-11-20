@@ -23,4 +23,7 @@ class Constant {
   static const devotionalDetailsKey = 'devotional_details';
   static const devotionalDetailsDateKey = 'devotional_details_date';
   static const categoryDevotionalsKey = 'category_devotionals';
+  static const moodsKey = 'moods';
+  static const moodsDateKey = 'moods_date';
+  static const hasAddedMoodKey = 'has_added_mood';
 }

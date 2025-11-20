@@ -1788,6 +1788,181 @@ class S {
       args: [],
     );
   }
+
+  /// `Where is your heart today?`
+  String get whereIsYourHeartToday {
+    return Intl.message(
+      'Where is your heart today?',
+      name: 'whereIsYourHeartToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose the mood that best reflects your heart right now.`
+  String get chooseMoodThatBestReflects {
+    return Intl.message(
+      'Choose the mood that best reflects your heart right now.',
+      name: 'chooseMoodThatBestReflects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select the state that resonates with your spiritual side.`
+  String get selectStateThatResonates {
+    return Intl.message(
+      'Select the state that resonates with your spiritual side.',
+      name: 'selectStateThatResonates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How would you describe your day?`
+  String get howWouldYouDescribeYourDay {
+    return Intl.message(
+      'How would you describe your day?',
+      name: 'howWouldYouDescribeYourDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write what's on your heart — how you felt, what you learned, or what you prayed for today.`
+  String get writeWhatsOnYourHeart {
+    return Intl.message(
+      'Write what\'s on your heart — how you felt, what you learned, or what you prayed for today.',
+      name: 'writeWhatsOnYourHeart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I'm grateful for...`
+  String get imGratefulFor {
+    return Intl.message(
+      'I\'m grateful for...',
+      name: 'imGratefulFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tip`
+  String get tip {
+    return Intl.message('Tip', name: 'tip', desc: '', args: []);
+  }
+
+  /// `You can revisit this note later in your Journal.`
+  String get youCanRevisitThisNote {
+    return Intl.message(
+      'You can revisit this note later in your Journal.',
+      name: 'youCanRevisitThisNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load moods`
+  String get unableToLoadMoods {
+    return Intl.message(
+      'Unable to load moods',
+      name: 'unableToLoadMoods',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Add to My Journal`
+  String get addToMyJournal {
+    return Intl.message(
+      'Add to My Journal',
+      name: 'addToMyJournal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hey ###, how are you feeling today?`
+  String get heyHowAreYouFeelingToday {
+    return Intl.message(
+      'Hey ###, how are you feeling today?',
+      name: 'heyHowAreYouFeelingToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an emotional mood`
+  String get pleaseSelectEmotionalMood {
+    return Intl.message(
+      'Please select an emotional mood',
+      name: 'pleaseSelectEmotionalMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a spiritual mood`
+  String get pleaseSelectSpiritualMood {
+    return Intl.message(
+      'Please select a spiritual mood',
+      name: 'pleaseSelectSpiritualMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(Optional)`
+  String get optional {
+    return Intl.message('(Optional)', name: 'optional', desc: '', args: []);
+  }
+
+  /// `Congratulations`
+  String get moodAddedSuccessfully {
+    return Intl.message(
+      'Congratulations',
+      name: 'moodAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have successfully logged your first mood.`
+  String get moodAddedSuccessfullyMessage {
+    return Intl.message(
+      'You have successfully logged your first mood.',
+      name: 'moodAddedSuccessfullyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error saving mood. Please try again.`
+  String get errorSavingMood {
+    return Intl.message(
+      'Error saving mood. Please try again.',
+      name: 'errorSavingMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to Journal`
+  String get goToJournal {
+    return Intl.message(
+      'Go to Journal',
+      name: 'goToJournal',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

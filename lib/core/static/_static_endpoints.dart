@@ -46,4 +46,8 @@ abstract class Endpoints {
     if (limit != null) queryParams.add('limit=$limit');
     return '$tags/$tagId/devotionals?${queryParams.join('&')}';
   }
+  
+  static const mood = 'mood';
+  static String getMoods(String lang) => '$mood?lang=$lang';
+  static String createMoodSession(int userId) => '$user/mood/session/$userId';
 }

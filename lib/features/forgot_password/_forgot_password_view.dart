@@ -52,10 +52,11 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final lang = S.of(context);
     final state = ref.watch(forgotPasswordViewModelProvider);
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
