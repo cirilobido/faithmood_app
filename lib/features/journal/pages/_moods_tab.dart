@@ -115,7 +115,7 @@ class _MoodsTabState extends ConsumerState<MoodsTab> {
             ),
           ),
         ),
-        const SizedBox(height: AppSizes.spacingLarge),
+        const SizedBox(height: AppSizes.spacingMedium),
         Expanded(
           child: _buildContent(context, theme, lang, state),
         ),
@@ -188,6 +188,7 @@ class _MoodsTabState extends ConsumerState<MoodsTab> {
               padding: EdgeInsets.all(AppSizes.paddingMedium),
             ),
           ),
+        SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingLarge)),
       ],
     );
   }

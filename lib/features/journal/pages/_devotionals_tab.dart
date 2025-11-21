@@ -97,7 +97,7 @@ class _DevotionalsTabState extends ConsumerState<DevotionalsTab> {
             ),
           ),
         ),
-        const SizedBox(height: AppSizes.spacingLarge),
+        const SizedBox(height: AppSizes.spacingMedium),
         Expanded(
           child: _buildContent(context, theme, lang, state),
         ),
@@ -172,6 +172,7 @@ class _DevotionalsTabState extends ConsumerState<DevotionalsTab> {
               padding: EdgeInsets.all(AppSizes.paddingMedium),
             ),
           ),
+        SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingLarge)),
       ],
     );
   }
