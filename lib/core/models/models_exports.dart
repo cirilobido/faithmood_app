@@ -24,6 +24,7 @@ export 'devotional/_devotional_logs_response.dart';
 export 'devotional/_devotional_log_tag_relationship.dart';
 export 'devotional/_devotional_log_update_request.dart';
 export 'shared/_name_translation.dart';
+export 'shared/_paginated_response.dart';
 export 'devotional/_devotional_log_verse_relationship.dart';
 export 'mood/_mood.dart';
 export 'mood/_moods_response.dart';
