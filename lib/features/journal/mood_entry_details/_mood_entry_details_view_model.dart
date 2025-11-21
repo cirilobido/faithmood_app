@@ -20,6 +20,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
   final MoodUseCase moodUseCase;
   final AuthProvider authProvider;
   final String sessionId;
+  bool _mounted = true;
 
   MoodEntryDetailsViewModel(
     this.moodUseCase,
@@ -27,6 +28,12 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
     this.sessionId,
   ) : super(MoodEntryDetailsState()) {
     loadMoodSessionDetail();
+  }
+
+  @override
+  void dispose() {
+    _mounted = false;
+    super.dispose();
   }
 
   void updateState({
@@ -38,6 +45,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
     bool? isUpdating,
     String? editedNote,
   }) {
+    if (!_mounted) return;
     state = state.copyWith(
       isLoading: isLoading,
       error: error,
@@ -69,6 +77,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       switch (result) {
         case Success(value: final session):
           {
+            if (!_mounted) return;
             updateState(
               isLoading: false,
               moodSession: session,
@@ -77,11 +86,13 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
         case Failure(exception: final exception):
           {
             devLogger('Error loading mood session detail: $exception');
+            if (!_mounted) return;
             updateState(isLoading: false, error: true);
           }
       }
     } catch (e) {
       devLogger('Error loading mood session detail: $e');
+      if (!_mounted) return;
       updateState(isLoading: false, error: true);
     }
   }
@@ -100,18 +111,21 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       switch (result) {
         case Success(value: final success):
           {
+            if (!_mounted) return false;
             updateState(isDeleting: false);
             return success;
           }
         case Failure(exception: final exception):
           {
             devLogger('Error deleting mood session: $exception');
+            if (!_mounted) return false;
             updateState(isDeleting: false);
             return false;
           }
       }
     } catch (e) {
       devLogger('Error deleting mood session: $e');
+      if (!_mounted) return false;
       updateState(isDeleting: false);
       return false;
     }
@@ -155,6 +169,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       switch (result) {
         case Success(value: final updatedSession):
           {
+            if (!_mounted) return false;
             final currentSession = state.moodSession;
             if (currentSession != null && updatedSession != null) {
               final updatedNote = request.note;
@@ -185,12 +200,14 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
         case Failure(exception: final exception):
           {
             devLogger('Error updating mood session: $exception');
+            if (!_mounted) return false;
             updateState(isUpdating: false);
             return false;
           }
       }
     } catch (e) {
       devLogger('Error updating mood session: $e');
+      if (!_mounted) return false;
       updateState(isUpdating: false);
       return false;
     }
