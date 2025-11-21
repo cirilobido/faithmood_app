@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/core_exports.dart';
@@ -50,7 +49,13 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(context, theme, lang),
+            DetailsPageHeader(
+              title: lang.journalEntry,
+              action: MenuHeaderAction(
+                onEdit: () => _handleEdit(context),
+                onDelete: () => _handleDelete(context, theme, lang),
+              ),
+            ),
             Expanded(
               child: state.isLoading
                   ? const Center(child: LoadingIndicator())
@@ -69,106 +74,6 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     );
   }
 
-  Widget _buildHeader(BuildContext context, ThemeData theme, S lang) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.paddingMedium,
-        vertical: AppSizes.paddingMedium,
-      ),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            splashColor: Colors.transparent,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            child: SvgPicture.asset(
-              AppIcons.arrowLeftIcon,
-              width: AppSizes.iconSizeMedium,
-              colorFilter: ColorFilter.mode(
-                theme.primaryIconTheme.color!,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              lang.journalEntry,
-              style: theme.textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(
-            width: AppSizes.iconSizeNormal,
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: PopupMenuButton<String>(
-                padding: EdgeInsets.zero,
-                iconSize: AppSizes.iconSizeNormal,
-                splashRadius: AppSizes.iconSizeNormal / 2,
-                icon: SvgPicture.asset(
-                  AppIcons.moreVerticalIcon,
-                  width: AppSizes.iconSizeNormal,
-                  height: AppSizes.iconSizeNormal,
-                  colorFilter: ColorFilter.mode(
-                    theme.primaryIconTheme.color!,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                onSelected: (value) {
-                  if (value == 'edit') {
-                    _handleEdit(context);
-                  } else if (value == 'delete') {
-                    _handleDelete(context, theme, lang);
-                  }
-                },
-                itemBuilder: (BuildContext context) => [
-                  PopupMenuItem<String>(
-                    value: 'edit',
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.edit,
-                          size: AppSizes.iconSizeNormal,
-                          color: theme.iconTheme.color,
-                        ),
-                        const SizedBox(width: AppSizes.spacingSmall),
-                        Text(
-                          lang.edit,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    value: 'delete',
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.delete,
-                          size: AppSizes.iconSizeNormal,
-                          color: theme.colorScheme.error,
-                        ),
-                        const SizedBox(width: AppSizes.spacingSmall),
-                        Text(
-                          lang.delete,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.error,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   void _handleEdit(BuildContext context) {
     final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
@@ -177,85 +82,25 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     _noteController.text = state.moodSession?.note ?? '';
   }
 
-  void _handleDelete(BuildContext context, ThemeData theme, S lang) {
-    showDialog(
+  void _handleDelete(BuildContext context, ThemeData theme, S lang) async {
+    final confirmed = await DeleteConfirmationDialog.show(
       context: context,
-      barrierDismissible: true,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          alignment: Alignment.center,
-          title: Text(
-            lang.deleteMoodEntry,
-            style: theme.textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            lang.deleteMoodEntryMessage,
-            style: theme.textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            Column(
-              children: [
-                CustomButton(
-                  title: lang.confirm,
-                  type: ButtonType.error,
-                  isShortText: true,
-                  onTap: () async {
-                    Navigator.of(dialogContext).pop();
-                    await _performDelete(context, theme, lang);
-                  },
-                ),
-                const SizedBox(height: AppSizes.spacingSmall),
-                CustomButton(
-                  title: lang.cancel,
-                  type: ButtonType.neutral,
-                  style: CustomStyle.outlined,
-                  isShortText: true,
-                  onTap: () {
-                    Navigator.of(dialogContext).pop();
-                  },
-                ),
-              ],
-            ),
-          ],
-        );
-      },
     );
+    if (confirmed == true) {
+      await _performDelete(context, theme, lang);
+    }
   }
 
   Future<void> _performDelete(BuildContext context, ThemeData theme, S lang) async {
     final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
     final journalVm = ref.read(journalViewModelProvider.notifier);
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        return PopScope(
-          canPop: false,
-          child: AlertDialog(
-            backgroundColor: theme.colorScheme.surface,
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const LoadingIndicator(),
-                const SizedBox(height: AppSizes.spacingMedium),
-                Text(
-                  lang.deleting,
-                  style: theme.textTheme.bodyLarge,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+    LoadingDialog.show(context: context, message: lang.deleting);
 
     final success = await vm.deleteMoodSession();
 
     if (context.mounted) {
-      Navigator.of(context).pop();
+      LoadingDialog.hide(context);
 
       if (success) {
         journalVm.loadMoodSessions();
@@ -293,34 +138,12 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
       return;
     }
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        return PopScope(
-          canPop: false,
-          child: AlertDialog(
-            backgroundColor: theme.colorScheme.surface,
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const LoadingIndicator(),
-                const SizedBox(height: AppSizes.spacingMedium),
-                Text(
-                  lang.saving,
-                  style: theme.textTheme.bodyLarge,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+    LoadingDialog.show(context: context, message: lang.saving);
 
     final success = await vm.updateMoodSession();
 
     if (context.mounted) {
-      Navigator.of(context).pop();
+      LoadingDialog.hide(context);
 
       if (success) {
         journalVm.loadMoodSessions();
@@ -392,85 +215,54 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
             spiritualMoodIcon,
             spiritualMoodName,
           ),
-          if (state.isEditing) ...[
+          if (state.isEditing || (session.note != null && session.note!.isNotEmpty)) ...[
             const SizedBox(height: AppSizes.spacingMedium),
-            Text(lang.myThoughts, style: theme.textTheme.titleMedium),
-            InputField(
+            NoteDisplay(
+              note: session.note,
+              isEditing: state.isEditing,
               controller: _noteController,
-              isMultiline: true,
-              hintText: lang.myThoughts,
               onChanged: (value) {
                 final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
                 vm.updateEditedNote(value);
               },
-            ),
-            const SizedBox(height: AppSizes.spacingMedium),
-            Column(
-              children: [
-                CustomButton(
-                  title: lang.save,
-                  type: ButtonType.primary,
-                  isLoading: state.isUpdating,
-                  isShortText: true,
-                  onTap: () => _performUpdate(context, theme, lang),
-                ),
-                const SizedBox(height: AppSizes.spacingSmall),
-                CustomButton(
-                  title: lang.cancel,
-                  type: ButtonType.neutral,
-                  style: CustomStyle.outlined,
-                  isShortText: true,
-                  onTap: () {
-                    final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
-                    final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
-                    vm.cancelEditing();
-                    _noteController.text = state.moodSession?.note ?? '';
-                  },
-                ),
-              ],
-            ),
-          ] else if (session.note != null && session.note!.isNotEmpty) ...[
-            const SizedBox(height: AppSizes.spacingMedium),
-            Text(lang.myThoughts, style: theme.textTheme.titleMedium),
-            const SizedBox(height: AppSizes.spacingSmall),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSizes.paddingMedium),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.secondary.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-              ),
-              child: Text(session.note!, style: theme.textTheme.bodyLarge),
+              onSave: () => _performUpdate(context, theme, lang),
+              onCancel: () {
+                final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
+                final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
+                vm.cancelEditing();
+                _noteController.text = state.moodSession?.note ?? '';
+              },
+              isSaving: state.isUpdating,
             ),
           ],
           if (aiVerse != null) ...[
             const SizedBox(height: AppSizes.spacingLarge),
-            _buildExpandableSection(
-              context,
-              theme,
-              lang.verseForTheDay,
-              _isVerseExpanded,
-              () {
+            ExpandableSection(
+              title: lang.verseForTheDay,
+              isExpanded: _isVerseExpanded,
+              onToggle: () {
                 setState(() {
                   _isVerseExpanded = !_isVerseExpanded;
                 });
               },
-              _buildVerseContent(context, theme, session.aiVerse!, userLang),
+              content: VerseContent(
+                verse: session.aiVerse!,
+                useStyledContainer: true,
+                userLang: userLang,
+              ),
             ),
           ],
           if (aiReflection != null && aiReflection.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingMedium),
-            _buildExpandableSection(
-              context,
-              theme,
-              lang.todayEncouragement,
-              _isReflectionExpanded,
-              () {
+            ExpandableSection(
+              title: lang.todayEncouragement,
+              isExpanded: _isReflectionExpanded,
+              onToggle: () {
                 setState(() {
                   _isReflectionExpanded = !_isReflectionExpanded;
                 });
               },
-              Text(
+              content: Text(
                 aiReflection,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.textTheme.labelSmall?.color,
@@ -562,99 +354,5 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     );
   }
 
-  Widget _buildExpandableSection(
-    BuildContext context,
-    ThemeData theme,
-    String title,
-    bool isExpanded,
-    VoidCallback onTap,
-    Widget content,
-  ) {
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.onSurface,
-        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-        border: Border.all(
-          color: theme.colorScheme.outline,
-          width: AppSizes.borderWithSmall,
-        ),
-      ),
-      child: Column(
-        children: [
-          InkWell(
-            splashColor: Colors.transparent,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            onTap: onTap,
-            child: Padding(
-              padding: const EdgeInsets.all(AppSizes.paddingMedium),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(title, style: theme.textTheme.titleMedium),
-                  ),
-                  Icon(
-                    isExpanded
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
-                    color: theme.iconTheme.color,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (isExpanded) ...[
-            Divider(
-              height: AppSizes.borderWithSmall,
-              color: theme.colorScheme.outlineVariant,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(AppSizes.paddingMedium),
-              child: content,
-            ),
-          ],
-        ],
-      ),
-    );
-  }
 
-  Widget _buildVerseContent(
-    BuildContext context,
-    ThemeData theme,
-    Verse aiVerse,
-    String userLang,
-  ) {
-    final verseText = aiVerse.translations?.first.text ?? '';
-    final verseRef = aiVerse.translations?.first.ref ?? '';
-
-    if (verseText.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(AppSizes.paddingMedium),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.primary.withValues(alpha: 0.2),
-        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(verseText, style: theme.textTheme.bodyLarge),
-          if (verseRef.isNotEmpty) ...[
-            const SizedBox(height: AppSizes.spacingXSmall),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                verseRef,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.textTheme.labelSmall?.color,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
 }
