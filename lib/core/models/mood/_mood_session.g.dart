@@ -12,17 +12,13 @@ MoodSession _$MoodSessionFromJson(Map<String, dynamic> json) => MoodSession(
   note: json['note'] as String?,
   emotional: json['emotional'] == null
       ? null
-      : MoodSessionEmotional.fromJson(
-          json['emotional'] as Map<String, dynamic>,
-        ),
+      : MoodSessionDetails.fromJson(json['emotional'] as Map<String, dynamic>),
   spiritual: json['spiritual'] == null
       ? null
-      : MoodSessionSpiritual.fromJson(
-          json['spiritual'] as Map<String, dynamic>,
-        ),
+      : MoodSessionDetails.fromJson(json['spiritual'] as Map<String, dynamic>),
   aiVerse: json['aiVerse'] == null
       ? null
-      : MoodSessionVerse.fromJson(json['aiVerse'] as Map<String, dynamic>),
+      : Verse.fromJson(json['aiVerse'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$MoodSessionToJson(MoodSession instance) =>

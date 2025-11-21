@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '_mood_tag.dart';
-import '_mood_translation.dart';
+import '../shared/_name_translation.dart';
+import '../tags/_tag.dart';
 
 part '_mood.g.dart';
 
@@ -13,8 +13,8 @@ class Mood {
   final String? description;
   final String? category;
   final String? icon;
-  final List<MoodTag>? tags;
-  final List<MoodTranslation>? translations;
+  final List<Tag>? tags;
+  final List<NameTranslation>? translations;
 
   Mood({
     this.id,

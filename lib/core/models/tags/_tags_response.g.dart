@@ -8,7 +8,7 @@ part of '_tags_response.dart';
 
 TagsResponse _$TagsResponseFromJson(Map<String, dynamic> json) => TagsResponse(
   tags: (json['tags'] as List<dynamic>?)
-      ?.map((e) => DevotionalTag.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => Tag.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 

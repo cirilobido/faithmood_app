@@ -9,8 +9,8 @@ final tagDaoProvider = Provider<TagDao>((ref) {
 });
 
 abstract class TagDao {
-  Future<bool?> saveTags(List<DevotionalTag> tags, String lang);
-  Future<List<DevotionalTag>?> getTags(String lang);
+  Future<bool?> saveTags(List<Tag> tags, String lang);
+  Future<List<Tag>?> getTags(String lang);
   Future<bool?> deleteTags(String lang);
 }
 
@@ -22,7 +22,7 @@ class TagDaoImpl implements TagDao {
   String _getTagsKey(String lang) => '${Constant.tagsKey}_$lang';
 
   @override
-  Future<List<DevotionalTag>?> getTags(String lang) async {
+  Future<List<Tag>?> getTags(String lang) async {
     final tagsJson = await secureStorage.getValue(
       key: _getTagsKey(lang),
     );
@@ -30,7 +30,7 @@ class TagDaoImpl implements TagDao {
     try {
       final List<dynamic> jsonList = jsonDecode(tagsJson);
       return jsonList
-          .map((item) => DevotionalTag.fromJson(item as Map<String, dynamic>))
+          .map((item) => Tag.fromJson(item as Map<String, dynamic>))
           .toList();
     } catch (_) {
       return null;
@@ -38,7 +38,7 @@ class TagDaoImpl implements TagDao {
   }
 
   @override
-  Future<bool> saveTags(List<DevotionalTag> tags, String lang) async {
+  Future<bool> saveTags(List<Tag> tags, String lang) async {
     final tagsJsonEncoded = jsonEncode(
       tags.map((tag) => tag.toJson()).toList(),
     );

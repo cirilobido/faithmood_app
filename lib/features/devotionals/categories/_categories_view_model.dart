@@ -34,7 +34,7 @@ class CategoriesViewModel extends StateNotifier<CategoriesState> {
     bool? isLoadingTags,
     bool? error,
     List<DevotionalCategory>? categories,
-    List<DevotionalTag>? tags,
+    List<Tag>? tags,
     String? searchQuery,
   }) {
     state = state.copyWith(

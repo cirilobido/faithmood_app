@@ -5,7 +5,7 @@ import '../../core/core_exports.dart';
 import '../../routes/app_routes_names.dart';
 
 class DevotionalTagChip extends StatelessWidget {
-  final DevotionalTag tag;
+  final Tag tag;
   final bool isClickable;
   final VoidCallback? onTap;
 

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '_devotional_log_tag.dart';
+import '../tags/_tag.dart';
 
 part '_devotional_log_tag_relationship.g.dart';
 
@@ -9,7 +9,7 @@ class DevotionalLogTagRelationship {
   final int? id;
   final int? devotionalId;
   final int? tagId;
-  final DevotionalLogTag? tag;
+  final Tag? tag;
 
   DevotionalLogTagRelationship({
     this.id,

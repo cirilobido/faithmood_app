@@ -14,7 +14,7 @@ DevotionalLogTagRelationship _$DevotionalLogTagRelationshipFromJson(
   tagId: (json['tagId'] as num?)?.toInt(),
   tag: json['tag'] == null
       ? null
-      : DevotionalLogTag.fromJson(json['tag'] as Map<String, dynamic>),
+      : Tag.fromJson(json['tag'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$DevotionalLogTagRelationshipToJson(

@@ -14,7 +14,7 @@ DevotionalLogVerseRelationship _$DevotionalLogVerseRelationshipFromJson(
   verseId: (json['verseId'] as num?)?.toInt(),
   verse: json['verse'] == null
       ? null
-      : DevotionalLogVerse.fromJson(json['verse'] as Map<String, dynamic>),
+      : Verse.fromJson(json['verse'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$DevotionalLogVerseRelationshipToJson(

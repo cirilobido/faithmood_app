@@ -1,8 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '_mood_session_emotional.dart';
-import '_mood_session_spiritual.dart';
-import '_mood_session_verse.dart';
+import '../verse/_verse.dart';
+import '_mood_session_details.dart';
 
 part '_mood_session.g.dart';
 
@@ -12,10 +11,10 @@ class MoodSession {
   @JsonKey(name: 'date')
   final DateTime? date;
   final String? note;
-  final MoodSessionEmotional? emotional;
-  final MoodSessionSpiritual? spiritual;
+  final MoodSessionDetails? emotional;
+  final MoodSessionDetails? spiritual;
   @JsonKey(name: 'aiVerse')
-  final MoodSessionVerse? aiVerse;
+  final Verse? aiVerse;
 
   MoodSession({
     this.sessionId,

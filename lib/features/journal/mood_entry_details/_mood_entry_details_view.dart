@@ -611,7 +611,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
   Widget _buildVerseContent(
     BuildContext context,
     ThemeData theme,
-    MoodSessionVerse aiVerse,
+    Verse aiVerse,
     String userLang,
   ) {
     final verseText = aiVerse.translations?.first.text ?? '';

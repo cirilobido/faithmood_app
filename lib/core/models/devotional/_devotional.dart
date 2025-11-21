@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../verse/_verse.dart';
 import '_devotional_category.dart';
-import '_devotional_tag.dart';
-import '_devotional_verse.dart';
+import '../tags/_tag.dart';
 
 part '_devotional.g.dart';
 
@@ -16,8 +16,8 @@ class Devotional {
   final String? title;
   final String? content;
   final String? reflection;
-  final List<DevotionalVerse>? verses;
-  final List<DevotionalTag>? tags;
+  final List<Verse>? verses;
+  final List<Tag>? tags;
   final String? iconEmoji;
 
   Devotional({

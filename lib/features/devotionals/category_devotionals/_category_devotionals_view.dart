@@ -11,7 +11,7 @@ import '_category_devotionals_state.dart';
 
 class CategoryDevotionalsView extends ConsumerStatefulWidget {
   final DevotionalCategory? category;
-  final DevotionalTag? tag;
+  final Tag? tag;
 
   const CategoryDevotionalsView({super.key, this.category, this.tag});
 

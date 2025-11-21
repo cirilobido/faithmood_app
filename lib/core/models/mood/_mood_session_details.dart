@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '_mood.dart';
 
-part '_mood_session_emotional.g.dart';
+part '_mood_session_details.g.dart';
 
 @JsonSerializable(includeIfNull: false)
-class MoodSessionEmotional {
+class MoodSessionDetails {
   final int? id;
   final int? userId;
   final int? moodId;
@@ -21,7 +21,7 @@ class MoodSessionEmotional {
   final DateTime? updatedAt;
   final Mood? mood;
 
-  MoodSessionEmotional({
+  MoodSessionDetails({
     this.id,
     this.userId,
     this.moodId,
@@ -38,9 +38,9 @@ class MoodSessionEmotional {
     this.mood,
   });
 
-  factory MoodSessionEmotional.fromJson(Map<String, dynamic> json) =>
-      _$MoodSessionEmotionalFromJson(json);
+  factory MoodSessionDetails.fromJson(Map<String, dynamic> json) =>
+      _$MoodSessionDetailsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MoodSessionEmotionalToJson(this);
+  Map<String, dynamic> toJson() => _$MoodSessionDetailsToJson(this);
 }
 

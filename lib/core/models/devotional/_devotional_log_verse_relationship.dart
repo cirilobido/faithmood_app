@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '_devotional_log_verse.dart';
+import '../verse/_verse.dart';
 
 part '_devotional_log_verse_relationship.g.dart';
 
@@ -9,7 +9,7 @@ class DevotionalLogVerseRelationship {
   final int? id;
   final int? devotionalId;
   final int? verseId;
-  final DevotionalLogVerse? verse;
+  final Verse? verse;
 
   DevotionalLogVerseRelationship({
     this.id,

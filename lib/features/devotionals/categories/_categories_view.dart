@@ -169,7 +169,7 @@ class CategoriesView extends ConsumerWidget {
     ThemeData theme,
     CategoriesViewModel vm,
     CategoriesState state,
-    List<DevotionalTag> allTags,
+    List<Tag> allTags,
   ) {
     showDialog(
       context: context,

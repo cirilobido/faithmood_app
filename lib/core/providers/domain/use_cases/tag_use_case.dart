@@ -12,7 +12,7 @@ class TagUseCase extends FutureUseCase<dynamic, dynamic> {
 
   TagUseCase(this.repository);
 
-  Future<Result<List<DevotionalTag>, Exception>> getTags(String lang) async {
+  Future<Result<List<Tag>, Exception>> getTags(String lang) async {
     try {
       final result = await repository.getTags(lang);
       return Success(result);

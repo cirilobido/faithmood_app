@@ -4,10 +4,10 @@ import '_devotional_log_tag_relationship.dart';
 import '_devotional_log_verse_relationship.dart';
 import '_devotional_category.dart';
 
-part '_devotional_log_devotional.g.dart';
+part '_devotional_log_content.g.dart';
 
 @JsonSerializable(includeIfNull: false)
-class DevotionalLogDevotional {
+class DevotionalLogContent {
   final int? id;
   final String? title;
   final String? content;
@@ -19,7 +19,7 @@ class DevotionalLogDevotional {
   final List<DevotionalLogVerseRelationship>? verses;
   final DevotionalCategory? category;
 
-  DevotionalLogDevotional({
+  DevotionalLogContent({
     this.id,
     this.title,
     this.content,
@@ -31,8 +31,8 @@ class DevotionalLogDevotional {
     this.category,
   });
 
-  factory DevotionalLogDevotional.fromJson(Map<String, dynamic> json) =>
-      _$DevotionalLogDevotionalFromJson(json);
+  factory DevotionalLogContent.fromJson(Map<String, dynamic> json) =>
+      _$DevotionalLogContentFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DevotionalLogDevotionalToJson(this);
+  Map<String, dynamic> toJson() => _$DevotionalLogContentToJson(this);
 }

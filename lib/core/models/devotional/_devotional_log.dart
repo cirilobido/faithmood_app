@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '_devotional_log_devotional.dart';
+import '_devotional_log_content.dart';
 
 part '_devotional_log.g.dart';
 
@@ -8,7 +8,7 @@ part '_devotional_log.g.dart';
 class DevotionalLog {
   final int? id;
   final int? userId;
-  final DevotionalLogDevotional? devotional;
+  final DevotionalLogContent? devotional;
   final bool? isFavorite;
   final bool? isCompleted;
   final String? note;

@@ -77,7 +77,7 @@ abstract class AppRoutes {
             pageBuilder: (context, state) {
               final extra = state.extra as Map<String, dynamic>?;
               final category = extra?['category'] as DevotionalCategory?;
-              final tag = extra?['tag'] as DevotionalTag?;
+              final tag = extra?['tag'] as Tag?;
               return NoTransitionPage<void>(
                 child: CategoryDevotionalsView(category: category, tag: tag),
               );

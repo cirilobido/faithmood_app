@@ -11,17 +11,17 @@ Devotional _$DevotionalFromJson(Map<String, dynamic> json) => Devotional(
   date: json['date'] as String?,
   coverImage: json['coverImage'] as String?,
   isPremium: json['isPremium'] as bool?,
-  category: json['category_devotionals'] == null
+  category: json['category'] == null
       ? null
-      : DevotionalCategory.fromJson(json['category_devotionals'] as Map<String, dynamic>),
+      : DevotionalCategory.fromJson(json['category'] as Map<String, dynamic>),
   title: json['title'] as String?,
   content: json['content'] as String?,
   reflection: json['reflection'] as String?,
   verses: (json['verses'] as List<dynamic>?)
-      ?.map((e) => DevotionalVerse.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => Verse.fromJson(e as Map<String, dynamic>))
       .toList(),
   tags: (json['tags'] as List<dynamic>?)
-      ?.map((e) => DevotionalTag.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => Tag.fromJson(e as Map<String, dynamic>))
       .toList(),
   iconEmoji: json['iconEmoji'] as String?,
 );
@@ -32,7 +32,7 @@ Map<String, dynamic> _$DevotionalToJson(Devotional instance) =>
       if (instance.date case final value?) 'date': value,
       if (instance.coverImage case final value?) 'coverImage': value,
       if (instance.isPremium case final value?) 'isPremium': value,
-      if (instance.category case final value?) 'category_devotionals': value,
+      if (instance.category case final value?) 'category': value,
       if (instance.title case final value?) 'title': value,
       if (instance.content case final value?) 'content': value,
       if (instance.reflection case final value?) 'reflection': value,

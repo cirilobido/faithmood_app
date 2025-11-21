@@ -7,7 +7,7 @@ import '_category_devotionals_state.dart';
 
 final categoryDevotionalsViewModelProvider = StateNotifierProvider.autoDispose.family<
     CategoryDevotionalsViewModel, CategoryDevotionalsState,
-    ({DevotionalCategory? category, DevotionalTag? tag})>((ref, params) {
+    ({DevotionalCategory? category, Tag? tag})>((ref, params) {
   return CategoryDevotionalsViewModel(
     ref.read(devotionalUseCaseProvider),
     ref.read(authProvider),
@@ -20,7 +20,7 @@ class CategoryDevotionalsViewModel extends StateNotifier<CategoryDevotionalsStat
   final DevotionalUseCase devotionalUseCase;
   final AuthProvider authProvider;
   final DevotionalCategory? category;
-  final DevotionalTag? tag;
+  final Tag? tag;
 
   CategoryDevotionalsViewModel(
     this.devotionalUseCase,

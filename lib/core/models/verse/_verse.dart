@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '_verse_book.dart';
+import '_verse_translation.dart';
 
 part '_verse.g.dart';
 
@@ -12,6 +13,7 @@ class Verse {
   final String? lang;
   final VerseBook? book;
   final DateTime? createdAt;
+  final List<VerseTranslation>? translations;
 
   Verse({
     this.id,
@@ -20,6 +22,7 @@ class Verse {
     this.lang,
     this.book,
     this.createdAt,
+    this.translations,
   });
 
   factory Verse.fromJson(Map<String, dynamic> json) => _$VerseFromJson(json);

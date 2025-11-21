@@ -5,7 +5,7 @@ class CategoriesState {
   bool isLoadingTags;
   bool error;
   List<DevotionalCategory> categories;
-  List<DevotionalTag> tags;
+  List<Tag> tags;
   String searchQuery;
 
   CategoriesState({
@@ -22,7 +22,7 @@ class CategoriesState {
     bool? isLoadingTags,
     bool? error,
     List<DevotionalCategory>? categories,
-    List<DevotionalTag>? tags,
+    List<Tag>? tags,
     String? searchQuery,
   }) {
     return CategoriesState(

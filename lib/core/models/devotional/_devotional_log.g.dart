@@ -12,7 +12,7 @@ DevotionalLog _$DevotionalLogFromJson(Map<String, dynamic> json) =>
       userId: (json['userId'] as num?)?.toInt(),
       devotional: json['devotional'] == null
           ? null
-          : DevotionalLogDevotional.fromJson(
+          : DevotionalLogContent.fromJson(
               json['devotional'] as Map<String, dynamic>,
             ),
       isFavorite: json['isFavorite'] as bool?,

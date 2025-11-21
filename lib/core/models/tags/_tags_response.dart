@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '_devotional_tag.dart';
+import '_tag.dart';
 
 part '_tags_response.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class TagsResponse {
-  final List<DevotionalTag>? tags;
+  final List<Tag>? tags;
 
   TagsResponse({
     this.tags,

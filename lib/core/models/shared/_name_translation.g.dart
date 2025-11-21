@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '_mood_translation.dart';
+part of '_name_translation.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MoodTranslation _$MoodTranslationFromJson(Map<String, dynamic> json) =>
-    MoodTranslation(name: json['name'] as String?);
+NameTranslation _$NameTranslationFromJson(Map<String, dynamic> json) =>
+    NameTranslation(name: json['name'] as String?);
 
-Map<String, dynamic> _$MoodTranslationToJson(MoodTranslation instance) =>
+Map<String, dynamic> _$NameTranslationToJson(NameTranslation instance) =>
     <String, dynamic>{if (instance.name case final value?) 'name': value};

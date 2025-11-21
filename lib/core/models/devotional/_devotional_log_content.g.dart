@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '_devotional_log_devotional.dart';
+part of '_devotional_log_content.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DevotionalLogDevotional _$DevotionalLogDevotionalFromJson(
+DevotionalLogContent _$DevotionalLogContentFromJson(
   Map<String, dynamic> json,
-) => DevotionalLogDevotional(
+) => DevotionalLogContent(
   id: (json['id'] as num?)?.toInt(),
   title: json['title'] as String?,
   content: json['content'] as String?,
@@ -31,8 +31,8 @@ DevotionalLogDevotional _$DevotionalLogDevotionalFromJson(
       : DevotionalCategory.fromJson(json['category'] as Map<String, dynamic>),
 );
 
-Map<String, dynamic> _$DevotionalLogDevotionalToJson(
-  DevotionalLogDevotional instance,
+Map<String, dynamic> _$DevotionalLogContentToJson(
+  DevotionalLogContent instance,
 ) => <String, dynamic>{
   if (instance.id case final value?) 'id': value,
   if (instance.title case final value?) 'title': value,

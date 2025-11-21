@@ -17,6 +17,9 @@ Verse _$VerseFromJson(Map<String, dynamic> json) => Verse(
   createdAt: json['createdAt'] == null
       ? null
       : DateTime.parse(json['createdAt'] as String),
+  translations: (json['translations'] as List<dynamic>?)
+      ?.map((e) => VerseTranslation.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$VerseToJson(Verse instance) => <String, dynamic>{
@@ -27,4 +30,5 @@ Map<String, dynamic> _$VerseToJson(Verse instance) => <String, dynamic>{
   if (instance.book case final value?) 'book': value,
   if (instance.createdAt?.toIso8601String() case final value?)
     'createdAt': value,
+  if (instance.translations case final value?) 'translations': value,
 };

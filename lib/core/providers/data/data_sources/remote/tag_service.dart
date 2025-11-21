@@ -13,7 +13,7 @@ final tagServiceProvider = Provider<TagService>((ref) {
 });
 
 abstract class TagService {
-  Future<List<DevotionalTag>> getTags(String lang);
+  Future<List<Tag>> getTags(String lang);
 }
 
 class TagServiceImpl implements TagService {
@@ -23,7 +23,7 @@ class TagServiceImpl implements TagService {
   TagServiceImpl({required this.httpClient, required this.requestProcessor});
 
   @override
-  Future<List<DevotionalTag>> getTags(String lang) async {
+  Future<List<Tag>> getTags(String lang) async {
     try {
       final request = await requestProcessor.process(
         request: httpClient.get(Endpoints.getTags(lang)),
@@ -31,7 +31,7 @@ class TagServiceImpl implements TagService {
           final response = TagsResponse.fromJson(data as Map<String, dynamic>);
           return response.tags ?? [];
         },
-      ) as List<DevotionalTag>;
+      ) as List<Tag>;
       return request;
     } catch (e) {
       throw Exception();

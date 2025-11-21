@@ -5,7 +5,7 @@ class CategoryDevotionalsState {
   bool isLoadingMore;
   bool error;
   DevotionalCategory? category;
-  DevotionalTag? tag;
+  Tag? tag;
   List<Devotional> devotionals;
   int page;
   int limit;
@@ -30,7 +30,7 @@ class CategoryDevotionalsState {
     bool? isLoadingMore,
     bool? error,
     DevotionalCategory? category,
-    DevotionalTag? tag,
+    Tag? tag,
     List<Devotional>? devotionals,
     int? page,
     int? limit,

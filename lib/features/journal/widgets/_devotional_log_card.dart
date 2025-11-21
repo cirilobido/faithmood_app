@@ -35,7 +35,7 @@ class DevotionalLogCard extends StatelessWidget {
     return note;
   }
 
-  String _getTagName(DevotionalLogTag? tag) {
+  String _getTagName(Tag? tag) {
     if (tag?.translations != null && tag!.translations!.isNotEmpty) {
       return tag.translations!.first.name ?? '';
     }
@@ -118,10 +118,7 @@ class DevotionalLogCard extends StatelessWidget {
                         final tagName = _getTagName(tag);
                         if (tagName.isEmpty) return const SizedBox.shrink();
                         return Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSizes.paddingXSmall,
-                            vertical: AppSizes.paddingXXSmall,
-                          ),
+                          padding: const EdgeInsets.all(AppSizes.paddingXSmall),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.secondary.withValues(
                               alpha: 0.2,
@@ -130,23 +127,30 @@ class DevotionalLogCard extends StatelessWidget {
                               AppSizes.radiusFull,
                             ),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (tag.icon != null && tag.icon!.isNotEmpty) ...[
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSizes.spacingXSmall,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (tag.icon != null && tag.icon!.isNotEmpty) ...[
+                                  Text(
+                                    tag.icon!,
+                                    style: theme.textTheme.labelMedium?.copyWith(
+                                      color: theme.textTheme.labelSmall?.color,
+                                    ),
+                                  ),
+                                  const SizedBox(width: AppSizes.spacingXXSmall),
+                                ],
                                 Text(
-                                  tag.icon!,
-                                  style: theme.textTheme.labelSmall,
+                                  tagName,
+                                  style: theme.textTheme.labelMedium?.copyWith(
+                                    color: theme.textTheme.labelSmall?.color,
+                                  ),
                                 ),
-                                const SizedBox(width: AppSizes.spacingXXSmall),
                               ],
-                              Text(
-                                tagName,
-                                style: theme.textTheme.labelMedium?.copyWith(
-                                  color: theme.textTheme.labelSmall?.color,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         );
                       }).toList(),

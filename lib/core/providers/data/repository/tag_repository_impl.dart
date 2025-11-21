@@ -21,7 +21,7 @@ class TagRepositoryImpl implements TagRepository {
   });
 
   @override
-  Future<List<DevotionalTag>> getTags(String lang) async {
+  Future<List<Tag>> getTags(String lang) async {
     try {
       // Always try to fetch from backend first
       final result = await tagService.getTags(lang);

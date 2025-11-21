@@ -310,7 +310,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
   Widget _buildVersesContent(
     BuildContext context,
     ThemeData theme,
-    List<DevotionalVerse> verses,
+    List<Verse> verses,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
