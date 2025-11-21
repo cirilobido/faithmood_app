@@ -98,7 +98,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
             ),
           ),
           SizedBox(
-            width: AppSizes.iconSizeMedium,
+            width: AppSizes.iconSizeNormal,
             child: Align(
               alignment: Alignment.centerRight,
               child: PopupMenuButton<String>(
@@ -392,10 +392,10 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
             spiritualMoodIcon,
             spiritualMoodName,
           ),
-          const SizedBox(height: AppSizes.spacingMedium),
           if (state.isEditing) ...[
+            const SizedBox(height: AppSizes.spacingMedium),
+            Text(lang.myThoughts, style: theme.textTheme.titleMedium),
             InputField(
-              label: lang.myThoughts,
               controller: _noteController,
               isMultiline: true,
               hintText: lang.myThoughts,
@@ -417,7 +417,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
                 const SizedBox(height: AppSizes.spacingSmall),
                 CustomButton(
                   title: lang.cancel,
-                  type: ButtonType.error,
+                  type: ButtonType.neutral,
                   style: CustomStyle.outlined,
                   isShortText: true,
                   onTap: () {
@@ -430,9 +430,18 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
               ],
             ),
           ] else if (session.note != null && session.note!.isNotEmpty) ...[
+            const SizedBox(height: AppSizes.spacingMedium),
             Text(lang.myThoughts, style: theme.textTheme.titleMedium),
             const SizedBox(height: AppSizes.spacingSmall),
-            Text(session.note!, style: theme.textTheme.bodyLarge),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(AppSizes.paddingMedium),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.secondary.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+              ),
+              child: Text(session.note!, style: theme.textTheme.bodyLarge),
+            ),
           ],
           if (aiVerse != null) ...[
             const SizedBox(height: AppSizes.spacingLarge),
@@ -624,7 +633,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     return Container(
       padding: const EdgeInsets.all(AppSizes.paddingMedium),
       decoration: BoxDecoration(
-        color: theme.colorScheme.secondary.withValues(alpha: 0.2),
+        color: theme.colorScheme.primary.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
       ),
       child: Column(

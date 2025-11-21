@@ -93,6 +93,7 @@ class DevotionalLogCard extends StatelessWidget {
                         ? _formatDate(log.createdAt)
                         : _formatDateString(devotional?.date),
                     style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: theme.textTheme.titleSmall?.fontWeight,
                       color: theme.textTheme.labelSmall?.color,
                     ),
                   ),

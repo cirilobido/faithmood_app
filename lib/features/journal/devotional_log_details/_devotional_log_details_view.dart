@@ -109,12 +109,10 @@ class _DevotionalLogDetailsViewState
             ),
           ),
           SizedBox(
-            width: AppSizes.iconSizeMedium,
+            width: AppSizes.iconSizeNormal,
             child: Align(
               alignment: Alignment.centerRight,
-              child: isEditing
-                  ? const SizedBox.shrink()
-                  : PopupMenuButton<String>(
+              child: PopupMenuButton<String>(
                       padding: EdgeInsets.zero,
                       iconSize: AppSizes.iconSizeNormal,
                       splashRadius: AppSizes.iconSizeNormal / 2,
@@ -395,8 +393,8 @@ class _DevotionalLogDetailsViewState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (state.isEditing) ...[
+            Text(lang.myThoughts, style: theme.textTheme.titleMedium),
             InputField(
-              label: lang.myThoughts,
               controller: _noteController,
               isMultiline: true,
               hintText: lang.myThoughts,
