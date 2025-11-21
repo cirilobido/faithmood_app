@@ -274,5 +274,39 @@
   "save": "Guardar",
   "saving": "Guardando...",
   "moodEntryUpdated": "Entrada del estado de ánimo actualizada exitosamente",
-  "errorUpdatingMoodEntry": "Error al actualizar la entrada del estado de ánimo"
+  "errorUpdatingMoodEntry": "Error al actualizar la entrada del estado de ánimo",
+  "selectAPeriod": "Seleccionar un Período",
+  "youveLoggedEntriesOnDays": "Has registrado entradas en {days} días",
+  "@youveLoggedEntriesOnDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "myEmotion": "Mi Emoción",
+  "mySpirit": "Mi Espíritu",
+  "streakDays": "Días de Racha",
+  "startLoggingYourMoodsToSeeYourStats": "Comienza a registrar tus estados de ánimo para ver tus estadísticas",
+  "addMoodEntry": "Agregar Entrada de Estado de Ánimo",
+  "premium": "Premium",
+  "user": "Usuario",
+  "emotionalMoodSummary": "Resumen de Estado Emocional",
+  "youFeltMostOften": "Te sentiste más a menudo: ",
+  "spiritualMoodSummary": "Resumen de Estado Espiritual",
+  "predominantSpiritualMood": "Estado espiritual predominante: ",
+  "unlockPremiumToGetAccessToAllStatsAndFeatures": "Desbloquea Premium para acceder a todas las estadísticas y funciones",
+  "streakStatusLightingInnerLight": "Encendiendo tu luz interior",
+  "streakStatusSeedOfFaith": "Semilla de fe",
+  "streakStatusStartingToGrow": "Comenzando a crecer",
+  "streakStatusConstantGrowth": "Crecimiento constante",
+  "streakStatusFoundationInChrist": "Fundamento en Cristo",
+  "streakStatusDisciplineInPrayer": "Disciplina en oración",
+  "streakStatusPeaceOfHolySpirit": "Paz del Espíritu Santo",
+  "streakStatusFedByTheWord": "Alimentado por la Palabra",
+  "streakStatusFirmAndDeepFaith": "Fe firme y profunda",
+  "streakStatusPerseveranceToTheEnd": "Perseverancia hasta el final",
+  "streakStatusGratefulHeart": "Corazón agradecido",
+  "streakStatusVictoryOfTheMonth": "Victoria del mes",
+  "streakStatusExpandingFaith": "Fe en expansión"
 }

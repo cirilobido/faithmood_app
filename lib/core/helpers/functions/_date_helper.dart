@@ -62,4 +62,47 @@ abstract class DateHelper {
     // ❌ Si no coincide con ninguno
     return null;
   }
+
+  static String formatForApi(DateTime date) {
+    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+  }
+
+  static int calculateLongestStreak(
+    List<String>? datesWithLogs,
+    DateTime startDate,
+    DateTime endDate,
+  ) {
+    if (datesWithLogs == null || datesWithLogs.isEmpty) {
+      return 0;
+    }
+
+    final dates = datesWithLogs
+        .map((d) => DateTime.parse(d))
+        .where((date) => date.isAfter(startDate.subtract(const Duration(days: 1))) && 
+                        date.isBefore(endDate.add(const Duration(days: 1))))
+        .toList()
+      ..sort((a, b) => b.compareTo(a));
+
+    if (dates.isEmpty) return 0;
+
+    int longestStreak = 1;
+    int currentStreak = 1;
+
+    for (int i = 0; i < dates.length - 1; i++) {
+      final current = DateTime(dates[i].year, dates[i].month, dates[i].day);
+      final next = DateTime(dates[i + 1].year, dates[i + 1].month, dates[i + 1].day);
+      final diff = current.difference(next).inDays;
+
+      if (diff == 1) {
+        currentStreak++;
+        if (currentStreak > longestStreak) {
+          longestStreak = currentStreak;
+        }
+      } else {
+        currentStreak = 1;
+      }
+    }
+
+    return longestStreak;
+  }
 }

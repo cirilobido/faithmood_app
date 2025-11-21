@@ -33,3 +33,7 @@ export 'mood/_mood_session_response.dart';
 export 'mood/_mood_session.dart';
 export 'mood/_mood_session_details.dart';
 export 'mood/_mood_sessions_response.dart';
+export 'analytics/_analytics.dart';
+export 'analytics/_analytics_response.dart';
+export 'analytics/_daily_stats.dart';
+export 'analytics/_range_stats.dart';

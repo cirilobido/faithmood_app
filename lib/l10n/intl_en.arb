@@ -274,5 +274,39 @@
   "save": "Save",
   "saving": "Saving...",
   "moodEntryUpdated": "Mood entry updated successfully",
-  "errorUpdatingMoodEntry": "Error updating mood entry"
+  "errorUpdatingMoodEntry": "Error updating mood entry",
+  "selectAPeriod": "Select a Period",
+  "youveLoggedEntriesOnDays": "You've logged entries on {days} days",
+  "@youveLoggedEntriesOnDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "myEmotion": "My Emotion",
+  "mySpirit": "My Spirit",
+  "streakDays": "Streak Days",
+  "startLoggingYourMoodsToSeeYourStats": "Start logging your moods to see your stats",
+  "addMoodEntry": "Add Mood Entry",
+  "premium": "Premium",
+  "user": "User",
+  "emotionalMoodSummary": "Emotional Mood Summary",
+  "youFeltMostOften": "You felt most often: ",
+  "spiritualMoodSummary": "Spiritual Mood Summary",
+  "predominantSpiritualMood": "Predominant spiritual mood: ",
+  "unlockPremiumToGetAccessToAllStatsAndFeatures": "Unlock Premium to get access to all stats and features",
+  "streakStatusLightingInnerLight": "Lighting your inner light",
+  "streakStatusSeedOfFaith": "Seed of faith",
+  "streakStatusStartingToGrow": "Starting to grow",
+  "streakStatusConstantGrowth": "Constant growth",
+  "streakStatusFoundationInChrist": "Foundation in Christ",
+  "streakStatusDisciplineInPrayer": "Discipline in prayer",
+  "streakStatusPeaceOfHolySpirit": "Peace of the Holy Spirit",
+  "streakStatusFedByTheWord": "Fed by the Word",
+  "streakStatusFirmAndDeepFaith": "Firm and deep faith",
+  "streakStatusPerseveranceToTheEnd": "Perseverance to the end",
+  "streakStatusGratefulHeart": "Grateful heart",
+  "streakStatusVictoryOfTheMonth": "Victory of the month",
+  "streakStatusExpandingFaith": "Expanding faith"
 }

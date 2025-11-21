@@ -2318,6 +2318,251 @@ class S {
       args: [],
     );
   }
+
+  /// `Select a Period`
+  String get selectAPeriod {
+    return Intl.message(
+      'Select a Period',
+      name: 'selectAPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've logged entries on {days} days`
+  String youveLoggedEntriesOnDays(int days) {
+    return Intl.message(
+      'You\'ve logged entries on $days days',
+      name: 'youveLoggedEntriesOnDays',
+      desc: '',
+      args: [days],
+    );
+  }
+
+  /// `My Emotion`
+  String get myEmotion {
+    return Intl.message('My Emotion', name: 'myEmotion', desc: '', args: []);
+  }
+
+  /// `My Spirit`
+  String get mySpirit {
+    return Intl.message('My Spirit', name: 'mySpirit', desc: '', args: []);
+  }
+
+  /// `Streak Days`
+  String get streakDays {
+    return Intl.message('Streak Days', name: 'streakDays', desc: '', args: []);
+  }
+
+  /// `Start logging your moods to see your stats`
+  String get startLoggingYourMoodsToSeeYourStats {
+    return Intl.message(
+      'Start logging your moods to see your stats',
+      name: 'startLoggingYourMoodsToSeeYourStats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Mood Entry`
+  String get addMoodEntry {
+    return Intl.message(
+      'Add Mood Entry',
+      name: 'addMoodEntry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premium`
+  String get premium {
+    return Intl.message('Premium', name: 'premium', desc: '', args: []);
+  }
+
+  /// `User`
+  String get user {
+    return Intl.message('User', name: 'user', desc: '', args: []);
+  }
+
+  /// `Emotional Mood Summary`
+  String get emotionalMoodSummary {
+    return Intl.message(
+      'Emotional Mood Summary',
+      name: 'emotionalMoodSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You felt most often: `
+  String get youFeltMostOften {
+    return Intl.message(
+      'You felt most often: ',
+      name: 'youFeltMostOften',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spiritual Mood Summary`
+  String get spiritualMoodSummary {
+    return Intl.message(
+      'Spiritual Mood Summary',
+      name: 'spiritualMoodSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Predominant spiritual mood: `
+  String get predominantSpiritualMood {
+    return Intl.message(
+      'Predominant spiritual mood: ',
+      name: 'predominantSpiritualMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unlock Premium to get access to all stats and features`
+  String get unlockPremiumToGetAccessToAllStatsAndFeatures {
+    return Intl.message(
+      'Unlock Premium to get access to all stats and features',
+      name: 'unlockPremiumToGetAccessToAllStatsAndFeatures',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lighting your inner light`
+  String get streakStatusLightingInnerLight {
+    return Intl.message(
+      'Lighting your inner light',
+      name: 'streakStatusLightingInnerLight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seed of faith`
+  String get streakStatusSeedOfFaith {
+    return Intl.message(
+      'Seed of faith',
+      name: 'streakStatusSeedOfFaith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starting to grow`
+  String get streakStatusStartingToGrow {
+    return Intl.message(
+      'Starting to grow',
+      name: 'streakStatusStartingToGrow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Constant growth`
+  String get streakStatusConstantGrowth {
+    return Intl.message(
+      'Constant growth',
+      name: 'streakStatusConstantGrowth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Foundation in Christ`
+  String get streakStatusFoundationInChrist {
+    return Intl.message(
+      'Foundation in Christ',
+      name: 'streakStatusFoundationInChrist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discipline in prayer`
+  String get streakStatusDisciplineInPrayer {
+    return Intl.message(
+      'Discipline in prayer',
+      name: 'streakStatusDisciplineInPrayer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Peace of the Holy Spirit`
+  String get streakStatusPeaceOfHolySpirit {
+    return Intl.message(
+      'Peace of the Holy Spirit',
+      name: 'streakStatusPeaceOfHolySpirit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fed by the Word`
+  String get streakStatusFedByTheWord {
+    return Intl.message(
+      'Fed by the Word',
+      name: 'streakStatusFedByTheWord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Firm and deep faith`
+  String get streakStatusFirmAndDeepFaith {
+    return Intl.message(
+      'Firm and deep faith',
+      name: 'streakStatusFirmAndDeepFaith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Perseverance to the end`
+  String get streakStatusPerseveranceToTheEnd {
+    return Intl.message(
+      'Perseverance to the end',
+      name: 'streakStatusPerseveranceToTheEnd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grateful heart`
+  String get streakStatusGratefulHeart {
+    return Intl.message(
+      'Grateful heart',
+      name: 'streakStatusGratefulHeart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Victory of the month`
+  String get streakStatusVictoryOfTheMonth {
+    return Intl.message(
+      'Victory of the month',
+      name: 'streakStatusVictoryOfTheMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expanding faith`
+  String get streakStatusExpandingFaith {
+    return Intl.message(
+      'Expanding faith',
+      name: 'streakStatusExpandingFaith',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

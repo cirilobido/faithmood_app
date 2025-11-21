@@ -48,6 +48,10 @@ abstract class AppIcons {
   static const bookmarkFilledIcon = 'assets/icons/ic_bookmark_filled.svg';
   static const calendarIcon = 'assets/icons/ic_calendar.svg';
   static const moreVerticalIcon = 'assets/icons/ic_options.svg';
+  static const happyIcon = 'assets/icons/ic_happy.svg';
+  static const spiritIcon = 'assets/icons/ic_spirit.svg';
+  static const heartIcon = 'assets/icons/ic_heart.svg';
+  static const settingsIcon = 'assets/icons/ic_settings.svg';
 }
 
 abstract class AppAnimations {

@@ -90,4 +90,8 @@ abstract class Endpoints {
   static String deleteDevotionalLog(int userId, int id) {
     return '$user/devotional/logs/$userId/$id';
   }
+  
+  static String getUserAnalytics(int userId, String startDate, String endDate) {
+    return '$user/analytics/$userId?startDate=$startDate&endDate=$endDate';
+  }
 }

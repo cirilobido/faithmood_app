@@ -20,9 +20,14 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
+  static String m0(days) => "Has registrado entradas en ${days} días";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
+    "addMoodEntry": MessageLookupByLibrary.simpleMessage(
+      "Agregar Entrada de Estado de Ánimo",
+    ),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage(
       "Agregar a Mi Diario",
     ),
@@ -107,6 +112,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
     "emotionalMood": MessageLookupByLibrary.simpleMessage("Estado Emocional"),
+    "emotionalMoodSummary": MessageLookupByLibrary.simpleMessage(
+      "Resumen de Estado Emocional",
+    ),
     "emotions": MessageLookupByLibrary.simpleMessage("Emociones"),
     "endDate": MessageLookupByLibrary.simpleMessage("Fecha Fin"),
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
@@ -258,8 +266,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "moods": MessageLookupByLibrary.simpleMessage("Estados de Ánimo"),
     "moreFilters": MessageLookupByLibrary.simpleMessage("Más Filtros"),
+    "myEmotion": MessageLookupByLibrary.simpleMessage("Mi Emoción"),
     "myJournal": MessageLookupByLibrary.simpleMessage("Mi Diario"),
     "myReflection": MessageLookupByLibrary.simpleMessage("Mi Reflexión"),
+    "mySpirit": MessageLookupByLibrary.simpleMessage("Mi Espíritu"),
     "myThoughts": MessageLookupByLibrary.simpleMessage("Mis Pensamientos"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "El nombre debe tener al menos 3 caracteres",
@@ -340,6 +350,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseSelectSpiritualMood": MessageLookupByLibrary.simpleMessage(
       "Por favor selecciona un estado de ánimo espiritual",
     ),
+    "predominantSpiritualMood": MessageLookupByLibrary.simpleMessage(
+      "Estado espiritual predominante: ",
+    ),
+    "premium": MessageLookupByLibrary.simpleMessage("Premium"),
     "preparingPageSubtitle": MessageLookupByLibrary.simpleMessage(
       "The Lord gives you strength when you need it most.",
     ),
@@ -408,6 +422,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchJournals": MessageLookupByLibrary.simpleMessage(
       "Buscar en el diario...",
     ),
+    "selectAPeriod": MessageLookupByLibrary.simpleMessage(
+      "Seleccionar un Período",
+    ),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
       "Selecciona el estado que resuene con tu lado espiritual.",
@@ -452,13 +469,59 @@ class MessageLookup extends MessageLookupByLibrary {
     "sortByDate": MessageLookupByLibrary.simpleMessage("Ordenar por Fecha"),
     "spirit": MessageLookupByLibrary.simpleMessage("Espíritu"),
     "spiritualMood": MessageLookupByLibrary.simpleMessage("Estado Espiritual"),
+    "spiritualMoodSummary": MessageLookupByLibrary.simpleMessage(
+      "Resumen de Estado Espiritual",
+    ),
     "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
     "startDate": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
     "startFreeTrial": MessageLookupByLibrary.simpleMessage("Start For Free"),
+    "startLoggingYourMoodsToSeeYourStats": MessageLookupByLibrary.simpleMessage(
+      "Comienza a registrar tus estados de ánimo para ver tus estadísticas",
+    ),
     "status": MessageLookupByLibrary.simpleMessage("Estado"),
     "storage": MessageLookupByLibrary.simpleMessage("Storage"),
     "storageUsage": MessageLookupByLibrary.simpleMessage(
       "Uso de Almacenamiento",
+    ),
+    "streakDays": MessageLookupByLibrary.simpleMessage("Días de Racha"),
+    "streakStatusConstantGrowth": MessageLookupByLibrary.simpleMessage(
+      "Crecimiento constante",
+    ),
+    "streakStatusDisciplineInPrayer": MessageLookupByLibrary.simpleMessage(
+      "Disciplina en oración",
+    ),
+    "streakStatusExpandingFaith": MessageLookupByLibrary.simpleMessage(
+      "Fe en expansión",
+    ),
+    "streakStatusFedByTheWord": MessageLookupByLibrary.simpleMessage(
+      "Alimentado por la Palabra",
+    ),
+    "streakStatusFirmAndDeepFaith": MessageLookupByLibrary.simpleMessage(
+      "Fe firme y profunda",
+    ),
+    "streakStatusFoundationInChrist": MessageLookupByLibrary.simpleMessage(
+      "Fundamento en Cristo",
+    ),
+    "streakStatusGratefulHeart": MessageLookupByLibrary.simpleMessage(
+      "Corazón agradecido",
+    ),
+    "streakStatusLightingInnerLight": MessageLookupByLibrary.simpleMessage(
+      "Encendiendo tu luz interior",
+    ),
+    "streakStatusPeaceOfHolySpirit": MessageLookupByLibrary.simpleMessage(
+      "Paz del Espíritu Santo",
+    ),
+    "streakStatusPerseveranceToTheEnd": MessageLookupByLibrary.simpleMessage(
+      "Perseverancia hasta el final",
+    ),
+    "streakStatusSeedOfFaith": MessageLookupByLibrary.simpleMessage(
+      "Semilla de fe",
+    ),
+    "streakStatusStartingToGrow": MessageLookupByLibrary.simpleMessage(
+      "Comenzando a crecer",
+    ),
+    "streakStatusVictoryOfTheMonth": MessageLookupByLibrary.simpleMessage(
+      "Victoria del mes",
     ),
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
@@ -498,6 +561,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "💭 Unlimited Mood Track",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
+    "unlockPremiumToGetAccessToAllStatsAndFeatures":
+        MessageLookupByLibrary.simpleMessage(
+          "Desbloquea Premium para acceder a todas las estadísticas y funciones",
+        ),
     "unsavedNoteMessage": MessageLookupByLibrary.simpleMessage(
       "Tienes una nota sin guardar. ¿Te gustaría guardarla antes de salir?",
     ),
@@ -511,6 +578,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateAvailableMessage": MessageLookupByLibrary.simpleMessage(
       "Hay una nueva versión de la app disponible. Actualiza para continuar usando todas las funciones.",
     ),
+    "user": MessageLookupByLibrary.simpleMessage("Usuario"),
     "usosYEstadisticas": MessageLookupByLibrary.simpleMessage(
       "Usos y estadísticas",
     ),
@@ -572,6 +640,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "youCanRevisitThisNote": MessageLookupByLibrary.simpleMessage(
       "Puedes revisar esta nota más tarde en tu Diario.",
     ),
+    "youFeltMostOften": MessageLookupByLibrary.simpleMessage(
+      "Te sentiste más a menudo: ",
+    ),
     "youHaveToEnterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "Debes ingresar un correo electrónico válido.",
     ),
@@ -580,5 +651,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "yourWeekInEmotions": MessageLookupByLibrary.simpleMessage(
       "Your Week in Emotions",
     ),
+    "youveLoggedEntriesOnDays": m0,
   };
 }

@@ -11,3 +11,4 @@ export 'mood/add_mood/_add_mood_view.dart';
 export 'journal/_journal_view.dart';
 export 'journal/mood_entry_details/_mood_entry_details_view.dart';
 export 'journal/devotional_log_details/_devotional_log_details_view.dart';
+export 'profile/_profile_view.dart';
