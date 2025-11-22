@@ -32,7 +32,19 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
         endDate,
       );
       devLogger('AnalyticsRepository.getUserAnalytics() - service returned: ${result != null ? "data" : "null"}');
+      
+      if (result != null) {
+        final saved = await analyticsDao.saveAnalytics(result, startDate, endDate);
+        devLogger('AnalyticsRepository.getUserAnalytics() - saved to cache: $saved');
+      }
+      
       return result;
+    } on ConnectionError {
+      devLogger('AnalyticsRepository.getUserAnalytics() - ConnectionError, trying to get cached data');
+      devLogger('AnalyticsRepository.getUserAnalytics() - cache lookup: startDate=$startDate, endDate=$endDate');
+      final cachedAnalytics = await analyticsDao.getAnalytics(startDate, endDate);
+      devLogger('AnalyticsRepository.getUserAnalytics() - cached data found: ${cachedAnalytics != null}');
+      return cachedAnalytics;
     } catch (e) {
       devLogger('AnalyticsRepository.getUserAnalytics() - ERROR: $e');
       rethrow;

@@ -6,7 +6,6 @@ import '../../../core/core_exports.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
 import '../../../core/providers/domain/use_cases/analytics_use_case.dart';
 import '../../../core/providers/domain/use_cases/mood_use_case.dart';
-import '../../../core/providers/data/data_sources/local/analytics_dao.dart';
 import '_profile_state.dart';
 
 final profileViewModelProvider =
@@ -232,28 +231,6 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       final startDate = DateHelper.formatForApi(dateRange['start']!);
       final endDate = DateHelper.formatForApi(dateRange['end']!);
 
-      final shouldUseCache = period == AnalyticsPeriod.lastWeek || period == AnalyticsPeriod.lastMonth;
-      Analytics? cachedAnalytics;
-
-      if (shouldUseCache && !forceRefresh) {
-        final analyticsDao = ref.read(analyticsDaoProvider);
-        cachedAnalytics = await analyticsDao.getAnalytics(startDate, endDate);
-        
-        if (cachedAnalytics != null) {
-          _updateStateByPeriod(
-            period: period,
-            value: cachedAnalytics,
-            totalDaysWithActivity: DateHelper.calculateTotalDaysWithActivity(
-              cachedAnalytics.activityByDate,
-              dateRange['start']!,
-              dateRange['end']!,
-            ),
-          );
-          updateState(isLoading: false, error: false);
-          return;
-        }
-      }
-
       final result = await _analyticsUseCase.getUserAnalytics(
         state.user!.id!,
         startDate,
@@ -263,30 +240,22 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       switch (result) {
         case Success(value: final value):
           {
-            if (value == null) {
-              throw Exception('Error getting analytics!');
+            if (value != null) {
+              _updateStateByPeriod(
+                period: period,
+                value: value,
+                totalDaysWithActivity: DateHelper.calculateTotalDaysWithActivity(
+                  value.activityByDate,
+                  dateRange['start']!,
+                  dateRange['end']!,
+                ),
+              );
             }
-
-            if (shouldUseCache) {
-              final analyticsDao = ref.read(analyticsDaoProvider);
-              unawaited(analyticsDao.saveAnalytics(value, startDate, endDate));
-            }
-
-            _updateStateByPeriod(
-              period: period,
-              value: value,
-              totalDaysWithActivity: DateHelper.calculateTotalDaysWithActivity(
-                value.activityByDate,
-                dateRange['start']!,
-                dateRange['end']!,
-              ),
-            );
-
             updateState(isLoading: false, error: false);
           }
         case Failure():
           {
-            throw Exception('Error getting analytics!');
+            updateState(isLoading: false, error: false);
           }
       }
     } catch (e) {

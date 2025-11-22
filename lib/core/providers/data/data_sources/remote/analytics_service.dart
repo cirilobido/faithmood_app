@@ -52,6 +52,8 @@ class AnalyticsServiceImpl implements AnalyticsService {
       ) as Analytics?;
       devLogger('AnalyticsService.getUserAnalytics() - request completed successfully');
       return request;
+    } on ConnectionError {
+      rethrow;
     } catch (e, stackTrace) {
       devLogger('AnalyticsService.getUserAnalytics() - ERROR: $e');
       devLogger('AnalyticsService.getUserAnalytics() - StackTrace: $stackTrace');

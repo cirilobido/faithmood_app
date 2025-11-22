@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/core_exports.dart';
+import '../../../../../dev_utils/dev_utils_exports.dart';
 
 final analyticsDaoProvider = Provider<AnalyticsDao>((ref) {
   final secureStorage = ref.read(secureStorageServiceProvider);
@@ -24,14 +25,19 @@ class AnalyticsDaoImpl implements AnalyticsDao {
 
   @override
   Future<Analytics?> getAnalytics(String startDate, String endDate) async {
-    final analyticsJson = await secureStorage.getValue(
-      key: _getAnalyticsKey(startDate, endDate),
-    );
-    if (analyticsJson == null) return null;
+    final key = _getAnalyticsKey(startDate, endDate);
+    devLogger('AnalyticsDao.getAnalytics() - looking up key: $key');
+    final analyticsJson = await secureStorage.getValue(key: key);
+    if (analyticsJson == null) {
+      devLogger('AnalyticsDao.getAnalytics() - no cached data found for key: $key');
+      return null;
+    }
     try {
       final response = AnalyticsResponse.fromJson(jsonDecode(analyticsJson));
+      devLogger('AnalyticsDao.getAnalytics() - cached data found and parsed successfully');
       return response.toAnalytics();
-    } catch (_) {
+    } catch (e) {
+      devLogger('AnalyticsDao.getAnalytics() - error parsing cached data: $e');
       return null;
     }
   }
@@ -39,6 +45,8 @@ class AnalyticsDaoImpl implements AnalyticsDao {
   @override
   Future<bool> saveAnalytics(Analytics analytics, String startDate, String endDate) async {
     try {
+      final key = _getAnalyticsKey(startDate, endDate);
+      devLogger('AnalyticsDao.saveAnalytics() - saving with key: $key');
       await deleteAnalytics(startDate, endDate);
       
       final response = AnalyticsResponse(
@@ -49,11 +57,13 @@ class AnalyticsDaoImpl implements AnalyticsDao {
       
       final analyticsJsonEncoded = jsonEncode(response.toJson());
       await secureStorage.saveValue(
-        key: _getAnalyticsKey(startDate, endDate),
+        key: key,
         value: analyticsJsonEncoded,
       );
+      devLogger('AnalyticsDao.saveAnalytics() - saved successfully with key: $key');
       return true;
-    } catch (_) {
+    } catch (e) {
+      devLogger('AnalyticsDao.saveAnalytics() - error saving: $e');
       return false;
     }
   }
