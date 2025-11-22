@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
       "Capture your thoughts each day.",
     ),
+    "changeTime": MessageLookupByLibrary.simpleMessage("Change Time"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
       "Choose the mood that best reflects your heart right now.",
     ),
@@ -111,6 +112,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Current Subscription",
     ),
     "customization": MessageLookupByLibrary.simpleMessage("Customization"),
+    "dailyDreamReminder": MessageLookupByLibrary.simpleMessage(
+      "Daily Dream Reminder",
+    ),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
@@ -442,7 +446,27 @@ class MessageLookup extends MessageLookupByLibrary {
       "We couldn’t complete your registration this time. Please try again, and if the issue continues, come back a little later.",
     ),
     "relevantVerses": MessageLookupByLibrary.simpleMessage("Relevant Verses"),
+    "reminder": MessageLookupByLibrary.simpleMessage("Reminder"),
     "reminderAlert": MessageLookupByLibrary.simpleMessage("Reminder Alert"),
+    "reminderDeleted": MessageLookupByLibrary.simpleMessage(
+      "Reminder deleted successfully",
+    ),
+    "reminderMessage": MessageLookupByLibrary.simpleMessage(
+      "Set a daily reminder to help you stay connected with your faith journey.",
+    ),
+    "reminderNoSetMessage": MessageLookupByLibrary.simpleMessage(
+      "You don\'t have a reminder set yet. Set one to receive daily notifications.",
+    ),
+    "reminderNotificationMessage": MessageLookupByLibrary.simpleMessage(
+      "Write your dreams before they fade away.",
+    ),
+    "reminderNotificationTitle": MessageLookupByLibrary.simpleMessage(
+      "Dream time 🌙",
+    ),
+    "reminderSetMessage": MessageLookupByLibrary.simpleMessage(
+      "Your reminder is set for this time every day.",
+    ),
+    "removeReminder": MessageLookupByLibrary.simpleMessage("Remove Reminder"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
@@ -463,6 +487,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select your Language",
     ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
+    "setReminder": MessageLookupByLibrary.simpleMessage("Set Reminder"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Share App"),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
@@ -697,6 +722,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "youHaveToEnterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "You have to enter a valid email.",
+    ),
+    "yourDailyReminderIsSet": MessageLookupByLibrary.simpleMessage(
+      "Your daily reminder is set",
     ),
     "yourJournal": MessageLookupByLibrary.simpleMessage("Your Journal"),
     "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Your Password is"),

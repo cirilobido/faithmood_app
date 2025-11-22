@@ -344,5 +344,17 @@
   "informationUpdatedSuccessfully": "Your information has been updated successfully.",
   "accountDeletedSuccessfully": "Your account has been deleted successfully.",
   "errorUpdatingInformation": "Error updating your information. Please try again.",
-  "errorDeletingAccount": "Error deleting your account. Please try again."
+  "errorDeletingAccount": "Error deleting your account. Please try again.",
+  "reminder": "Reminder",
+  "reminderMessage": "Set a daily reminder to help you stay connected with your faith journey.",
+  "dailyDreamReminder": "Daily Dream Reminder",
+  "reminderSetMessage": "Your reminder is set for this time every day.",
+  "changeTime": "Change Time",
+  "removeReminder": "Remove Reminder",
+  "reminderNoSetMessage": "You don't have a reminder set yet. Set one to receive daily notifications.",
+  "setReminder": "Set Reminder",
+  "reminderNotificationTitle": "Dream time 🌙",
+  "reminderNotificationMessage": "Write your dreams before they fade away.",
+  "yourDailyReminderIsSet": "Your daily reminder is set",
+  "reminderDeleted": "Reminder deleted successfully"
 }

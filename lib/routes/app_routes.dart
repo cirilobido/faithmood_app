@@ -165,6 +165,14 @@ abstract class AppRoutes {
           child: const SecurityView(),
         ),
       ),
+      GoRoute(
+        path: Routes.reminder,
+        pageBuilder: (context, state) => buildSlidePage(
+          key: state.pageKey,
+          isBottomSheet: false,
+          child: const ReminderView(),
+        ),
+      ),
     ],
   );
 }

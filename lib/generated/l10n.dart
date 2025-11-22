@@ -2868,6 +2868,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Reminder`
+  String get reminder {
+    return Intl.message('Reminder', name: 'reminder', desc: '', args: []);
+  }
+
+  /// `Set a daily reminder to help you stay connected with your faith journey.`
+  String get reminderMessage {
+    return Intl.message(
+      'Set a daily reminder to help you stay connected with your faith journey.',
+      name: 'reminderMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Dream Reminder`
+  String get dailyDreamReminder {
+    return Intl.message(
+      'Daily Dream Reminder',
+      name: 'dailyDreamReminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your reminder is set for this time every day.`
+  String get reminderSetMessage {
+    return Intl.message(
+      'Your reminder is set for this time every day.',
+      name: 'reminderSetMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Time`
+  String get changeTime {
+    return Intl.message('Change Time', name: 'changeTime', desc: '', args: []);
+  }
+
+  /// `Remove Reminder`
+  String get removeReminder {
+    return Intl.message(
+      'Remove Reminder',
+      name: 'removeReminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have a reminder set yet. Set one to receive daily notifications.`
+  String get reminderNoSetMessage {
+    return Intl.message(
+      'You don\'t have a reminder set yet. Set one to receive daily notifications.',
+      name: 'reminderNoSetMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Reminder`
+  String get setReminder {
+    return Intl.message(
+      'Set Reminder',
+      name: 'setReminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dream time 🌙`
+  String get reminderNotificationTitle {
+    return Intl.message(
+      'Dream time 🌙',
+      name: 'reminderNotificationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write your dreams before they fade away.`
+  String get reminderNotificationMessage {
+    return Intl.message(
+      'Write your dreams before they fade away.',
+      name: 'reminderNotificationMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your daily reminder is set`
+  String get yourDailyReminderIsSet {
+    return Intl.message(
+      'Your daily reminder is set',
+      name: 'yourDailyReminderIsSet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reminder deleted successfully`
+  String get reminderDeleted {
+    return Intl.message(
+      'Reminder deleted successfully',
+      name: 'reminderDeleted',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

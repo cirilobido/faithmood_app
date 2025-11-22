@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
       "Capture your thoughts each day.",
     ),
+    "changeTime": MessageLookupByLibrary.simpleMessage("Cambiar hora"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
       "Elige el estado de ánimo que mejor refleje tu corazón en este momento.",
     ),
@@ -115,6 +116,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Suscripción Actual",
     ),
     "customization": MessageLookupByLibrary.simpleMessage("Personalización"),
+    "dailyDreamReminder": MessageLookupByLibrary.simpleMessage(
+      "Recordatorio diario",
+    ),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Rango de Fechas"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
@@ -460,7 +464,29 @@ class MessageLookup extends MessageLookupByLibrary {
     "relevantVerses": MessageLookupByLibrary.simpleMessage(
       "Versículos Relevantes",
     ),
+    "reminder": MessageLookupByLibrary.simpleMessage("Recordatorio"),
     "reminderAlert": MessageLookupByLibrary.simpleMessage("Recordatorio"),
+    "reminderDeleted": MessageLookupByLibrary.simpleMessage(
+      "Recordatorio eliminado ⏳",
+    ),
+    "reminderMessage": MessageLookupByLibrary.simpleMessage(
+      "Elige la hora ideal para pausar, reflexionar y acercarte a Dios cada día. ✨",
+    ),
+    "reminderNoSetMessage": MessageLookupByLibrary.simpleMessage(
+      "Mantén tu ritmo — activa un recordatorio para no dejar pasar tu momento con Dios. 🙏",
+    ),
+    "reminderNotificationMessage": MessageLookupByLibrary.simpleMessage(
+      "Tómate un instante para escribir cómo te sientes hoy. 📖",
+    ),
+    "reminderNotificationTitle": MessageLookupByLibrary.simpleMessage(
+      "Momento con Dios 🙏",
+    ),
+    "reminderSetMessage": MessageLookupByLibrary.simpleMessage(
+      "¡Perfecto! Te avisaremos a esta hora para que registres tu sentir. ✝️",
+    ),
+    "removeReminder": MessageLookupByLibrary.simpleMessage(
+      "Eliminar recordatorio",
+    ),
     "resendCode": MessageLookupByLibrary.simpleMessage("Reenviar código"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
@@ -485,6 +511,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select your Language",
     ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
+    "setReminder": MessageLookupByLibrary.simpleMessage("Activar recordatorio"),
     "settings": MessageLookupByLibrary.simpleMessage("Configuración"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Compartir Aplicación"),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
@@ -725,6 +752,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "youHaveToEnterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "Debes ingresar un correo electrónico válido.",
+    ),
+    "yourDailyReminderIsSet": MessageLookupByLibrary.simpleMessage(
+      "Tu recordatorio diario está listo 🙏",
     ),
     "yourJournal": MessageLookupByLibrary.simpleMessage("Your Journal"),
     "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Tu contraseña "),

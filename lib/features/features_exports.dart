@@ -15,3 +15,4 @@ export 'profile/_profile_view.dart';
 export 'settings/_settings_view.dart';
 export 'settings/my_information/_my_information_view.dart';
 export 'settings/security/_security_view.dart';
+export 'settings/reminder/_reminder_view.dart';

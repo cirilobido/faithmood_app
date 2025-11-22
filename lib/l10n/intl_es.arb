@@ -344,5 +344,17 @@
   "informationUpdatedSuccessfully": "Tu información se ha actualizado correctamente.",
   "accountDeletedSuccessfully": "Tu cuenta se ha eliminado correctamente.",
   "errorUpdatingInformation": "Error al actualizar tu información. Por favor intenta de nuevo.",
-  "errorDeletingAccount": "Error al eliminar tu cuenta. Por favor intenta de nuevo."
+  "errorDeletingAccount": "Error al eliminar tu cuenta. Por favor intenta de nuevo.",
+  "reminder": "Recordatorio",
+  "reminderMessage": "Elige la hora ideal para pausar, reflexionar y acercarte a Dios cada día. ✨",
+  "dailyDreamReminder": "Recordatorio diario",
+  "reminderSetMessage": "¡Perfecto! Te avisaremos a esta hora para que registres tu sentir. ✝️",
+  "changeTime": "Cambiar hora",
+  "removeReminder": "Eliminar recordatorio",
+  "reminderNoSetMessage": "Mantén tu ritmo — activa un recordatorio para no dejar pasar tu momento con Dios. 🙏",
+  "setReminder": "Activar recordatorio",
+  "reminderNotificationTitle": "Momento con Dios 🙏",
+  "reminderNotificationMessage": "Tómate un instante para escribir cómo te sientes hoy. 📖",
+  "yourDailyReminderIsSet": "Tu recordatorio diario está listo 🙏",
+  "reminderDeleted": "Recordatorio eliminado ⏳"
 }
