@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Account"),
+    "accountDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Your account has been deleted successfully.",
+    ),
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage("Add Mood Entry"),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage("Add to My Journal"),
@@ -140,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
     ),
+    "errorDeletingAccount": MessageLookupByLibrary.simpleMessage(
+      "Error deleting your account. Please try again.",
+    ),
     "errorDeletingMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Error deleting mood entry",
     ),
@@ -148,6 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorSavingNote": MessageLookupByLibrary.simpleMessage(
       "Error saving note",
+    ),
+    "errorUpdatingInformation": MessageLookupByLibrary.simpleMessage(
+      "Error updating your information. Please try again.",
     ),
     "errorUpdatingMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Error updating mood entry",
@@ -233,6 +242,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "inTheApp": MessageLookupByLibrary.simpleMessage("in the app."),
     "informationSafeMessage": MessageLookupByLibrary.simpleMessage(
       "Your information will be kept safe and secure.",
+    ),
+    "informationUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Your information has been updated successfully.",
     ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
     "invalidEmailOrPasswordPleaseTryAgain":

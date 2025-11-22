@@ -340,5 +340,9 @@
   "deleteAccount": "Delete Account",
   "pleaseFillAllTheFieldsWithValidData": "Please fill all the fields with valid data",
   "sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry": "Sorry, something went wrong while updating your information. Please try again.",
-  "afterDeletingYourAccountYouWillLoseAllYourData": "After deleting your account, you will lose all your data. This action cannot be undone."
+  "afterDeletingYourAccountYouWillLoseAllYourData": "After deleting your account, you will lose all your data. This action cannot be undone.",
+  "informationUpdatedSuccessfully": "Your information has been updated successfully.",
+  "accountDeletedSuccessfully": "Your account has been deleted successfully.",
+  "errorUpdatingInformation": "Error updating your information. Please try again.",
+  "errorDeletingAccount": "Error deleting your account. Please try again."
 }

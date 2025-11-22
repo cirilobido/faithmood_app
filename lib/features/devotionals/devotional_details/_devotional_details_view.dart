@@ -19,7 +19,7 @@ class DevotionalDetailsView extends ConsumerStatefulWidget {
 
 class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
   final TextEditingController _reflectionController = TextEditingController();
-  bool _isVersesExpanded = false;
+  bool _isVersesExpanded = true;
   bool _isLearningsExpanded = false;
 
   @override
@@ -115,13 +115,12 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (devotional.verses != null && devotional.verses!.isNotEmpty) ...[
+            VerseContent(verses: devotional.verses!)
+          ],
+          const SizedBox(height: AppSizes.spacingLarge),
           Text(devotional.title ?? '', style: theme.textTheme.headlineMedium),
-          const SizedBox(height: AppSizes.spacingMedium),
-          if (devotional.content != null && devotional.content!.isNotEmpty)
-            Text(devotional.content!, style: theme.textTheme.bodyLarge),
           if (devotional.tags != null && devotional.tags!.isNotEmpty) ...[
-            const SizedBox(height: AppSizes.spacingLarge),
-            Text(lang.tags, style: theme.textTheme.titleMedium),
             const SizedBox(height: AppSizes.spacingSmall),
             Wrap(
               spacing: AppSizes.spacingSmall,
@@ -131,18 +130,9 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
               }).toList(),
             ),
           ],
-          if (devotional.verses != null && devotional.verses!.isNotEmpty) ...[
-            const SizedBox(height: AppSizes.spacingLarge),
-            ExpandableSection(
-              title: lang.relevantVerses,
-              isExpanded: _isVersesExpanded,
-              onToggle: () {
-                setState(() {
-                  _isVersesExpanded = !_isVersesExpanded;
-                });
-              },
-              content: VerseContent(verses: devotional.verses!),
-            ),
+          if (devotional.content != null && devotional.content!.isNotEmpty) ...[
+            const SizedBox(height: AppSizes.spacingMedium),
+            Text(devotional.content!, style: theme.textTheme.bodyLarge),
           ],
           if (devotional.reflection != null &&
               devotional.reflection!.isNotEmpty) ...[

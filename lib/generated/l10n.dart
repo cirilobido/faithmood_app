@@ -2828,6 +2828,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Your information has been updated successfully.`
+  String get informationUpdatedSuccessfully {
+    return Intl.message(
+      'Your information has been updated successfully.',
+      name: 'informationUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account has been deleted successfully.`
+  String get accountDeletedSuccessfully {
+    return Intl.message(
+      'Your account has been deleted successfully.',
+      name: 'accountDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating your information. Please try again.`
+  String get errorUpdatingInformation {
+    return Intl.message(
+      'Error updating your information. Please try again.',
+      name: 'errorUpdatingInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting your account. Please try again.`
+  String get errorDeletingAccount {
+    return Intl.message(
+      'Error deleting your account. Please try again.',
+      name: 'errorDeletingAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

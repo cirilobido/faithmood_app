@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Cuenta"),
+    "accountDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Tu cuenta se ha eliminado correctamente.",
+    ),
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Agregar Entrada de Estado de Ánimo",
@@ -144,6 +147,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Ingresa un número de teléfono válido",
     ),
+    "errorDeletingAccount": MessageLookupByLibrary.simpleMessage(
+      "Error al eliminar tu cuenta. Por favor intenta de nuevo.",
+    ),
     "errorDeletingMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Error al eliminar la entrada del estado de ánimo",
     ),
@@ -152,6 +158,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorSavingNote": MessageLookupByLibrary.simpleMessage(
       "Error al guardar la nota",
+    ),
+    "errorUpdatingInformation": MessageLookupByLibrary.simpleMessage(
+      "Error al actualizar tu información. Por favor intenta de nuevo.",
     ),
     "errorUpdatingMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Error al actualizar la entrada del estado de ánimo",
@@ -241,6 +250,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "inTheApp": MessageLookupByLibrary.simpleMessage("en la app."),
     "informationSafeMessage": MessageLookupByLibrary.simpleMessage(
       "Tu información se mantendrá segura.",
+    ),
+    "informationUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Tu información se ha actualizado correctamente.",
     ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Correo electrónico inválido",

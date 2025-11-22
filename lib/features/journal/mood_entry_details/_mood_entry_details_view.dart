@@ -74,25 +74,30 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     );
   }
 
-
   void _handleEdit(BuildContext context) {
-    final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
+    final vm = ref.read(
+      moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+    );
     final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
     vm.startEditing();
     _noteController.text = state.moodSession?.note ?? '';
   }
 
   void _handleDelete(BuildContext context, ThemeData theme, S lang) async {
-    final confirmed = await DeleteConfirmationDialog.show(
-      context: context,
-    );
+    final confirmed = await DeleteConfirmationDialog.show(context: context);
     if (confirmed == true) {
       await _performDelete(context, theme, lang);
     }
   }
 
-  Future<void> _performDelete(BuildContext context, ThemeData theme, S lang) async {
-    final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
+  Future<void> _performDelete(
+    BuildContext context,
+    ThemeData theme,
+    S lang,
+  ) async {
+    final vm = ref.read(
+      moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+    );
     final journalVm = ref.read(journalViewModelProvider.notifier);
 
     LoadingDialog.show(context: context, message: lang.deleting);
@@ -124,8 +129,14 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     }
   }
 
-  Future<void> _performUpdate(BuildContext context, ThemeData theme, S lang) async {
-    final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
+  Future<void> _performUpdate(
+    BuildContext context,
+    ThemeData theme,
+    S lang,
+  ) async {
+    final vm = ref.read(
+      moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+    );
     final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
     final journalVm = ref.read(journalViewModelProvider.notifier);
 
@@ -206,50 +217,50 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildFeelingAndSpiritCard(
-            context,
-            theme,
-            lang,
-            emotionalMoodIcon,
-            emotionalMoodName,
-            spiritualMoodIcon,
-            spiritualMoodName,
-          ),
-          if (state.isEditing || (session.note != null && session.note!.isNotEmpty)) ...[
+          if (aiVerse != null) ...[
+            VerseContent(
+              verse: session.aiVerse!,
+              useStyledContainer: true,
+              userLang: userLang,
+            ),
+          ],
+          ...[
+            const SizedBox(height: AppSizes.spacingLarge),
+            _buildFeelingAndSpiritCard(
+              context,
+              theme,
+              lang,
+              emotionalMoodIcon,
+              emotionalMoodName,
+              spiritualMoodIcon,
+              spiritualMoodName,
+            ),
+          ],
+          if (state.isEditing ||
+              (session.note != null && session.note!.isNotEmpty)) ...[
             const SizedBox(height: AppSizes.spacingMedium),
             NoteDisplay(
               note: session.note,
               isEditing: state.isEditing,
               controller: _noteController,
               onChanged: (value) {
-                final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
+                final vm = ref.read(
+                  moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                );
                 vm.updateEditedNote(value);
               },
               onSave: () => _performUpdate(context, theme, lang),
               onCancel: () {
-                final vm = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId).notifier);
-                final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
+                final vm = ref.read(
+                  moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                );
+                final state = ref.read(
+                  moodEntryDetailsViewModelProvider(widget.sessionId),
+                );
                 vm.cancelEditing();
                 _noteController.text = state.moodSession?.note ?? '';
               },
               isSaving: state.isUpdating,
-            ),
-          ],
-          if (aiVerse != null) ...[
-            const SizedBox(height: AppSizes.spacingLarge),
-            ExpandableSection(
-              title: lang.verseForTheDay,
-              isExpanded: _isVerseExpanded,
-              onToggle: () {
-                setState(() {
-                  _isVerseExpanded = !_isVerseExpanded;
-                });
-              },
-              content: VerseContent(
-                verse: session.aiVerse!,
-                useStyledContainer: true,
-                userLang: userLang,
-              ),
             ),
           ],
           if (aiReflection != null && aiReflection.isNotEmpty) ...[
@@ -353,6 +364,4 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
       ],
     );
   }
-
-
 }

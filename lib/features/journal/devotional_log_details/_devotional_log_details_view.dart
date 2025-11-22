@@ -213,6 +213,10 @@ class _DevotionalLogDetailsViewState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (devotional?.verses != null && devotional!.verses!.isNotEmpty) ...[
+            VerseContent(verseRelationships: devotional.verses!),
+            const SizedBox(height: AppSizes.spacingLarge),
+          ],
           if (state.isEditing || (log.note != null && log.note!.isNotEmpty)) ...[
             NoteDisplay(
               note: log.note,
@@ -241,12 +245,7 @@ class _DevotionalLogDetailsViewState
           ],
           if (devotional?.title != null && devotional!.title!.isNotEmpty) ...[
             Text(devotional.title!, style: theme.textTheme.headlineMedium),
-            const SizedBox(height: AppSizes.spacingMedium),
-          ],
-          if (devotional?.content != null &&
-              devotional!.content!.isNotEmpty) ...[
-            Text(devotional.content!, style: theme.textTheme.bodyLarge),
-            const SizedBox(height: AppSizes.spacingLarge),
+            const SizedBox(height: AppSizes.spacingSmall),
           ],
           if (devotional?.tags != null && devotional!.tags!.isNotEmpty) ...[
             Wrap(
@@ -289,19 +288,9 @@ class _DevotionalLogDetailsViewState
             ),
             const SizedBox(height: AppSizes.spacingMedium),
           ],
-          if (devotional?.verses != null && devotional!.verses!.isNotEmpty) ...[
-            ExpandableSection(
-              title: lang.relevantVerses,
-              isExpanded: _isVersesExpanded,
-              onToggle: () {
-                setState(() {
-                  _isVersesExpanded = !_isVersesExpanded;
-                });
-              },
-              content: VerseContent(
-                verseRelationships: devotional.verses!,
-              ),
-            ),
+          if (devotional?.content != null &&
+              devotional!.content!.isNotEmpty) ...[
+            Text(devotional.content!, style: theme.textTheme.bodyLarge),
             const SizedBox(height: AppSizes.spacingLarge),
           ],
           if (devotional?.reflection != null &&

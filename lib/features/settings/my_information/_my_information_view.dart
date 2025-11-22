@@ -246,12 +246,23 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
                       ),
                     );
 
-                    if (isValid) {
-                      setState(() {
-                        isEditing = false;
-                      });
-                    } else {
-                      showUpdateInformationErrorDialog();
+                    if (context.mounted) {
+                      if (isValid) {
+                        setState(() {
+                          isEditing = false;
+                        });
+                        CustomSnackBar.show(
+                          context,
+                          backgroundColor: theme.colorScheme.primary,
+                          message: lang.informationUpdatedSuccessfully,
+                        );
+                      } else {
+                        CustomSnackBar.show(
+                          context,
+                          backgroundColor: theme.colorScheme.error,
+                          message: lang.errorUpdatingInformation,
+                        );
+                      }
                     }
                   } else {
                     showDeleteAccountDialog();
@@ -278,21 +289,10 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
     );
   }
 
-  void showUpdateInformationErrorDialog() {
-    final lang = S.of(context);
-    CustomDialogModal.show(
-      context: context,
-      title: lang.updateInformation,
-      content: lang.sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry,
-      iconPath: AppIcons.sadPetImage,
-      buttonTitle: lang.continueText,
-      buttonType: ButtonType.primary,
-      onPrimaryTap: () async {},
-    );
-  }
 
   void showDeleteAccountDialog() {
     final lang = S.of(context);
+    final theme = Theme.of(context);
     CustomDialogModal.show(
       context: context,
       title: lang.deleteAccount,
@@ -304,8 +304,18 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
         final viewModel = ref.read(myInformationViewModelProvider.notifier);
         final result = await viewModel.deleteAccount();
 
-        if (result) {
-          context.go(Routes.initialPath);
+        if (context.mounted) {
+          if (result) {
+            if (context.mounted) {
+              context.go(Routes.initialPath);
+            }
+          } else {
+            CustomSnackBar.show(
+              context,
+              backgroundColor: theme.colorScheme.error,
+              message: lang.errorDeletingAccount,
+            );
+          }
         }
       },
     );

@@ -96,6 +96,10 @@ class MyInformationViewModel extends StateNotifier<MyInformationState> {
       await authProvider.updateUserData(params);
       final user = authProvider.user;
       updateState(user: user, isLoading: false);
+      firebaseAnalyticProvider.logEvent(
+        name: 'update_user_data_successfully',
+        parameters: {'screen': 'my_information_screen'},
+      );
       return true;
     } catch (e) {
       devLogger(e.toString());
@@ -110,10 +114,17 @@ class MyInformationViewModel extends StateNotifier<MyInformationState> {
 
   Future<bool> deleteAccount() async {
     try {
+      updateState(isLoading: true, error: false);
       await authProvider.deleteUser(authProvider.user!.id!);
+      updateState(isLoading: false);
+      firebaseAnalyticProvider.logEvent(
+        name: 'delete_user_successfully',
+        parameters: {'screen': 'my_information_screen'},
+      );
       return true;
     } catch (e) {
       devLogger(e.toString());
+      updateState(isLoading: false, error: true);
       firebaseAnalyticProvider.logEvent(
         name: 'delete_user_failed',
         parameters: {'screen': 'my_information_screen'},

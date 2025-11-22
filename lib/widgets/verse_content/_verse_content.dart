@@ -19,11 +19,11 @@ class VerseContent extends ConsumerWidget {
     this.useStyledContainer = false,
     this.userLang,
   }) : assert(
-          (verse != null && verses == null && verseRelationships == null) ||
-          (verse == null && verses != null && verseRelationships == null) ||
-          (verse == null && verses == null && verseRelationships != null),
-          'Exactly one of verse, verses, or verseRelationships must be provided',
-        );
+         (verse != null && verses == null && verseRelationships == null) ||
+             (verse == null && verses != null && verseRelationships == null) ||
+             (verse == null && verses == null && verseRelationships != null),
+         'Exactly one of verse, verses, or verseRelationships must be provided',
+       );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +35,12 @@ class VerseContent extends ConsumerWidget {
     } else if (verses != null) {
       return _buildVerseList(context, theme, verses!, lang);
     } else if (verseRelationships != null) {
-      return _buildVerseRelationshipList(context, theme, verseRelationships!, lang);
+      return _buildVerseRelationshipList(
+        context,
+        theme,
+        verseRelationships!,
+        lang,
+      );
     }
 
     return const SizedBox.shrink();
@@ -62,31 +67,43 @@ class VerseContent extends ConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    final content = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(verseText, style: theme.textTheme.bodyLarge),
-        if (verseRef.isNotEmpty) ...[
-          const SizedBox(height: AppSizes.spacingXSmall),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              verseRef,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.textTheme.labelSmall?.color,
-                fontWeight: FontWeight.w700,
+    final content = Container(
+      padding: const EdgeInsets.all(AppSizes.paddingMedium),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.secondary.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            verseText,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.headlineSmall,
+          ),
+          if (verseRef.isNotEmpty) ...[
+            const SizedBox(height: AppSizes.spacingSmall),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                verseRef,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.textTheme.labelSmall?.color,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
+          ],
         ],
-      ],
+      ),
     );
 
     if (useStyledContainer) {
       return Container(
-        padding: const EdgeInsets.all(AppSizes.paddingMedium),
+        padding: const EdgeInsets.all(AppSizes.paddingSmall),
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary.withValues(alpha: 0.2),
+          color: theme.colorScheme.secondary.withValues(alpha: 0.4),
           borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
         ),
         child: content,
@@ -102,39 +119,47 @@ class VerseContent extends ConsumerWidget {
     List<Verse> verses,
     String lang,
   ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: verses.map((verse) {
-        final verseText = verse.text ?? '';
-        final verseRef = verse.ref ?? '';
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.paddingMedium),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.secondary.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: verses.map((verse) {
+          final verseText = verse.text ?? '';
+          final verseRef = verse.ref ?? '';
 
-        if (verseText.isEmpty) {
-          return const SizedBox.shrink();
-        }
+          if (verseText.isEmpty) {
+            return const SizedBox.shrink();
+          }
 
-        return Padding(
-          padding: const EdgeInsets.only(bottom: AppSizes.spacingMedium),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(verseText, style: theme.textTheme.bodyLarge),
-              if (verseRef.isNotEmpty) ...[
-                const SizedBox(height: AppSizes.spacingXSmall),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    verseRef,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.textTheme.labelSmall?.color,
-                      fontWeight: FontWeight.w700,
+          return Padding(
+            padding: (verse != verses.last) ? const EdgeInsets.only(bottom: AppSizes.spacingMedium) : EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(verseText, textAlign: TextAlign.center, style: theme.textTheme.headlineSmall,),
+                if (verseRef.isNotEmpty) ...[
+                  const SizedBox(height: AppSizes.spacingSmall),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      verseRef,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.textTheme.labelSmall?.color,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ],
-            ],
-          ),
-        );
-      }).toList(),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 
@@ -145,7 +170,7 @@ class VerseContent extends ConsumerWidget {
     String lang,
   ) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: verseRelationships.map((verseRelationship) {
         final verse = verseRelationship.verse;
         if (verse == null ||
@@ -166,30 +191,37 @@ class VerseContent extends ConsumerWidget {
           return const SizedBox.shrink();
         }
 
-        return Padding(
-          padding: const EdgeInsets.only(bottom: AppSizes.spacingMedium),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(verseText, style: theme.textTheme.bodyLarge),
-              if (verseRef.isNotEmpty) ...[
-                const SizedBox(height: AppSizes.spacingXSmall),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    verseRef,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.textTheme.labelSmall?.color,
-                      fontWeight: FontWeight.w700,
+        return Container(
+          padding: const EdgeInsets.all(AppSizes.paddingMedium),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.secondary.withValues(alpha: 0.4),
+            borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: AppSizes.spacingMedium),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(verseText, textAlign: TextAlign.center, style: theme.textTheme.headlineSmall,),
+                if (verseRef.isNotEmpty) ...[
+                  const SizedBox(height: AppSizes.spacingSmall),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      verseRef,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.textTheme.labelSmall?.color,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ],
-            ],
+            ),
           ),
         );
       }).toList(),
     );
   }
 }
-

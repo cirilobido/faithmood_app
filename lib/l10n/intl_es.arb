@@ -340,5 +340,9 @@
   "deleteAccount": "Eliminar Cuenta",
   "pleaseFillAllTheFieldsWithValidData": "Por favor completa todos los campos con datos válidos",
   "sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry": "Lo sentimos, algo salió mal al actualizar tu información. Por favor intenta de nuevo.",
-  "afterDeletingYourAccountYouWillLoseAllYourData": "Después de eliminar tu cuenta, perderás todos tus datos. Esta acción no se puede deshacer."
+  "afterDeletingYourAccountYouWillLoseAllYourData": "Después de eliminar tu cuenta, perderás todos tus datos. Esta acción no se puede deshacer.",
+  "informationUpdatedSuccessfully": "Tu información se ha actualizado correctamente.",
+  "accountDeletedSuccessfully": "Tu cuenta se ha eliminado correctamente.",
+  "errorUpdatingInformation": "Error al actualizar tu información. Por favor intenta de nuevo.",
+  "errorDeletingAccount": "Error al eliminar tu cuenta. Por favor intenta de nuevo."
 }
