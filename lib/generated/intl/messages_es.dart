@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "account": MessageLookupByLibrary.simpleMessage("Cuenta"),
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Agregar Entrada de Estado de Ánimo",
@@ -37,6 +38,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "advanceProgressTracker": MessageLookupByLibrary.simpleMessage(
       "✨ Advance Progress Tracker",
     ),
+    "afterDeletingYourAccountYouWillLoseAllYourData":
+        MessageLookupByLibrary.simpleMessage(
+          "Después de eliminar tu cuenta, perderás todos tus datos. Esta acción no se puede deshacer.",
+        ),
     "age": MessageLookupByLibrary.simpleMessage("Age"),
     "ageIsRequired": MessageLookupByLibrary.simpleMessage("Age is required!"),
     "all": MessageLookupByLibrary.simpleMessage("Todos"),
@@ -45,7 +50,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Allow Notifications",
     ),
     "and": MessageLookupByLibrary.simpleMessage("y"),
+    "appLanguage": MessageLookupByLibrary.simpleMessage(
+      "Idioma de la Aplicación",
+    ),
+    "appName": MessageLookupByLibrary.simpleMessage("Tu nombre"),
+    "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
+      "Versión de la Aplicación: ###",
+    ),
     "applyFilters": MessageLookupByLibrary.simpleMessage("Aplicar Filtros"),
+    "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
+      "¿Estás seguro de que quieres cerrar sesión?",
+    ),
     "ascending": MessageLookupByLibrary.simpleMessage("Ascendente"),
     "askNotificationSubtitle": MessageLookupByLibrary.simpleMessage(
       "We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.",
@@ -86,12 +101,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirmar Contraseña",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+    "contactUs": MessageLookupByLibrary.simpleMessage("Contáctanos"),
     "continueText": MessageLookupByLibrary.simpleMessage("Continuar"),
     "continueWithoutNote": MessageLookupByLibrary.simpleMessage(
       "Continuar Sin Nota",
     ),
     "createAnAccount": MessageLookupByLibrary.simpleMessage("Crear una cuenta"),
     "createCampaign": MessageLookupByLibrary.simpleMessage("Crear Campaña"),
+    "currentSubscription": MessageLookupByLibrary.simpleMessage(
+      "Suscripción Actual",
+    ),
+    "customization": MessageLookupByLibrary.simpleMessage("Personalización"),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Rango de Fechas"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
@@ -101,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Días Con Actividad",
     ),
     "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("Eliminar Cuenta"),
     "deleteMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Eliminar Entrada del Estado de Ánimo",
     ),
@@ -177,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Find a plan that fits your journey.",
     ),
     "firstName": MessageLookupByLibrary.simpleMessage("Nombre"),
+    "followUs": MessageLookupByLibrary.simpleMessage("Síguenos"),
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
       "¿Olvidaste tu contraseña?",
     ),
@@ -245,6 +267,8 @@ class MessageLookup extends MessageLookupByLibrary {
           "El nombre debe tener al menos 3 caracteres",
         ),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
+    "localeName": MessageLookupByLibrary.simpleMessage("Español"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Cerrar Sesión"),
     "loginErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Tu correo o contraseña no coinciden. Verifica tus datos e inténtalo de nuevo.",
     ),
@@ -312,6 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
     "order": MessageLookupByLibrary.simpleMessage("Orden"),
     "otpCode": MessageLookupByLibrary.simpleMessage("Código OTP"),
+    "ourApp": MessageLookupByLibrary.simpleMessage("Nuestra Aplicación"),
     "passMinCharacters": MessageLookupByLibrary.simpleMessage("6 caracteres"),
     "passOneLetter": MessageLookupByLibrary.simpleMessage("1 letra"),
     "passOneNumber": MessageLookupByLibrary.simpleMessage("1 número"),
@@ -339,6 +364,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "✨ Your journey is just beginning",
     ),
     "pending": MessageLookupByLibrary.simpleMessage("Pendiente"),
+    "personalInformation": MessageLookupByLibrary.simpleMessage(
+      "Información Personal",
+    ),
     "phone": MessageLookupByLibrary.simpleMessage("Teléfono"),
     "phoneNumberDigitsError": MessageLookupByLibrary.simpleMessage(
       "El teléfono solo puede contener dígitos",
@@ -347,6 +375,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "El teléfono debe tener entre 10 y 15 dígitos",
     ),
     "plan": MessageLookupByLibrary.simpleMessage("Plan"),
+    "pleaseFillAllTheFieldsWithValidData": MessageLookupByLibrary.simpleMessage(
+      "Por favor completa todos los campos con datos válidos",
+    ),
     "pleaseSelectEmotionalMood": MessageLookupByLibrary.simpleMessage(
       "Por favor selecciona un estado de ánimo emocional",
     ),
@@ -375,6 +406,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicy": MessageLookupByLibrary.simpleMessage(
       "Política de privacidad",
     ),
+    "privacySecurity": MessageLookupByLibrary.simpleMessage(
+      "Privacidad y Seguridad",
+    ),
     "privacyTerms": MessageLookupByLibrary.simpleMessage(
       "Privacidad y Términos",
     ),
@@ -393,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "psaml231Verse": MessageLookupByLibrary.simpleMessage(
       "The Lord is my shepherd; I shall not want.",
     ),
+    "rateUs": MessageLookupByLibrary.simpleMessage("Califícanos"),
     "ratingContentDesc": MessageLookupByLibrary.simpleMessage(
       "FaithMood was made for people like you",
     ),
@@ -413,6 +448,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "relevantVerses": MessageLookupByLibrary.simpleMessage(
       "Versículos Relevantes",
     ),
+    "reminderAlert": MessageLookupByLibrary.simpleMessage("Recordatorio"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Reenviar código"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
@@ -437,6 +473,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select your Language",
     ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
+    "settings": MessageLookupByLibrary.simpleMessage("Configuración"),
+    "shareApp": MessageLookupByLibrary.simpleMessage("Compartir Aplicación"),
+    "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
+    "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
+      "FaithMood App \nFaithMood te ayuda a rastrear tus emociones, profundizar tu vida espiritual y recibir devocionales diarios personalizados. \nDeberías probarlo 👉 ###",
+    ),
     "signIn": MessageLookupByLibrary.simpleMessage("Iniciar sesión"),
     "signInNow": MessageLookupByLibrary.simpleMessage("Iniciar sesión ahora"),
     "signUp": MessageLookupByLibrary.simpleMessage("Crear cuenta"),
@@ -468,6 +510,10 @@ class MessageLookup extends MessageLookupByLibrary {
           "Ocurrió un error al enviar el código OTP. Inténtalo de nuevo más tarde.",
         ),
     "sorryAboutThis": MessageLookupByLibrary.simpleMessage("Lo sentimos"),
+    "sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry":
+        MessageLookupByLibrary.simpleMessage(
+          "Lo sentimos, algo salió mal al actualizar tu información. Por favor intenta de nuevo.",
+        ),
     "sortBy": MessageLookupByLibrary.simpleMessage("Ordenar Por"),
     "sortByDate": MessageLookupByLibrary.simpleMessage("Ordenar por Fecha"),
     "spirit": MessageLookupByLibrary.simpleMessage("Espíritu"),
@@ -528,13 +574,23 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
+    "support": MessageLookupByLibrary.simpleMessage("Soporte"),
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
     "tags": MessageLookupByLibrary.simpleMessage("Etiquetas"),
+    "termsConditions": MessageLookupByLibrary.simpleMessage(
+      "Términos y Condiciones",
+    ),
     "termsOfUse": MessageLookupByLibrary.simpleMessage("Términos de uso."),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "Este campo es obligatorio",
+    ),
+    "thisUsedForAllYourMoodAnalysis": MessageLookupByLibrary.simpleMessage(
+      "Esto se usa para todos tus análisis de estado de ánimo.",
+    ),
+    "thisUsedForAllYourNewDreamAnalysis": MessageLookupByLibrary.simpleMessage(
+      "Esto se usa para todos tus nuevos análisis de sueños",
     ),
     "tip": MessageLookupByLibrary.simpleMessage("Consejo"),
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
@@ -567,6 +623,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "💭 Unlimited Mood Track",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
+    "unlockPremiumFeatures": MessageLookupByLibrary.simpleMessage(
+      "Desbloquear Funciones Premium",
+    ),
     "unlockPremiumToGetAccessToAllStatsAndFeatures":
         MessageLookupByLibrary.simpleMessage(
           "Desbloquea Premium para acceder a todas las estadísticas y funciones",
@@ -583,6 +642,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "updateAvailableMessage": MessageLookupByLibrary.simpleMessage(
       "Hay una nueva versión de la app disponible. Actualiza para continuar usando todas las funciones.",
+    ),
+    "updateInformation": MessageLookupByLibrary.simpleMessage(
+      "Actualizar Información",
     ),
     "user": MessageLookupByLibrary.simpleMessage("Usuario"),
     "usosYEstadisticas": MessageLookupByLibrary.simpleMessage(

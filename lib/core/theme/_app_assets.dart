@@ -53,6 +53,16 @@ abstract class AppIcons {
   static const spiritIcon = 'assets/icons/ic_spirit.svg';
   static const heartIcon = 'assets/icons/ic_heart.svg';
   static const settingsIcon = 'assets/icons/ic_settings.svg';
+  static const safeBoxIcon = 'assets/icons/ic_safe_box.svg';
+  static const diamondIcon = 'assets/icons/ic_diamond.svg';
+  static const bellIcon = 'assets/icons/ic_bell.svg';
+  static const langIcon = 'assets/icons/ic_lang.svg';
+  static const shareIcon = 'assets/icons/ic_share.svg';
+  static const thumbsUpIcon = 'assets/icons/ic_thumbs_up.svg';
+  static const globeIcon = 'assets/icons/ic_globe.svg';
+  static const shieldCheckIcon = 'assets/icons/ic_shield_check.svg';
+  static const handshakeIcon = 'assets/icons/ic_handshake.svg';
+  static const editIcon = 'assets/icons/ic_edit.svg';
 }
 
 abstract class AppAnimations {

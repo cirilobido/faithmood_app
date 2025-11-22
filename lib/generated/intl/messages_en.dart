@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "account": MessageLookupByLibrary.simpleMessage("Account"),
     "activa": MessageLookupByLibrary.simpleMessage("Activa"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage("Add Mood Entry"),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage("Add to My Journal"),
@@ -33,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "advanceProgressTracker": MessageLookupByLibrary.simpleMessage(
       "✨ Advance Progress Tracker",
     ),
+    "afterDeletingYourAccountYouWillLoseAllYourData":
+        MessageLookupByLibrary.simpleMessage(
+          "After deleting your account, you will lose all your data. This action cannot be undone.",
+        ),
     "age": MessageLookupByLibrary.simpleMessage("Age"),
     "ageIsRequired": MessageLookupByLibrary.simpleMessage("Age is required!"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
@@ -41,7 +46,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Allow Notifications",
     ),
     "and": MessageLookupByLibrary.simpleMessage("and"),
+    "appLanguage": MessageLookupByLibrary.simpleMessage("App Language"),
+    "appName": MessageLookupByLibrary.simpleMessage("Your name"),
+    "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
+      "App Version: ###",
+    ),
     "applyFilters": MessageLookupByLibrary.simpleMessage("Apply Filters"),
+    "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to log out?",
+    ),
     "ascending": MessageLookupByLibrary.simpleMessage("Ascending"),
     "askNotificationSubtitle": MessageLookupByLibrary.simpleMessage(
       "We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.",
@@ -82,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirmar Contraseña",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+    "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
     "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
     "continueWithoutNote": MessageLookupByLibrary.simpleMessage(
       "Continue Without Note",
@@ -90,6 +104,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Create an Account",
     ),
     "createCampaign": MessageLookupByLibrary.simpleMessage("Crear Campaña"),
+    "currentSubscription": MessageLookupByLibrary.simpleMessage(
+      "Current Subscription",
+    ),
+    "customization": MessageLookupByLibrary.simpleMessage("Customization"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
@@ -99,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Days With Activity",
     ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
     "deleteMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Delete Mood Entry",
     ),
@@ -173,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Find a plan that fits your journey.",
     ),
     "firstName": MessageLookupByLibrary.simpleMessage("Nombre"),
+    "followUs": MessageLookupByLibrary.simpleMessage("Follow Us"),
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
       "Forgot Your Password?",
     ),
@@ -237,6 +257,8 @@ class MessageLookup extends MessageLookupByLibrary {
           "El nombre debe tener al menos 3 caracteres",
         ),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
+    "localeName": MessageLookupByLibrary.simpleMessage("English"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
     "loginErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Your email or password doesn’t seem to match. Please check your details and try again.",
     ),
@@ -302,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
     "order": MessageLookupByLibrary.simpleMessage("Order"),
     "otpCode": MessageLookupByLibrary.simpleMessage("OTP Code"),
+    "ourApp": MessageLookupByLibrary.simpleMessage("Our App"),
     "passMinCharacters": MessageLookupByLibrary.simpleMessage("6 characters"),
     "passOneLetter": MessageLookupByLibrary.simpleMessage("One letter"),
     "passOneNumber": MessageLookupByLibrary.simpleMessage("One number"),
@@ -329,6 +352,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "✨ Your journey is just beginning",
     ),
     "pending": MessageLookupByLibrary.simpleMessage("Pendiente"),
+    "personalInformation": MessageLookupByLibrary.simpleMessage(
+      "Personal Information",
+    ),
     "phone": MessageLookupByLibrary.simpleMessage("Teléfono"),
     "phoneNumberDigitsError": MessageLookupByLibrary.simpleMessage(
       "El teléfono solo puede contener dígitos",
@@ -337,6 +363,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "El teléfono debe tener entre 10 y 15 dígitos",
     ),
     "plan": MessageLookupByLibrary.simpleMessage("Plan"),
+    "pleaseFillAllTheFieldsWithValidData": MessageLookupByLibrary.simpleMessage(
+      "Please fill all the fields with valid data",
+    ),
     "pleaseSelectEmotionalMood": MessageLookupByLibrary.simpleMessage(
       "Please select an emotional mood",
     ),
@@ -363,6 +392,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "🙏 We’re preparing your space...",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "privacySecurity": MessageLookupByLibrary.simpleMessage(
+      "Privacy & Security",
+    ),
     "privacyTerms": MessageLookupByLibrary.simpleMessage("Privacy & Terms"),
     "privacyText1": MessageLookupByLibrary.simpleMessage(
       "By continuing, you agree to our",
@@ -379,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "psaml231Verse": MessageLookupByLibrary.simpleMessage(
       "The Lord is my shepherd; I shall not want.",
     ),
+    "rateUs": MessageLookupByLibrary.simpleMessage("Rate Us"),
     "ratingContentDesc": MessageLookupByLibrary.simpleMessage(
       "FaithMood was made for people like you",
     ),
@@ -397,6 +430,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "We couldn’t complete your registration this time. Please try again, and if the issue continues, come back a little later.",
     ),
     "relevantVerses": MessageLookupByLibrary.simpleMessage("Relevant Verses"),
+    "reminderAlert": MessageLookupByLibrary.simpleMessage("Reminder Alert"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
@@ -417,6 +451,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select your Language",
     ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "shareApp": MessageLookupByLibrary.simpleMessage("Share App"),
+    "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
+    "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
+      "FaithMood App \nFaithMood helps you track your emotions, deepen your spiritual life, and receive personalized daily devotionals. \nYou should try it 👉 ###",
+    ),
     "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signInNow": MessageLookupByLibrary.simpleMessage("Sign In Now"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -448,6 +488,10 @@ class MessageLookup extends MessageLookupByLibrary {
           "Something went wrong while sending the otp code, please try again later.",
         ),
     "sorryAboutThis": MessageLookupByLibrary.simpleMessage("Sorry about this"),
+    "sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry":
+        MessageLookupByLibrary.simpleMessage(
+          "Sorry, something went wrong while updating your information. Please try again.",
+        ),
     "sortBy": MessageLookupByLibrary.simpleMessage("Sort By"),
     "sortByDate": MessageLookupByLibrary.simpleMessage("Sort by Date"),
     "spirit": MessageLookupByLibrary.simpleMessage("Spirit"),
@@ -508,13 +552,23 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
+    "support": MessageLookupByLibrary.simpleMessage("Support"),
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
     "tags": MessageLookupByLibrary.simpleMessage("Tags"),
+    "termsConditions": MessageLookupByLibrary.simpleMessage(
+      "Terms & Conditions",
+    ),
     "termsOfUse": MessageLookupByLibrary.simpleMessage("Terms of Use."),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required",
+    ),
+    "thisUsedForAllYourMoodAnalysis": MessageLookupByLibrary.simpleMessage(
+      "This is used for all your mood analysis.",
+    ),
+    "thisUsedForAllYourNewDreamAnalysis": MessageLookupByLibrary.simpleMessage(
+      "This is used for all your new dream analysis",
     ),
     "tip": MessageLookupByLibrary.simpleMessage("Tip"),
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
@@ -547,6 +601,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "💭 Unlimited Mood Track",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
+    "unlockPremiumFeatures": MessageLookupByLibrary.simpleMessage(
+      "Unlock Premium Features",
+    ),
     "unlockPremiumToGetAccessToAllStatsAndFeatures":
         MessageLookupByLibrary.simpleMessage(
           "Unlock Premium to get access to all stats and features",
@@ -559,6 +616,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateAvailable": MessageLookupByLibrary.simpleMessage("Update available"),
     "updateAvailableMessage": MessageLookupByLibrary.simpleMessage(
       "There is a new version of the app available. Please update to continue using all features.",
+    ),
+    "updateInformation": MessageLookupByLibrary.simpleMessage(
+      "Update Information",
     ),
     "user": MessageLookupByLibrary.simpleMessage("User"),
     "usosYEstadisticas": MessageLookupByLibrary.simpleMessage(

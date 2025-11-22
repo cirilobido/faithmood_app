@@ -73,4 +73,16 @@ abstract class AppColors {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
+
+  static const gradientBackground = LinearGradient(
+    colors: [background, cardPrimary],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  static const gradientPremium = LinearGradient(
+    colors: [tertiary, secondary],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

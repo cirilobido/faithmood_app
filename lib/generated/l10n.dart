@@ -2583,6 +2583,251 @@ class S {
       args: [],
     );
   }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message('Account', name: 'account', desc: '', args: []);
+  }
+
+  /// `Personal Information`
+  String get personalInformation {
+    return Intl.message(
+      'Personal Information',
+      name: 'personalInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy & Security`
+  String get privacySecurity {
+    return Intl.message(
+      'Privacy & Security',
+      name: 'privacySecurity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Subscription`
+  String get currentSubscription {
+    return Intl.message(
+      'Current Subscription',
+      name: 'currentSubscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customization`
+  String get customization {
+    return Intl.message(
+      'Customization',
+      name: 'customization',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reminder Alert`
+  String get reminderAlert {
+    return Intl.message(
+      'Reminder Alert',
+      name: 'reminderAlert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Language`
+  String get appLanguage {
+    return Intl.message(
+      'App Language',
+      name: 'appLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our App`
+  String get ourApp {
+    return Intl.message('Our App', name: 'ourApp', desc: '', args: []);
+  }
+
+  /// `Rate Us`
+  String get rateUs {
+    return Intl.message('Rate Us', name: 'rateUs', desc: '', args: []);
+  }
+
+  /// `Share App`
+  String get shareApp {
+    return Intl.message('Share App', name: 'shareApp', desc: '', args: []);
+  }
+
+  /// `Follow Us`
+  String get followUs {
+    return Intl.message('Follow Us', name: 'followUs', desc: '', args: []);
+  }
+
+  /// `Support`
+  String get support {
+    return Intl.message('Support', name: 'support', desc: '', args: []);
+  }
+
+  /// `Contact Us`
+  String get contactUs {
+    return Intl.message('Contact Us', name: 'contactUs', desc: '', args: []);
+  }
+
+  /// `Terms & Conditions`
+  String get termsConditions {
+    return Intl.message(
+      'Terms & Conditions',
+      name: 'termsConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get logOut {
+    return Intl.message('Log Out', name: 'logOut', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to log out?`
+  String get areYouSureYouWantToLogOut {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'areYouSureYouWantToLogOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Version: ###`
+  String get appVersionStateappversion {
+    return Intl.message(
+      'App Version: ###',
+      name: 'appVersionStateappversion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unlock Premium Features`
+  String get unlockPremiumFeatures {
+    return Intl.message(
+      'Unlock Premium Features',
+      name: 'unlockPremiumFeatures',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FaithMood App`
+  String get shareFaithMoodApp {
+    return Intl.message(
+      'FaithMood App',
+      name: 'shareFaithMoodApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FaithMood App \nFaithMood helps you track your emotions, deepen your spiritual life, and receive personalized daily devotionals. \nYou should try it 👉 ###`
+  String get shareFaithMoodAppMessage {
+    return Intl.message(
+      'FaithMood App \nFaithMood helps you track your emotions, deepen your spiritual life, and receive personalized daily devotionals. \nYou should try it 👉 ###',
+      name: 'shareFaithMoodAppMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get localeName {
+    return Intl.message('English', name: 'localeName', desc: '', args: []);
+  }
+
+  /// `Your name`
+  String get appName {
+    return Intl.message('Your name', name: 'appName', desc: '', args: []);
+  }
+
+  /// `This is used for all your new dream analysis`
+  String get thisUsedForAllYourNewDreamAnalysis {
+    return Intl.message(
+      'This is used for all your new dream analysis',
+      name: 'thisUsedForAllYourNewDreamAnalysis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is used for all your mood analysis.`
+  String get thisUsedForAllYourMoodAnalysis {
+    return Intl.message(
+      'This is used for all your mood analysis.',
+      name: 'thisUsedForAllYourMoodAnalysis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Information`
+  String get updateInformation {
+    return Intl.message(
+      'Update Information',
+      name: 'updateInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill all the fields with valid data`
+  String get pleaseFillAllTheFieldsWithValidData {
+    return Intl.message(
+      'Please fill all the fields with valid data',
+      name: 'pleaseFillAllTheFieldsWithValidData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, something went wrong while updating your information. Please try again.`
+  String get sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry {
+    return Intl.message(
+      'Sorry, something went wrong while updating your information. Please try again.',
+      name: 'sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After deleting your account, you will lose all your data. This action cannot be undone.`
+  String get afterDeletingYourAccountYouWillLoseAllYourData {
+    return Intl.message(
+      'After deleting your account, you will lose all your data. This action cannot be undone.',
+      name: 'afterDeletingYourAccountYouWillLoseAllYourData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

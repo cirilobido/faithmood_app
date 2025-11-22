@@ -72,6 +72,7 @@ class MenuHeaderAction extends DetailsPageHeaderAction {
     final lang = S.of(context);
     return SizedBox(
       width: AppSizes.iconSizeNormal,
+      height: AppSizes.iconSizeNormal,
       child: Align(
         alignment: Alignment.centerRight,
         child: PopupMenuButton<String>(

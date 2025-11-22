@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:faithmood_app/features/journal/_journal_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,8 @@ import 'package:faithmood_app/routes/app_routes.dart';
 import 'package:faithmood_app/routes/app_routes_names.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+import '../../../features/home/_home_view_model.dart';
+import '../../../features/profile/_profile_view_model.dart';
 import '../../providers/data/data_sources/local/auth_dao.dart';
 
 final authInterceptorProvider = Provider<AuthInterceptor>((ref) {
@@ -68,8 +71,9 @@ class AuthInterceptor implements Interceptor {
       } else {
         await authDao.deleteCurrentUser();
         await authDao.deleteCurrentUserToken();
-        // TODO: Invalidate all viewmodels
-        // ref.invalidate(homeViewModelProvider);
+        ref.invalidate(homeViewModelProvider);
+        ref.invalidate(profileViewModelProvider);
+        ref.invalidate(journalViewModelProvider);
         await Purchases.logOut();
         WidgetsBinding.instance.addPostFrameCallback((_) {
           final router = GoRouter.of(

@@ -144,6 +144,19 @@ abstract class AppRoutes {
           );
         },
       ),
+      GoRoute(
+        path: Routes.settings,
+        pageBuilder: (context, state) =>
+            buildSlidePage(key: state.pageKey, child: const SettingsView()),
+      ),
+      GoRoute(
+        path: Routes.myInformation,
+        pageBuilder: (context, state) => buildSlidePage(
+          key: state.pageKey,
+          isBottomSheet: false,
+          child: const MyInformationView(),
+        ),
+      ),
     ],
   );
 }
