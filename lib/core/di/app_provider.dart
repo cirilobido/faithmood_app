@@ -6,8 +6,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../platform/platform_exports.dart';
 import '../static/static_exports.dart';
 
-const _connectTimeoutDuration = Duration(milliseconds: 100000000);
-const _receiveTimeoutDuration = Duration(milliseconds: 100000000);
+const _connectTimeoutDuration = Duration(seconds: 30);
+const _receiveTimeoutDuration = Duration(seconds: 30);
 
 final dioProvider = Provider<Dio>(
   (ref) => _generateDio(

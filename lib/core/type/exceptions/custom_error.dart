@@ -20,3 +20,7 @@ class TooManyRequestsError extends CustomError {
 class InternalServerError extends CustomError {
   InternalServerError(super.message);
 }
+
+class TimeoutError extends CustomError {
+  TimeoutError(super.message);
+}

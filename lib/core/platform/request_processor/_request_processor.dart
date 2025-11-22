@@ -17,6 +17,10 @@ class RequestProcessor {
       }
       throw Exception('Unexpected status code: ${response.statusCode}');
     } on DioException catch (error) {
+      if (error.type == DioExceptionType.connectionTimeout ||
+          error.type == DioExceptionType.receiveTimeout) {
+        throw TimeoutError('Request timeout: ${error.message}');
+      }
       if (error.response != null) {
         final statusCode = error.response?.statusCode;
         if (statusCode == null) {
