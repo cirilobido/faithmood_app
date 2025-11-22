@@ -51,14 +51,14 @@ class _PremiumBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
       decoration: BoxDecoration(
-        color: AppColors.secondary,
+        color: theme.colorScheme.secondary,
         borderRadius: BorderRadius.circular(AppSizes.radiusFull),
       ),
       child: Text(
         lang.premium,
         style: theme.textTheme.labelSmall?.copyWith(
           fontWeight: FontWeight.w600,
-          color: AppColors.background,
+          color: theme.colorScheme.onSurface,
         ),
       ),
     );

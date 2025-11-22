@@ -29,6 +29,7 @@ abstract class AppIcons {
   static const lockIcon = 'assets/icons/ic_lock.svg';
   static const homeIcon = 'assets/icons/ic_home.svg';
   static const openBookIcon = 'assets/icons/ic_open_book.svg';
+  static const openBookFilledIcon = 'assets/icons/ic_open_book_filled.svg';
   static const journalIcon = 'assets/icons/ic_journal.svg';
   static const profileIcon = 'assets/icons/ic_profile.svg';
   static const userIcon = 'assets/icons/ic_user.svg';

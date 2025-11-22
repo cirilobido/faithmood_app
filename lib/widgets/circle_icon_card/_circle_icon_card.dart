@@ -49,7 +49,7 @@ class CircleIconCard extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(
                 width: borderWidth ?? AppSizes.borderWithSmall,
-                color: borderColor ?? AppColors.border,
+                color: borderColor ?? theme.colorScheme.outline,
               ),
             ),
             padding: EdgeInsets.all(padding ?? AppSizes.paddingSmall),

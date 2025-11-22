@@ -26,4 +26,5 @@ class Constant {
   static const moodsKey = 'moods';
   static const moodsDateKey = 'moods_date';
   static const hasAddedMoodKey = 'has_added_mood';
+  static const analyticsKeyPrefix = 'analytics';
 }

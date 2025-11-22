@@ -44,7 +44,7 @@ class PageJoinOther extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Divider(
-                      color: AppColors.textSecondary,
+                      color: theme.colorScheme.outline,
                       thickness: 2,
                     ),
                     Row(

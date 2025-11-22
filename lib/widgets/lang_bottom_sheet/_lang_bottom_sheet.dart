@@ -39,7 +39,7 @@ class LanguageBottomSheet extends StatelessWidget {
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   color: isSelected
-                      ? isDark ? AppColors.tertiary : AppColors.primary
+                      ? isDark ? theme.colorScheme.tertiary : theme.colorScheme.primary
                       : null,
                 ),
               ),

@@ -95,6 +95,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
+    "daysWithActivity": MessageLookupByLibrary.simpleMessage(
+      "Days With Activity",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Delete Mood Entry",
@@ -520,6 +523,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
     "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Unable to load categories",
+    ),
+    "unableToLoadDevotional": MessageLookupByLibrary.simpleMessage(
+      "Unable to load devotional",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
       "Unable to load devotionals",

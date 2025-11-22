@@ -10,11 +10,13 @@ enum DailyDataType { emotional, spiritual }
 class DailyTrackingCard extends ConsumerWidget {
   final Analytics? analytics;
   final DailyDataType dataType;
+  final bool isPremium;
 
   const DailyTrackingCard({
     super.key,
     required this.analytics,
     required this.dataType,
+    required this.isPremium,
   });
 
   List<String> _localizedWeekDays(String locale) {
@@ -26,7 +28,11 @@ class DailyTrackingCard extends ConsumerWidget {
     });
   }
 
-  Map<String, String?> _buildIconMap(List<String> weekDays, String locale, WidgetRef ref) {
+  Map<String, String?> _buildIconMap(
+    List<String> weekDays,
+    String locale,
+    WidgetRef ref,
+  ) {
     final Map<String, String?> iconByDay = {
       for (var day in weekDays) day: null,
     };
@@ -36,16 +42,19 @@ class DailyTrackingCard extends ConsumerWidget {
     final viewModel = ref.read(profileViewModelProvider.notifier);
 
     for (final stat in analytics!.dailyStats!) {
-      final dayAbbr = DateFormat.E(locale).format(
-        DateTime.parse(stat.date ?? ''),
-      );
+      final dayAbbr = DateFormat.E(
+        locale,
+      ).format(DateTime.parse(stat.date ?? ''));
       final moodId = dataType == DailyDataType.emotional
           ? stat.predominantEmotionalMoodId
           : stat.predominantSpiritualMoodId;
-      
+
       if (moodId != null) {
-        final mood = viewModel.getMoodById(moodId, isEmotional: dataType == DailyDataType.emotional);
-        iconByDay[dayAbbr] = mood?.icon;
+        final mood = viewModel.getMoodById(
+          moodId,
+          isEmotional: dataType == DailyDataType.emotional,
+        );
+        iconByDay[dayAbbr] = isPremium ? mood?.icon : '💙';
       }
     }
 
@@ -113,4 +122,3 @@ class _DayColumn extends StatelessWidget {
     );
   }
 }
-

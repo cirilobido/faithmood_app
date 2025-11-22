@@ -154,6 +154,7 @@ class CustomButton extends StatelessWidget {
         label: Center(
           child: Text(
             title,
+            textAlign: TextAlign.center,
             style: textTheme?.copyWith(
               color: _getForegroundOutlinedColor(isDark),
             ),
@@ -172,6 +173,7 @@ class CustomButton extends StatelessWidget {
       label: Center(
         child: Text(
           title,
+          textAlign: TextAlign.center,
           style: textTheme?.copyWith(color: _getForegroundColor(isDark)),
         ),
       ),

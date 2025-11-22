@@ -14,7 +14,7 @@ class JournalSortChipModal extends ConsumerStatefulWidget {
 }
 
 class _JournalSortChipModalState extends ConsumerState<JournalSortChipModal> {
-  String _sortBy = 'updatedAt';
+  String _sortBy = 'createdAt';
   String _order = 'desc';
 
   @override
@@ -61,9 +61,9 @@ class _JournalSortChipModalState extends ConsumerState<JournalSortChipModal> {
                 context: context,
                 theme: theme,
                 label: lang.date,
-                value: 'updatedAt',
-                isSelected: _sortBy == 'updatedAt',
-                onTap: () => setState(() => _sortBy = 'updatedAt'),
+                value: 'createdAt',
+                isSelected: _sortBy == 'createdAt',
+                onTap: () => setState(() => _sortBy = 'createdAt'),
               ),
               _buildChip(
                 context: context,

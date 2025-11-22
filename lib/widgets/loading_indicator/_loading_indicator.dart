@@ -23,9 +23,12 @@ class LoadingIndicator extends StatelessWidget {
     );
 
     if (padding != null) {
-      return Padding(
-        padding: padding!,
-        child: indicator,
+      return Align(
+        alignment: Alignment.center,
+        child: Padding(
+          padding: padding!,
+          child: indicator,
+        ),
       );
     }
 

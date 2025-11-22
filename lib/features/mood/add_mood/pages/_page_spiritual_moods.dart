@@ -92,9 +92,6 @@ class PageSpiritualMoods extends StatelessWidget {
                                     fontWeight: isSelected
                                         ? FontWeight.w700
                                         : FontWeight.w600,
-                                    color: isSelected
-                                        ? AppColors.textPrimary
-                                        : null,
                                   ),
                                 ),
                                 if (mood.description != null &&

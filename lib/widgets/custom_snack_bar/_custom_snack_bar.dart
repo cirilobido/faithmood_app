@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:faithmood_app/core/core_exports.dart';
 
 class CustomSnackBar {
   static void show(
@@ -14,7 +13,7 @@ class CustomSnackBar {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: backgroundColor ?? AppColors.primary,
+        backgroundColor: backgroundColor ?? theme.colorScheme.primary,
         content: Text(message, style: textStyle ?? theme.textTheme.bodyLarge),
         behavior: behavior,
         duration: duration,

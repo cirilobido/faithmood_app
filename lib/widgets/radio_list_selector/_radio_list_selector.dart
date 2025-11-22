@@ -82,7 +82,6 @@ class _RadioListSelectorState extends State<RadioListSelector> {
             label,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-              color: selected ? AppColors.textPrimary : null,
             ),
           ),
           fillColor: WidgetStateProperty.resolveWith<Color>((states) {

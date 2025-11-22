@@ -22,19 +22,46 @@ class AnalyticsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ImageFiltered(
-      imageFilter: isPremium
-          ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
-          : ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _EmotionalMoodSection(analytics: analytics, isWeek: isWeek),
-          const SizedBox(height: AppSizes.spacingLarge),
-          _SpiritualMoodSection(analytics: analytics, isWeek: isWeek),
-          const SizedBox(height: AppSizes.spacingMedium),
-        ],
-      ),
+    final theme = Theme.of(context);
+    return Stack(
+      children: [
+        // CONTENIDO ORIGINAL (sin blur)
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _EmotionalMoodSection(
+              analytics: analytics,
+              isWeek: isWeek,
+              isPremium: isPremium,
+            ),
+            const SizedBox(height: AppSizes.spacingLarge),
+            if (isPremium)
+              _SpiritualMoodSection(
+                analytics: analytics,
+                isWeek: isWeek,
+                isPremium: isPremium,
+              ),
+            if (isPremium) const SizedBox(height: AppSizes.spacingMedium),
+          ],
+        ),
+
+        // OVERLAY con BLUR + GRADIENT
+        if (!isPremium)
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    theme.colorScheme.surface.withValues(alpha: 0.4),
+                    theme.colorScheme.surface,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -42,8 +69,13 @@ class AnalyticsSection extends StatelessWidget {
 class _EmotionalMoodSection extends ConsumerWidget {
   final Analytics? analytics;
   final bool isWeek;
+  final bool isPremium;
 
-  const _EmotionalMoodSection({this.analytics, this.isWeek = false});
+  const _EmotionalMoodSection({
+    this.analytics,
+    this.isWeek = false,
+    this.isPremium = false,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,22 +96,42 @@ class _EmotionalMoodSection extends ConsumerWidget {
           children: [
             Text(lang.youFeltMostOften, style: theme.textTheme.bodyMedium),
             const SizedBox(width: AppSizes.spacingXSmall),
-            Text(
-              "${predominantMood?.icon ?? ''}${(predominantMood?.name ?? '')}",
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: theme.textTheme.titleSmall?.fontWeight,
+            ImageFiltered(
+              imageFilter: isPremium
+                  ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
+                  : ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+              child: Text(
+                "${(isPremium ? (predominantMood?.icon ?? '') : '💚')}${(predominantMood?.name ?? '')}",
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontWeight: theme.textTheme.titleSmall?.fontWeight,
+                ),
               ),
             ),
           ],
         ),
         if (isWeek) const SizedBox(height: AppSizes.spacingSmall),
         if (isWeek)
-          DailyTrackingCard(
-            analytics: analytics,
-            dataType: DailyDataType.emotional,
+          ImageFiltered(
+            imageFilter: isPremium
+                ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
+                : ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+            child: DailyTrackingCard(
+              analytics: analytics,
+              dataType: DailyDataType.emotional,
+              isPremium: isPremium,
+            ),
           ),
         const SizedBox(height: AppSizes.spacingSmall),
-        MoodSummaryCard(rangeStats: analytics?.rangeStats, isEmotional: true),
+        ImageFiltered(
+          imageFilter: isPremium
+              ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
+              : ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+          child: MoodSummaryCard(
+            rangeStats: analytics?.rangeStats,
+            isEmotional: true,
+            isPremium: isPremium,
+          ),
+        ),
       ],
     );
   }
@@ -88,8 +140,13 @@ class _EmotionalMoodSection extends ConsumerWidget {
 class _SpiritualMoodSection extends ConsumerWidget {
   final Analytics? analytics;
   final bool isWeek;
+  final bool isPremium;
 
-  const _SpiritualMoodSection({this.analytics, this.isWeek = false});
+  const _SpiritualMoodSection({
+    this.analytics,
+    this.isWeek = false,
+    this.isPremium = false,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -114,7 +171,7 @@ class _SpiritualMoodSection extends ConsumerWidget {
             ),
             const SizedBox(width: AppSizes.spacingXSmall),
             Text(
-              "${predominantMood?.icon ?? ''}${(predominantMood?.name ?? '')}",
+              "${(isPremium ? (predominantMood?.icon ?? '') : '💜')}${(predominantMood?.name ?? '')}",
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: theme.textTheme.titleSmall?.fontWeight,
               ),
@@ -127,6 +184,7 @@ class _SpiritualMoodSection extends ConsumerWidget {
           DailyTrackingCard(
             analytics: analytics,
             dataType: DailyDataType.spiritual,
+            isPremium: isPremium,
           ),
         const SizedBox(height: AppSizes.spacingSmall),
         MoodSummaryCard(rangeStats: analytics?.rangeStats, isEmotional: false),

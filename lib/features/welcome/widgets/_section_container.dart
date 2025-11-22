@@ -29,8 +29,9 @@ class SectionContainer extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingMedium),
       child: Column(
-        crossAxisAlignment:
-        centerTitle ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+        crossAxisAlignment: centerTitle
+            ? CrossAxisAlignment.center
+            : CrossAxisAlignment.start,
         children: [
           Text(
             title,
@@ -52,16 +53,14 @@ class SectionContainer extends StatelessWidget {
                       subtitle!,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.normal,
-                        color: isDark
-                            ? AppColors.dTextSecondary
-                            : AppColors.textSecondary,
+                        color: theme.textTheme.labelSmall?.color!,
                       ),
-                      textAlign:
-                      centerSubtitle ? TextAlign.center : TextAlign.start,
+                      textAlign: centerSubtitle
+                          ? TextAlign.center
+                          : TextAlign.start,
                     ),
 
-                  if (subtitle != null)
-                    SizedBox(height: spacingAfterSubtitle),
+                  if (subtitle != null) SizedBox(height: spacingAfterSubtitle),
 
                   content,
                 ],

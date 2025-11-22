@@ -7,11 +7,13 @@ import '../_profile_view_model.dart';
 class MoodSummaryCard extends ConsumerWidget {
   final RangeStats? rangeStats;
   final bool isEmotional;
+  final bool isPremium;
 
   const MoodSummaryCard({
     super.key,
     required this.rangeStats,
     this.isEmotional = true,
+    this.isPremium = false,
   });
 
   List<_MoodStat> _calculateMoodStats(WidgetRef ref) {
@@ -71,7 +73,7 @@ class MoodSummaryCard extends ConsumerWidget {
             .map(
               (stat) => Padding(
                 padding: const EdgeInsets.only(bottom: AppSizes.spacingSmall),
-                child: _MoodStatRow(stat: stat),
+                child: _MoodStatRow(stat: stat, isPremium: isPremium),
               ),
             )
             .toList(),
@@ -96,14 +98,15 @@ class _MoodStat {
 
 class _MoodStatRow extends StatelessWidget {
   final _MoodStat stat;
+  final bool isPremium;
 
-  const _MoodStatRow({required this.stat});
+  const _MoodStatRow({required this.stat, required this.isPremium});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final mood = stat.mood;
-    final moodName = '${mood?.icon ?? ''} ${(mood?.name ?? '')}';
+    final moodName = '${(isPremium ? mood?.icon ?? '' : '😊')} ${(mood?.name ?? '')}';
 
     return Row(
       children: [

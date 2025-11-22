@@ -20,11 +20,11 @@ class LoginView extends ConsumerStatefulWidget {
 class _LoginViewState extends ConsumerState<LoginView> {
   // TODO: EMAIL AND PASS FOR TESTING
   final TextEditingController _emailController = TextEditingController(
-    text: 'testaccount@example.com',
+    text: 'test@faithmood.com',
   );
   final FocusNode _emailFocusNode = FocusNode();
   final TextEditingController _passController = TextEditingController(
-    text: '@Rnd0121',
+    text: 'Fm23-sTnzA',
   );
   final FocusNode _passFocusNode = FocusNode();
   bool _showPassword = false;
@@ -73,7 +73,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         }
                         CustomSnackBar.show(
                           context,
-                          backgroundColor: AppColors.error,
+                          backgroundColor: theme.colorScheme.error,
                           message: lang.invalidEmailOrPasswordPleaseTryAgain,
                         );
                       },
@@ -187,7 +187,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     }
                     CustomSnackBar.show(
                       context,
-                      backgroundColor: AppColors.error,
+                      backgroundColor: theme.colorScheme.error,
                       message: lang.youHaveToEnterAValidEmail,
                     );
                   },

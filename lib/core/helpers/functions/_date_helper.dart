@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../models/analytics/_activity_data.dart';
+
 abstract class DateHelper {
   static String formatDateWMY(DateTime date) {
     final day = toBeginningOfSentenceCase(DateFormat.d().format(date));
@@ -67,42 +69,38 @@ abstract class DateHelper {
     return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
   }
 
-  static int calculateLongestStreak(
-    List<String>? datesWithLogs,
+  static int calculateTotalDaysWithActivity(
+    Map<String, ActivityData>? activityByDate,
     DateTime startDate,
     DateTime endDate,
   ) {
-    if (datesWithLogs == null || datesWithLogs.isEmpty) {
+    if (activityByDate == null || activityByDate.isEmpty) {
       return 0;
     }
 
-    final dates = datesWithLogs
-        .map((d) => DateTime.parse(d))
-        .where((date) => date.isAfter(startDate.subtract(const Duration(days: 1))) && 
-                        date.isBefore(endDate.add(const Duration(days: 1))))
-        .toList()
-      ..sort((a, b) => b.compareTo(a));
+    int totalDays = 0;
 
-    if (dates.isEmpty) return 0;
+    for (final entry in activityByDate.entries) {
+      final dateStr = entry.key;
+      final activity = entry.value;
 
-    int longestStreak = 1;
-    int currentStreak = 1;
+      try {
+        final date = DateTime.parse(dateStr);
+        final dateOnly = DateTime(date.year, date.month, date.day);
+        final startOnly = DateTime(startDate.year, startDate.month, startDate.day);
+        final endOnly = DateTime(endDate.year, endDate.month, endDate.day);
 
-    for (int i = 0; i < dates.length - 1; i++) {
-      final current = DateTime(dates[i].year, dates[i].month, dates[i].day);
-      final next = DateTime(dates[i + 1].year, dates[i + 1].month, dates[i + 1].day);
-      final diff = current.difference(next).inDays;
-
-      if (diff == 1) {
-        currentStreak++;
-        if (currentStreak > longestStreak) {
-          longestStreak = currentStreak;
+        if (dateOnly.isAfter(startOnly.subtract(const Duration(days: 1))) &&
+            dateOnly.isBefore(endOnly.add(const Duration(days: 1)))) {
+          if (activity.mood == true || activity.devotional == true) {
+            totalDays++;
+          }
         }
-      } else {
-        currentStreak = 1;
+      } catch (e) {
+        continue;
       }
     }
 
-    return longestStreak;
+    return totalDays;
   }
 }

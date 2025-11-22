@@ -14,7 +14,7 @@ class JournalSortModal extends ConsumerStatefulWidget {
 }
 
 class _JournalSortModalState extends ConsumerState<JournalSortModal> {
-  String _sortBy = 'updatedAt';
+  String _sortBy = 'createdAt';
   String _order = 'desc';
 
   @override

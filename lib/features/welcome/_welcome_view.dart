@@ -46,7 +46,7 @@ class WelcomeView extends ConsumerWidget {
                     if (error != null) {
                       CustomSnackBar.show(
                         context,
-                        backgroundColor: AppColors.error,
+                        backgroundColor: theme.colorScheme.error,
                         message: error,
                       );
                       return;

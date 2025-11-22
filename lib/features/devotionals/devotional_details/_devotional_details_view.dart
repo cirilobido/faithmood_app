@@ -101,7 +101,6 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
     );
   }
 
-
   Widget _buildContent(
     BuildContext context,
     ThemeData theme,
@@ -142,9 +141,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   _isVersesExpanded = !_isVersesExpanded;
                 });
               },
-              content: VerseContent(
-                verses: devotional.verses!,
-              ),
+              content: VerseContent(verses: devotional.verses!),
             ),
           ],
           if (devotional.reflection != null &&
@@ -185,7 +182,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 CustomSnackBar.show(
                   context,
                   message: lang.noteSavedSuccessfully,
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: theme.colorScheme.primary,
                 );
                 if (context.mounted) {
                   Navigator.of(context).pop();
@@ -194,7 +191,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 CustomSnackBar.show(
                   context,
                   message: lang.errorSavingNote,
-                  backgroundColor: AppColors.error,
+                  backgroundColor: theme.colorScheme.error,
                 );
               }
             },
@@ -204,6 +201,4 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
       ),
     );
   }
-
-
 }

@@ -97,6 +97,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
+    "daysWithActivity": MessageLookupByLibrary.simpleMessage(
+      "Días Con Actividad",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
     "deleteMoodEntry": MessageLookupByLibrary.simpleMessage(
       "Eliminar Entrada del Estado de Ánimo",
@@ -540,6 +543,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tryAgain": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
     "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Unable to load categories",
+    ),
+    "unableToLoadDevotional": MessageLookupByLibrary.simpleMessage(
+      "Unable to load devotional",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
       "No se pudieron cargar las devocionales",

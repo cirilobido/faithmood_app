@@ -287,6 +287,7 @@
   "myEmotion": "Mi Emoción",
   "mySpirit": "Mi Espíritu",
   "streakDays": "Días de Racha",
+  "daysWithActivity": "Días Con Actividad",
   "startLoggingYourMoodsToSeeYourStats": "Comienza a registrar tus estados de ánimo para ver tus estadísticas",
   "addMoodEntry": "Agregar Entrada de Estado de Ánimo",
   "premium": "Premium",
@@ -308,5 +309,6 @@
   "streakStatusPerseveranceToTheEnd": "Perseverancia hasta el final",
   "streakStatusGratefulHeart": "Corazón agradecido",
   "streakStatusVictoryOfTheMonth": "Victoria del mes",
-  "streakStatusExpandingFaith": "Fe en expansión"
+  "streakStatusExpandingFaith": "Fe en expansión",
+  "unableToLoadDevotional": "Unable to load devotional"
 }

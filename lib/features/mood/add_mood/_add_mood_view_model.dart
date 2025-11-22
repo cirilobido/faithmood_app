@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/core_exports.dart';
 import '../../../core/providers/domain/use_cases/mood_use_case.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
+import '../../../features/profile/_profile_view_model.dart';
 import '_add_mood_state.dart';
 
 final hasAddedMoodProvider = FutureProvider<bool>((ref) async {
@@ -14,6 +15,7 @@ final hasAddedMoodProvider = FutureProvider<bool>((ref) async {
 final addMoodViewModelProvider =
     StateNotifierProvider.autoDispose<AddMoodViewModel, AddMoodState>((ref) {
   return AddMoodViewModel(
+    ref,
     ref.read(moodUseCaseProvider),
     ref.read(authProvider),
     ref.read(secureStorageServiceProvider),
@@ -21,11 +23,13 @@ final addMoodViewModelProvider =
 });
 
 class AddMoodViewModel extends StateNotifier<AddMoodState> {
+  final Ref ref;
   final MoodUseCase moodUseCase;
   final AuthProvider authProvider;
   final SecureStorage secureStorage;
 
   AddMoodViewModel(
+    this.ref,
     this.moodUseCase,
     this.authProvider,
     this.secureStorage,
@@ -152,6 +156,7 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
               key: Constant.hasAddedMoodKey,
               value: 'true',
             );
+            ref.read(profileViewModelProvider.notifier).invalidateStats();
             return response?.sessionId;
           }
         case Failure(exception: final exception):

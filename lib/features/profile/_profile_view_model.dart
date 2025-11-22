@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
 import '../../../core/providers/domain/use_cases/analytics_use_case.dart';
 import '../../../core/providers/domain/use_cases/mood_use_case.dart';
+import '../../../core/providers/data/data_sources/local/analytics_dao.dart';
 import '_profile_state.dart';
 
 final profileViewModelProvider =
@@ -212,10 +215,10 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     }
   }
 
-  Future<void> getAnalytics(AnalyticsPeriod period) async {
+  Future<void> getAnalytics(AnalyticsPeriod period, {bool forceRefresh = false}) async {
     updateState(isLoading: true, error: false, selectedPeriod: period);
 
-    if (getCurrentStats(period) != null) {
+    if (!forceRefresh && getCurrentStats(period) != null) {
       updateState(isLoading: false, error: false);
       return;
     }
@@ -226,10 +229,35 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       }
 
       final dateRange = DateTimeHelper.getDateRange(period);
+      final startDate = DateHelper.formatForApi(dateRange['start']!);
+      final endDate = DateHelper.formatForApi(dateRange['end']!);
+
+      final shouldUseCache = period == AnalyticsPeriod.lastWeek || period == AnalyticsPeriod.lastMonth;
+      Analytics? cachedAnalytics;
+
+      if (shouldUseCache && !forceRefresh) {
+        final analyticsDao = ref.read(analyticsDaoProvider);
+        cachedAnalytics = await analyticsDao.getAnalytics(startDate, endDate);
+        
+        if (cachedAnalytics != null) {
+          _updateStateByPeriod(
+            period: period,
+            value: cachedAnalytics,
+            totalDaysWithActivity: DateHelper.calculateTotalDaysWithActivity(
+              cachedAnalytics.activityByDate,
+              dateRange['start']!,
+              dateRange['end']!,
+            ),
+          );
+          updateState(isLoading: false, error: false);
+          return;
+        }
+      }
+
       final result = await _analyticsUseCase.getUserAnalytics(
         state.user!.id!,
-        DateHelper.formatForApi(dateRange['start']!),
-        DateHelper.formatForApi(dateRange['end']!),
+        startDate,
+        endDate,
       );
 
       switch (result) {
@@ -239,11 +267,16 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
               throw Exception('Error getting analytics!');
             }
 
+            if (shouldUseCache) {
+              final analyticsDao = ref.read(analyticsDaoProvider);
+              unawaited(analyticsDao.saveAnalytics(value, startDate, endDate));
+            }
+
             _updateStateByPeriod(
               period: period,
               value: value,
-              streak: DateHelper.calculateLongestStreak(
-                value.datesWithLogs,
+              totalDaysWithActivity: DateHelper.calculateTotalDaysWithActivity(
+                value.activityByDate,
                 dateRange['start']!,
                 dateRange['end']!,
               ),
@@ -273,20 +306,20 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   void _updateStateByPeriod({
     required AnalyticsPeriod period,
     required Analytics value,
-    int? streak,
+    int? totalDaysWithActivity,
   }) {
     switch (period) {
       case AnalyticsPeriod.thisWeek:
-        updateState(thisWeekStats: value, thisWeekStreak: streak);
+        updateState(thisWeekStats: value, thisWeekStreak: totalDaysWithActivity);
         break;
       case AnalyticsPeriod.lastWeek:
-        updateState(lastWeekStats: value, lastWeekStreak: streak);
+        updateState(lastWeekStats: value, lastWeekStreak: totalDaysWithActivity);
         break;
       case AnalyticsPeriod.thisMonth:
-        updateState(thisMonthStats: value, thisMonthStreak: streak);
+        updateState(thisMonthStats: value, thisMonthStreak: totalDaysWithActivity);
         break;
       case AnalyticsPeriod.lastMonth:
-        updateState(lastMonthStats: value, lastMonthStreak: streak);
+        updateState(lastMonthStats: value, lastMonthStreak: totalDaysWithActivity);
         break;
     }
   }
@@ -295,6 +328,37 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     final user = _authProvider.user;
     if (user != null) {
       updateState(user: user);
+    }
+  }
+
+  void invalidateStats() {
+    if (!_mounted) return;
+    
+    final hadThisWeek = state.thisWeekStats != null;
+    final hadThisMonth = state.thisMonthStats != null;
+    
+    state = ProfileState(
+      user: state.user,
+      selectedPeriod: state.selectedPeriod,
+      thisWeekStats: null,
+      thisWeekStreak: null,
+      lastWeekStats: state.lastWeekStats,
+      lastWeekStreak: state.lastWeekStreak,
+      thisMonthStats: null,
+      thisMonthStreak: null,
+      lastMonthStats: state.lastMonthStats,
+      lastMonthStreak: state.lastMonthStreak,
+      isPremium: state.isPremium,
+      moods: state.moods,
+      isLoading: state.isLoading,
+      error: state.error,
+    );
+    
+    if (hadThisWeek) {
+      unawaited(getAnalytics(AnalyticsPeriod.thisWeek, forceRefresh: true));
+    }
+    if (hadThisMonth) {
+      unawaited(getAnalytics(AnalyticsPeriod.thisMonth, forceRefresh: true));
     }
   }
 }

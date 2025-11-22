@@ -7,7 +7,6 @@ import '../../../widgets/widgets_exports.dart';
 import '../_profile_view_model.dart';
 import '../../../generated/l10n.dart';
 
-
 class StatsSection extends ConsumerWidget {
   final bool isPremium;
   final Analytics? analytics;
@@ -91,7 +90,7 @@ class StatsSection extends ConsumerWidget {
                   const SizedBox(width: AppSizes.spacingSmall),
                   Expanded(
                     child: _StatCard(
-                      icon: AppIcons.openBookIcon,
+                      icon: AppIcons.openBookFilledIcon,
                       value: totalDevotionals.toString(),
                       label: lang.devotionals,
                     ),
@@ -100,27 +99,28 @@ class StatsSection extends ConsumerWidget {
               ),
               const SizedBox(height: AppSizes.spacingSmall),
               // Second row: Most Frequent Emotional and Spiritual Mood
-              Row(
-                children: [
-                  Expanded(
-                    child: _MoodStatCard(
-                      icon: AppIcons.happyIcon,
-                      mood: emotionalMood,
-                      label: lang.myEmotion,
+              if (isPremium)
+                Row(
+                  children: [
+                    Expanded(
+                      child: _MoodStatCard(
+                        icon: AppIcons.happyIcon,
+                        mood: emotionalMood,
+                        label: lang.myEmotion,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: AppSizes.spacingSmall),
-                  Expanded(
-                    child: _MoodStatCard(
-                      icon: AppIcons.spiritIcon,
-                      mood: spiritualMood,
-                      label: lang.mySpirit,
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Expanded(
+                      child: _MoodStatCard(
+                        icon: AppIcons.spiritIcon,
+                        mood: spiritualMood,
+                        label: lang.mySpirit,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: AppSizes.spacingSmall),
-              _StreakCard(streak: streakDays),
+                  ],
+                ),
+              if (isPremium) const SizedBox(height: AppSizes.spacingSmall),
+              if (isPremium) _StreakCard(streak: streakDays),
             ],
           ),
       ],
@@ -372,7 +372,6 @@ class _StreakCard extends StatelessWidget {
     return {'emoji': emoji, 'status': status};
   }
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -400,7 +399,10 @@ class _StreakCard extends StatelessWidget {
               const SizedBox(width: AppSizes.spacingSmall),
               Text(streak.toString(), style: theme.textTheme.headlineSmall),
               const SizedBox(width: AppSizes.spacingXSmall),
-              Text(' ${lang.streakDays}', style: theme.textTheme.headlineSmall),
+              Text(
+                ' ${lang.daysWithActivity}',
+                style: theme.textTheme.headlineSmall,
+              ),
             ],
           ),
           const SizedBox(height: AppSizes.spacingXSmall),

@@ -38,7 +38,7 @@ class JournalState {
     this.selectedEmotionalMoodId,
     this.selectedSpiritualMoodId,
     this.hasNoteFilter,
-    this.sortBy = 'updatedAt',
+    this.sortBy = 'createdAt',
     this.order = 'desc',
     this.startDate,
     this.endDate,

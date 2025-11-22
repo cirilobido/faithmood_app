@@ -196,7 +196,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                     text: TextSpan(
                       text: lang.otpCode,
                       style: theme.textTheme.labelLarge?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: theme.textTheme.labelSmall?.color!,
                       ),
                       children: [
                         TextSpan(
@@ -264,7 +264,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                       child: Text(
                         lang.thisFieldIsRequired,
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: AppColors.error,
+                          color: theme.colorScheme.error,
                         ),
                       ),
                     ),
@@ -282,7 +282,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 prefixIconWidget: SvgPicture.asset(
                   AppIcons.keyIcon,
                   colorFilter: ColorFilter.mode(
-                    AppColors.iconPrimary,
+                    theme.primaryIconTheme.color!,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -297,7 +297,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                     colorFilter: ColorFilter.mode(
                       _showPassword
                           ? theme.colorScheme.secondary
-                          : AppColors.iconPrimary,
+                          : theme.primaryIconTheme.color!,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -312,7 +312,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                   lang.resendCode,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: AppColors.secondary,
+                    color: theme.colorScheme.secondary,
                   ),
                 ),
               ),

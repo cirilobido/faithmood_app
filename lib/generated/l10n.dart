@@ -2354,6 +2354,16 @@ class S {
     return Intl.message('Streak Days', name: 'streakDays', desc: '', args: []);
   }
 
+  /// `Days With Activity`
+  String get daysWithActivity {
+    return Intl.message(
+      'Days With Activity',
+      name: 'daysWithActivity',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Start logging your moods to see your stats`
   String get startLoggingYourMoodsToSeeYourStats {
     return Intl.message(
@@ -2559,6 +2569,16 @@ class S {
     return Intl.message(
       'Expanding faith',
       name: 'streakStatusExpandingFaith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load devotional`
+  String get unableToLoadDevotional {
+    return Intl.message(
+      'Unable to load devotional',
+      name: 'unableToLoadDevotional',
       desc: '',
       args: [],
     );

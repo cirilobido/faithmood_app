@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/core_exports.dart';
 import '../../../core/providers/domain/use_cases/devotional_use_case.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
+import '../../../features/profile/_profile_view_model.dart';
 import '_devotional_details_state.dart';
 
 final devotionalDetailsViewModelProvider = StateNotifierProvider.autoDispose.family<
     DevotionalDetailsViewModel, DevotionalDetailsState, int>((ref, devotionalId) {
   return DevotionalDetailsViewModel(
+    ref,
     ref.read(devotionalUseCaseProvider),
     ref.read(authProvider),
     devotionalId,
@@ -15,11 +17,13 @@ final devotionalDetailsViewModelProvider = StateNotifierProvider.autoDispose.fam
 });
 
 class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
+  final Ref ref;
   final DevotionalUseCase devotionalUseCase;
   final AuthProvider authProvider;
   final int devotionalId;
 
   DevotionalDetailsViewModel(
+    this.ref,
     this.devotionalUseCase,
     this.authProvider,
     this.devotionalId,
@@ -106,6 +110,9 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       switch (result) {
         case Success(value: final success):
           {
+            if (success) {
+              ref.read(profileViewModelProvider.notifier).invalidateStats();
+            }
             updateState(
               isSaving: false,
               isSaved: success,
@@ -148,6 +155,9 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       switch (result) {
         case Success(value: final success):
           {
+            if (success) {
+              ref.read(profileViewModelProvider.notifier).invalidateStats();
+            }
             updateState(
               isSaving: false,
               isSaved: success,

@@ -46,7 +46,6 @@ class PremiumPromotionCard extends StatelessWidget {
                         title,
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: AppSizes.spacingSmall),
@@ -54,7 +53,6 @@ class PremiumPromotionCard extends StatelessWidget {
                         description,
                         style: theme.textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: AppColors.textPrimary,
                         ),
                       ),
                     ],

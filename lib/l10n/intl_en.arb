@@ -287,6 +287,7 @@
   "myEmotion": "My Emotion",
   "mySpirit": "My Spirit",
   "streakDays": "Streak Days",
+  "daysWithActivity": "Days With Activity",
   "startLoggingYourMoodsToSeeYourStats": "Start logging your moods to see your stats",
   "addMoodEntry": "Add Mood Entry",
   "premium": "Premium",
@@ -308,5 +309,6 @@
   "streakStatusPerseveranceToTheEnd": "Perseverance to the end",
   "streakStatusGratefulHeart": "Grateful heart",
   "streakStatusVictoryOfTheMonth": "Victory of the month",
-  "streakStatusExpandingFaith": "Expanding faith"
+  "streakStatusExpandingFaith": "Expanding faith",
+  "unableToLoadDevotional": "Unable to load devotional"
 }

@@ -63,7 +63,7 @@ class WelcomeTopBar extends StatelessWidget {
                     AppIcons.closeIcon,
                     width: AppSizes.iconSizeLarge,
                     colorFilter: ColorFilter.mode(
-                      isDark ? AppColors.dIconTertiary : AppColors.iconTertiary,
+                      theme.iconTheme.color!,
                       BlendMode.srcIn,
                     ),
                   ),

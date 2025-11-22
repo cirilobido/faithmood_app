@@ -52,10 +52,11 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final lang = S.of(context);
     final state = ref.watch(signUpViewModelProvider);
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
@@ -83,7 +84,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                         value: _pageIndex.toDouble() / 2,
                         strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          AppColors.secondary,
+                          theme.colorScheme.secondary,
                         ),
                       ),
                     ),
@@ -158,6 +159,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
   }
 
   void _handleNextPage() async {
+    final theme = Theme.of(context);
     final lang = S.of(context);
     if (_pageIndex == namePageView) {
       nameError =
@@ -165,7 +167,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
       if (nameError) {
         CustomSnackBar.show(
           context,
-          backgroundColor: AppColors.error,
+          backgroundColor: theme.colorScheme.error,
           message: lang.nameMustBeAtLeast3CharactersLong,
         );
         return;
@@ -181,7 +183,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         });
         CustomSnackBar.show(
           context,
-          backgroundColor: AppColors.error,
+          backgroundColor: theme.colorScheme.error,
           message: lang.passwordDontMatch,
         );
         return;
@@ -204,7 +206,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         final lang = S.of(context);
         CustomSnackBar.show(
           context,
-          backgroundColor: AppColors.error,
+          backgroundColor: theme.colorScheme.error,
           message: lang.invalidEmailOrPasswordPleaseTryAgain,
         );
         return;
@@ -267,7 +269,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
           Text(
             lang.signUpNameMessage,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: AppColors.textSecondary,
+              color: theme.textTheme.labelSmall?.color!,
             ),
           ),
           const SizedBox(height: AppSizes.spacingLarge),
@@ -306,7 +308,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
             Text(
               lang.signUpEmailMessage,
               style: theme.textTheme.bodyLarge?.copyWith(
-                color: AppColors.textSecondary,
+                color: theme.textTheme.labelSmall?.color!,
               ),
             ),
             const SizedBox(height: AppSizes.spacingLarge),
@@ -318,7 +320,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               focusNode: _emailFocusNode,
               prefixIconWidget: SvgPicture.asset(
                 AppIcons.emailIcon,
-                colorFilter: ColorFilter.mode(AppColors.iconPrimary, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(theme.primaryIconTheme.color!, BlendMode.srcIn),
               ),
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validations: [FieldTypeValidation.email],
@@ -339,7 +341,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               obscureText: !_showPassword,
               prefixIconWidget: SvgPicture.asset(
                 AppIcons.keyIcon,
-                colorFilter: ColorFilter.mode(AppColors.iconPrimary, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(theme.primaryIconTheme.color!, BlendMode.srcIn),
               ),
               suffixIconWidget: IconButton(
                 onPressed: () {
@@ -350,7 +352,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 icon: SvgPicture.asset(
                   _showPassword ? AppIcons.eyeIcon : AppIcons.eyeClosedIcon,
                   colorFilter: ColorFilter.mode(
-                    _showPassword ? theme.colorScheme.primary : AppColors.iconPrimary,
+                    _showPassword ? theme.colorScheme.primary : theme.primaryIconTheme.color!,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -374,7 +376,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               obscureText: !_showConfirmPassword,
               prefixIconWidget: SvgPicture.asset(
                 AppIcons.keyIcon,
-                colorFilter: ColorFilter.mode(AppColors.iconPrimary, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(theme.primaryIconTheme.color!, BlendMode.srcIn),
               ),
               suffixIconWidget: IconButton(
                 onPressed: () {
@@ -389,7 +391,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                   colorFilter: ColorFilter.mode(
                     _showConfirmPassword
                         ? theme.colorScheme.primary
-                        : AppColors.iconPrimary,
+                        : theme.primaryIconTheme.color!,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -436,7 +438,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
       },
       child: Text(
         text,
-        style: theme.textTheme.bodySmall?.copyWith(color: AppColors.secondary),
+          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.secondary),
       ),
     );
   }

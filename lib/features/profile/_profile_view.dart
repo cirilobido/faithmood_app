@@ -28,8 +28,10 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       devLogger('ProfileView.addPostFrameCallback() executed');
       final viewModel = ref.read(profileViewModelProvider.notifier);
-      devLogger('ProfileView - viewModel.isDataLoaded: ${viewModel.isDataLoaded}');
-      
+      devLogger(
+        'ProfileView - viewModel.isDataLoaded: ${viewModel.isDataLoaded}',
+      );
+
       if (!viewModel.isDataLoaded) {
         devLogger('ProfileView - calling loadData()');
         viewModel.loadData();
@@ -121,21 +123,22 @@ class _ProfileContent extends StatelessWidget {
                 child: const CircularProgressIndicator(),
               ),
             ),
-          if (totalLogs > 0 && !isLoading && isPremium) ...[
+          if (!isPremium && totalLogs > 0) const PremiumUpsellCard(),
+          if (totalLogs > 0 && !isLoading) ...[
             const SizedBox(height: AppSizes.spacingLarge),
             AnalyticsSection(
               isPremium: isPremium,
               analytics: analytics,
-              isWeek: selectedPeriod == AnalyticsPeriod.thisWeek ||
+              isWeek:
+                  selectedPeriod == AnalyticsPeriod.thisWeek ||
                   selectedPeriod == AnalyticsPeriod.lastWeek,
             ),
           ],
           if (totalLogs == 0 && !isLoading) ...[
-            const SizedBox(height: AppSizes.spacingMedium),
             Center(
               child: Image.asset(
                 AppIcons.greenChartImage,
-                height: AppSizes.dialogIconSize,
+                height: AppSizes.welcomeFigureIconSize,
               ),
             ),
             const SizedBox(height: AppSizes.spacingMedium),
@@ -155,11 +158,9 @@ class _ProfileContent extends StatelessWidget {
               },
             ),
           ],
-          if (!isPremium && totalLogs > 0) const PremiumUpsellCard(),
-          const SizedBox(height: AppSizes.spacingSmall),
+          const SizedBox(height: AppSizes.spacingLarge),
         ],
       ),
     );
   }
 }
-

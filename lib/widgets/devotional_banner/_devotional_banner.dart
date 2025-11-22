@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/core_exports.dart';
+import '../../generated/l10n.dart';
 
 class DevotionalBanner extends StatelessWidget {
   final bool isLoading;
@@ -46,8 +47,8 @@ class DevotionalBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         gradient: LinearGradient(
           colors: [
-            AppColors.tertiary.withOpacity(0.3),
-            AppColors.secondary.withOpacity(0.3),
+            theme.colorScheme.tertiary.withValues(alpha: 0.4),
+            theme.colorScheme.secondary.withValues(alpha: 0.4),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -72,8 +73,8 @@ class DevotionalBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
         gradient: LinearGradient(
           colors: [
-            AppColors.tertiary.withOpacity(0.3),
-            AppColors.secondary.withOpacity(0.3),
+            theme.colorScheme.tertiary.withValues(alpha: 0.4),
+            theme.colorScheme.secondary.withValues(alpha: 0.4),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -83,10 +84,10 @@ class DevotionalBanner extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, color: AppColors.primary),
+            Icon(Icons.error_outline, color: theme.colorScheme.primary),
             const SizedBox(height: AppSizes.spacingXSmall),
             Text(
-              'Unable to load devotional',
+              S.of(context).unableToLoadDevotional,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.textTheme.labelSmall?.color,
               ),
@@ -107,8 +108,8 @@ class DevotionalBanner extends StatelessWidget {
               ? null
               : LinearGradient(
                   colors: [
-                    AppColors.tertiary.withOpacity(0.3),
-                    AppColors.secondary.withOpacity(0.3),
+                    theme.colorScheme.tertiary.withValues(alpha: 0.4),
+                    theme.colorScheme.secondary.withValues(alpha: 0.4),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -129,8 +130,8 @@ class DevotionalBanner extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppColors.tertiary.withOpacity(0.3),
-                            AppColors.secondary.withOpacity(0.3),
+                            theme.colorScheme.tertiary.withValues(alpha: 0.4),
+                            theme.colorScheme.secondary.withValues(alpha: 0.4),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -138,20 +139,6 @@ class DevotionalBanner extends StatelessWidget {
                       ),
                     );
                   },
-                ),
-              ),
-            if (coverImage != null)
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black.withOpacity(0.3),
-                      Colors.black.withOpacity(0.5),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
                 ),
               ),
             Padding(
@@ -171,7 +158,9 @@ class DevotionalBanner extends StatelessWidget {
                             vertical: AppSizes.paddingXXSmall,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.8),
+                            color: theme.colorScheme.primary.withValues(
+                              alpha: 0.8,
+                            ),
                             borderRadius: BorderRadius.circular(
                               AppSizes.radiusSmall,
                             ),
@@ -190,7 +179,9 @@ class DevotionalBanner extends StatelessWidget {
                             AppSizes.paddingXXSmall,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.secondary.withOpacity(0.8),
+                            color: theme.colorScheme.secondary.withValues(
+                              alpha: 0.8,
+                            ),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -240,4 +231,3 @@ class DevotionalBanner extends StatelessWidget {
     );
   }
 }
-

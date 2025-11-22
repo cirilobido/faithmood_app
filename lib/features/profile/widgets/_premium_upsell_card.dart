@@ -14,11 +14,6 @@ class PremiumUpsellCard extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: AppSizes.spacingMedium),
-        Image.asset(
-          AppIcons.greenChartImage,
-          height: AppSizes.dialogIconSize,
-        ),
-        const SizedBox(height: AppSizes.spacingSmall),
         InkWell(
           splashColor: Colors.transparent,
           onTap: () {
@@ -30,12 +25,15 @@ class PremiumUpsellCard extends StatelessWidget {
             padding: const EdgeInsets.all(AppSizes.paddingMedium),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.secondary, AppColors.primary],
+                colors: [
+                  theme.colorScheme.secondary,
+                  theme.colorScheme.primary,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: theme.colorScheme.outline),
             ),
             child: Text(
               lang.unlockPremiumToGetAccessToAllStatsAndFeatures,
@@ -44,9 +42,7 @@ class PremiumUpsellCard extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSizes.spacingLarge),
       ],
     );
   }
 }
-
