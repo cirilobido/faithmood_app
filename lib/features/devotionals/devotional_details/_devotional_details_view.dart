@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/widgets_exports.dart';
+import '../../../features/journal/_journal_view_model.dart';
 import '_devotional_details_view_model.dart';
 import '_devotional_details_state.dart';
 
@@ -56,6 +57,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   if (note != null) {
                     final success = await vm.saveReflection(note: note);
                     if (success && context.mounted) {
+                      ref.read(journalViewModelProvider.notifier).refreshDevotionalLogsIfNeeded();
                       CustomSnackBar.show(
                         context,
                         message: S.of(context).noteSavedSuccessfully,
@@ -71,7 +73,10 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                       );
                     }
                   } else {
-                    await vm.saveNoteWithoutReflection();
+                    final success = await vm.saveNoteWithoutReflection();
+                    if (success) {
+                      ref.read(journalViewModelProvider.notifier).refreshDevotionalLogsIfNeeded();
+                    }
                     Navigator.of(context).pop();
                   }
                 } else {
@@ -169,6 +174,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
             onTap: () async {
               final success = await vm.saveReflection();
               if (success && context.mounted) {
+                ref.read(journalViewModelProvider.notifier).refreshDevotionalLogsIfNeeded();
                 CustomSnackBar.show(
                   context,
                   message: lang.noteSavedSuccessfully,

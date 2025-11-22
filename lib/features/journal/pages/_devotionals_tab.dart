@@ -126,54 +126,69 @@ class _DevotionalsTabState extends ConsumerState<DevotionalsTab> {
       );
     }
 
+    final vm = ref.read(journalViewModelProvider.notifier);
+
     if (state.devotionalLogs.isEmpty) {
-      return Center(
-        child: Text(
-          lang.noJournalEntries,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.textTheme.labelSmall?.color,
+      return RefreshIndicator(
+        onRefresh: () => vm.loadDevotionalLogs(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: Center(
+              child: Text(
+                lang.noJournalEntries,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.textTheme.labelSmall?.color,
+                ),
+              ),
+            ),
           ),
         ),
       );
     }
 
-    return CustomScrollView(
-      controller: _scrollController,
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingMedium,
-          ),
-          sliver: SliverList.separated(
-            itemCount: state.devotionalLogs.length,
-            separatorBuilder: (context, index) =>
-                const SizedBox(height: AppSizes.spacingMedium),
-            itemBuilder: (context, index) {
-              final log = state.devotionalLogs[index];
-              return DevotionalLogCard(
-                log: log,
-                onTap: () {
-                  if (log.id != null) {
-                    context.push(
-                      Routes.devotionalLogDetails,
-                      extra: {
-                        'id': log.id!,
-                      },
-                    );
-                  }
-                },
-              );
-            },
-          ),
-        ),
-        if (state.isLoadingMoreDevotionalLogs)
-          const SliverToBoxAdapter(
-            child: LoadingIndicator(
-              padding: EdgeInsets.all(AppSizes.paddingMedium),
+    return RefreshIndicator(
+      onRefresh: () => vm.loadDevotionalLogs(),
+      child: CustomScrollView(
+        controller: _scrollController,
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingMedium,
+            ),
+            sliver: SliverList.separated(
+              itemCount: state.devotionalLogs.length,
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: AppSizes.spacingMedium),
+              itemBuilder: (context, index) {
+                final log = state.devotionalLogs[index];
+                return DevotionalLogCard(
+                  log: log,
+                  onTap: () {
+                    if (log.id != null) {
+                      context.push(
+                        Routes.devotionalLogDetails,
+                        extra: {
+                          'id': log.id!,
+                        },
+                      );
+                    }
+                  },
+                );
+              },
             ),
           ),
-        SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingLarge)),
-      ],
+          if (state.isLoadingMoreDevotionalLogs)
+            const SliverToBoxAdapter(
+              child: LoadingIndicator(
+                padding: EdgeInsets.all(AppSizes.paddingMedium),
+              ),
+            ),
+          SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingLarge)),
+        ],
+      ),
     );
   }
 }

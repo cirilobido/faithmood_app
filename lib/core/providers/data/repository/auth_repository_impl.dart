@@ -67,8 +67,20 @@ class AuthRepositoryImpl implements AuthRepository {
         }
       }
       return currentUser;
+    } on ConnectionError {
+      final currentUser = await authDao.getCurrentUser();
+      return currentUser;
     } catch (_) {
       throw Exception('Error refreshing user!');
+    }
+  }
+
+  @override
+  Future<User?> getCachedUser() async {
+    try {
+      return await authDao.getCurrentUser();
+    } catch (_) {
+      throw Exception('Error getting cached user!');
     }
   }
 

@@ -144,52 +144,67 @@ class _MoodsTabState extends ConsumerState<MoodsTab> {
       );
     }
 
+    final vm = ref.read(journalViewModelProvider.notifier);
+
     if (state.moodSessions.isEmpty) {
-      return Center(
-        child: Text(
-          lang.noJournalEntries,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.textTheme.labelSmall?.color,
+      return RefreshIndicator(
+        onRefresh: () => vm.loadMoodSessions(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: Center(
+              child: Text(
+                lang.noJournalEntries,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.textTheme.labelSmall?.color,
+                ),
+              ),
+            ),
           ),
         ),
       );
     }
 
-    return CustomScrollView(
-      controller: _scrollController,
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingMedium,
-          ),
-          sliver: SliverList.separated(
-            itemCount: state.moodSessions.length,
-            separatorBuilder: (context, index) =>
-                const SizedBox(height: AppSizes.spacingMedium),
-            itemBuilder: (context, index) {
-              final session = state.moodSessions[index];
-                      return MoodEntryCard(
-                        session: session,
-                        onTap: () {
-                          if (session.sessionId != null) {
-                            context.push(
-                              Routes.moodEntryDetails,
-                              extra: {'sessionId': session.sessionId},
-                            );
-                          }
-                        },
-                      );
-            },
-          ),
-        ),
-        if (state.isLoadingMore)
-          const SliverToBoxAdapter(
-            child: LoadingIndicator(
-              padding: EdgeInsets.all(AppSizes.paddingMedium),
+    return RefreshIndicator(
+      onRefresh: () => vm.loadMoodSessions(),
+      child: CustomScrollView(
+        controller: _scrollController,
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingMedium,
+            ),
+            sliver: SliverList.separated(
+              itemCount: state.moodSessions.length,
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: AppSizes.spacingMedium),
+              itemBuilder: (context, index) {
+                final session = state.moodSessions[index];
+                        return MoodEntryCard(
+                          session: session,
+                          onTap: () {
+                            if (session.sessionId != null) {
+                              context.push(
+                                Routes.moodEntryDetails,
+                                extra: {'sessionId': session.sessionId},
+                              );
+                            }
+                          },
+                        );
+              },
             ),
           ),
-        SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingLarge)),
-      ],
+          if (state.isLoadingMore)
+            const SliverToBoxAdapter(
+              child: LoadingIndicator(
+                padding: EdgeInsets.all(AppSizes.paddingMedium),
+              ),
+            ),
+          SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingLarge)),
+        ],
+      ),
     );
   }
 }

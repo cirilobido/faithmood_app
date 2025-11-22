@@ -78,16 +78,70 @@ class AuthProvider extends ChangeNotifier {
       switch (result) {
         case Success(value: final value):
           {
-            _user = value;
+            if (value != null) {
+              _user = value;
+            } else {
+              final cachedResult = await _useCase.getCachedUser();
+              switch (cachedResult) {
+                case Success(value: final cachedUser):
+                  {
+                    if (cachedUser != null) {
+                      _user = cachedUser;
+                    }
+                  }
+                case Failure():
+                  {}
+              }
+            }
           }
         case Failure():
           {
-            throw Exception('Error getting user!');
+            final cachedResult = await _useCase.getCachedUser();
+            switch (cachedResult) {
+              case Success(value: final cachedUser):
+                {
+                  if (cachedUser != null) {
+                    _user = cachedUser;
+                  } else {
+                    throw Exception('Error getting user!');
+                  }
+                }
+              case Failure():
+                {
+                  throw Exception('Error getting user!');
+                }
+            }
           }
+      }
+    } on ConnectionError {
+      final cachedResult = await _useCase.getCachedUser();
+      switch (cachedResult) {
+        case Success(value: final cachedUser):
+          {
+            if (cachedUser != null) {
+              _user = cachedUser;
+            }
+          }
+        case Failure():
+          {}
       }
     } catch (e) {
       devLogger(e.toString());
-      rethrow;
+      final cachedResult = await _useCase.getCachedUser();
+      switch (cachedResult) {
+        case Success(value: final cachedUser):
+          {
+            if (cachedUser != null) {
+              _user = cachedUser;
+            } else {
+              rethrow;
+            }
+          }
+        case Failure():
+          {
+            rethrow;
+          }
+      }
     }
     notifyListeners();
   }

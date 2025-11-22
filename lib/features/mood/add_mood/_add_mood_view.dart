@@ -7,6 +7,7 @@ import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
 import '../../../routes/app_routes_names.dart';
 import '../../../widgets/widgets_exports.dart';
+import '../../../features/journal/_journal_view_model.dart';
 import '_add_mood_view_model.dart';
 import 'widgets/_mood_page_switcher.dart';
 
@@ -151,6 +152,7 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
                     }
 
                     if (sessionId != null && context.mounted) {
+                      ref.read(journalViewModelProvider.notifier).refreshMoodSessionsIfNeeded();
                       if (!hasAddedMood) {
                         _showSuccessModal(context, theme, lang, sessionId);
                       } else {

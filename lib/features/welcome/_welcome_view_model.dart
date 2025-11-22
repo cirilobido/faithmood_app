@@ -29,7 +29,9 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
     this.firebaseAnalyticProvider,
     this.authProvider,
     this.settingsProvider,
-  ) : super(WelcomeState());
+  ) : super(WelcomeState()) {
+    _initializeBackendPageOrder();
+  }
 
   bool get isFirstTimeOpen => settingsProvider.isFirstTimeOpen;
 
@@ -50,8 +52,17 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
   String? selectedGuidedPlan;
   String? selectedSocial;
 
-  List<int> backendPageOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  late List<int> backendPageOrder;
   bool _registrationAttempted = false;
+
+  void _initializeBackendPageOrder() {
+    final onboardingScreens = settingsProvider.settings?.onboardingScreens;
+    if (onboardingScreens != null && onboardingScreens.isNotEmpty) {
+      backendPageOrder = List<int>.from(onboardingScreens);
+    } else {
+      backendPageOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    }
+  }
 
   void updateState({
     int? currentPage,
@@ -142,7 +153,7 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
   }
 
   void _updateProgress() {
-    final total = 8; // TOTAL NORMAL PAGES
+    final total = backendPageOrder.length;
     if (total <= 0) return;
 
     final value = state.currentPage / total;

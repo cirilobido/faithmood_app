@@ -455,5 +455,17 @@ class JournalViewModel extends StateNotifier<JournalState> {
       updateState(isLoadingMoreDevotionalLogs: false, devotionalLogsError: true);
     }
   }
+
+  Future<void> refreshMoodSessionsIfNeeded() async {
+    if (state.moodSessions.isNotEmpty) {
+      await loadMoodSessions();
+    }
+  }
+
+  Future<void> refreshDevotionalLogsIfNeeded() async {
+    if (state.devotionalLogs.isNotEmpty) {
+      await loadDevotionalLogs();
+    }
+  }
 }
 

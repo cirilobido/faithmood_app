@@ -21,6 +21,9 @@ class RequestProcessor {
           error.type == DioExceptionType.receiveTimeout) {
         throw TimeoutError('Request timeout: ${error.message}');
       }
+      if (error.type == DioExceptionType.connectionError) {
+        throw ConnectionError('Connection error: ${error.message}');
+      }
       if (error.response != null) {
         final statusCode = error.response?.statusCode;
         if (statusCode == null) {

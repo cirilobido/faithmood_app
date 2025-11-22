@@ -48,6 +48,15 @@ class AuthUseCase extends FutureUseCase<dynamic, dynamic> {
     }
   }
 
+  Future<Result<User?, Exception>> getCachedUser() async {
+    try {
+      final result = await repository.getCachedUser();
+      return Success(result);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await repository.signOut();

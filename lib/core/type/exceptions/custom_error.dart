@@ -24,3 +24,7 @@ class InternalServerError extends CustomError {
 class TimeoutError extends CustomError {
   TimeoutError(super.message);
 }
+
+class ConnectionError extends CustomError {
+  ConnectionError(super.message);
+}

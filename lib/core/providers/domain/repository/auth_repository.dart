@@ -11,6 +11,8 @@ abstract class AuthRepository {
 
   Future<User?> refreshUser();
 
+  Future<User?> getCachedUser();
+
   Future<void> signOut();
 
   Future<User> updateUserData(User params);

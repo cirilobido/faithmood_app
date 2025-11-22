@@ -62,7 +62,16 @@ class _SplashViewState extends ConsumerState<SplashView> {
     final isUserLoggedIn = await appSettingProvider.getIsUserLoggedIn();
     if (mounted && isUserLoggedIn) {
       final auth = ref.read(authProvider);
-      await auth.refreshUserInformation();
+      try {
+        await auth.refreshUserInformation();
+      } catch (e) {
+        final analytics = ref.read(firebaseAnalyticProvider);
+        analytics.logEvent(
+          name: 'error_refreshing_user',
+          parameters: {'screen': 'splash_screen', 'error': e.toString()},
+        );
+        devLogger('Error refreshing user in splash: $e');
+      }
       final user = auth.user;
       if (user != null) {
         context.go(Routes.home);
