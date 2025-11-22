@@ -157,6 +157,14 @@ abstract class AppRoutes {
           child: const MyInformationView(),
         ),
       ),
+      GoRoute(
+        path: Routes.privacyAndSecurity,
+        pageBuilder: (context, state) => buildSlidePage(
+          key: state.pageKey,
+          isBottomSheet: false,
+          child: const SecurityView(),
+        ),
+      ),
     ],
   );
 }

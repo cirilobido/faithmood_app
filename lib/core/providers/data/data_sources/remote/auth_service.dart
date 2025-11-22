@@ -157,10 +157,18 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<UserResponse?> changePassword(User params) async {
     try {
+      final userJson = params.toJson();
+      final paramsMap = params as dynamic;
+      if (paramsMap.password != null) {
+        userJson['password'] = paramsMap.password;
+      }
+      if (paramsMap.newPassword != null) {
+        userJson['newPassword'] = paramsMap.newPassword;
+      }
       return await requestProcessor.process(
         request: httpClient.put(
           '${Endpoints.changePassword}/${params.id}',
-          data: params.toJson(),
+          data: userJson,
         ),
         jsonMapper: (data) {
           final response = UserResponse.fromJson(data as Map<String, dynamic>);

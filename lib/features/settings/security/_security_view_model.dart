@@ -1,0 +1,141 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/core_exports.dart';
+import '../../../dev_utils/dev_utils_exports.dart';
+import '_security_state.dart';
+
+final securityViewModelProvider =
+    AutoDisposeStateNotifierProvider<SecurityViewModel, SecurityState>((ref) {
+  return SecurityViewModel(
+    ref.read(firebaseAnalyticProvider),
+    ref.read(authProvider),
+    ref.read(settingsProvider),
+  );
+});
+
+class SecurityViewModel extends StateNotifier<SecurityState> {
+  final FirebaseAnalyticProvider firebaseAnalyticProvider;
+  final AuthProvider authProvider;
+  final SettingsProvider settingsProvider;
+
+  SecurityViewModel(
+    this.firebaseAnalyticProvider,
+    this.authProvider,
+    this.settingsProvider,
+  ) : super(SecurityState());
+
+  Settings? get settings => settingsProvider.settings;
+
+  Future<void> loadData({bool refresh = false}) async {
+    updateState(isLoading: true, error: false);
+    try {
+      await _getUserLimitations();
+      updateState(isLoading: false);
+    } catch (e) {
+      updateState(isLoading: false, error: true);
+      devLogger(e.toString());
+      firebaseAnalyticProvider.logEvent(
+        name: 'load_data_failed',
+        parameters: {
+          'screen': 'security_screen',
+          'error': e.toString(),
+        },
+      );
+    }
+  }
+
+  void updateState({
+    User? user,
+    bool? isPremium,
+    bool? isLoading,
+    bool? error,
+  }) {
+    state = state.copyWith(
+      user: user,
+      isPremium: isPremium,
+      isLoading: isLoading,
+      error: error,
+    );
+  }
+
+  Future<void> _getUserLimitations() async {
+    try {
+      final settings = settingsProvider.settings;
+      if (settings != null) {
+        final user = authProvider.user;
+        final isPremium = user?.planType != PlanName.FREE;
+        updateState(user: user, isPremium: isPremium);
+        firebaseAnalyticProvider.logEvent(
+          name: 'get_user_limitations_successfully',
+          parameters: {'screen': 'security_screen'},
+        );
+        return;
+      }
+      firebaseAnalyticProvider.logEvent(
+        name: 'get_user_limitations_failed',
+        parameters: {'screen': 'security_screen'},
+      );
+      throw Exception('Error getting max chars!');
+    } catch (e) {
+      devLogger(e.toString());
+      firebaseAnalyticProvider.logEvent(
+        name: 'get_user_limitations_failed',
+        parameters: {
+          'screen': 'security_screen',
+          'error': e.toString(),
+        },
+      );
+      rethrow;
+    }
+  }
+
+  Future<bool> changePassword(User params) async {
+    try {
+      updateState(isLoading: true, error: false);
+      await authProvider.changePassword(params);
+      final user = authProvider.user;
+      updateState(user: user, isLoading: false);
+      firebaseAnalyticProvider.logEvent(
+        name: 'change_password_successfully',
+        parameters: {'screen': 'security_screen'},
+      );
+      return true;
+    } catch (e) {
+      devLogger(e.toString());
+      updateState(isLoading: false, error: true);
+      firebaseAnalyticProvider.logEvent(
+        name: 'change_password_failed',
+        parameters: {
+          'screen': 'security_screen',
+          'error': e.toString(),
+        },
+      );
+      return false;
+    }
+  }
+
+  Future<bool> deleteAccount() async {
+    try {
+      updateState(isLoading: true, error: false);
+      await authProvider.deleteUser(authProvider.user!.id!);
+      updateState(isLoading: false);
+      firebaseAnalyticProvider.logEvent(
+        name: 'delete_user_successfully',
+        parameters: {'screen': 'security_screen'},
+      );
+      return true;
+    } catch (e) {
+      devLogger(e.toString());
+      updateState(isLoading: false, error: true);
+      firebaseAnalyticProvider.logEvent(
+        name: 'delete_user_failed',
+        parameters: {
+          'screen': 'security_screen',
+          'error': e.toString(),
+        },
+      );
+      return false;
+    }
+  }
+}
+

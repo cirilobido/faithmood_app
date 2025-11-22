@@ -114,7 +114,7 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
                           readOnly: !isEditing,
                           extraSpace: false,
                           label: lang.firstName,
-                          hintText: lang.appName,
+                          hintText: lang.firstName,
                           controller: _nameController,
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           validations: isEditing ? [FieldTypeValidation.name] : null,
