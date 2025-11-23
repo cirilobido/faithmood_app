@@ -15,4 +15,8 @@ abstract class LocalStorageRepository {
   Future<void> setReminderTime(String time);
 
   Future<void> deleteReminderTime();
+
+  Future<String?> getThemeMode();
+
+  Future<void> setThemeMode(String mode);
 }

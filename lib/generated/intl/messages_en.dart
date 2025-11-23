@@ -50,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "and": MessageLookupByLibrary.simpleMessage("and"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("App Language"),
+    "appTheme": MessageLookupByLibrary.simpleMessage("App Theme"),
     "appName": MessageLookupByLibrary.simpleMessage("Your name"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
       "App Version: ###",
@@ -117,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
+    "dark": MessageLookupByLibrary.simpleMessage("Dark"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
@@ -135,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "descending": MessageLookupByLibrary.simpleMessage("Descending"),
     "devotional": MessageLookupByLibrary.simpleMessage("Devotional"),
     "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
+    "discoverPremium": MessageLookupByLibrary.simpleMessage("Discover Premium"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Password"),
@@ -197,7 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
     "feeling": MessageLookupByLibrary.simpleMessage("Feeling"),
     "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
-      "FFollow guided daily devotionals",
+      "Follow guided daily devotionals",
     ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
     "filterByMood": MessageLookupByLibrary.simpleMessage("Filter by Mood"),
@@ -233,6 +236,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "history": MessageLookupByLibrary.simpleMessage("Historial"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "howAreYouFeeling": MessageLookupByLibrary.simpleMessage(
+      "How are you feeling?",
+    ),
     "howWouldYouDescribeYourDay": MessageLookupByLibrary.simpleMessage(
       "How would you describe your day?",
     ),
@@ -267,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Key Learnings"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "light": MessageLookupByLibrary.simpleMessage("Light"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
         MessageLookupByLibrary.simpleMessage(
@@ -274,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
     "localeName": MessageLookupByLibrary.simpleMessage("English"),
+    "logMood": MessageLookupByLibrary.simpleMessage("Log Mood"),
     "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
     "loginErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Your email or password doesn’t seem to match. Please check your details and try again.",
@@ -479,6 +487,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "selectAPeriod": MessageLookupByLibrary.simpleMessage("Select a Period"),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
+    "selectYourTheme": MessageLookupByLibrary.simpleMessage("Select Your Theme"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
       "Select the state that resonates with your spiritual side.",
     ),
@@ -590,6 +599,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "system": MessageLookupByLibrary.simpleMessage("System"),
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
@@ -636,6 +646,9 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "unlimitedMoodTrack": MessageLookupByLibrary.simpleMessage(
       "💭 Unlimited Mood Track",
+    ),
+    "unlockMoreDevotionalsAdvanceStats": MessageLookupByLibrary.simpleMessage(
+      "Unlock more devotionals, advance stats, and an ad-free experience.",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
     "unlockPremiumFeatures": MessageLookupByLibrary.simpleMessage(
@@ -727,6 +740,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Your daily reminder is set",
     ),
     "yourJournal": MessageLookupByLibrary.simpleMessage("Your Journal"),
+    "yourJourneyBeginsToday": MessageLookupByLibrary.simpleMessage(
+      "✨ Your journey begins today",
+    ),
     "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Your Password is"),
     "yourWeekInEmotions": MessageLookupByLibrary.simpleMessage(
       "Your Week in Emotions",

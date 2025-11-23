@@ -118,6 +118,25 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                               );
                             },
                           ),
+                          SettingItem(
+                            lang.appTheme,
+                            subtitle: _getThemeModeSubtitle(lang, ref.watch(appThemeProvider).themeMode),
+                            AppIcons.settingsIcon,
+                            onTap: () async {
+                              final themeProvider = ref.watch(appThemeProvider);
+                              final currentThemeMode = themeProvider.themeMode;
+
+                              await ThemeModeBottomSheet.show(
+                                context: context,
+                                selectedThemeMode: currentThemeMode,
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    themeProvider.setThemeMode(value);
+                                  }
+                                },
+                              );
+                            },
+                          ),
                         ],
                       ),
                       _buildSection(
@@ -305,6 +324,17 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         }
       },
     );
+  }
+
+  String _getThemeModeSubtitle(S lang, ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return lang.light;
+      case ThemeMode.dark:
+        return lang.dark;
+      case ThemeMode.system:
+        return lang.system;
+    }
   }
 }
 

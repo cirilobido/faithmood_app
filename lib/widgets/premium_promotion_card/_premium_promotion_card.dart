@@ -27,7 +27,7 @@ class PremiumPromotionCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSizes.paddingLarge),
       decoration: BoxDecoration(
-        color: theme.colorScheme.secondary,
+        color: theme.colorScheme.tertiary.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
       ),
       child: Column(

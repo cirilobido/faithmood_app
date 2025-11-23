@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/core_exports.dart';
 import '../../../core/providers/domain/use_cases/devotional_use_case.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
+import '../../../features/profile/_profile_view_model.dart';
 import '_devotional_log_details_state.dart';
 
 final devotionalLogDetailsViewModelProvider =
@@ -12,6 +13,7 @@ final devotionalLogDetailsViewModelProvider =
       ref.read(devotionalUseCaseProvider),
       ref.read(authProvider),
       id,
+      ref,
     );
     ref.onDispose(() {
       viewModel._mounted = false;
@@ -24,12 +26,14 @@ class DevotionalLogDetailsViewModel extends StateNotifier<DevotionalLogDetailsSt
   final DevotionalUseCase devotionalUseCase;
   final AuthProvider authProvider;
   final int id;
+  final Ref ref;
   bool _mounted = true;
 
   DevotionalLogDetailsViewModel(
     this.devotionalUseCase,
     this.authProvider,
     this.id,
+    this.ref,
   ) : super(DevotionalLogDetailsState()) {
     loadDevotionalLogDetail();
   }
@@ -166,6 +170,7 @@ class DevotionalLogDetailsViewModel extends StateNotifier<DevotionalLogDetailsSt
                 devotionalLog: updatedLog,
                 editedNote: null,
               );
+              ref.read(profileViewModelProvider.notifier).invalidateStats();
               return true;
             }
             final currentLog = state.devotionalLog;
@@ -188,6 +193,7 @@ class DevotionalLogDetailsViewModel extends StateNotifier<DevotionalLogDetailsSt
                 devotionalLog: newDevotionalLog,
                 editedNote: null,
               );
+              ref.read(profileViewModelProvider.notifier).invalidateStats();
               return true;
             }
             updateState(isUpdating: false);

@@ -57,6 +57,43 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
     );
   }
 
+  Mood? _preSelectedMood;
+
+  void setPreSelectedMood(Mood? mood) {
+    _preSelectedMood = mood;
+    if (state.moods.isNotEmpty && mood != null) {
+      _applyPreSelectedMood();
+    }
+  }
+
+  void _applyPreSelectedMood() {
+    if (_preSelectedMood != null && state.moods.isNotEmpty) {
+      try {
+        Mood? matchingMood;
+        if (_preSelectedMood!.id != null) {
+          matchingMood = state.moods.firstWhere(
+            (m) => m.id == _preSelectedMood!.id,
+            orElse: () => Mood(),
+          );
+        }
+        if (matchingMood?.id == null && _preSelectedMood!.key != null) {
+          try {
+            matchingMood = state.moods.firstWhere(
+              (m) => m.key == _preSelectedMood!.key,
+            );
+          } catch (e) {
+            devLogger('Mood with key ${_preSelectedMood!.key} not found');
+          }
+        }
+        if (matchingMood?.id != null) {
+          updateState(selectedEmotionalMood: matchingMood);
+        }
+      } catch (e) {
+        devLogger('Error applying pre-selected mood: $e');
+      }
+    }
+  }
+
   Future<void> _loadMoods() async {
     try {
       updateState(isLoading: true, error: false);
@@ -67,6 +104,9 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
         case Success(value: final moods):
           {
             updateState(isLoading: false, moods: moods);
+            if (_preSelectedMood != null) {
+              _applyPreSelectedMood();
+            }
           }
         case Failure(exception: final exception):
           {

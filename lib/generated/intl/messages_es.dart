@@ -56,6 +56,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "appLanguage": MessageLookupByLibrary.simpleMessage(
       "Idioma de la Aplicación",
     ),
+    "appTheme": MessageLookupByLibrary.simpleMessage(
+      "Tema de la Aplicación",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Tu nombre"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
       "Versión de la Aplicación: ###",
@@ -121,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Rango de Fechas"),
+    "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
@@ -139,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "descending": MessageLookupByLibrary.simpleMessage("Descendente"),
     "devotional": MessageLookupByLibrary.simpleMessage("Devocional"),
     "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
+    "discoverPremium": MessageLookupByLibrary.simpleMessage(
+      "Descubrir Premium",
+    ),
     "edit": MessageLookupByLibrary.simpleMessage("Editar"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
@@ -201,7 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
     "feeling": MessageLookupByLibrary.simpleMessage("Sentimiento"),
     "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
-      "FFollow guided daily devotionals",
+      "Follow guided daily devotionals",
     ),
     "files": MessageLookupByLibrary.simpleMessage("Archivos"),
     "filterByMood": MessageLookupByLibrary.simpleMessage(
@@ -239,6 +246,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "history": MessageLookupByLibrary.simpleMessage("Historial"),
     "home": MessageLookupByLibrary.simpleMessage("Inicio"),
+    "howAreYouFeeling": MessageLookupByLibrary.simpleMessage(
+      "¿Cómo te sientes?",
+    ),
     "howWouldYouDescribeYourDay": MessageLookupByLibrary.simpleMessage(
       "¿Cómo describirías tu día?",
     ),
@@ -277,6 +287,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizajes Clave"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "light": MessageLookupByLibrary.simpleMessage("Claro"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
         MessageLookupByLibrary.simpleMessage(
@@ -284,6 +295,9 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
     "localeName": MessageLookupByLibrary.simpleMessage("Español"),
+    "logMood": MessageLookupByLibrary.simpleMessage(
+      "Registrar Estado de Ánimo",
+    ),
     "logOut": MessageLookupByLibrary.simpleMessage("Cerrar Sesión"),
     "loginErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Tu correo o contraseña no coinciden. Verifica tus datos e inténtalo de nuevo.",
@@ -454,7 +468,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Share your thoughts — your feedback inspires others 🙏",
     ),
     "ratingContentTitle": MessageLookupByLibrary.simpleMessage(
-      "🎉 Enjoying your experience so far?",
+      "🎉 ¿Disfrutando tu experiencia hasta ahora?",
     ),
     "recipient": MessageLookupByLibrary.simpleMessage("Destinatario"),
     "reflectNow": MessageLookupByLibrary.simpleMessage("Reflect Now"),
@@ -503,6 +517,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Seleccionar un Período",
     ),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
+    "selectYourTheme": MessageLookupByLibrary.simpleMessage("Selecciona tu Tema"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
       "Selecciona el estado que resuene con tu lado espiritual.",
     ),
@@ -614,6 +629,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
     "support": MessageLookupByLibrary.simpleMessage("Soporte"),
+    "system": MessageLookupByLibrary.simpleMessage("Sistema"),
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
@@ -660,6 +676,9 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "unlimitedMoodTrack": MessageLookupByLibrary.simpleMessage(
       "💭 Unlimited Mood Track",
+    ),
+    "unlockMoreDevotionalsAdvanceStats": MessageLookupByLibrary.simpleMessage(
+      "Desbloquea más devocionales, estadísticas avanzadas y una experiencia sin anuncios.",
     ),
     "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
     "unlockPremiumFeatures": MessageLookupByLibrary.simpleMessage(
@@ -757,6 +776,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tu recordatorio diario está listo 🙏",
     ),
     "yourJournal": MessageLookupByLibrary.simpleMessage("Your Journal"),
+    "yourJourneyBeginsToday": MessageLookupByLibrary.simpleMessage(
+      "✨ Tu viaje comienza hoy",
+    ),
     "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Tu contraseña "),
     "yourWeekInEmotions": MessageLookupByLibrary.simpleMessage(
       "Your Week in Emotions",

@@ -72,4 +72,15 @@ class LocalStorageRepositoryImpl implements LocalStorageRepository {
     await preferences.deleteValue(key: Constant.dailyNotificationHourKey);
     await preferences.deleteValue(key: Constant.dailyNotificationMinuteKey);
   }
+
+  @override
+  Future<String?> getThemeMode() async {
+    final result = await preferences.getValue(key: Constant.themeModeKey);
+    return result;
+  }
+
+  @override
+  Future<void> setThemeMode(String mode) async {
+    await preferences.saveValue(key: Constant.themeModeKey, value: mode);
+  }
 }

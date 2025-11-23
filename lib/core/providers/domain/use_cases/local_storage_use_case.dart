@@ -44,6 +44,14 @@ class LocalStorageUseCase extends FutureUseCase<dynamic, dynamic> {
     return _repository.deleteReminderTime();
   }
 
+  Future<String?> getThemeMode() async {
+    return _repository.getThemeMode();
+  }
+
+  Future<void> setThemeMode(String mode) async {
+    return _repository.setThemeMode(mode);
+  }
+
   @override
   Future<Result<dynamic, Exception>> run(params) {
     throw UnimplementedError();

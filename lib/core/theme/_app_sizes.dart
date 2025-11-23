@@ -41,7 +41,7 @@ abstract class AppSizes {
   static const bottomNavSelectorWidth = 48.0;
   static const bottomNavSelectorHeight = 4.0;
   static const borderWithSmall = 1.0;
-  static const homeWeekItemsWidth = 48.0;
+  static const homeWeekItemsWidth = 40.0;
   static const homeWeekItemsContainerHeight = 90.0;
   static const tagChipHeight = 32.0;
   static const filterTagChipHeight = 36.0;

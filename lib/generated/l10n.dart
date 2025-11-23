@@ -989,6 +989,11 @@ class S {
     return Intl.message('Language', name: 'language', desc: '', args: []);
   }
 
+  /// `Light`
+  String get light {
+    return Intl.message('Light', name: 'light', desc: '', args: []);
+  }
+
   /// `Select your Language`
   String get selectYourLanguage {
     return Intl.message(
@@ -1474,6 +1479,36 @@ class S {
     );
   }
 
+  /// `✨ Your journey begins today`
+  String get yourJourneyBeginsToday {
+    return Intl.message(
+      '✨ Your journey begins today',
+      name: 'yourJourneyBeginsToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unlock more devotionals, advance stats, and an ad-free experience.`
+  String get unlockMoreDevotionalsAdvanceStats {
+    return Intl.message(
+      'Unlock more devotionals, advance stats, and an ad-free experience.',
+      name: 'unlockMoreDevotionalsAdvanceStats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discover Premium`
+  String get discoverPremium {
+    return Intl.message(
+      'Discover Premium',
+      name: 'discoverPremium',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `🎉 Enjoying your experience so far?`
   String get ratingContentTitle {
     return Intl.message(
@@ -1519,6 +1554,16 @@ class S {
     return Intl.message(
       'Select an Option',
       name: 'selectAnOption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Your Theme`
+  String get selectYourTheme {
+    return Intl.message(
+      'Select Your Theme',
+      name: 'selectYourTheme',
       desc: '',
       args: [],
     );
@@ -1644,10 +1689,10 @@ class S {
     );
   }
 
-  /// `FFollow guided daily devotionals`
+  /// `Follow guided daily devotionals`
   String get ffollowGuidedDailyDevotionals {
     return Intl.message(
-      'FFollow guided daily devotionals',
+      'Follow guided daily devotionals',
       name: 'ffollowGuidedDailyDevotionals',
       desc: '',
       args: [],
@@ -1899,6 +1944,21 @@ class S {
     );
   }
 
+  /// `How are you feeling?`
+  String get howAreYouFeeling {
+    return Intl.message(
+      'How are you feeling?',
+      name: 'howAreYouFeeling',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Mood`
+  String get logMood {
+    return Intl.message('Log Mood', name: 'logMood', desc: '', args: []);
+  }
+
   /// `Please select an emotional mood`
   String get pleaseSelectEmotionalMood {
     return Intl.message(
@@ -2132,6 +2192,11 @@ class S {
   /// `Date Range`
   String get dateRange {
     return Intl.message('Date Range', name: 'dateRange', desc: '', args: []);
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message('Dark', name: 'dark', desc: '', args: []);
   }
 
   /// `No emotional moods available`
@@ -2654,6 +2719,16 @@ class S {
     );
   }
 
+  /// `App Theme`
+  String get appTheme {
+    return Intl.message(
+      'App Theme',
+      name: 'appTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Our App`
   String get ourApp {
     return Intl.message('Our App', name: 'ourApp', desc: '', args: []);
@@ -2677,6 +2752,11 @@ class S {
   /// `Support`
   String get support {
     return Intl.message('Support', name: 'support', desc: '', args: []);
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message('System', name: 'system', desc: '', args: []);
   }
 
   /// `Contact Us`

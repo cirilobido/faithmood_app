@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/core_exports.dart';
 import '../../generated/l10n.dart';
+import '../../routes/app_routes_names.dart';
 import '../../widgets/widgets_exports.dart';
 import '_home_view_model.dart';
+import 'widgets/_home_mood_selector.dart';
 
-class HomeView extends ConsumerWidget {
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends ConsumerState<HomeView> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final state = ref.read(homeViewModelProvider);
+    if (state.weekMoodSessions.isEmpty && !state.isLoadingWeekMoods) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final vm = ref.read(homeViewModelProvider.notifier);
     final state = ref.watch(homeViewModelProvider);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final lang = S.of(context);
     final userName = vm.getUserName() ?? '';
     final greeting = vm.getGreeting();
 
@@ -34,27 +54,31 @@ class HomeView extends ConsumerWidget {
               _buildHeader(context, theme, greeting, userName),
               const SizedBox(height: AppSizes.spacingLarge),
 
-              // Banner Carousel Section
-              DevotionalBanner(
-                isLoading: state.isLoadingDevotional,
-                hasError: state.errorDevotional,
-                coverImage: vm.getDevotionalCoverImage(),
-                title: vm.getDevotionalTitle(),
-                content: vm.getDevotionalContent(),
-                categoryTitle: vm.getDevotionalCategoryTitle(),
-                isPremium: vm.isDevotionalPremium(),
-              ),
-              const SizedBox(height: AppSizes.spacingXLarge),
-
-              // Week in Emotions Section
-              _buildWeekEmotionsSection(context, theme),
-              const SizedBox(height: AppSizes.spacingXLarge),
-
               // Verse of the Day Section
               VerseOfDayCard(
                 isLoading: state.isLoading,
                 verse: state.dailyVerse,
               ),
+              const SizedBox(height: AppSizes.spacingXLarge),
+
+              // Banner Carousel Section
+              // DevotionalBanner(
+              //   isLoading: state.isLoadingDevotional,
+              //   hasError: state.errorDevotional,
+              //   coverImage: vm.getDevotionalCoverImage(),
+              //   title: vm.getDevotionalTitle(),
+              //   content: vm.getDevotionalContent(),
+              //   categoryTitle: vm.getDevotionalCategoryTitle(),
+              //   isPremium: vm.isDevotionalPremium(),
+              // ),
+              // const SizedBox(height: AppSizes.spacingXLarge),
+
+              // Mood Selection Section
+              const HomeMoodSelector(),
+              const SizedBox(height: AppSizes.spacingXLarge),
+
+              // Week in Emotions Section
+              _buildWeekEmotionsSection(context, theme, ref),
               const SizedBox(height: AppSizes.spacingXLarge),
 
               // Choose Your Next Step Section
@@ -63,10 +87,13 @@ class HomeView extends ConsumerWidget {
 
               // Premium Promotion Section
               PremiumPromotionCard(
-                title: '✨ Your journey is begins today',
-                description: 'Unlock more category_devotionals, guided plans, moods, and an ad-free experience.',
-                buttonTitle: 'Discover Premium',
+                title: lang.yourJourneyBeginsToday,
+                description: lang.unlockMoreDevotionalsAdvanceStats,
+                buttonTitle: lang.discoverPremium,
                 imagePath: AppIcons.happyPetImage,
+                onButtonTap: () {
+                  context.push(Routes.subscription);
+                },
               ),
               const SizedBox(height: AppSizes.spacingLarge),
             ],
@@ -103,9 +130,19 @@ class HomeView extends ConsumerWidget {
     );
   }
 
-
-  Widget _buildWeekEmotionsSection(BuildContext context, ThemeData theme) {
+  Widget _buildWeekEmotionsSection(
+    BuildContext context,
+    ThemeData theme,
+    WidgetRef ref,
+  ) {
     final lang = S.of(context);
+    final state = ref.watch(homeViewModelProvider);
+    final vm = ref.read(homeViewModelProvider.notifier);
+
+    final weekDates = vm.getCurrentWeekDates();
+    final today = DateTime.now();
+    final todayOnly = DateTime(today.year, today.month, today.day);
+    final userLang = ref.read(authProvider).user?.lang;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,65 +165,98 @@ class HomeView extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: AppSizes.spacingMedium),
-        SizedBox(
-          height: AppSizes.homeWeekItemsContainerHeight,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 7,
-            itemBuilder: (context, index) {
-              final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-              final dates = ['04', '05', '06', '07', '08', '09', '10'];
-              final isToday = index == 3;
-              final hasEmotion = index < 4;
+        if (state.isLoadingWeekMoods)
+          SizedBox(
+            height: AppSizes.homeWeekItemsContainerHeight,
+            child: const Center(child: LoadingIndicator()),
+          )
+        else
+          SizedBox(
+            height: AppSizes.homeWeekItemsContainerHeight,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: weekDates.asMap().entries.map((entry) {
+                final index = entry.key;
+                final date = entry.value;
+                final dateOnly = DateTime(date.year, date.month, date.day);
+                final isToday = dateOnly.isAtSameMomentAs(todayOnly);
+                final isFuture = dateOnly.isAfter(todayOnly);
+                final daySessions = state.weekMoodSessions[dateOnly] ?? [];
+                final hasData = daySessions.isNotEmpty;
 
-              return Container(
-                width: AppSizes.homeWeekItemsWidth,
-                margin: const EdgeInsets.only(right: AppSizes.spacingSmall),
-                decoration: BoxDecoration(
-                  color: isToday
-                      ? theme.colorScheme.secondary.withValues(alpha: 0.60)
-                      : hasEmotion
-                      ? theme.colorScheme.primary.withValues(alpha: 0.20)
-                      : theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(AppSizes.radiusFull),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: AppSizes.paddingSmall,
-                  horizontal: AppSizes.paddingXSmall,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          days[index],
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.textTheme.labelSmall?.color!,
-                            fontWeight: FontWeight.w500,
+                Color backgroundColor;
+                if (isToday) {
+                  backgroundColor = theme.colorScheme.secondary.withValues(
+                    alpha: 0.6,
+                  );
+                } else if (isFuture) {
+                  backgroundColor = theme.colorScheme.onSurface;
+                } else{
+                  backgroundColor = theme.colorScheme.primary.withValues(
+                    alpha: 0.2,
+                  );
+                }
+
+                String? moodEmoji;
+                if (hasData && daySessions.isNotEmpty) {
+                  final firstSession = daySessions.first;
+                  moodEmoji = firstSession.emotional?.mood?.icon;
+                }
+
+                return Container(
+                  width: AppSizes.homeWeekItemsWidth,
+                  margin: EdgeInsets.only(
+                    right: index < weekDates.length - 1
+                        ? AppSizes.spacingSmall
+                        : 0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(AppSizes.radiusFull),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppSizes.paddingSmall,
+                    horizontal: AppSizes.paddingXSmall,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            vm.getDayName(date, userLang),
+                            style: theme.textTheme.labelLarge?.copyWith(
+                              color: theme.textTheme.labelSmall?.color!,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            vm.getDayNumber(date),
+                            style: theme.textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
+                      if (hasData && moodEmoji != null && moodEmoji.isNotEmpty)
+                        Text(moodEmoji, style: theme.textTheme.titleLarge)
+                      else
+                        SvgPicture.asset(
+                          AppIcons.dottedCircleIcon,
+                          width: AppSizes.iconSizeRegular,
+                          height: AppSizes.iconSizeRegular,
+                          colorFilter: ColorFilter.mode(
+                            theme.iconTheme.color!,
+                            BlendMode.srcIn,
                           ),
                         ),
-                        Text(dates[index], style: theme.textTheme.titleSmall),
-                      ],
-                    ),
-                    if (hasEmotion)
-                      Text('😁', style: theme.textTheme.titleLarge)
-                    else
-                      SvgPicture.asset(
-                        AppIcons.dottedCircleIcon,
-                        width: AppSizes.iconSizeRegular,
-                        height: AppSizes.iconSizeRegular,
-                      ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
           ),
-        ),
       ],
     );
   }
-
 
   Widget _buildNextStepSection(
     BuildContext context,
@@ -210,6 +280,9 @@ class HomeView extends ConsumerWidget {
           description: lang.ffollowGuidedDailyDevotionals,
           color: theme.colorScheme.tertiary,
           icon: AppIcons.openBookIcon,
+          onTap: () {
+            context.go(Routes.devotional);
+          },
         ),
         const SizedBox(height: AppSizes.spacingMedium),
         ActionCard(
@@ -217,9 +290,11 @@ class HomeView extends ConsumerWidget {
           description: lang.captureYourThoughtsEachDay,
           color: theme.colorScheme.primary,
           icon: AppIcons.journalIcon,
+          onTap: () {
+            context.go(Routes.journal);
+          },
         ),
       ],
     );
   }
-
 }

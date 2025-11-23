@@ -6,6 +6,7 @@ import '../../../core/core_exports.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
 import '../../../core/providers/domain/use_cases/analytics_use_case.dart';
 import '../../../core/providers/domain/use_cases/mood_use_case.dart';
+import '../../../features/home/_home_view_model.dart';
 import '_profile_state.dart';
 
 final profileViewModelProvider =
@@ -328,6 +329,13 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     }
     if (hadThisMonth) {
       unawaited(getAnalytics(AnalyticsPeriod.thisMonth, forceRefresh: true));
+    }
+    
+    // Also refresh home screen week stats since they use the same analytics cache
+    try {
+      ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
+    } catch (_) {
+      // Home view model might not be available if user is not on home screen
     }
   }
 }

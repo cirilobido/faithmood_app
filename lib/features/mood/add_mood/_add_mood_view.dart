@@ -12,13 +12,25 @@ import '_add_mood_view_model.dart';
 import 'widgets/_mood_page_switcher.dart';
 
 class AddMoodView extends ConsumerStatefulWidget {
-  const AddMoodView({super.key});
+  final Mood? preSelectedMood;
+
+  const AddMoodView({super.key, this.preSelectedMood});
 
   @override
   ConsumerState<AddMoodView> createState() => _AddMoodViewState();
 }
 
 class _AddMoodViewState extends ConsumerState<AddMoodView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.preSelectedMood != null) {
+        ref.read(addMoodViewModelProvider.notifier).setPreSelectedMood(widget.preSelectedMood);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addMoodViewModelProvider);

@@ -138,9 +138,11 @@ abstract class AppRoutes {
       GoRoute(
         path: Routes.addMood,
         pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final preSelectedMood = extra?['preSelectedMood'] as Mood?;
           return buildSlidePage(
             key: state.pageKey,
-            child: AddMoodView(),
+            child: AddMoodView(preSelectedMood: preSelectedMood),
           );
         },
       ),
