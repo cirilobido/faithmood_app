@@ -324,6 +324,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
       "No categories available",
     ),
+    "category": MessageLookupByLibrary.simpleMessage("Category"),
+    "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No tags available",
+    ),
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
       "No devotionals available",
     ),

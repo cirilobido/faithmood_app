@@ -44,6 +44,7 @@ abstract class AppSizes {
   static const borderWithSmall = 1.0;
   static const homeWeekItemsWidth = 40.0;
   static const homeWeekItemsContainerHeight = 90.0;
+  static const tagChipCardHeight = 24.0;
   static const tagChipHeight = 32.0;
   static const filterTagChipHeight = 36.0;
   static const categoryCardHeight = 180.0;

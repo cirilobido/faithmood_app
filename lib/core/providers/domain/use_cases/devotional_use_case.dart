@@ -48,6 +48,15 @@ class DevotionalUseCase extends FutureUseCase<dynamic, dynamic> {
     }
   }
 
+  Future<Result<DevotionalsResponse, Exception>> getAllDevotionals(String lang, {int? page, int? limit, int? categoryId, String? tags}) async {
+    try {
+      final result = await repository.getAllDevotionals(lang, page: page, limit: limit, categoryId: categoryId, tags: tags);
+      return Success(result ?? DevotionalsResponse(results: []));
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
   Future<Result<bool, Exception>> saveDevotionalLog(int userId, DevotionalLogRequest request) async {
     try {
       final result = await repository.saveDevotionalLog(userId, request);

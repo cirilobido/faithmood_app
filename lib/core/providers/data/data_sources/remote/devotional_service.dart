@@ -27,6 +27,13 @@ abstract class DevotionalService {
     int? page,
     int? limit,
   });
+  Future<DevotionalsResponse?> getAllDevotionals(
+    String lang, {
+    int? page,
+    int? limit,
+    int? categoryId,
+    String? tags,
+  });
   Future<bool> saveDevotionalLog(int userId, DevotionalLogRequest request);
   Future<DevotionalLogsResponse?> getDevotionalLogs(int userId, Map<String, dynamic>? queryParams);
   Future<DevotionalLog?> getDevotionalLogDetail(int userId, int id, String lang);
@@ -128,6 +135,39 @@ class DevotionalServiceImpl implements DevotionalService {
                     lang,
                     page: page,
                     limit: limit,
+                  ),
+                ),
+                jsonMapper: (data) {
+                  return DevotionalsResponse.fromJson(
+                    data as Map<String, dynamic>,
+                  );
+                },
+              )
+              as DevotionalsResponse?;
+      return request;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<DevotionalsResponse?> getAllDevotionals(
+    String lang, {
+    int? page,
+    int? limit,
+    int? categoryId,
+    String? tags,
+  }) async {
+    try {
+      final request =
+          await requestProcessor.process(
+                request: httpClient.get(
+                  Endpoints.getAllDevotionals(
+                    lang,
+                    page: page,
+                    limit: limit,
+                    categoryId: categoryId,
+                    tags: tags,
                   ),
                 ),
                 jsonMapper: (data) {

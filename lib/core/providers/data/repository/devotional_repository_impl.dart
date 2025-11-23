@@ -161,6 +161,22 @@ class DevotionalRepositoryImpl implements DevotionalRepository {
   }
 
   @override
+  Future<DevotionalsResponse?> getAllDevotionals(String lang, {int? page, int? limit, int? categoryId, String? tags}) async {
+    try {
+      final result = await devotionalService.getAllDevotionals(
+        lang,
+        page: page,
+        limit: limit,
+        categoryId: categoryId,
+        tags: tags,
+      );
+      return result;
+    } catch (e) {
+      throw Exception('Error getting all devotionals');
+    }
+  }
+
+  @override
   Future<bool> saveDevotionalLog(int userId, DevotionalLogRequest request) async {
     try {
       return await devotionalService.saveDevotionalLog(userId, request);

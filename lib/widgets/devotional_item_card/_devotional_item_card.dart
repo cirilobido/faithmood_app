@@ -23,6 +23,8 @@ class DevotionalItemCard extends StatelessWidget {
     final tagIcon = isPremium
         ? '🔒'
         : devotional.iconEmoji ?? fallbackIcon;
+    final tags = devotional.tags ?? [];
+    final hasTags = tags.isNotEmpty;
 
     return InkWell(
       splashColor: Colors.transparent,
@@ -35,6 +37,10 @@ class DevotionalItemCard extends StatelessWidget {
               ? theme.colorScheme.tertiary.withValues(alpha: 0.4)
               : theme.colorScheme.onSurface,
           borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+          border: Border.all(
+            color: theme.colorScheme.secondary,
+            width: AppSizes.borderWithSmall,
+          ),
         ),
         child: Row(
           children: [
@@ -56,6 +62,49 @@ class DevotionalItemCard extends StatelessWidget {
                       color: theme.textTheme.labelSmall?.color,
                     ),
                   ),
+                  if (hasTags) ...[
+                    const SizedBox(height: AppSizes.spacingXSmall),
+                    SizedBox(
+                      height: AppSizes.tagChipCardHeight,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: tags.map((tag) {
+                          final tagName = tag.name ?? '';
+                          if (tagName.isEmpty) return const SizedBox.shrink();
+                          return Padding(
+                            padding: const EdgeInsets.only(right: AppSizes.spacingXSmall),
+                            child: Container(
+                              padding: const EdgeInsets.all(AppSizes.paddingXSmall),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.secondary.withValues(
+                                  alpha: 0.2,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  AppSizes.radiusFull,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSizes.spacingXSmall,
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      '${tag.icon ?? ''}$tagName',
+                                      style: theme.textTheme.labelMedium?.copyWith(
+                                        color: theme.textTheme.labelSmall?.color,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -74,6 +123,7 @@ class DevotionalItemCard extends StatelessWidget {
   }
 
   Widget _buildIcon(BuildContext context, ThemeData theme, String? icon, bool isPremium) {
+    // Prioritize coverImage, then fallback to iconEmoji
     if (devotional.coverImage != null && devotional.coverImage!.isNotEmpty) {
       return ClipOval(
         child: CachedNetworkImage(
@@ -87,7 +137,9 @@ class DevotionalItemCard extends StatelessWidget {
       );
     }
 
-    if (icon != null && icon.isNotEmpty) {
+    // Fallback to iconEmoji if coverImage is not available
+    final displayIcon = icon ?? devotional.iconEmoji;
+    if (displayIcon != null && displayIcon.isNotEmpty) {
       return Container(
         width: AppSizes.iconSizeXXLarge,
         height: AppSizes.iconSizeXXLarge,
@@ -99,7 +151,7 @@ class DevotionalItemCard extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Text(
-          icon,
+          displayIcon,
           textAlign: TextAlign.center,
           style: theme.textTheme.headlineSmall,
         ),

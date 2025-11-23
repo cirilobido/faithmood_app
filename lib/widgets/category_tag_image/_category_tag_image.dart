@@ -14,7 +14,7 @@ class CategoryTagImage extends StatelessWidget {
     this.imageUrl,
     this.emoji,
     this.colorHex,
-    this.height = AppSizes.welcomeBellIconSize,
+    this.height = AppSizes.dialogIconSize,
   });
 
   @override
@@ -32,21 +32,31 @@ class CategoryTagImage extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  Widget _buildCategoryImage(BuildContext context, ThemeData theme, String imageUrl) {
+  Widget _buildCategoryImage(
+    BuildContext context,
+    ThemeData theme,
+    String imageUrl,
+  ) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         width: double.infinity,
-        height: height,
         fit: BoxFit.cover,
-        placeholder: (context, url) => _buildPlaceholder(context, theme),
-        errorWidget: (context, url, error) => _buildPlaceholder(context, theme),
+        imageBuilder: (context, imageProvider) =>
+            Image(image: imageProvider, height: height, fit: BoxFit.cover),
+        placeholder: (context, url) => SizedBox.shrink(),
+        errorWidget: (context, url, error) => SizedBox.shrink(),
       ),
     );
   }
 
-  Widget _buildTagEmoji(BuildContext context, ThemeData theme, String emoji, String? colorHex) {
+  Widget _buildTagEmoji(
+    BuildContext context,
+    ThemeData theme,
+    String emoji,
+    String? colorHex,
+  ) {
     Color? tagColor;
     if (colorHex != null && colorHex.isNotEmpty) {
       try {
@@ -61,7 +71,8 @@ class CategoryTagImage extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-        color: tagColor?.withValues(alpha: 0.2) ??
+        color:
+            tagColor?.withValues(alpha: 0.2) ??
             theme.colorScheme.secondary.withValues(alpha: 0.4),
       ),
       alignment: Alignment.center,
@@ -71,8 +82,8 @@ class CategoryTagImage extends StatelessWidget {
 
   Widget _buildPlaceholder(BuildContext context, ThemeData theme) {
     return Container(
-      height: height,
-      color: theme.colorScheme.secondary.withValues(alpha: 0.4),
+      height: AppSizes.iconSizeMedium,
+      color: Colors.transparent,
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.paddingMedium),
@@ -86,4 +97,3 @@ class CategoryTagImage extends StatelessWidget {
     );
   }
 }
-

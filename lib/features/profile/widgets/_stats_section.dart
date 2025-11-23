@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/core_exports.dart';
-import '../../../widgets/widgets_exports.dart';
 import '../_profile_view_model.dart';
 import '../../../generated/l10n.dart';
 
@@ -155,42 +154,67 @@ class _PeriodFilterDropDown extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-              title: Text(
-                lang.selectAPeriod,
-                style: theme.textTheme.titleMedium,
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: periodList.map((e) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      AnalyticsPeriod.toTitle(context: context, type: e) ?? '',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: (selectedPeriod == e)
-                            ? theme.textTheme.titleMedium?.fontWeight
-                            : null,
-                        color: (selectedPeriod == e)
-                            ? theme.colorScheme.primary
-                            : theme.textTheme.bodyLarge?.color,
-                      ),
+              child: Container(
+                padding: const EdgeInsets.all(AppSizes.paddingLarge),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            lang.selectAPeriod,
+                            style: theme.textTheme.titleLarge,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.of(context).pop(),
+                          splashColor: Colors.transparent,
+                          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                          child: SvgPicture.asset(
+                            AppIcons.closeIcon,
+                            width: AppSizes.iconSizeMedium,
+                            colorFilter: ColorFilter.mode(
+                              theme.iconTheme.color!,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      onChanged?.call(e);
-                    },
-                  );
-                }).toList(),
-              ),
-              actions: [
-                CustomButton(
-                  title: lang.cancel,
-                  type: ButtonType.neutral,
-                  isShortText: true,
-                  onTap: () => Navigator.pop(context),
+                    const SizedBox(height: AppSizes.spacingLarge),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: periodList.map((e) {
+                        return ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            AnalyticsPeriod.toTitle(context: context, type: e) ?? '',
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: (selectedPeriod == e)
+                                  ? theme.textTheme.titleMedium?.fontWeight
+                                  : null,
+                              color: (selectedPeriod == e)
+                                  ? theme.colorScheme.primary
+                                  : theme.textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            onChanged?.call(e);
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             );
           },
         );

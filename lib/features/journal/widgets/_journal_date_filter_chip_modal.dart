@@ -93,13 +93,40 @@ class _JournalDateFilterChipModalState
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
       ),
+      insetPadding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
       child: Container(
         padding: const EdgeInsets.all(AppSizes.paddingLarge),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.9,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(lang.dateRange, style: theme.textTheme.titleLarge),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    lang.dateRange,
+                    style: theme.textTheme.titleLarge,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  splashColor: Colors.transparent,
+                  overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                  child: SvgPicture.asset(
+                    AppIcons.closeIcon,
+                    width: AppSizes.iconSizeMedium,
+                    colorFilter: ColorFilter.mode(
+                      theme.iconTheme.color!,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: AppSizes.spacingLarge),
 
             InputField(

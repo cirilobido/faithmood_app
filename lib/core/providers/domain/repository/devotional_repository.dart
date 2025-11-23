@@ -5,6 +5,7 @@ abstract class DevotionalRepository {
   Future<Devotional?> getDevotionalById(int id, String lang);
   Future<DevotionalsResponse?> getDevotionalsByCategory(int categoryId, String lang, {int? page, int? limit});
   Future<DevotionalsResponse?> getDevotionalsByTag(int tagId, String lang, {int? page, int? limit});
+  Future<DevotionalsResponse?> getAllDevotionals(String lang, {int? page, int? limit, int? categoryId, String? tags});
   Future<bool> saveDevotionalLog(int userId, DevotionalLogRequest request);
   Future<DevotionalLogsResponse?> getDevotionalLogs(int userId, Map<String, dynamic>? queryParams);
   Future<DevotionalLog?> getDevotionalLogDetail(int userId, int id, String lang);

@@ -6,6 +6,7 @@ class JournalFilterChip extends StatelessWidget {
   final String label;
   final String? value;
   final bool isSelected;
+  final bool isClearFilter;
   final VoidCallback onTap;
 
   const JournalFilterChip({
@@ -13,6 +14,7 @@ class JournalFilterChip extends StatelessWidget {
     required this.label,
     this.value,
     this.isSelected = false,
+    this.isClearFilter = false,
     required this.onTap,
   });
 
@@ -32,11 +34,15 @@ class JournalFilterChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? theme.colorScheme.primary.withValues(alpha: 0.1)
+              : isClearFilter
+              ? theme.colorScheme.error.withValues(alpha: 0.1)
               : theme.colorScheme.onSurface,
           borderRadius: BorderRadius.circular(AppSizes.radiusFull),
           border: Border.all(
             color: isSelected
                 ? theme.colorScheme.primary
+                : isClearFilter
+                ? theme.colorScheme.error
                 : theme.colorScheme.outline,
             width: AppSizes.borderWithSmall,
           ),
@@ -46,12 +52,15 @@ class JournalFilterChip extends StatelessWidget {
           style: theme.textTheme.bodyMedium?.copyWith(
             color: isSelected
                 ? theme.colorScheme.onPrimary
+                : isClearFilter
+                ? theme.colorScheme.error
                 : theme.textTheme.bodyMedium?.color,
-            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+            fontWeight: isSelected || isClearFilter
+                ? FontWeight.w700
+                : FontWeight.w500,
           ),
         ),
       ),
     );
   }
 }
-

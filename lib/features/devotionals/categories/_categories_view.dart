@@ -1,22 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
 import '../../../routes/app_routes_names.dart';
 import '../../../widgets/widgets_exports.dart';
+import '../../journal/widgets/_journal_filter_chip.dart';
 import '_categories_view_model.dart';
 import '_categories_state.dart';
 
-class CategoriesView extends ConsumerWidget {
+class CategoriesView extends ConsumerStatefulWidget {
   const CategoriesView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CategoriesView> createState() => _CategoriesViewState();
+}
+
+class _CategoriesViewState extends ConsumerState<CategoriesView> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final vm = ref.read(categoriesViewModelProvider.notifier);
+    final state = ref.read(categoriesViewModelProvider);
+
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 200 &&
+        !state.isLoadingMore &&
+        !state.isLoading &&
+        state.hasMore) {
+      vm.loadMore();
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final vm = ref.read(categoriesViewModelProvider.notifier);
     final state = ref.watch(categoriesViewModelProvider);
     final theme = Theme.of(context);
+    final lang = S.of(context);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -31,53 +66,18 @@ class CategoriesView extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header Section
-                  SectionHeader(
-                    title: S.of(context).devotionals,
-                    subtitle: S.of(context).findAPlanThatFitsYourJourney,
-                    titleStyle: theme.textTheme.headlineMedium,
-                  ),
-                  const SizedBox(height: AppSizes.spacingSmall),
-
-                  // Search Bar
-                  _buildSearchBar(context, theme, vm, state),
+                  _buildHeader(context, theme, vm, state, lang),
+                  if (state.isSearchVisible) ...[
+                    const SizedBox(height: AppSizes.spacingSmall),
+                    _buildSearchBar(context, theme, vm, state, lang),
+                  ],
                   const SizedBox(height: AppSizes.spacingMedium),
-
-                  // Tags Filter Section
-                  TagsFilterSection(
-                    tags: state.tags,
-                    isLoading: state.isLoadingTags,
-                    onTagTap: (tag) {
-                      context.push(
-                        Routes.categoryDevotionals,
-                        extra: {'tag': tag},
-                      );
-                    },
-                    onViewMore: () {
-                      TagsModal.show(
-                        context: context,
-                        tags: state.tags,
-                        onTagSelected: (tag) {
-                          context.push(
-                            Routes.categoryDevotionals,
-                            extra: {'tag': tag},
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  _buildFilterChips(context, theme, vm, state, lang),
                 ],
               ),
             ),
-
-            // Scrollable Categories Section
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSizes.paddingMedium,
-                ),
-                child: _buildCategoriesSection(context, theme, state, vm),
-              ),
+              child: _buildDevotionalsSection(context, theme, state, vm, lang),
             ),
           ],
         ),
@@ -85,31 +85,125 @@ class CategoriesView extends ConsumerWidget {
     );
   }
 
+  Widget _buildHeader(
+    BuildContext context,
+    ThemeData theme,
+    CategoriesViewModel vm,
+    CategoriesState state,
+    S lang,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                lang.devotionals,
+                style: theme.textTheme.headlineMedium,
+              ),
+              const SizedBox(height: AppSizes.spacingXSmall),
+              Text(
+                lang.findAPlanThatFitsYourJourney,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.textTheme.labelSmall?.color,
+                ),
+              ),
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () => vm.toggleSearchVisibility(),
+          splashColor: Colors.transparent,
+          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+          child: SvgPicture.asset(
+            state.isSearchVisible ? AppIcons.closeIcon : AppIcons.searchIcon,
+            width: AppSizes.iconSizeLarge,
+            colorFilter: ColorFilter.mode(
+              theme.iconTheme.color!,
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
   Widget _buildSearchBar(
     BuildContext context,
     ThemeData theme,
     CategoriesViewModel vm,
     CategoriesState state,
+    S lang,
   ) {
-    final lang = S.of(context);
     return InputField(
       hintText: lang.search,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.search,
       initialValue: state.searchQuery,
       onChanged: (value) => vm.updateSearchQuery(value),
     );
   }
 
+  Widget _buildFilterChips(
+    BuildContext context,
+    ThemeData theme,
+    CategoriesViewModel vm,
+    CategoriesState state,
+    S lang,
+  ) {
+    final hasCategoryFilter = state.selectedCategory != null;
+    final hasTagsFilter = state.selectedTags.isNotEmpty;
+    final categoryValue = state.selectedCategory?.title;
+    final tagsValue = state.selectedTags.length > 0
+        ? '${lang.tags}: ${state.selectedTags.length}'
+        : null;
 
-  Widget _buildCategoriesSection(
+    return SizedBox(
+      height: AppSizes.filterTagChipHeight,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          JournalFilterChip(
+            label: lang.category,
+            value: categoryValue,
+            isSelected: hasCategoryFilter,
+            onTap: () {
+              _showCategoryFilterModal(context, theme, vm, state, lang);
+            },
+          ),
+          const SizedBox(width: AppSizes.spacingSmall),
+          JournalFilterChip(
+            label: lang.tags,
+            value: tagsValue,
+            isSelected: hasTagsFilter,
+            onTap: () {
+              _showTagsFilterModal(context, theme, vm, state, lang);
+            },
+          ),
+          if (hasCategoryFilter || hasTagsFilter) ...[
+            const SizedBox(width: AppSizes.spacingSmall),
+            JournalFilterChip(
+              label: lang.clearFilters,
+              value: null,
+              isClearFilter: true,
+              onTap: () => vm.clearFilters(),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDevotionalsSection(
     BuildContext context,
     ThemeData theme,
     CategoriesState state,
     CategoriesViewModel vm,
+    S lang,
   ) {
-    final lang = S.of(context);
-    if (state.isLoading) {
+    if (state.isLoading && state.devotionals.isEmpty) {
       return const Center(
         child: LoadingIndicator(
           padding: EdgeInsets.all(AppSizes.paddingMedium),
@@ -117,46 +211,502 @@ class CategoriesView extends ConsumerWidget {
       );
     }
 
-    if (state.error) {
+    if (state.error && state.devotionals.isEmpty) {
       return ErrorState(
-        message: lang.unableToLoadCategories,
+        message: lang.unableToLoadDevotionals,
         imagePath: AppIcons.sadPetImage,
       );
     }
 
-    // Get filtered categories based on search query
-    final filteredCategories = vm.getFilteredCategories();
+    final filteredDevotionals = vm.getFilteredDevotionals();
 
-    if (filteredCategories.isEmpty) {
+    if (filteredDevotionals.isEmpty && !state.isLoading) {
       return EmptyState(
         message: state.searchQuery.trim().isEmpty
-            ? lang.noCategoriesAvailable
-            : '${lang.noCategoriesAvailable} "${state.searchQuery}"',
+            ? lang.noDevotionalsAvailable
+            : '${lang.noDevotionalsAvailable} "${state.searchQuery}"',
       );
     }
 
-    return ListView.separated(
-      padding: const EdgeInsets.only(bottom: AppSizes.paddingMedium),
-      itemCount: filteredCategories.length,
-      separatorBuilder: (context, index) =>
-          const SizedBox(height: AppSizes.spacingMedium),
-      itemBuilder: (context, index) {
-        final category = filteredCategories[index];
-        return CategoryCard(
-          title: category.title,
-          description: category.description,
-          coverImage: category.coverImage,
-          iconEmoji: category.iconEmoji,
-          isPremium: category.isPremium ?? false,
-          onTap: () {
-            context.push(
-              Routes.categoryDevotionals,
-              extra: {'category': category},
-            );
-          },
-        );
-      },
+    return RefreshIndicator(
+      onRefresh: () => vm.refresh(),
+      child: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingMedium,
+            ),
+            sliver: SliverList.separated(
+              itemCount: filteredDevotionals.length,
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: AppSizes.spacingMedium),
+              itemBuilder: (context, index) {
+                final devotional = filteredDevotionals[index];
+                return DevotionalItemCard(
+                  devotional: devotional,
+                  onTap: () {
+                    if (devotional.id != null) {
+                      context.push(
+                        Routes.devotionalDetails,
+                        extra: {'devotionalId': devotional.id},
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+          ),
+          if (state.isLoadingMore)
+            const SliverToBoxAdapter(
+              child: LoadingIndicator(
+                padding: EdgeInsets.all(AppSizes.paddingMedium),
+              ),
+            ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: AppSizes.spacingLarge),
+          ),
+        ],
+      ),
     );
   }
 
+  void _showCategoryFilterModal(
+    BuildContext context,
+    ThemeData theme,
+    CategoriesViewModel vm,
+    CategoriesState state,
+    S lang,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) => _CategoryFilterModal(
+        categories: state.categories,
+        selectedCategory: state.selectedCategory,
+        onCategorySelected: (category) {
+          vm.selectCategory(category);
+        },
+        onClear: () {
+          vm.clearFilters();
+        },
+      ),
+    );
+  }
+
+  void _showTagsFilterModal(
+    BuildContext context,
+    ThemeData theme,
+    CategoriesViewModel vm,
+    CategoriesState state,
+    S lang,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) => _TagsFilterModal(
+        tags: state.tags,
+        selectedTags: state.selectedTags,
+        onTagsSelected: (tags) {
+          vm.setSelectedTags(tags);
+        },
+        onClear: () {
+          vm.clearFilters();
+        },
+      ),
+    );
+  }
+}
+
+class _CategoryFilterModal extends StatefulWidget {
+  final List<DevotionalCategory> categories;
+  final DevotionalCategory? selectedCategory;
+  final Function(DevotionalCategory?) onCategorySelected;
+  final VoidCallback onClear;
+
+  const _CategoryFilterModal({
+    required this.categories,
+    required this.selectedCategory,
+    required this.onCategorySelected,
+    required this.onClear,
+  });
+
+  @override
+  State<_CategoryFilterModal> createState() => _CategoryFilterModalState();
+}
+
+class _CategoryFilterModalState extends State<_CategoryFilterModal> {
+  late DevotionalCategory? _tempSelectedCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    _tempSelectedCategory = widget.selectedCategory;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final lang = S.of(context);
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+      ),
+      insetPadding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
+      child: Container(
+        padding: const EdgeInsets.all(AppSizes.paddingLarge),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.9,
+          maxHeight: MediaQuery.of(context).size.height * 0.7,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    lang.category,
+                    style: theme.textTheme.titleLarge,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  splashColor: Colors.transparent,
+                  overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                  child: SvgPicture.asset(
+                    AppIcons.closeIcon,
+                    width: AppSizes.iconSizeMedium,
+                    colorFilter: ColorFilter.mode(
+                      theme.iconTheme.color!,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSizes.spacingLarge),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.categories.isEmpty)
+                      Text(
+                        lang.noDevotionalsAvailable,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.textTheme.labelSmall?.color,
+                        ),
+                      )
+                    else
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: _buildCategoryChip(
+                              context: context,
+                              theme: theme,
+                              label: lang.all,
+                              isSelected: _tempSelectedCategory == null,
+                              onTap: () {
+                                setState(() {
+                                  _tempSelectedCategory = null;
+                                });
+                              },
+                            ),
+                          ),
+                          ...widget.categories.map((category) {
+                            final isSelected = _tempSelectedCategory?.id == category.id;
+                            return Padding(
+                              padding: const EdgeInsets.only(top: AppSizes.spacingSmall),
+                              child: Center(
+                                child: _buildCategoryChip(
+                                  context: context,
+                                  theme: theme,
+                                  label: category.title ?? '',
+                                  icon: category.iconEmoji,
+                                  isSelected: isSelected,
+                                  onTap: () {
+                                    setState(() {
+                                      _tempSelectedCategory = isSelected ? null : category;
+                                    });
+                                  },
+                                ),
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSizes.spacingLarge),
+            CustomButton(
+              title: lang.applyFilters,
+              type: ButtonType.neutral,
+              isShortText: true,
+              onTap: () {
+                widget.onCategorySelected(_tempSelectedCategory);
+                Navigator.of(context).pop();
+              },
+            ),
+            const SizedBox(height: AppSizes.spacingSmall),
+            CustomButton(
+              title: lang.clearFilters,
+              type: ButtonType.neutral,
+              style: CustomStyle.outlined,
+              isShortText: true,
+              onTap: () {
+                widget.onClear();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryChip({
+    required BuildContext context,
+    required ThemeData theme,
+    required String label,
+    String? icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingMedium,
+          vertical: AppSizes.paddingSmall,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? theme.colorScheme.primary.withValues(alpha: 0.1)
+              : theme.colorScheme.onSurface,
+          borderRadius: BorderRadius.circular(AppSizes.radiusFull),
+          border: Border.all(
+            color: isSelected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.outline,
+            width: AppSizes.borderWithSmall,
+          ),
+        ),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: AppSizes.spacingXSmall,
+          children: [
+            Text(
+              '${icon ?? ''}$label',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: isSelected
+                    ? theme.colorScheme.onPrimary
+                    : theme.textTheme.bodyMedium?.color,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TagsFilterModal extends StatefulWidget {
+  final List<Tag> tags;
+  final List<Tag> selectedTags;
+  final Function(List<Tag>) onTagsSelected;
+  final VoidCallback onClear;
+
+  const _TagsFilterModal({
+    required this.tags,
+    required this.selectedTags,
+    required this.onTagsSelected,
+    required this.onClear,
+  });
+
+  @override
+  State<_TagsFilterModal> createState() => _TagsFilterModalState();
+}
+
+class _TagsFilterModalState extends State<_TagsFilterModal> {
+  late List<Tag> _tempSelectedTags;
+
+  @override
+  void initState() {
+    super.initState();
+    _tempSelectedTags = List<Tag>.from(widget.selectedTags);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final lang = S.of(context);
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+      ),
+      insetPadding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
+      child: Container(
+        padding: const EdgeInsets.all(AppSizes.paddingLarge),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.9,
+          maxHeight: MediaQuery.of(context).size.height * 0.7,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    lang.tags,
+                    style: theme.textTheme.titleLarge,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  splashColor: Colors.transparent,
+                  overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                  child: SvgPicture.asset(
+                    AppIcons.closeIcon,
+                    width: AppSizes.iconSizeMedium,
+                    colorFilter: ColorFilter.mode(
+                      theme.iconTheme.color!,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSizes.spacingLarge),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (widget.tags.isEmpty)
+                      Text(
+                        lang.noTagsAvailable,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.textTheme.labelSmall?.color,
+                        ),
+                      )
+                      else
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: AppSizes.spacingSmall,
+                        runSpacing: AppSizes.spacingSmall,
+                        children: widget.tags.map((tag) {
+                          final isSelected = _tempSelectedTags.any((t) => t.id == tag.id);
+                          return _buildTagChip(
+                            context: context,
+                            theme: theme,
+                            label: tag.name ?? '',
+                            icon: tag.icon,
+                            isSelected: isSelected,
+                            onTap: () {
+                              setState(() {
+                                if (isSelected) {
+                                  _tempSelectedTags.removeWhere((t) => t.id == tag.id);
+                                } else {
+                                  _tempSelectedTags.add(tag);
+                                }
+                              });
+                            },
+                          );
+                        }).toList(),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSizes.spacingLarge),
+            CustomButton(
+              title: lang.applyFilters,
+              type: ButtonType.neutral,
+              isShortText: true,
+              onTap: () {
+                widget.onTagsSelected(_tempSelectedTags);
+                Navigator.of(context).pop();
+              },
+            ),
+            const SizedBox(height: AppSizes.spacingSmall),
+            CustomButton(
+              title: lang.clearFilters,
+              type: ButtonType.neutral,
+              style: CustomStyle.outlined,
+              isShortText: true,
+              onTap: () {
+                setState(() {
+                  _tempSelectedTags.clear();
+                });
+                widget.onClear();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTagChip({
+    required BuildContext context,
+    required ThemeData theme,
+    required String label,
+    String? icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingMedium,
+          vertical: AppSizes.paddingSmall,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? theme.colorScheme.primary.withValues(alpha: 0.1)
+              : theme.colorScheme.onSurface,
+          borderRadius: BorderRadius.circular(AppSizes.radiusFull),
+          border: Border.all(
+            color: isSelected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.outline,
+            width: AppSizes.borderWithSmall,
+          ),
+        ),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: AppSizes.spacingXSmall,
+          children: [
+            if (icon != null && icon.isNotEmpty)
+              Text(icon, style: theme.textTheme.bodyMedium),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: isSelected
+                    ? theme.colorScheme.onPrimary
+                    : theme.textTheme.bodyMedium?.color,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

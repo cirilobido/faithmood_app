@@ -34,6 +34,14 @@ abstract class Endpoints {
     if (limit != null) queryParams.add('limit=$limit');
     return '$devotional/category/$categoryId?${queryParams.join('&')}';
   }
+  static String getAllDevotionals(String lang, {int? page, int? limit, int? categoryId, String? tags}) {
+    final queryParams = <String>['lang=$lang'];
+    if (page != null) queryParams.add('page=$page');
+    if (limit != null) queryParams.add('limit=$limit');
+    if (categoryId != null) queryParams.add('categoryId=$categoryId');
+    if (tags != null && tags.isNotEmpty) queryParams.add('tags=$tags');
+    return '$devotional/all?${queryParams.join('&')}';
+  }
   
   static const categories = 'categories';
   static String getCategories(String lang) => '$categories/?lang=$lang';

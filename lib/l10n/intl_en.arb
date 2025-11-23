@@ -184,6 +184,8 @@
   "selectTag": "Select Tag",
   "unableToLoadCategories": "Unable to load categories",
   "noCategoriesAvailable": "No categories available",
+  "category": "Category",
+  "noTagsAvailable": "No tags available",
   "unlockNow": "Unlock Now",
   "reflectNow": "Reflect Now",
   "explore": "Explore",

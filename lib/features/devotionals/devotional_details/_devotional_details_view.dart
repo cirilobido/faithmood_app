@@ -57,7 +57,9 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   if (note != null) {
                     final success = await vm.saveReflection(note: note);
                     if (success && context.mounted) {
-                      ref.read(journalViewModelProvider.notifier).refreshDevotionalLogsIfNeeded();
+                      ref
+                          .read(journalViewModelProvider.notifier)
+                          .refreshDevotionalLogsIfNeeded();
                       CustomSnackBar.show(
                         context,
                         message: S.of(context).noteSavedSuccessfully,
@@ -75,7 +77,9 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   } else {
                     final success = await vm.saveNoteWithoutReflection();
                     if (success) {
-                      ref.read(journalViewModelProvider.notifier).refreshDevotionalLogsIfNeeded();
+                      ref
+                          .read(journalViewModelProvider.notifier)
+                          .refreshDevotionalLogsIfNeeded();
                     }
                     Navigator.of(context).pop();
                   }
@@ -120,8 +124,13 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (devotional.coverImage != null &&
+              devotional.coverImage!.isNotEmpty) ...[
+            CategoryTagImage(imageUrl: devotional.coverImage!),
+            const SizedBox(height: AppSizes.spacingMedium),
+          ],
           if (devotional.verses != null && devotional.verses!.isNotEmpty) ...[
-            VerseContent(verses: devotional.verses!)
+            VerseContent(verses: devotional.verses!),
           ],
           const SizedBox(height: AppSizes.spacingLarge),
           Text(devotional.title ?? '', style: theme.textTheme.headlineMedium),
@@ -174,7 +183,9 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
             onTap: () async {
               final success = await vm.saveReflection();
               if (success && context.mounted) {
-                ref.read(journalViewModelProvider.notifier).refreshDevotionalLogsIfNeeded();
+                ref
+                    .read(journalViewModelProvider.notifier)
+                    .refreshDevotionalLogsIfNeeded();
                 CustomSnackBar.show(
                   context,
                   message: lang.noteSavedSuccessfully,

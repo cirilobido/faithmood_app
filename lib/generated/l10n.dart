@@ -1614,6 +1614,21 @@ class S {
     );
   }
 
+  /// `Category`
+  String get category {
+    return Intl.message('Category', name: 'category', desc: '', args: []);
+  }
+
+  /// `No tags available`
+  String get noTagsAvailable {
+    return Intl.message(
+      'No tags available',
+      name: 'noTagsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unlock Now`
   String get unlockNow {
     return Intl.message('Unlock Now', name: 'unlockNow', desc: '', args: []);

@@ -337,6 +337,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCampaignsYet": MessageLookupByLibrary.simpleMessage(
       "Aún no hay campañas disponibles.",
     ),
+    "category": MessageLookupByLibrary.simpleMessage("Categoría"),
+    "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No hay etiquetas disponibles",
+    ),
     "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
       "No categories available",
     ),
