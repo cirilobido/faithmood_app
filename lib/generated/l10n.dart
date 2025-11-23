@@ -3058,6 +3058,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Finish Account Setup`
+  String get finishAccountSetup {
+    return Intl.message(
+      'Finish Account Setup',
+      name: 'finishAccountSetup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete your profile by adding your email and password.`
+  String get finishAccountSetupMessage {
+    return Intl.message(
+      'Complete your profile by adding your email and password.',
+      name: 'finishAccountSetupMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

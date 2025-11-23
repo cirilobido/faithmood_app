@@ -366,5 +366,7 @@
   "reminderNotificationTitle": "Dream time 🌙",
   "reminderNotificationMessage": "Write your dreams before they fade away.",
   "yourDailyReminderIsSet": "Your daily reminder is set",
-  "reminderDeleted": "Reminder deleted successfully"
+  "reminderDeleted": "Reminder deleted successfully",
+  "finishAccountSetup": "Finish Account Setup",
+  "finishAccountSetupMessage": "Complete your profile by adding your email and password."
 }

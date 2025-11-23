@@ -12,6 +12,7 @@ abstract class AppSizes {
   static const iconSizeRegular = 24.0;
   static const iconSizeNormal = 20.0;
   static const iconSizeSmall = 16.0;
+  static const iconSizeXSmall = 12.0;
 
   //Padding
   static const paddingXXSmall = 2.0;

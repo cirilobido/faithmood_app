@@ -366,5 +366,7 @@
   "reminderNotificationTitle": "Momento con Dios 🙏",
   "reminderNotificationMessage": "Tómate un instante para escribir cómo te sientes hoy. 📖",
   "yourDailyReminderIsSet": "Tu recordatorio diario está listo 🙏",
-  "reminderDeleted": "Recordatorio eliminado ⏳"
+  "reminderDeleted": "Recordatorio eliminado ⏳",
+  "finishAccountSetup": "Completa la configuración de tu cuenta",
+  "finishAccountSetupMessage": "Completa tu perfil agregando tu correo electrónico y contraseña."
 }

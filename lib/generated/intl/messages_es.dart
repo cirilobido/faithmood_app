@@ -483,6 +483,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderDeleted": MessageLookupByLibrary.simpleMessage(
       "Recordatorio eliminado ⏳",
     ),
+    "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
+      "Completa la configuración de tu cuenta",
+    ),
+    "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
+      "Completa tu perfil agregando tu correo electrónico y contraseña.",
+    ),
     "reminderMessage": MessageLookupByLibrary.simpleMessage(
       "Elige la hora ideal para pausar, reflexionar y acercarte a Dios cada día. ✨",
     ),

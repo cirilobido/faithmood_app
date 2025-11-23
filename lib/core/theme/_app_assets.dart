@@ -1,7 +1,6 @@
 abstract class AppIcons {
   // 🖼️ PNG
   static const appLogo = 'assets/logo/logo_transparent.png';
-  static const logoSecondary = 'assets/logo/logo_secondary.png';
   static const welcomePetImage = 'assets/img/img_welcome_pet.png';
   static const happyPetImage = 'assets/img/img_happy_pet.png';
   static const sadPetImage = 'assets/img/img_sad_pet.png';

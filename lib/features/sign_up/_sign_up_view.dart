@@ -18,16 +18,8 @@ class SignUpView extends ConsumerStatefulWidget {
 }
 
 class _SignUpViewState extends ConsumerState<SignUpView> {
-  final namePageView = 0.0;
-  final emailAndPassPageView = 1.0;
-  double _pageIndex = 0.0;
-  final PageController _pageController = PageController(initialPage: 0);
   String? privacyUrl;
   String? termsUrl;
-
-  final TextEditingController _nameController = TextEditingController();
-  final FocusNode _nameFocusNode = FocusNode();
-  bool nameError = false;
 
   final TextEditingController _emailController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
@@ -73,18 +65,21 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      AppIcons.logoSecondary,
-                      height: AppSizes.iconSizeLarge,
-                    ),
                     SizedBox(
-                      width: AppSizes.iconSizeSmall,
-                      height: AppSizes.iconSizeSmall,
-                      child: CircularProgressIndicator(
-                        value: _pageIndex.toDouble() / 2,
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          theme.colorScheme.secondary,
+                      width: AppSizes.iconSizeMedium,
+                      height: AppSizes.iconSizeMedium,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        context.pop();
+                      },
+                      child: SvgPicture.asset(
+                        AppIcons.closeIcon,
+                        width: AppSizes.iconSizeMedium,
+                        height: AppSizes.iconSizeMedium,
+                        colorFilter: ColorFilter.mode(
+                          theme.iconTheme.color!,
+                          BlendMode.srcIn,
                         ),
                       ),
                     ),
@@ -92,19 +87,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 ),
               ),
               Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (index) {
-                    setState(() {
-                      _pageIndex = index.toDouble();
-                    });
-                  },
-                  children: [
-                    SingleChildScrollView(child: _nameContent()),
-                    _mailAndPassContent(),
-                  ],
-                ),
+                child: _mailAndPassContent(),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -116,36 +99,8 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                   children: [
                     CustomButton(
                       isLoading: state.isLoading,
-                      title: _pageIndex == 2
-                          ? lang.getStarted
-                          : lang.continueText,
-                      type: (_pageIndex == 0 || _pageIndex == 2)
-                          ? ButtonType.primary
-                          : ButtonType.tertiary,
-                      style: (_pageIndex == 0 || _pageIndex == 2)
-                          ? CustomStyle.filled
-                          : CustomStyle.outlined,
+                      title: lang.continueText,
                       onTap: _handleNextPage,
-                    ),
-                    SizedBox(height: AppSizes.spacingSmall),
-                    CustomButton(
-                      title: _pageIndex == 0 ? lang.iHaveAnAccount : lang.back,
-                      type: _pageIndex == 0
-                          ? ButtonType.secondary
-                          : ButtonType.tertiary,
-                      style: CustomStyle.borderless,
-                      onTap: () {
-                        if (_pageIndex != namePageView) {
-                          _pageController.previousPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                          return;
-                        }
-                        if (context.mounted) {
-                          context.go(Routes.login);
-                        }
-                      },
                     ),
                   ],
                 ),
@@ -161,21 +116,6 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
   void _handleNextPage() async {
     final theme = Theme.of(context);
     final lang = S.of(context);
-    if (_pageIndex == namePageView) {
-      nameError =
-          InputValidations.validateName(context, _nameController.text) != null;
-      if (nameError) {
-        CustomSnackBar.show(
-          context,
-          backgroundColor: theme.colorScheme.error,
-          message: lang.nameMustBeAtLeast3CharactersLong,
-        );
-        return;
-      }
-      _nameFocusNode.unfocus();
-    }
-
-    if (_pageIndex == emailAndPassPageView) {
       if (_passController.text != _passConfirmController.text) {
         setState(() {
           passError = true;
@@ -216,18 +156,12 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
       _passConfirmFocusNode.unfocus();
       _handleRegisterUser();
       return;
-    }
-    _pageController.nextPage(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeIn,
-    );
   }
 
   _handleRegisterUser() async {
     if (_emailController.text.trim().isEmpty ||
         _passController.text.trim().isEmpty ||
-        _passConfirmController.text.trim().isEmpty ||
-        _nameController.text.trim().isEmpty) {
+        _passConfirmController.text.trim().isEmpty) {
       return;
     }
     final viewModel = ref.read(signUpViewModelProvider.notifier);
@@ -236,7 +170,6 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         email: _emailController.text.trim(),
         password: _passController.text.trim(),
         newPassword: _passConfirmController.text.trim(),
-        name: _nameController.text.trim(),
       ),
     );
     if (success && context.mounted) {
@@ -257,44 +190,6 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     );
   }
 
-  Widget _nameContent() {
-    final theme = Theme.of(context);
-    final lang = S.of(context);
-    return Padding(
-      padding: EdgeInsets.all(AppSizes.paddingMedium),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(lang.whatsYourName, style: theme.textTheme.displaySmall),
-          Text(
-            lang.signUpNameMessage,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.textTheme.labelSmall?.color!,
-            ),
-          ),
-          const SizedBox(height: AppSizes.spacingLarge),
-          InputField(
-            label: lang.firstName,
-            hintText: 'John',
-            required: true,
-            maxLength: 50,
-            textCapitalization: TextCapitalization.words,
-            controller: _nameController,
-            focusNode: _nameFocusNode,
-            autoValidateMode: AutovalidateMode.onUserInteraction,
-            validations: [FieldTypeValidation.name],
-            onChanged: (value) {
-              setState(() {
-                nameError =
-                    InputValidations.validateName(context, value) != null;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _mailAndPassContent() {
     final theme = Theme.of(context);
     final lang = S.of(context);
@@ -304,14 +199,14 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(lang.emailPassword, style: theme.textTheme.displaySmall),
+            Text(lang.emailPassword, style: theme.textTheme.headlineLarge),
             Text(
               lang.signUpEmailMessage,
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.textTheme.labelSmall?.color!,
               ),
             ),
-            const SizedBox(height: AppSizes.spacingLarge),
+            const SizedBox(height: AppSizes.spacingXLarge),
             InputField(
               required: true,
               hintText: 'user@gmail.com',
@@ -331,7 +226,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 });
               },
             ),
-            const SizedBox(height: AppSizes.spacingMedium),
+            const SizedBox(height: AppSizes.spacingLarge),
             InputField(
               required: true,
               hintText: '---------',
@@ -366,7 +261,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 });
               },
             ),
-            const SizedBox(height: AppSizes.spacingMedium),
+            const SizedBox(height: AppSizes.spacingLarge),
             InputField(
               required: true,
               hintText: '---------',
@@ -445,13 +340,10 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   void dispose() {
-    _pageController.dispose();
-    _nameController.dispose();
     _emailController.dispose();
     _passController.dispose();
     _passConfirmController.dispose();
 
-    _nameFocusNode.dispose();
     _emailFocusNode.dispose();
     _passFocusNode.dispose();
     _passConfirmFocusNode.dispose();

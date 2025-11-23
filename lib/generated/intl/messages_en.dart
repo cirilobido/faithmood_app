@@ -459,6 +459,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderDeleted": MessageLookupByLibrary.simpleMessage(
       "Reminder deleted successfully",
     ),
+    "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
+      "Finish Account Setup",
+    ),
+    "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
+      "Complete your profile by adding your email and password.",
+    ),
     "reminderMessage": MessageLookupByLibrary.simpleMessage(
       "Set a daily reminder to help you stay connected with your faith journey.",
     ),

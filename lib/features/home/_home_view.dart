@@ -61,6 +61,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
               ),
               const SizedBox(height: AppSizes.spacingXLarge),
 
+              // Account Setup Alert
+              if (_shouldShowAccountSetupAlert(ref))
+                ...[
+                  const AccountSetupAlert(),
+                  const SizedBox(height: AppSizes.spacingLarge),
+                ],
+
               // Banner Carousel Section
               // DevotionalBanner(
               //   isLoading: state.isLoadingDevotional,
@@ -256,6 +263,12 @@ class _HomeViewState extends ConsumerState<HomeView> {
           ),
       ],
     );
+  }
+
+  bool _shouldShowAccountSetupAlert(WidgetRef ref) {
+    final user = ref.watch(authProvider).user;
+    final email = user?.email;
+    return email == null || email.isEmpty;
   }
 
   Widget _buildNextStepSection(
