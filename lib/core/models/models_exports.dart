@@ -10,6 +10,7 @@ export 'user/_auth_request.dart';
 export 'user/_lang.dart';
 export 'verse/_verse.dart';
 export 'verse/_verse_book.dart';
+export 'verse/_verse_translation.dart';
 export 'verse/_verse_response.dart';
 export 'devotional/_devotional.dart';
 export 'devotional/_devotional_category.dart';

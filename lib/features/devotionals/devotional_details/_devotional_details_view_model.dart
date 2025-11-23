@@ -12,6 +12,7 @@ final devotionalDetailsViewModelProvider = StateNotifierProvider.autoDispose.fam
     ref,
     ref.read(devotionalUseCaseProvider),
     ref.read(authProvider),
+    ref.read(ttsServiceProvider),
     devotionalId,
   );
 });
@@ -20,15 +21,26 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
   final Ref ref;
   final DevotionalUseCase devotionalUseCase;
   final AuthProvider authProvider;
+  final TtsService ttsService;
   final int devotionalId;
 
   DevotionalDetailsViewModel(
     this.ref,
     this.devotionalUseCase,
     this.authProvider,
+    this.ttsService,
     this.devotionalId,
   ) : super(DevotionalDetailsState()) {
     _loadDevotional();
+    ttsService.onStateChanged = _syncTtsState;
+  }
+
+  void _syncTtsState() {
+    updateState(
+      isPlaying: ttsService.isPlaying,
+      isPaused: ttsService.isPaused,
+      isStopped: !ttsService.isPlaying && !ttsService.isPaused,
+    );
   }
 
   void updateState({
@@ -40,6 +52,9 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
     bool? isSaved,
     bool? hasUnsavedChanges,
     bool? isFavorite,
+    bool? isPlaying,
+    bool? isPaused,
+    bool? isStopped,
   }) {
     state = state.copyWith(
       isLoading: isLoading,
@@ -50,6 +65,9 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       isSaved: isSaved,
       hasUnsavedChanges: hasUnsavedChanges,
       isFavorite: isFavorite,
+      isPlaying: isPlaying,
+      isPaused: isPaused,
+      isStopped: isStopped,
     );
   }
 
@@ -181,6 +199,133 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
 
   void toggleFavorite() {
     updateState(isFavorite: !state.isFavorite);
+  }
+
+  String _formatDevotionalText(Devotional devotional, String userLang) {
+    final buffer = StringBuffer();
+
+    if (devotional.title != null && devotional.title!.isNotEmpty) {
+      buffer.writeln(devotional.title!);
+      buffer.writeln();
+    }
+
+    if (devotional.verses != null && devotional.verses!.isNotEmpty) {
+      for (final verse in devotional.verses!) {
+        final verseRef = verse.getFormattedRef();
+        if (verseRef.isNotEmpty) {
+          buffer.writeln(verseRef);
+        }
+
+        VerseTranslation? translation;
+        if (verse.translations != null && verse.translations!.isNotEmpty) {
+          translation = verse.translations!.firstWhere(
+            (t) => t.lang == userLang,
+            orElse: () => verse.translations!.first,
+          );
+        }
+
+        final verseText = translation?.text ?? verse.text ?? '';
+        if (verseText.isNotEmpty) {
+          buffer.writeln(verseText);
+        }
+        buffer.writeln();
+      }
+    }
+
+    if (devotional.content != null && devotional.content!.isNotEmpty) {
+      buffer.writeln(devotional.content!);
+      buffer.writeln();
+    }
+
+    if (devotional.reflection != null && devotional.reflection!.isNotEmpty) {
+      buffer.writeln(devotional.reflection!);
+    }
+
+    return buffer.toString().trim();
+  }
+
+  Future<void> playTTS() async {
+    final devotional = state.devotional;
+    if (devotional == null) return;
+
+    try {
+      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final languageSet = await ttsService.setLanguage(userLang);
+      
+      if (!languageSet) {
+        devLogger('Failed to set TTS language');
+      }
+
+      final text = _formatDevotionalText(devotional, userLang);
+      if (text.isEmpty) {
+        devLogger('No text to speak');
+        return;
+      }
+
+      final success = await ttsService.speak(text);
+      if (success) {
+        updateState(
+          isPlaying: true,
+          isPaused: false,
+          isStopped: false,
+        );
+      } else {
+        updateState(
+          isPlaying: false,
+          isPaused: false,
+          isStopped: true,
+        );
+      }
+    } catch (e) {
+      devLogger('Error playing TTS: $e');
+      updateState(
+        isPlaying: false,
+        isPaused: false,
+        isStopped: true,
+      );
+    }
+  }
+
+  Future<void> pauseTTS() async {
+    try {
+      final success = await ttsService.pause();
+      if (success) {
+        updateState(
+          isPlaying: false,
+          isPaused: true,
+          isStopped: false,
+        );
+      }
+    } catch (e) {
+      devLogger('Error pausing TTS: $e');
+    }
+  }
+
+  Future<void> stopTTS() async {
+    try {
+      final success = await ttsService.stop();
+      if (success) {
+        updateState(
+          isPlaying: false,
+          isPaused: false,
+          isStopped: true,
+        );
+      }
+    } catch (e) {
+      devLogger('Error stopping TTS: $e');
+      updateState(
+        isPlaying: false,
+        isPaused: false,
+        isStopped: true,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    ttsService.onStateChanged = null;
+    ttsService.stop();
+    super.dispose();
   }
 }
 

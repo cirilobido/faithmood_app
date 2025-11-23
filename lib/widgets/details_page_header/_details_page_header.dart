@@ -173,3 +173,64 @@ class FavoriteHeaderAction extends DetailsPageHeaderAction {
   }
 }
 
+class CompositeHeaderAction extends DetailsPageHeaderAction {
+  final List<Widget> actions;
+
+  CompositeHeaderAction({
+    required this.actions,
+  });
+
+  @override
+  Widget build(BuildContext context, ThemeData theme) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: actions
+          .map((action) => Padding(
+                padding: const EdgeInsets.only(left: AppSizes.spacingMedium),
+                child: action,
+              ))
+          .toList(),
+    );
+  }
+}
+
+class TtsHeaderAction extends DetailsPageHeaderAction {
+  final bool isPlaying;
+  final bool isPaused;
+  final VoidCallback onTap;
+
+  TtsHeaderAction({
+    required this.isPlaying,
+    required this.isPaused,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context, ThemeData theme) {
+    IconData icon;
+    Color? iconColor;
+
+    if (isPlaying) {
+      icon = Icons.pause;
+      iconColor = theme.colorScheme.primary;
+    } else if (isPaused) {
+      icon = Icons.play_arrow;
+      iconColor = theme.colorScheme.primary;
+    } else {
+      icon = Icons.volume_up;
+      iconColor = theme.primaryIconTheme.color;
+    }
+
+    return InkWell(
+      onTap: onTap,
+      splashColor: Colors.transparent,
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      child: Icon(
+        icon,
+        size: AppSizes.iconSizeMedium,
+        color: iconColor,
+      ),
+    );
+  }
+}
+

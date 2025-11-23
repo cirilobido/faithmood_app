@@ -48,6 +48,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
             DetailsPageHeader(
               title: S.of(context).devotional,
               onBack: () async {
+                await vm.stopTTS();
                 if (state.hasUnsavedChanges && !state.isSaved) {
                   final note = await SaveNoteModal.show(
                     context: context,
@@ -87,9 +88,29 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   Navigator.of(context).pop();
                 }
               },
-              action: FavoriteHeaderAction(
-                isFavorite: state.isFavorite,
-                onToggle: () => vm.toggleFavorite(),
+              action: CompositeHeaderAction(
+                actions: [
+                  TtsHeaderAction(
+                    isPlaying: state.isPlaying,
+                    isPaused: state.isPaused,
+                    onTap: () async {
+                      if (state.isPlaying) {
+                        await vm.pauseTTS();
+                      } else if (state.isPaused) {
+                        await vm.playTTS();
+                      } else {
+                        if (state.devotional == null) {
+                          return;
+                        }
+                        await vm.playTTS();
+                      }
+                    },
+                  ).build(context, theme),
+                  FavoriteHeaderAction(
+                    isFavorite: state.isFavorite,
+                    onToggle: () => vm.toggleFavorite(),
+                  ).build(context, theme),
+                ],
               ),
             ),
             Expanded(

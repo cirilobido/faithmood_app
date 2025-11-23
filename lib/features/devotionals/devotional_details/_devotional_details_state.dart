@@ -9,6 +9,9 @@ class DevotionalDetailsState {
   bool isSaved;
   bool hasUnsavedChanges;
   bool isFavorite;
+  bool isPlaying;
+  bool isPaused;
+  bool isStopped;
 
   DevotionalDetailsState({
     this.isLoading = false,
@@ -19,6 +22,9 @@ class DevotionalDetailsState {
     this.isSaved = false,
     this.hasUnsavedChanges = false,
     this.isFavorite = false,
+    this.isPlaying = false,
+    this.isPaused = false,
+    this.isStopped = true,
   });
 
   DevotionalDetailsState copyWith({
@@ -30,6 +36,9 @@ class DevotionalDetailsState {
     bool? isSaved,
     bool? hasUnsavedChanges,
     bool? isFavorite,
+    bool? isPlaying,
+    bool? isPaused,
+    bool? isStopped,
   }) {
     return DevotionalDetailsState(
       isLoading: isLoading ?? this.isLoading,
@@ -40,6 +49,9 @@ class DevotionalDetailsState {
       isSaved: isSaved ?? this.isSaved,
       hasUnsavedChanges: hasUnsavedChanges ?? this.hasUnsavedChanges,
       isFavorite: isFavorite ?? this.isFavorite,
+      isPlaying: isPlaying ?? this.isPlaying,
+      isPaused: isPaused ?? this.isPaused,
+      isStopped: isStopped ?? this.isStopped,
     );
   }
 }
