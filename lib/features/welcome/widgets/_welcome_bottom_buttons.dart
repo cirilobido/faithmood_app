@@ -1,6 +1,8 @@
 import 'package:faithmood_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/core_exports.dart';
+import '../../../routes/app_routes_names.dart';
 import '../../../widgets/widgets_exports.dart';
 
 class WelcomeBottomButtons extends StatelessWidget {
@@ -61,6 +63,17 @@ class WelcomeBottomButtons extends StatelessWidget {
               style: CustomStyle.filled,
               onTap: onPrimaryTapOverride ?? onNext,
             ),
+
+          if (index == 0) ...[
+            SizedBox(height: AppSizes.spacingSmall),
+            CustomButton(
+              title: lang.iHaveAnAccount,
+              type: ButtonType.neutral,
+              style: CustomStyle.borderless,
+              isShortText: true,
+              onTap: () => context.go(Routes.login),
+            ),
+          ],
 
           if (index == 9) ...[
             SizedBox(height: AppSizes.spacingSmall),
