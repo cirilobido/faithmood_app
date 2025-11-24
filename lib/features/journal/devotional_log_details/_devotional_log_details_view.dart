@@ -57,9 +57,38 @@ class _DevotionalLogDetailsViewState
           children: [
             DetailsPageHeader(
               title: lang.journalEntry,
-              action: MenuHeaderAction(
+              onBack: () async {
+                final vm = ref.read(
+                  devotionalLogDetailsViewModelProvider(widget.id).notifier,
+                );
+                await vm.stopTTS();
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              action: DevotionalLogOptionsHeaderAction(
                 onEdit: () => _handleEdit(context),
                 onDelete: () => _handleDelete(context, theme, lang),
+                isPlaying: state.isPlaying,
+                isPaused: state.isPaused,
+                onTtsTap: () async {
+                  final vm = ref.read(
+                    devotionalLogDetailsViewModelProvider(widget.id).notifier,
+                  );
+                  if (state.isPlaying) {
+                    await vm.pauseTTS();
+                  } else if (state.isPaused) {
+                    await vm.playTTS();
+                  } else {
+                    await vm.playTTS();
+                  }
+                  if (context.mounted) {
+                    TtsPlayerDialog.showDevotionalLog(
+                      context: context,
+                      id: widget.id,
+                    );
+                  }
+                },
               ),
             ),
             Expanded(

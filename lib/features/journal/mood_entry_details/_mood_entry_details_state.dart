@@ -8,6 +8,12 @@ class MoodEntryDetailsState {
   final bool isEditing;
   final bool isUpdating;
   final String? editedNote;
+  final bool isPlaying;
+  final bool isPaused;
+  final bool isStopped;
+  final int currentPosition;
+  final int totalLength;
+  final double progress;
 
   MoodEntryDetailsState({
     this.isLoading = false,
@@ -17,6 +23,12 @@ class MoodEntryDetailsState {
     this.isEditing = false,
     this.isUpdating = false,
     this.editedNote,
+    this.isPlaying = false,
+    this.isPaused = false,
+    this.isStopped = true,
+    this.currentPosition = 0,
+    this.totalLength = 0,
+    this.progress = 0.0,
   });
 
   MoodEntryDetailsState copyWith({
@@ -27,6 +39,12 @@ class MoodEntryDetailsState {
     bool? isEditing,
     bool? isUpdating,
     String? editedNote,
+    bool? isPlaying,
+    bool? isPaused,
+    bool? isStopped,
+    int? currentPosition,
+    int? totalLength,
+    double? progress,
   }) {
     return MoodEntryDetailsState(
       isLoading: isLoading ?? this.isLoading,
@@ -36,6 +54,12 @@ class MoodEntryDetailsState {
       isEditing: isEditing ?? this.isEditing,
       isUpdating: isUpdating ?? this.isUpdating,
       editedNote: editedNote ?? this.editedNote,
+      isPlaying: isPlaying ?? this.isPlaying,
+      isPaused: isPaused ?? this.isPaused,
+      isStopped: isStopped ?? this.isStopped,
+      currentPosition: currentPosition ?? this.currentPosition,
+      totalLength: totalLength ?? this.totalLength,
+      progress: progress ?? this.progress,
     );
   }
 }

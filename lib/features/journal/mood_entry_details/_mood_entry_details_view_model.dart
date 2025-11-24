@@ -8,32 +8,254 @@ import '_mood_entry_details_state.dart';
 final moodEntryDetailsViewModelProvider =
     StateNotifierProvider.autoDispose.family<MoodEntryDetailsViewModel, MoodEntryDetailsState, String>(
   (ref, sessionId) {
-    return MoodEntryDetailsViewModel(
+    final viewModel = MoodEntryDetailsViewModel(
       ref.read(moodUseCaseProvider),
       ref.read(authProvider),
+      ref.read(ttsServiceProvider),
       sessionId,
     );
+    ref.onDispose(() {
+      viewModel._mounted = false;
+      viewModel.dispose();
+    });
+    return viewModel;
   },
 );
 
 class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
   final MoodUseCase moodUseCase;
   final AuthProvider authProvider;
+  final TtsService ttsService;
   final String sessionId;
   bool _mounted = true;
 
   MoodEntryDetailsViewModel(
     this.moodUseCase,
     this.authProvider,
+    this.ttsService,
     this.sessionId,
   ) : super(MoodEntryDetailsState()) {
     loadMoodSessionDetail();
+    _syncTtsState();
   }
 
   @override
   void dispose() {
     _mounted = false;
+    ttsService.onStateChanged = null;
+    ttsService.onProgressChanged = null;
+    ttsService.stop();
     super.dispose();
+  }
+
+  void _syncTtsState() {
+    ttsService.onStateChanged = () {
+      if (!_mounted) return;
+      updateState(
+        isPlaying: ttsService.isPlaying,
+        isPaused: ttsService.isPaused,
+        isStopped: !ttsService.isPlaying && !ttsService.isPaused,
+        currentPosition: ttsService.currentPosition,
+        totalLength: ttsService.totalLength,
+        progress: ttsService.progress,
+      );
+    };
+
+    ttsService.onProgressChanged = (progress) {
+      if (!_mounted) return;
+      updateState(
+        currentPosition: ttsService.currentPosition,
+        totalLength: ttsService.totalLength,
+        progress: progress,
+      );
+    };
+  }
+
+  String _formatMoodEntryText(MoodSession session, String userLang) {
+    final buffer = StringBuffer();
+
+    if (session.aiVerse != null) {
+      final verse = session.aiVerse!;
+      final verseRef = verse.getFormattedRef();
+      if (verseRef.isNotEmpty) {
+        buffer.writeln(verseRef);
+      }
+
+      VerseTranslation? translation;
+      if (verse.translations != null && verse.translations!.isNotEmpty) {
+        translation = verse.translations!.firstWhere(
+          (t) => t.lang == userLang,
+          orElse: () => verse.translations!.first,
+        );
+      }
+
+      final verseText = translation?.text ?? verse.text ?? '';
+      if (verseText.isNotEmpty) {
+        buffer.writeln(verseText);
+      }
+      buffer.writeln();
+    }
+
+    final emotionalMood = session.emotional?.mood;
+    final spiritualMood = session.spiritual?.mood;
+
+    String getMoodName(Mood? mood) {
+      if (mood == null) return '';
+      return mood.translations?.first.name ?? mood.name ?? '';
+    }
+
+    final emotionalMoodName = getMoodName(emotionalMood);
+    final spiritualMoodName = getMoodName(spiritualMood);
+
+    if (emotionalMoodName.isNotEmpty || spiritualMoodName.isNotEmpty) {
+      if (emotionalMoodName.isNotEmpty) {
+        buffer.writeln('Feeling: $emotionalMoodName');
+      }
+      if (spiritualMoodName.isNotEmpty) {
+        buffer.writeln('Spirit: $spiritualMoodName');
+      }
+      buffer.writeln();
+    }
+
+    final aiReflection =
+        session.emotional?.aiReflection ?? session.spiritual?.aiReflection;
+    if (aiReflection != null && aiReflection.isNotEmpty) {
+      buffer.writeln(aiReflection);
+    }
+
+    return buffer.toString().trim();
+  }
+
+  Future<void> playTTS() async {
+    final session = state.moodSession;
+    if (session == null) return;
+
+    try {
+      if (state.isPaused) {
+        final success = await ttsService.resume();
+        if (success) {
+          updateState(
+            isPlaying: true,
+            isPaused: false,
+            isStopped: false,
+          );
+        }
+        return;
+      }
+
+      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final languageSet = await ttsService.setLanguage(userLang);
+      
+      if (!languageSet) {
+        devLogger('Failed to set TTS language');
+      }
+
+      final text = _formatMoodEntryText(session, userLang);
+      if (text.isEmpty) {
+        devLogger('No text to speak');
+        return;
+      }
+
+      final success = await ttsService.speak(text);
+      if (success) {
+        updateState(
+          isPlaying: true,
+          isPaused: false,
+          isStopped: false,
+          totalLength: ttsService.totalLength,
+          currentPosition: 0,
+          progress: 0.0,
+        );
+      } else {
+        updateState(
+          isPlaying: false,
+          isPaused: false,
+          isStopped: true,
+        );
+      }
+    } catch (e) {
+      devLogger('Error playing TTS: $e');
+      updateState(
+        isPlaying: false,
+        isPaused: false,
+        isStopped: true,
+      );
+    }
+  }
+
+  Future<void> pauseTTS() async {
+    try {
+      final success = await ttsService.pause();
+      if (success) {
+        updateState(
+          isPlaying: false,
+          isPaused: true,
+          isStopped: false,
+        );
+      }
+    } catch (e) {
+      devLogger('Error pausing TTS: $e');
+    }
+  }
+
+  Future<void> stopTTS() async {
+    try {
+      final success = await ttsService.stop();
+      if (success) {
+        updateState(
+          isPlaying: false,
+          isPaused: false,
+          isStopped: true,
+          currentPosition: 0,
+          progress: 0.0,
+        );
+      }
+    } catch (e) {
+      devLogger('Error stopping TTS: $e');
+      updateState(
+        isPlaying: false,
+        isPaused: false,
+        isStopped: true,
+        currentPosition: 0,
+        progress: 0.0,
+      );
+    }
+  }
+
+  Future<void> seekToPosition(double progress) async {
+    try {
+      if (state.totalLength == 0) return;
+
+      final position = (progress * state.totalLength).round();
+      final wasPlaying = state.isPlaying || state.isPaused;
+      
+      updateState(
+        isPlaying: true,
+        isPaused: false,
+        isStopped: false,
+        currentPosition: position,
+        progress: progress,
+      );
+
+      final success = await ttsService.seekToPosition(position);
+      if (!success && wasPlaying) {
+        updateState(
+          isPlaying: false,
+          isPaused: true,
+          isStopped: false,
+        );
+      }
+    } catch (e) {
+      devLogger('Error seeking TTS: $e');
+      final wasPlaying = state.isPlaying || state.isPaused;
+      if (wasPlaying) {
+        updateState(
+          isPlaying: false,
+          isPaused: true,
+          isStopped: false,
+        );
+      }
+    }
   }
 
   void updateState({
@@ -44,6 +266,12 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
     bool? isEditing,
     bool? isUpdating,
     String? editedNote,
+    bool? isPlaying,
+    bool? isPaused,
+    bool? isStopped,
+    int? currentPosition,
+    int? totalLength,
+    double? progress,
   }) {
     if (!_mounted) return;
     state = state.copyWith(
@@ -54,6 +282,12 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       isEditing: isEditing,
       isUpdating: isUpdating,
       editedNote: editedNote,
+      isPlaying: isPlaying,
+      isPaused: isPaused,
+      isStopped: isStopped,
+      currentPosition: currentPosition,
+      totalLength: totalLength,
+      progress: progress,
     );
   }
 

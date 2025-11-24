@@ -51,9 +51,38 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
           children: [
             DetailsPageHeader(
               title: lang.journalEntry,
-              action: MenuHeaderAction(
+              onBack: () async {
+                final vm = ref.read(
+                  moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                );
+                await vm.stopTTS();
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              action: MoodEntryOptionsHeaderAction(
                 onEdit: () => _handleEdit(context),
                 onDelete: () => _handleDelete(context, theme, lang),
+                isPlaying: state.isPlaying,
+                isPaused: state.isPaused,
+                onTtsTap: () async {
+                  final vm = ref.read(
+                    moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                  );
+                  if (state.isPlaying) {
+                    await vm.pauseTTS();
+                  } else if (state.isPaused) {
+                    await vm.playTTS();
+                  } else {
+                    await vm.playTTS();
+                  }
+                  if (context.mounted) {
+                    TtsPlayerDialog.showMoodEntry(
+                      context: context,
+                      sessionId: widget.sessionId,
+                    );
+                  }
+                },
               ),
             ),
             Expanded(

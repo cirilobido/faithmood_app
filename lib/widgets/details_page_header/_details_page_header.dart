@@ -325,3 +325,229 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
   }
 }
 
+class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final bool isPlaying;
+  final bool isPaused;
+  final VoidCallback onTtsTap;
+
+  MoodEntryOptionsHeaderAction({
+    this.onEdit,
+    this.onDelete,
+    required this.isPlaying,
+    required this.isPaused,
+    required this.onTtsTap,
+  });
+
+  @override
+  Widget build(BuildContext context, ThemeData theme) {
+    final lang = S.of(context);
+    return SizedBox(
+      width: AppSizes.iconSizeNormal,
+      height: AppSizes.iconSizeNormal,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: PopupMenuButton<String>(
+          padding: EdgeInsets.zero,
+          iconSize: AppSizes.iconSizeMedium,
+          splashRadius: AppSizes.iconSizeMedium / 2,
+          icon: SvgPicture.asset(
+            AppIcons.moreVerticalIcon,
+            width: AppSizes.iconSizeMedium,
+            height: AppSizes.iconSizeMedium,
+            colorFilter: ColorFilter.mode(
+              theme.primaryIconTheme.color!,
+              BlendMode.srcIn,
+            ),
+          ),
+          onSelected: (value) {
+            if (value == 'tts') {
+              onTtsTap();
+            } else if (value == 'edit' && onEdit != null) {
+              onEdit!();
+            } else if (value == 'delete' && onDelete != null) {
+              onDelete!();
+            }
+          },
+          itemBuilder: (BuildContext context) => [
+            PopupMenuItem<String>(
+              value: 'tts',
+              child: Row(
+                children: [
+                  Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: AppSizes.iconSizeNormal,
+                    color: theme.iconTheme.color,
+                  ),
+                  const SizedBox(width: AppSizes.spacingSmall),
+                  Text(
+                    isPlaying ? 'Pause' : 'Play',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (onEdit != null)
+              PopupMenuItem<String>(
+                value: 'edit',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      size: AppSizes.iconSizeNormal,
+                      color: theme.iconTheme.color,
+                    ),
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      lang.edit,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (onDelete != null)
+              PopupMenuItem<String>(
+                value: 'delete',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      size: AppSizes.iconSizeNormal,
+                      color: theme.colorScheme.error,
+                    ),
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      lang.delete,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DevotionalLogOptionsHeaderAction extends DetailsPageHeaderAction {
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final bool isPlaying;
+  final bool isPaused;
+  final VoidCallback onTtsTap;
+
+  DevotionalLogOptionsHeaderAction({
+    this.onEdit,
+    this.onDelete,
+    required this.isPlaying,
+    required this.isPaused,
+    required this.onTtsTap,
+  });
+
+  @override
+  Widget build(BuildContext context, ThemeData theme) {
+    final lang = S.of(context);
+    return SizedBox(
+      width: AppSizes.iconSizeNormal,
+      height: AppSizes.iconSizeNormal,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: PopupMenuButton<String>(
+          padding: EdgeInsets.zero,
+          iconSize: AppSizes.iconSizeMedium,
+          splashRadius: AppSizes.iconSizeMedium / 2,
+          icon: SvgPicture.asset(
+            AppIcons.moreVerticalIcon,
+            width: AppSizes.iconSizeMedium,
+            height: AppSizes.iconSizeMedium,
+            colorFilter: ColorFilter.mode(
+              theme.primaryIconTheme.color!,
+              BlendMode.srcIn,
+            ),
+          ),
+          onSelected: (value) {
+            if (value == 'tts') {
+              onTtsTap();
+            } else if (value == 'edit' && onEdit != null) {
+              onEdit!();
+            } else if (value == 'delete' && onDelete != null) {
+              onDelete!();
+            }
+          },
+          itemBuilder: (BuildContext context) => [
+            PopupMenuItem<String>(
+              value: 'tts',
+              child: Row(
+                children: [
+                  Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: AppSizes.iconSizeNormal,
+                    color: theme.iconTheme.color,
+                  ),
+                  const SizedBox(width: AppSizes.spacingSmall),
+                  Text(
+                    isPlaying ? 'Pause' : 'Play',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (onEdit != null)
+              PopupMenuItem<String>(
+                value: 'edit',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      size: AppSizes.iconSizeNormal,
+                      color: theme.iconTheme.color,
+                    ),
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      lang.edit,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (onDelete != null)
+              PopupMenuItem<String>(
+                value: 'delete',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      size: AppSizes.iconSizeNormal,
+                      color: theme.colorScheme.error,
+                    ),
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      lang.delete,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

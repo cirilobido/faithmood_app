@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../core/core_exports.dart';
 import '../widgets_exports.dart';
 import '../../features/devotionals/devotional_details/_devotional_details_view_model.dart';
+import '../../features/journal/mood_entry_details/_mood_entry_details_view_model.dart';
+import '../../features/journal/devotional_log_details/_devotional_log_details_view_model.dart';
 
 class TtsPlayerDialog {
   static Future<void> show({
@@ -134,6 +136,185 @@ class TtsPlayerDialog {
         textAlign: TextAlign.center,
         style: theme.textTheme.headlineMedium,
       ),
+    );
+  }
+
+  static Future<void> showMoodEntry({
+    required BuildContext context,
+    required String sessionId,
+  }) {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext dialogContext) {
+        return Consumer(
+          builder: (context, ref, child) {
+            final state = ref.watch(
+              moodEntryDetailsViewModelProvider(sessionId),
+            );
+            final vm = ref.read(
+              moodEntryDetailsViewModelProvider(sessionId).notifier,
+            );
+            final theme = Theme.of(context);
+            
+            if (state.moodSession == null) {
+              return const SizedBox.shrink();
+            }
+            
+            final session = state.moodSession!;
+            final emotionalMood = session.emotional?.mood;
+            final spiritualMood = session.spiritual?.mood;
+            final moodIcon = emotionalMood?.icon ?? spiritualMood?.icon ?? '💭';
+            
+            return AlertDialog(
+              alignment: Alignment.center,
+              contentPadding: const EdgeInsets.all(AppSizes.paddingMedium),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(width: AppSizes.iconSizeRegular),
+                      Expanded(
+                        child: Text(
+                          'Journal Entry',
+                          style: theme.textTheme.titleMedium,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => Navigator.of(dialogContext).pop(),
+                        child: SvgPicture.asset(
+                          AppIcons.closeIcon,
+                          width: AppSizes.iconSizeMedium,
+                          height: AppSizes.iconSizeMedium,
+                          colorFilter: ColorFilter.mode(
+                            theme.primaryIconTheme.color!,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.spacingLarge),
+                  _buildEmojiContainer(theme, moodIcon),
+                  const SizedBox(height: AppSizes.spacingLarge),
+                  TtsControls(
+                    isPlaying: state.isPlaying,
+                    isPaused: state.isPaused,
+                    progress: state.progress,
+                    currentPosition: state.currentPosition,
+                    totalLength: state.totalLength,
+                    onPlayPause: () async {
+                      if (state.isPlaying) {
+                        await vm.pauseTTS();
+                      } else {
+                        await vm.playTTS();
+                      }
+                    },
+                    onStop: () => vm.stopTTS(),
+                    onSeek: (progress) => vm.seekToPosition(progress),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  static Future<void> showDevotionalLog({
+    required BuildContext context,
+    required int id,
+  }) {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext dialogContext) {
+        return Consumer(
+          builder: (context, ref, child) {
+            final state = ref.watch(
+              devotionalLogDetailsViewModelProvider(id),
+            );
+            final vm = ref.read(
+              devotionalLogDetailsViewModelProvider(id).notifier,
+            );
+            final theme = Theme.of(context);
+            
+            if (state.devotionalLog?.devotional == null) {
+              return const SizedBox.shrink();
+            }
+            
+            final devotional = state.devotionalLog!.devotional!;
+            
+            return AlertDialog(
+              alignment: Alignment.center,
+              contentPadding: const EdgeInsets.all(AppSizes.paddingMedium),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(width: AppSizes.iconSizeRegular),
+                      Expanded(
+                        child: Text(
+                          devotional.title ?? 'Journal Entry',
+                          style: theme.textTheme.titleMedium,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => Navigator.of(dialogContext).pop(),
+                        child: SvgPicture.asset(
+                          AppIcons.closeIcon,
+                          width: AppSizes.iconSizeMedium,
+                          height: AppSizes.iconSizeMedium,
+                          colorFilter: ColorFilter.mode(
+                            theme.primaryIconTheme.color!,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.spacingLarge),
+                  _buildEmojiContainer(theme, devotional.iconEmoji),
+                  const SizedBox(height: AppSizes.spacingLarge),
+                  TtsControls(
+                    isPlaying: state.isPlaying,
+                    isPaused: state.isPaused,
+                    progress: state.progress,
+                    currentPosition: state.currentPosition,
+                    totalLength: state.totalLength,
+                    onPlayPause: () async {
+                      if (state.isPlaying) {
+                        await vm.pauseTTS();
+                      } else {
+                        await vm.playTTS();
+                      }
+                    },
+                    onStop: () => vm.stopTTS(),
+                    onSeek: (progress) => vm.seekToPosition(progress),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
