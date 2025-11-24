@@ -15,6 +15,8 @@ class TtsService {
   String _currentText = '';
   int _currentPosition = 0;
   int _totalLength = 0;
+  int _basePositionForProgress = 0;
+  bool _isSeeking = false;
   String? _selectedVoiceName;
   String? _selectedVoiceLocale;
 
@@ -59,9 +61,12 @@ class TtsService {
       });
 
       _flutterTts!.setProgressHandler((String text, int startOffset, int endOffset, String word) {
-        _currentPosition = startOffset;
-        final progressValue = _totalLength > 0 ? _currentPosition / _totalLength : 0.0;
-        onProgressChanged?.call(progressValue);
+        if (_totalLength > 0 && !_isSeeking) {
+          final absolutePosition = _basePositionForProgress + startOffset;
+          _currentPosition = absolutePosition.clamp(0, _totalLength);
+          final progressValue = _currentPosition / _totalLength;
+          onProgressChanged?.call(progressValue);
+        }
       });
       
       _isInitialized = true;
@@ -154,24 +159,33 @@ class TtsService {
     }
   }
 
-  Future<bool> speak(String text, {int? startPosition}) async {
+  Future<bool> speak(String text, {int? startPosition, bool skipProgressUpdate = false}) async {
     try {
       await _initialize();
       if (_flutterTts == null) return false;
 
       final position = startPosition ?? _currentPosition;
       String textToSpeak;
+      int basePosition = 0;
 
       if (position > 0 && position < text.length) {
         textToSpeak = text.substring(position);
+        basePosition = position;
         _currentPosition = position;
       } else {
         textToSpeak = text;
+        basePosition = 0;
         _currentPosition = 0;
       }
 
       _currentText = text;
       _totalLength = text.length;
+      _basePositionForProgress = basePosition;
+
+      if (!skipProgressUpdate) {
+        final currentProgress = _totalLength > 0 ? _currentPosition / _totalLength : 0.0;
+        onProgressChanged?.call(currentProgress);
+      }
 
       await _flutterTts!.stop();
       
@@ -255,6 +269,7 @@ class TtsService {
         _currentPosition = 0;
         _currentText = '';
         _totalLength = 0;
+        _basePositionForProgress = 0;
         onStateChanged?.call();
         onProgressChanged?.call(0.0);
         return true;
@@ -268,6 +283,7 @@ class TtsService {
       _currentPosition = 0;
       _currentText = '';
       _totalLength = 0;
+      _basePositionForProgress = 0;
       onStateChanged?.call();
       onProgressChanged?.call(0.0);
       return false;
@@ -279,21 +295,31 @@ class TtsService {
     try {
       if (_flutterTts == null || _currentText.isEmpty) return false;
 
+      _isSeeking = true;
       final clampedPosition = position.clamp(0, _currentText.length);
       wasPlaying = _isPlaying || _isPaused;
+
+      _basePositionForProgress = clampedPosition;
+      _currentPosition = clampedPosition;
+      final targetProgress = _totalLength > 0 ? clampedPosition / _totalLength : 0.0;
+      onProgressChanged?.call(targetProgress);
+
+      if (wasPlaying) {
+        await _flutterTts!.stop();
+        await Future.delayed(const Duration(milliseconds: 200));
+      }
 
       _isPlaying = true;
       _isPaused = false;
       onStateChanged?.call();
 
-      if (wasPlaying) {
-        await _flutterTts!.stop();
-        await Future.delayed(const Duration(milliseconds: 100));
-      }
-
-      final success = await speak(_currentText, startPosition: clampedPosition);
+      final success = await speak(_currentText, startPosition: clampedPosition, skipProgressUpdate: true);
       
-      if (!success) {
+      if (success) {
+        await Future.delayed(const Duration(milliseconds: 300));
+        _isSeeking = false;
+      } else {
+        _isSeeking = false;
         _isPaused = wasPlaying;
         _isPlaying = false;
         onStateChanged?.call();
@@ -302,6 +328,7 @@ class TtsService {
       return success;
     } catch (e) {
       devLogger('Error seeking TTS: $e');
+      _isSeeking = false;
       _isPaused = wasPlaying;
       _isPlaying = false;
       onStateChanged?.call();

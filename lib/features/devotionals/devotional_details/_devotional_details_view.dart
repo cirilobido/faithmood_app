@@ -118,6 +118,8 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 isPlaying: state.isPlaying,
                 isPaused: state.isPaused,
                 progress: state.progress,
+                currentPosition: state.currentPosition,
+                totalLength: state.totalLength,
                 onPlayPause: () async {
                   if (state.isPlaying) {
                     await vm.pauseTTS();

@@ -375,18 +375,12 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
         isPlaying: true,
         isPaused: false,
         isStopped: false,
+        currentPosition: position,
+        progress: progress,
       );
 
       final success = await ttsService.seekToPosition(position);
-      if (success) {
-        updateState(
-          isPlaying: true,
-          isPaused: false,
-          isStopped: false,
-          currentPosition: position,
-          progress: progress,
-        );
-      } else if (wasPlaying) {
+      if (!success && wasPlaying) {
         updateState(
           isPlaying: false,
           isPaused: true,
