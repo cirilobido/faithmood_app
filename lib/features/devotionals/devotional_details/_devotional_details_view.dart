@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
@@ -7,6 +8,7 @@ import '../../../widgets/widgets_exports.dart';
 import '../../../features/journal/_journal_view_model.dart';
 import '_devotional_details_view_model.dart';
 import '_devotional_details_state.dart';
+import '../../../widgets/tts_player_dialog/_tts_player_dialog.dart';
 
 class DevotionalDetailsView extends ConsumerStatefulWidget {
   final int devotionalId;
@@ -42,6 +44,26 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
+      floatingActionButton: state.devotional != null
+          ? FloatingActionButton(
+              onPressed: () async {
+                if (!state.isPlaying && !state.isPaused) {
+                  await vm.playTTS();
+                }
+                if (context.mounted) {
+                  TtsPlayerDialog.show(
+                    context: context,
+                    devotionalId: widget.devotionalId,
+                  );
+                }
+              },
+              backgroundColor: theme.colorScheme.primary,
+              child: Icon(
+                state.isPlaying ? Icons.pause : Icons.play_arrow,
+                color: theme.colorScheme.surface,
+              ),
+            )
+          : null,
       body: SafeArea(
         child: Column(
           children: [
@@ -66,7 +88,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                         message: S.of(context).noteSavedSuccessfully,
                       );
                       if (context.mounted) {
-                        Navigator.of(context).pop();
+                        context.pop();
                       }
                     } else if (context.mounted) {
                       CustomSnackBar.show(
@@ -82,56 +104,17 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                           .read(journalViewModelProvider.notifier)
                           .refreshDevotionalLogsIfNeeded();
                     }
-                    Navigator.of(context).pop();
+                    context.pop();
                   }
                 } else {
-                  Navigator.of(context).pop();
+                  context.pop();
                 }
               },
-              action: CompositeHeaderAction(
-                actions: [
-                  TtsHeaderAction(
-                    isPlaying: state.isPlaying,
-                    isPaused: state.isPaused,
-                    onTap: () async {
-                      if (state.isPlaying) {
-                        await vm.pauseTTS();
-                      } else if (state.isPaused) {
-                        await vm.playTTS();
-                      } else {
-                        if (state.devotional == null) {
-                          return;
-                        }
-                        await vm.playTTS();
-                      }
-                    },
-                  ).build(context, theme),
-                  FavoriteHeaderAction(
-                    isFavorite: state.isFavorite,
-                    onToggle: () => vm.toggleFavorite(),
-                  ).build(context, theme),
-                ],
+              action: FavoriteHeaderAction(
+                isFavorite: state.isFavorite,
+                onToggle: () => vm.toggleFavorite(),
               ),
             ),
-            if (state.isPlaying || state.isPaused) ...[
-              TtsControls(
-                isPlaying: state.isPlaying,
-                isPaused: state.isPaused,
-                progress: state.progress,
-                currentPosition: state.currentPosition,
-                totalLength: state.totalLength,
-                onPlayPause: () async {
-                  if (state.isPlaying) {
-                    await vm.pauseTTS();
-                  } else {
-                    await vm.playTTS();
-                  }
-                },
-                onStop: () => vm.stopTTS(),
-                onSeek: (progress) => vm.seekToPosition(progress),
-              ),
-              SizedBox(height: AppSizes.spacingMedium),
-            ],
             Expanded(
               child: state.isLoading
                   ? const Center(child: LoadingIndicator())
@@ -232,7 +215,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   backgroundColor: theme.colorScheme.primary,
                 );
                 if (context.mounted) {
-                  Navigator.of(context).pop();
+                  context.pop();
                 }
               } else if (context.mounted) {
                 CustomSnackBar.show(

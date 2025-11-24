@@ -99,6 +99,7 @@ class _TtsControlsState extends State<TtsControls> {
                   ),
                 ),
               ),
+
               IconButton(
                 icon: Icon(Icons.stop, color: theme.colorScheme.primary),
                 onPressed: widget.onStop,
