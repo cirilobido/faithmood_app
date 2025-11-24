@@ -989,11 +989,6 @@ class S {
     return Intl.message('Language', name: 'language', desc: '', args: []);
   }
 
-  /// `Light`
-  String get light {
-    return Intl.message('Light', name: 'light', desc: '', args: []);
-  }
-
   /// `Select your Language`
   String get selectYourLanguage {
     return Intl.message(
@@ -1554,16 +1549,6 @@ class S {
     return Intl.message(
       'Select an Option',
       name: 'selectAnOption',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Select Your Theme`
-  String get selectYourTheme {
-    return Intl.message(
-      'Select Your Theme',
-      name: 'selectYourTheme',
       desc: '',
       args: [],
     );
@@ -2209,11 +2194,6 @@ class S {
     return Intl.message('Date Range', name: 'dateRange', desc: '', args: []);
   }
 
-  /// `Dark`
-  String get dark {
-    return Intl.message('Dark', name: 'dark', desc: '', args: []);
-  }
-
   /// `No emotional moods available`
   String get noEmotionalMoodsAvailable {
     return Intl.message(
@@ -2736,12 +2716,32 @@ class S {
 
   /// `App Theme`
   String get appTheme {
+    return Intl.message('App Theme', name: 'appTheme', desc: '', args: []);
+  }
+
+  /// `Select Your Theme`
+  String get selectYourTheme {
     return Intl.message(
-      'App Theme',
-      name: 'appTheme',
+      'Select Your Theme',
+      name: 'selectYourTheme',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message('Light', name: 'light', desc: '', args: []);
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message('Dark', name: 'dark', desc: '', args: []);
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message('System', name: 'system', desc: '', args: []);
   }
 
   /// `Our App`
@@ -2767,11 +2767,6 @@ class S {
   /// `Support`
   String get support {
     return Intl.message('Support', name: 'support', desc: '', args: []);
-  }
-
-  /// `System`
-  String get system {
-    return Intl.message('System', name: 'system', desc: '', args: []);
   }
 
   /// `Contact Us`

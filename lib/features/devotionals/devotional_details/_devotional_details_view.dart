@@ -46,7 +46,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
         child: Column(
           children: [
             DetailsPageHeader(
-              title: S.of(context).devotional,
+              title: lang.devotional,
               onBack: () async {
                 await vm.stopTTS();
                 if (state.hasUnsavedChanges && !state.isSaved) {
@@ -113,7 +113,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 ],
               ),
             ),
-            if (state.isPlaying || state.isPaused)
+            if (state.isPlaying || state.isPaused) ...[
               TtsControls(
                 isPlaying: state.isPlaying,
                 isPaused: state.isPaused,
@@ -130,6 +130,8 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 onStop: () => vm.stopTTS(),
                 onSeek: (progress) => vm.seekToPosition(progress),
               ),
+              SizedBox(height: AppSizes.spacingMedium),
+            ],
             Expanded(
               child: state.isLoading
                   ? const Center(child: LoadingIndicator())

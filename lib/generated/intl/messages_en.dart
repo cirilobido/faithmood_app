@@ -50,8 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "and": MessageLookupByLibrary.simpleMessage("and"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("App Language"),
-    "appTheme": MessageLookupByLibrary.simpleMessage("App Theme"),
     "appName": MessageLookupByLibrary.simpleMessage("Your name"),
+    "appTheme": MessageLookupByLibrary.simpleMessage("App Theme"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
       "App Version: ###",
     ),
@@ -75,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
       "Capture your thoughts each day.",
     ),
+    "category": MessageLookupByLibrary.simpleMessage("Category"),
     "changeTime": MessageLookupByLibrary.simpleMessage("Change Time"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
       "Choose the mood that best reflects your heart right now.",
@@ -116,9 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "dailyDreamReminder": MessageLookupByLibrary.simpleMessage(
       "Daily Dream Reminder",
     ),
+    "dark": MessageLookupByLibrary.simpleMessage("Dark"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
-    "dark": MessageLookupByLibrary.simpleMessage("Dark"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
@@ -207,6 +208,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
       "Find a plan that fits your journey.",
     ),
+    "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
+      "Finish Account Setup",
+    ),
+    "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
+      "Complete your profile by adding your email and password.",
+    ),
     "firstName": MessageLookupByLibrary.simpleMessage("Nombre"),
     "followUs": MessageLookupByLibrary.simpleMessage("Follow Us"),
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
@@ -273,13 +280,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Key Learnings"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
-    "light": MessageLookupByLibrary.simpleMessage("Light"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
         MessageLookupByLibrary.simpleMessage(
           "El nombre debe tener al menos 3 caracteres",
         ),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
+    "light": MessageLookupByLibrary.simpleMessage("Light"),
     "localeName": MessageLookupByLibrary.simpleMessage("English"),
     "logMood": MessageLookupByLibrary.simpleMessage("Log Mood"),
     "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
@@ -324,10 +331,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
       "No categories available",
     ),
-    "category": MessageLookupByLibrary.simpleMessage("Category"),
-    "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
-      "No tags available",
-    ),
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
       "No devotionals available",
     ),
@@ -343,6 +346,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noSearchResults": MessageLookupByLibrary.simpleMessage("No results found"),
     "noSpiritualMoodsAvailable": MessageLookupByLibrary.simpleMessage(
       "No spiritual moods available",
+    ),
+    "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No tags available",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Note saved successfully",
@@ -463,12 +469,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderDeleted": MessageLookupByLibrary.simpleMessage(
       "Reminder deleted successfully",
     ),
-    "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
-      "Finish Account Setup",
-    ),
-    "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
-      "Complete your profile by adding your email and password.",
-    ),
     "reminderMessage": MessageLookupByLibrary.simpleMessage(
       "Set a daily reminder to help you stay connected with your faith journey.",
     ),
@@ -497,13 +497,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "selectAPeriod": MessageLookupByLibrary.simpleMessage("Select a Period"),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
-    "selectYourTheme": MessageLookupByLibrary.simpleMessage("Select Your Theme"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
       "Select the state that resonates with your spiritual side.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Select your Language",
+    ),
+    "selectYourTheme": MessageLookupByLibrary.simpleMessage(
+      "Select Your Theme",
     ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
     "setReminder": MessageLookupByLibrary.simpleMessage("Set Reminder"),
@@ -609,10 +611,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
-    "system": MessageLookupByLibrary.simpleMessage("System"),
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
+    "system": MessageLookupByLibrary.simpleMessage("System"),
     "tags": MessageLookupByLibrary.simpleMessage("Tags"),
     "termsConditions": MessageLookupByLibrary.simpleMessage(
       "Terms & Conditions",

@@ -39,7 +39,7 @@ class _TtsControlsState extends State<TtsControls> {
       _dragValue = widget.progress;
     }
   }
-  
+
   @override
   void initState() {
     super.initState();
@@ -56,17 +56,9 @@ class _TtsControlsState extends State<TtsControls> {
         horizontal: AppSizes.paddingMedium,
         vertical: AppSizes.paddingSmall,
       ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        border: Border(
-          top: BorderSide(
-            color: theme.colorScheme.primary.withValues(alpha: 0.2),
-            width: AppSizes.borderWithSmall,
-          ),
-        ),
-      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -78,49 +70,58 @@ class _TtsControlsState extends State<TtsControls> {
                 onPressed: widget.onPlayPause,
               ),
               Expanded(
-                child: Slider(
-                  value: displayValue.clamp(0.0, 1.0),
-                  onChanged: (value) {
-                    setState(() {
-                      _isDragging = true;
-                      _dragValue = value;
-                    });
-                  },
-                  onChangeEnd: (value) {
-                    setState(() {
-                      _isDragging = false;
-                    });
-                    widget.onSeek(value);
-                  },
-                  activeColor: theme.colorScheme.primary,
-                  inactiveColor: theme.colorScheme.primary.withValues(alpha: 0.3),
+                child: SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    trackHeight: 6,
+                    trackShape: GradientActiveTrackShape(
+                      gradient: AppColors.progressGradient,
+                      inactiveColor: theme.colorScheme.tertiary.withValues(
+                        alpha: 0.2,
+                      ),
+                    ),
+                    thumbColor: theme.colorScheme.primary,
+                    overlayColor: theme.colorScheme.tertiary.withValues(
+                      alpha: 0.2,
+                    ),
+                  ),
+                  child: Slider(
+                    value: displayValue.clamp(0.0, 1.0),
+                    onChanged: (value) {
+                      setState(() {
+                        _isDragging = true;
+                        _dragValue = value;
+                      });
+                    },
+                    onChangeEnd: (value) {
+                      setState(() => _isDragging = false);
+                      widget.onSeek(value);
+                    },
+                  ),
                 ),
               ),
               IconButton(
-                icon: Icon(
-                  Icons.stop,
-                  color: theme.colorScheme.primary,
-                ),
+                icon: Icon(Icons.stop, color: theme.colorScheme.primary),
                 onPressed: widget.onStop,
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
+            padding: const EdgeInsets.only(
+              left: AppSizes.paddingSmall,
+              right: AppSizes.paddingSmall,
+            ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  _formatTime(widget.currentPosition),
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
+                Icon(
+                  Icons.access_time,
+                  size: AppSizes.iconSizeSmall,
+                  color: theme.iconTheme.color,
                 ),
+                const SizedBox(width: AppSizes.spacingXSmall),
                 Text(
-                  _formatTime(widget.totalLength),
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
+                  '${_formatTime(widget.currentPosition)}/${_formatTime(widget.totalLength)}',
+                  style: theme.textTheme.bodySmall,
                 ),
               ],
             ),
@@ -131,14 +132,101 @@ class _TtsControlsState extends State<TtsControls> {
   }
 
   String _formatTime(int chars) {
-    if (chars == 0) return '0:00';
-    
+    if (chars == 0) return '00:00';
+
     const charsPerSecond = 15.0;
     final seconds = (chars / charsPerSecond).round();
     final minutes = seconds ~/ 60;
     final secs = seconds % 60;
-    
-    return '${minutes}:${secs.toString().padLeft(2, '0')}';
+
+    return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
 }
 
+class GradientActiveTrackShape extends SliderTrackShape {
+  final Gradient gradient;
+  final Color inactiveColor;
+
+  GradientActiveTrackShape({
+    required this.gradient,
+    required this.inactiveColor,
+  });
+
+  @override
+  Rect getPreferredRect({
+    bool isDiscrete = false,
+    bool isEnabled = true,
+    Offset offset = Offset.zero,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight ?? 4.0;
+    final double trackLeft = offset.dx;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset offset, {
+    required Animation<double> enableAnimation,
+    bool isDiscrete = false,
+    bool isEnabled = true,
+    required RenderBox parentBox,
+    Offset? secondaryOffset,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required Offset thumbCenter,
+  }) {
+    final Rect trackRect = getPreferredRect(
+      parentBox: parentBox,
+      sliderTheme: sliderTheme,
+      offset: offset,
+    );
+
+    final double activeWidth = thumbCenter.dx - trackRect.left;
+
+    // ACTIVE TRACK (gradient)
+    final Rect activeRect = Rect.fromLTWH(
+      trackRect.left,
+      trackRect.top,
+      activeWidth.clamp(0, trackRect.width),
+      trackRect.height,
+    );
+
+    final Paint activePaint = Paint()
+      ..shader = gradient.createShader(activeRect);
+
+    // INACTIVE TRACK
+    final Rect inactiveRect = Rect.fromLTWH(
+      activeRect.right,
+      trackRect.top,
+      (trackRect.width - activeWidth).clamp(0, trackRect.width),
+      trackRect.height,
+    );
+
+    final Paint inactivePaint = Paint()..color = inactiveColor;
+
+    // Draw active
+    context.canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        activeRect,
+        Radius.circular(trackRect.height / 2),
+      ),
+      activePaint,
+    );
+
+    // Draw inactive
+    context.canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        inactiveRect,
+        Radius.circular(trackRect.height / 2),
+      ),
+      inactivePaint,
+    );
+  }
+}

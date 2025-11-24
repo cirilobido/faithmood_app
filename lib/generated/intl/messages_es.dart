@@ -56,10 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "appLanguage": MessageLookupByLibrary.simpleMessage(
       "Idioma de la Aplicación",
     ),
-    "appTheme": MessageLookupByLibrary.simpleMessage(
-      "Tema de la Aplicación",
-    ),
     "appName": MessageLookupByLibrary.simpleMessage("Tu nombre"),
+    "appTheme": MessageLookupByLibrary.simpleMessage("Tema de la Aplicación"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
       "Versión de la Aplicación: ###",
     ),
@@ -83,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
       "Capture your thoughts each day.",
     ),
+    "category": MessageLookupByLibrary.simpleMessage("Categoría"),
     "changeTime": MessageLookupByLibrary.simpleMessage("Cambiar hora"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
       "Elige el estado de ánimo que mejor refleje tu corazón en este momento.",
@@ -122,9 +121,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "dailyDreamReminder": MessageLookupByLibrary.simpleMessage(
       "Recordatorio diario",
     ),
+    "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Rango de Fechas"),
-    "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
     "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
     "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
     "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
@@ -217,6 +216,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
       "Find a plan that fits your journey.",
     ),
+    "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
+      "Completa la configuración de tu cuenta",
+    ),
+    "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
+      "Completa tu perfil agregando tu correo electrónico y contraseña.",
+    ),
     "firstName": MessageLookupByLibrary.simpleMessage("Nombre"),
     "followUs": MessageLookupByLibrary.simpleMessage("Síguenos"),
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
@@ -287,13 +292,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizajes Clave"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
-    "light": MessageLookupByLibrary.simpleMessage("Claro"),
     "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
     "lastNameMustBeAtLeast3CharactersLong":
         MessageLookupByLibrary.simpleMessage(
           "El nombre debe tener al menos 3 caracteres",
         ),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
+    "light": MessageLookupByLibrary.simpleMessage("Claro"),
     "localeName": MessageLookupByLibrary.simpleMessage("Español"),
     "logMood": MessageLookupByLibrary.simpleMessage(
       "Registrar Estado de Ánimo",
@@ -337,12 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCampaignsYet": MessageLookupByLibrary.simpleMessage(
       "Aún no hay campañas disponibles.",
     ),
-    "category": MessageLookupByLibrary.simpleMessage("Categoría"),
-    "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
-      "No hay etiquetas disponibles",
-    ),
     "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
-      "No categories available",
+      "No hay categorías disponibles",
     ),
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
       "No hay devocionales disponibles",
@@ -361,6 +362,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noSpiritualMoodsAvailable": MessageLookupByLibrary.simpleMessage(
       "No spiritual moods available",
+    ),
+    "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No hay etiquetas disponibles",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Nota guardada exitosamente",
@@ -487,12 +491,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderDeleted": MessageLookupByLibrary.simpleMessage(
       "Recordatorio eliminado ⏳",
     ),
-    "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
-      "Completa la configuración de tu cuenta",
-    ),
-    "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
-      "Completa tu perfil agregando tu correo electrónico y contraseña.",
-    ),
     "reminderMessage": MessageLookupByLibrary.simpleMessage(
       "Elige la hora ideal para pausar, reflexionar y acercarte a Dios cada día. ✨",
     ),
@@ -527,13 +525,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Seleccionar un Período",
     ),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
-    "selectYourTheme": MessageLookupByLibrary.simpleMessage("Selecciona tu Tema"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
       "Selecciona el estado que resuene con tu lado espiritual.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Select your Language",
+    ),
+    "selectYourTheme": MessageLookupByLibrary.simpleMessage(
+      "Selecciona tu Tema",
     ),
     "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
     "setReminder": MessageLookupByLibrary.simpleMessage("Activar recordatorio"),
@@ -639,10 +639,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
     "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
     "support": MessageLookupByLibrary.simpleMessage("Soporte"),
-    "system": MessageLookupByLibrary.simpleMessage("Sistema"),
     "suscripcionActual": MessageLookupByLibrary.simpleMessage(
       "Suscripción actual",
     ),
+    "system": MessageLookupByLibrary.simpleMessage("Sistema"),
     "tags": MessageLookupByLibrary.simpleMessage("Etiquetas"),
     "termsConditions": MessageLookupByLibrary.simpleMessage(
       "Términos y Condiciones",
