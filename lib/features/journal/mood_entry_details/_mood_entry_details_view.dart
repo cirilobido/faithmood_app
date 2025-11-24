@@ -293,7 +293,14 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
             ),
           ],
           const SizedBox(height: AppSizes.spacingMedium),
-          NativeAdmobAd(isBigBanner: true),
+          Builder(
+            builder: (context) {
+              final auth = ref.watch(authProvider);
+              final isPremium = auth.user?.planType != PlanName.FREE;
+              if (isPremium) return const SizedBox.shrink();
+              return NativeAdmobAd(isBigBanner: true);
+            },
+          ),
           const SizedBox(height: AppSizes.spacingMedium),
           if (aiReflection != null && aiReflection.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingMedium),

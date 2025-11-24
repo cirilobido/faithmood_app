@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,16 +8,16 @@ import '../generated/l10n.dart';
 import '../routes/app_routes_names.dart';
 import '../widgets/widgets_exports.dart';
 
-class BottomNavScreen extends StatefulWidget {
+class BottomNavScreen extends ConsumerStatefulWidget {
   final Widget child;
 
   const BottomNavScreen({super.key, required this.child});
 
   @override
-  State<BottomNavScreen> createState() => _BottomNavScreenState();
+  ConsumerState<BottomNavScreen> createState() => _BottomNavScreenState();
 }
 
-class _BottomNavScreenState extends State<BottomNavScreen> {
+class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
   int _selectedIndex = 0;
   static const List<String> _routes = [
     Routes.home,
@@ -70,7 +71,14 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         child: Column(
           children: [
             Expanded(child: widget.child),
-            NativeAdmobAd(isNativeBanner: false),
+            Consumer(
+              builder: (context, ref, child) {
+                final auth = ref.watch(authProvider);
+                final isPremium = auth.user?.planType != PlanName.FREE;
+                if (isPremium) return const SizedBox.shrink();
+                return NativeAdmobAd(isNativeBanner: false);
+              },
+            ),
           ],
         ),
       ),
