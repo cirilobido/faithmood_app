@@ -296,8 +296,10 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
           Builder(
             builder: (context) {
               final auth = ref.watch(authProvider);
+              final settings = ref.watch(settingsProvider);
               final isPremium = auth.user?.planType != PlanName.FREE;
-              if (isPremium) return const SizedBox.shrink();
+              final showBannerAds = settings.isBannerAdEnable;
+              if (isPremium || !showBannerAds) return const SizedBox.shrink();
               return NativeAdmobAd(isBigBanner: true);
             },
           ),
