@@ -19,11 +19,6 @@ import 'generated/l10n.dart';
 // import 'firebase_options.dart';
 
 Future<void> main() async {
-  final binding = WidgetsFlutterBinding.ensureInitialized();
-
-  // Keep native splash visible during initialization
-  FlutterNativeSplash.preserve(widgetsBinding: binding);
-
   // Global error handling
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
@@ -37,6 +32,11 @@ Future<void> main() async {
   // Run inside a guarded zone to catch any top-level async errors
   await runZonedGuarded<Future<void>>(
     () async {
+      final binding = WidgetsFlutterBinding.ensureInitialized();
+
+      // Keep native splash visible during initialization
+      FlutterNativeSplash.preserve(widgetsBinding: binding);
+
       await _initializeCore();
 
       FlutterNativeSplash.remove();

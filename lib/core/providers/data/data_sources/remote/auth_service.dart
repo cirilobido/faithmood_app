@@ -17,7 +17,7 @@ abstract class AuthService {
 
   Future<UserResponse?> loginUser(AuthRequest params);
 
-  Future<UserResponse?> refreshToken(String token);
+  Future<UserResponse?> refreshToken(String refreshToken);
 
   Future<UserResponse?> getUser(int id);
 
@@ -77,12 +77,12 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<UserResponse?> refreshToken(String token) async {
+  Future<UserResponse?> refreshToken(String refreshToken) async {
     try {
       return await requestProcessor.process(
         request: httpClient.post(
           Endpoints.refreshToken,
-          data: {"token": token},
+          data: {"refreshToken": refreshToken},
         ),
         jsonMapper: (data) {
           final response = UserResponse.fromJson(data as Map<String, dynamic>);

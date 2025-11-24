@@ -13,6 +13,7 @@ abstract class AnalyticsDao {
   Future<bool> saveAnalytics(Analytics analytics, String startDate, String endDate);
   Future<Analytics?> getAnalytics(String startDate, String endDate);
   Future<bool> deleteAnalytics(String startDate, String endDate);
+  Future<bool> deleteAllAnalytics();
 }
 
 class AnalyticsDaoImpl implements AnalyticsDao {
@@ -22,6 +23,8 @@ class AnalyticsDaoImpl implements AnalyticsDao {
 
   String _getAnalyticsKey(String startDate, String endDate) =>
       '${Constant.analyticsKeyPrefix}_${startDate}_${endDate}';
+  
+  String _getAnalyticsKeysListKey() => '${Constant.analyticsKeyPrefix}_keys_list';
 
   @override
   Future<Analytics?> getAnalytics(String startDate, String endDate) async {
@@ -60,6 +63,20 @@ class AnalyticsDaoImpl implements AnalyticsDao {
         key: key,
         value: analyticsJsonEncoded,
       );
+      
+      final keysListKey = _getAnalyticsKeysListKey();
+      final existingKeysJson = await secureStorage.getValue(key: keysListKey);
+      final List<String> keysList = existingKeysJson != null 
+          ? List<String>.from(jsonDecode(existingKeysJson))
+          : [];
+      if (!keysList.contains(key)) {
+        keysList.add(key);
+        await secureStorage.saveValue(
+          key: keysListKey,
+          value: jsonEncode(keysList),
+        );
+      }
+      
       devLogger('AnalyticsDao.saveAnalytics() - saved successfully with key: $key');
       return true;
     } catch (e) {
@@ -71,7 +88,44 @@ class AnalyticsDaoImpl implements AnalyticsDao {
   @override
   Future<bool> deleteAnalytics(String startDate, String endDate) async {
     try {
-      await secureStorage.deleteValue(key: _getAnalyticsKey(startDate, endDate));
+      final key = _getAnalyticsKey(startDate, endDate);
+      await secureStorage.deleteValue(key: key);
+      
+      final keysListKey = _getAnalyticsKeysListKey();
+      final existingKeysJson = await secureStorage.getValue(key: keysListKey);
+      if (existingKeysJson != null) {
+        final List<String> keysList = List<String>.from(jsonDecode(existingKeysJson));
+        keysList.remove(key);
+        if (keysList.isEmpty) {
+          await secureStorage.deleteValue(key: keysListKey);
+        } else {
+          await secureStorage.saveValue(
+            key: keysListKey,
+            value: jsonEncode(keysList),
+          );
+        }
+      }
+      
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> deleteAllAnalytics() async {
+    try {
+      final keysListKey = _getAnalyticsKeysListKey();
+      final existingKeysJson = await secureStorage.getValue(key: keysListKey);
+      
+      if (existingKeysJson != null) {
+        final List<String> keysList = List<String>.from(jsonDecode(existingKeysJson));
+        for (final key in keysList) {
+          await secureStorage.deleteValue(key: key);
+        }
+        await secureStorage.deleteValue(key: keysListKey);
+      }
+      
       return true;
     } catch (_) {
       return false;

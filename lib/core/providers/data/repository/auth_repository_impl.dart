@@ -2,20 +2,27 @@ import 'package:faithmood_app/core/core_exports.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../data_sources/local/auth_dao.dart';
+import '../data_sources/local/analytics_dao.dart';
 import '../data_sources/remote/auth_service.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepositoryImpl(
     authService: ref.watch(authServiceProvider),
     authDao: ref.watch(authDaoProvider),
+    analyticsDao: ref.watch(analyticsDaoProvider),
   );
 });
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthService authService;
   final AuthDao authDao;
+  final AnalyticsDao analyticsDao;
 
-  AuthRepositoryImpl({required this.authService, required this.authDao});
+  AuthRepositoryImpl({
+    required this.authService, 
+    required this.authDao,
+    required this.analyticsDao,
+  });
 
   @override
   Future<User> registerUser(AuthRequest params) async {
@@ -26,6 +33,15 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       if (result?.token != null) {
         await authDao.saveCurrentUserToken(result!.token!);
+      }
+      if (result?.tokenExpiration != null) {
+        await authDao.saveTokenExpiration(result!.tokenExpiration!);
+      }
+      if (result?.refreshToken != null) {
+        await authDao.saveRefreshToken(result!.refreshToken!);
+      }
+      if (result?.refreshExpiration != null) {
+        await authDao.saveRefreshExpiration(result!.refreshExpiration!);
       }
       if (result?.user == null) {
         throw Exception();
@@ -45,6 +61,15 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       if (result?.token != null) {
         await authDao.saveCurrentUserToken(result!.token!);
+      }
+      if (result?.tokenExpiration != null) {
+        await authDao.saveTokenExpiration(result!.tokenExpiration!);
+      }
+      if (result?.refreshToken != null) {
+        await authDao.saveRefreshToken(result!.refreshToken!);
+      }
+      if (result?.refreshExpiration != null) {
+        await authDao.saveRefreshExpiration(result!.refreshExpiration!);
       }
       if (result?.user == null) {
         throw Exception();
@@ -85,11 +110,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<String?> refreshToken(String token) async {
+  Future<String?> refreshToken(String refreshToken) async {
     try {
-      final result = await authService.refreshToken(token);
+      final storedRefreshToken = refreshToken.isNotEmpty 
+          ? refreshToken 
+          : await authDao.getRefreshToken();
+      
+      if (storedRefreshToken == null) {
+        throw Exception('No refresh token available');
+      }
+
+      final result = await authService.refreshToken(storedRefreshToken);
       if (result?.token != null) {
         await authDao.saveCurrentUserToken(result!.token!);
+      }
+      if (result?.expiresIn != null) {
+        await authDao.saveTokenExpiration(result!.expiresIn!);
       }
       return result?.token;
     } catch (_) {
@@ -112,6 +148,10 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await authDao.deleteCurrentUser();
       await authDao.deleteCurrentUserToken();
+      await authDao.deleteRefreshToken();
+      await authDao.deleteRefreshExpiration();
+      await authDao.deleteTokenExpiration();
+      await analyticsDao.deleteAllAnalytics();
     } catch (_) {
       throw Exception('Error signing out user from RIMP!');
     }
@@ -140,6 +180,7 @@ class AuthRepositoryImpl implements AuthRepository {
       if (result?.user != null) {
         throw Exception();
       }
+      await analyticsDao.deleteAllAnalytics();
       return result!.user!;
     } catch (_) {
       throw Exception('Error deleting user from RIMP!');

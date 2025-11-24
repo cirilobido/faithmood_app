@@ -5,7 +5,7 @@ abstract class AuthRepository {
 
   Future<User> loginUser(AuthRequest params);
 
-  Future<String?> refreshToken(String token);
+  Future<String?> refreshToken(String refreshToken);
 
   Future<String?> getLocalToken();
 

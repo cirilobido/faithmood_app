@@ -11,7 +11,7 @@ abstract class Endpoints {
   static const auth = 'auth';
   static const register = '$auth/register';
   static const login = '$auth/login';
-  static const refreshToken = '$auth/refresh-token';
+  static const refreshToken = '$auth/refresh-t';
   static const changePassword = '$auth/change-password';
   static const sendOtp = '$auth/send-otp';
   static const verifyOtp = '$auth/verify-otp';

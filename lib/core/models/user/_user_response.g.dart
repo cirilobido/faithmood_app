@@ -12,6 +12,10 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       ? null
       : User.fromJson(json['user'] as Map<String, dynamic>),
   token: json['token'] as String?,
+  tokenExpiration: json['tokenExpiration'] as String?,
+  refreshToken: json['refreshToken'] as String?,
+  refreshExpiration: json['refreshExpiration'] as String?,
+  expiresIn: json['expiresIn'] as String?,
 );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
@@ -19,4 +23,8 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'message': instance.message,
       'user': instance.user,
       'token': instance.token,
+      'tokenExpiration': instance.tokenExpiration,
+      'refreshToken': instance.refreshToken,
+      'refreshExpiration': instance.refreshExpiration,
+      'expiresIn': instance.expiresIn,
     };

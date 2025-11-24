@@ -23,6 +23,9 @@ class User {
   final UserSettings? settings;
   final dynamic lastMoodLog;
   final dynamic lastDevotional;
+  final String? refreshToken;
+  final String? refreshExpiration;
+  final String? tokenExpiration;
 
   User({
     this.id,
@@ -42,6 +45,9 @@ class User {
     this.settings,
     this.lastMoodLog,
     this.lastDevotional,
+    this.refreshToken,
+    this.refreshExpiration,
+    this.tokenExpiration,
   });
 
   factory User.fromJson(Map<String, dynamic> json) =>
@@ -67,6 +73,9 @@ class User {
     UserSettings? settings,
     dynamic lastMoodLog,
     dynamic lastDevotional,
+    String? refreshToken,
+    String? refreshExpiration,
+    String? tokenExpiration,
   }) {
     return User(
       id: id ?? this.id,
@@ -86,6 +95,9 @@ class User {
       settings: settings ?? this.settings,
       lastMoodLog: lastMoodLog ?? this.lastMoodLog,
       lastDevotional: lastDevotional ?? this.lastDevotional,
+      refreshToken: refreshToken ?? this.refreshToken,
+      refreshExpiration: refreshExpiration ?? this.refreshExpiration,
+      tokenExpiration: tokenExpiration ?? this.tokenExpiration,
     );
   }
 }

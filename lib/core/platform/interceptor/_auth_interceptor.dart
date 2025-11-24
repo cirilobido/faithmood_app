@@ -13,17 +13,27 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import '../../../features/home/_home_view_model.dart';
 import '../../../features/profile/_profile_view_model.dart';
 import '../../providers/data/data_sources/local/auth_dao.dart';
+import '../../providers/data/data_sources/local/analytics_dao.dart';
 
 final authInterceptorProvider = Provider<AuthInterceptor>((ref) {
-  return AuthInterceptor(ref: ref, authDao: ref.watch(authDaoProvider));
+  return AuthInterceptor(
+    ref: ref, 
+    authDao: ref.watch(authDaoProvider),
+    analyticsDao: ref.watch(analyticsDaoProvider),
+  );
 });
 
 class AuthInterceptor implements Interceptor {
   final Ref ref;
   final AuthDao authDao;
+  final AnalyticsDao analyticsDao;
   final Dio _dio = Dio();
 
-  AuthInterceptor({required this.ref, required this.authDao});
+  AuthInterceptor({
+    required this.ref, 
+    required this.authDao,
+    required this.analyticsDao,
+  });
 
   @override
   void onRequest(
@@ -71,6 +81,10 @@ class AuthInterceptor implements Interceptor {
       } else {
         await authDao.deleteCurrentUser();
         await authDao.deleteCurrentUserToken();
+        await authDao.deleteRefreshToken();
+        await authDao.deleteRefreshExpiration();
+        await authDao.deleteTokenExpiration();
+        await analyticsDao.deleteAllAnalytics();
         ref.invalidate(homeViewModelProvider);
         ref.invalidate(profileViewModelProvider);
         ref.invalidate(journalViewModelProvider);
@@ -95,27 +109,42 @@ class AuthInterceptor implements Interceptor {
 
   Future<bool> _refreshToken() async {
     try {
-      final currentToken = await authDao.getCurrentUserToken();
-      if (currentToken == null) return false;
+      final refreshToken = await authDao.getRefreshToken();
+      if (refreshToken == null) return false;
 
-      // final response = await authRepository.refreshToken(currentToken);
       final response = await _dio.post(
         "${Endpoints.base}${Endpoints.refreshToken}",
-        data: {"token": currentToken},
+        data: {"refreshToken": refreshToken},
         options: Options(
           headers: {"Content-Type": "application/json"},
         ),
       );
 
       if (response.statusCode == 200 && response.data != null) {
-        final newAccessToken = response.data["token"];
-        await authDao.saveCurrentUserToken(newAccessToken);
-        return true;
+        final responseData = response.data as Map<String, dynamic>;
+        final newToken = responseData["token"] as String?;
+        final expiresIn = responseData["tokenExpiration"] as String?;
+        final newRefreshToken = responseData["refreshToken"] as String?;
+        final refreshExpiration = responseData["refreshExpiration"] as String?;
+
+        if (newToken != null) {
+          await authDao.saveCurrentUserToken(newToken);
+          if (expiresIn != null) {
+            await authDao.saveTokenExpiration(expiresIn);
+          }
+          if (newRefreshToken != null) {
+            await authDao.saveRefreshToken(newRefreshToken);
+          }
+          if (refreshExpiration != null) {
+            await authDao.saveRefreshExpiration(refreshExpiration);
+          }
+          return true;
+        }
       }
+      return false;
     } catch (e) {
-      rethrow;
+      return false;
     }
-    return false;
   }
 
   @override

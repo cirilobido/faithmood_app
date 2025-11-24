@@ -32,6 +32,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       : UserSettings.fromJson(json['settings'] as Map<String, dynamic>),
   lastMoodLog: json['lastMoodLog'],
   lastDevotional: json['lastDevotional'],
+  refreshToken: json['refreshToken'] as String?,
+  refreshExpiration: json['refreshExpiration'] as String?,
+  tokenExpiration: json['tokenExpiration'] as String?,
 );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -55,6 +58,9 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   if (instance.settings case final value?) 'settings': value,
   if (instance.lastMoodLog case final value?) 'lastMoodLog': value,
   if (instance.lastDevotional case final value?) 'lastDevotional': value,
+  if (instance.refreshToken case final value?) 'refreshToken': value,
+  if (instance.refreshExpiration case final value?) 'refreshExpiration': value,
+  if (instance.tokenExpiration case final value?) 'tokenExpiration': value,
 };
 
 const _$LangEnumMap = {Lang.en: 'en', Lang.es: 'es', Lang.pt: 'pt'};

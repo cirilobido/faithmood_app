@@ -30,7 +30,7 @@ void _addInterceptors(Dio dio, Ref ref) {
       ),
     ]);
   }
-  final AuthInterceptor authenticationDao = ref.watch(authInterceptorProvider);
+  final AuthInterceptor authenticationDao = ref.read(authInterceptorProvider);
   dio.interceptors.add(authenticationDao);
 }
 

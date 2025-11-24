@@ -3,6 +3,9 @@
 class Constant {
   static const current_session_user = 'current_session_user';
   static const current_session_user_token = 'current_session_user_token';
+  static const current_session_refresh_token = 'current_session_refresh_token';
+  static const current_session_refresh_expiration = 'current_session_refresh_expiration';
+  static const current_session_token_expiration = 'current_session_token_expiration';
 
   static const isFirstTimeOpenKey = 'is_first_time_open';
   static const appLanguageKey = 'app_language';
