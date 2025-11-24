@@ -30,6 +30,10 @@ class _SplashViewState extends ConsumerState<SplashView> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _init();
     });
+    Future.microtask(() {
+      ref.read(interstitialAdProvider.notifier).loadAd();
+      ref.read(rewardedAdProvider.notifier).loadAd();
+    });
   }
 
   Future<void> _init() async {

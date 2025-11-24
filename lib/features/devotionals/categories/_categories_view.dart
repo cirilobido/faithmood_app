@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
@@ -247,7 +246,8 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
                   devotional: devotional,
                   onTap: () {
                     if (devotional.id != null) {
-                      context.push(
+                      context.pushWithAd(
+                        ref,
                         Routes.devotionalDetails,
                         extra: {'devotionalId': devotional.id},
                       );

@@ -160,18 +160,21 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
                     final sessionId = await vm.saveMood();
 
                     if (context.mounted) {
-                      Navigator.of(context).pop();
+                      context.pop();
                     }
 
                     if (sessionId != null && context.mounted) {
                       ref.read(journalViewModelProvider.notifier).refreshMoodSessionsIfNeeded();
+                      
                       if (!hasAddedMood) {
                         _showSuccessModal(context, theme, lang, sessionId);
                       } else {
-                        context.pop();
-                        context.push(
+                        context.pushWithAd(
+                          ref,
                           Routes.moodEntryDetails,
                           extra: {'sessionId': sessionId},
+                          forceShow: true,
+                          popBeforePush: true,
                         );
                       }
                     } else if (context.mounted) {
@@ -200,9 +203,11 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
       iconPath: AppIcons.happyPetImage,
       onPrimaryTap: () async {
         context.pop();
-        context.push(
+        context.pushWithAd(
+          ref,
           Routes.moodEntryDetails,
           extra: {'sessionId': sessionId},
+          forceShow: true,
         );
       },
     );

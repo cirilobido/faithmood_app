@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
@@ -152,7 +151,8 @@ class _CategoryDevotionalsViewState
                   fallbackIcon: widget.tag?.icon ?? widget.category?.iconEmoji,
                   onTap: () {
                     if (devotional.id != null) {
-                      context.push(
+                      context.pushWithAd(
+                        ref,
                         Routes.devotionalDetails,
                         extra: {'devotionalId': devotional.id},
                       );

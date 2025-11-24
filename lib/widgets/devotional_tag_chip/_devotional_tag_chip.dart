@@ -69,6 +69,8 @@ class DevotionalTagChip extends StatelessWidget {
       onTap: onTap ??
           () {
             if (context.mounted) {
+              // Note: This widget doesn't have access to WidgetRef
+              // If you need ads here, you'll need to pass ref or use a different approach
               context.push(Routes.categoryDevotionals, extra: {'tag': tag});
             }
           },
