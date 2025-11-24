@@ -38,6 +38,7 @@ abstract class AppSizes {
   static const radiusXXSmall = 4.0;
 
   //---------------Extra---------------//
+  static const bannerAdHeight = 100.0;
   static const bottomNavHeight = 80.0;
   static const bottomNavSelectorWidth = 48.0;
   static const bottomNavSelectorHeight = 4.0;

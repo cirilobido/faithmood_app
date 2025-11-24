@@ -168,6 +168,9 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
             const SizedBox(height: AppSizes.spacingMedium),
             Text(devotional.content!, style: theme.textTheme.bodyLarge),
           ],
+          const SizedBox(height: AppSizes.spacingMedium),
+          NativeAdmobAd(isBigBanner: true),
+          const SizedBox(height: AppSizes.spacingMedium),
           if (devotional.reflection != null &&
               devotional.reflection!.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingMedium),

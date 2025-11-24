@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../core/core_exports.dart';
 import '../generated/l10n.dart';
 import '../routes/app_routes_names.dart';
+import '../widgets/widgets_exports.dart';
 
 class BottomNavScreen extends StatefulWidget {
   final Widget child;
@@ -65,7 +66,14 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     _getCurrentIndex(context);
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      body: SafeArea(child: widget.child),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: widget.child),
+            NativeAdmobAd(isNativeBanner: false),
+          ],
+        ),
+      ),
       bottomNavigationBar: Container(
         // height: AppSizes.bottomNavHeight,
         decoration: BoxDecoration(
@@ -179,7 +187,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           Container(
             width: AppSizes.iconSizeXXLarge,
             height: AppSizes.iconSizeXXLarge,
-            margin: const EdgeInsets.symmetric(horizontal: AppSizes.spacingSmall),
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppSizes.spacingSmall,
+            ),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: theme.colorScheme.primary.withValues(alpha: 0.2),

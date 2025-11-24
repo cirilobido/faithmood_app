@@ -322,6 +322,9 @@ class _DevotionalLogDetailsViewState
             Text(devotional.content!, style: theme.textTheme.bodyLarge),
             const SizedBox(height: AppSizes.spacingLarge),
           ],
+          const SizedBox(height: AppSizes.spacingMedium),
+          NativeAdmobAd(isBigBanner: true),
+          const SizedBox(height: AppSizes.spacingMedium),
           if (devotional?.reflection != null &&
               devotional!.reflection!.isNotEmpty) ...[
             ExpandableSection(

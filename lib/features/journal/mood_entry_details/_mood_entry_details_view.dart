@@ -292,6 +292,9 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
               isSaving: state.isUpdating,
             ),
           ],
+          const SizedBox(height: AppSizes.spacingMedium),
+          NativeAdmobAd(isBigBanner: true),
+          const SizedBox(height: AppSizes.spacingMedium),
           if (aiReflection != null && aiReflection.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingMedium),
             ExpandableSection(

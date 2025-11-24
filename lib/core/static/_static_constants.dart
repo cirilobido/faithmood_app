@@ -31,4 +31,11 @@ class Constant {
   static const moodsDateKey = 'moods_date';
   static const hasAddedMoodKey = 'has_added_mood';
   static const analyticsKeyPrefix = 'analytics';
+
+  
+  static const admobBannerAdUnitId = 'ca-app-pub-3940256099942544/9214589741';
+  static const admobNativeAdUnitId = 'ca-app-pub-3940256099942544/2247696110';
+  static const admobInterstitialAdUnitId =
+      'ca-app-pub-3940256099942544/1033173712';
+  static const admobRewardedAdUnitId = 'ca-app-pub-3940256099942544/5224354917';
 }
