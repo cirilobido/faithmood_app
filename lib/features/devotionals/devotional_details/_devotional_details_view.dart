@@ -44,26 +44,6 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      floatingActionButton: state.devotional != null
-          ? FloatingActionButton(
-              onPressed: () async {
-                if (!state.isPlaying && !state.isPaused) {
-                  await vm.playTTS();
-                }
-                if (context.mounted) {
-                  TtsPlayerDialog.show(
-                    context: context,
-                    devotionalId: widget.devotionalId,
-                  );
-                }
-              },
-              backgroundColor: theme.colorScheme.primary,
-              child: Icon(
-                state.isPlaying ? Icons.pause : Icons.play_arrow,
-                color: theme.colorScheme.surface,
-              ),
-            )
-          : null,
       body: SafeArea(
         child: Column(
           children: [
@@ -110,9 +90,26 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                   context.pop();
                 }
               },
-              action: FavoriteHeaderAction(
+              action: DevotionalOptionsHeaderAction(
                 isFavorite: state.isFavorite,
-                onToggle: () => vm.toggleFavorite(),
+                isPlaying: state.isPlaying,
+                isPaused: state.isPaused,
+                onToggleFavorite: () => vm.toggleFavorite(),
+                onTtsTap: () async {
+                  if (state.isPlaying) {
+                    await vm.pauseTTS();
+                  } else if (state.isPaused) {
+                    await vm.playTTS();
+                  } else {
+                    await vm.playTTS();
+                  }
+                  if (context.mounted) {
+                    TtsPlayerDialog.show(
+                      context: context,
+                      devotionalId: widget.devotionalId,
+                    );
+                  }
+                },
               ),
             ),
             Expanded(

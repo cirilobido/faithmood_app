@@ -234,3 +234,94 @@ class TtsHeaderAction extends DetailsPageHeaderAction {
   }
 }
 
+class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
+  final bool isFavorite;
+  final bool isPlaying;
+  final bool isPaused;
+  final VoidCallback onToggleFavorite;
+  final VoidCallback onTtsTap;
+
+  DevotionalOptionsHeaderAction({
+    required this.isFavorite,
+    required this.isPlaying,
+    required this.isPaused,
+    required this.onToggleFavorite,
+    required this.onTtsTap,
+  });
+
+  @override
+  Widget build(BuildContext context, ThemeData theme) {
+    return SizedBox(
+      width: AppSizes.iconSizeNormal,
+      height: AppSizes.iconSizeNormal,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: PopupMenuButton<String>(
+          padding: EdgeInsets.zero,
+          iconSize: AppSizes.iconSizeMedium,
+          splashRadius: AppSizes.iconSizeMedium / 2,
+          icon: SvgPicture.asset(
+            AppIcons.moreVerticalIcon,
+            width: AppSizes.iconSizeMedium,
+            height: AppSizes.iconSizeMedium,
+            colorFilter: ColorFilter.mode(
+              theme.primaryIconTheme.color!,
+              BlendMode.srcIn,
+            ),
+          ),
+          onSelected: (value) {
+            if (value == 'tts') {
+              onTtsTap();
+            } else if (value == 'favorite') {
+              onToggleFavorite();
+            }
+          },
+          itemBuilder: (BuildContext context) => [
+            PopupMenuItem<String>(
+              value: 'tts',
+              child: Row(
+                children: [
+                  Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: AppSizes.iconSizeNormal,
+                    color: theme.iconTheme.color,
+                  ),
+                  const SizedBox(width: AppSizes.spacingSmall),
+                  Text(
+                    isPlaying ? 'Pause' : 'Play',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            PopupMenuItem<String>(
+              value: 'favorite',
+              child: Row(
+                children: [
+                  Icon(
+                    isFavorite ? Icons.bookmark : Icons.bookmark_border,
+                    size: AppSizes.iconSizeNormal,
+                    color: isFavorite
+                        ? theme.colorScheme.primary
+                        : theme.iconTheme.color,
+                  ),
+                  const SizedBox(width: AppSizes.spacingSmall),
+                  Text(
+                    isFavorite ? 'Remove from favorites' : 'Add to favorites',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: isFavorite ? theme.colorScheme.primary : null,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
