@@ -21,6 +21,8 @@ export 'devotional_tag_chip/_devotional_tag_chip.dart';
 export 'save_note_modal/_save_note_modal.dart';
 export 'expandable_section/_expandable_section.dart';
 export 'verse_content/_verse_content.dart';
+export 'tts_voice_selector/_tts_voice_selector.dart';
+export 'tts_controls/_tts_controls.dart';
 export 'details_page_header/_details_page_header.dart';
 export 'note_display/_note_display.dart';
 export 'delete_confirmation_dialog/_delete_confirmation_dialog.dart';

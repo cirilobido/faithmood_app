@@ -113,6 +113,21 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 ],
               ),
             ),
+            if (state.isPlaying || state.isPaused)
+              TtsControls(
+                isPlaying: state.isPlaying,
+                isPaused: state.isPaused,
+                progress: state.progress,
+                onPlayPause: () async {
+                  if (state.isPlaying) {
+                    await vm.pauseTTS();
+                  } else {
+                    await vm.playTTS();
+                  }
+                },
+                onStop: () => vm.stopTTS(),
+                onSeek: (progress) => vm.seekToPosition(progress),
+              ),
             Expanded(
               child: state.isLoading
                   ? const Center(child: LoadingIndicator())

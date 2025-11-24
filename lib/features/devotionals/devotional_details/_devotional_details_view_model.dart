@@ -33,6 +33,7 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
   ) : super(DevotionalDetailsState()) {
     _loadDevotional();
     ttsService.onStateChanged = _syncTtsState;
+    ttsService.onProgressChanged = _onProgressChanged;
   }
 
   void _syncTtsState() {
@@ -40,8 +41,20 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       isPlaying: ttsService.isPlaying,
       isPaused: ttsService.isPaused,
       isStopped: !ttsService.isPlaying && !ttsService.isPaused,
+      currentPosition: ttsService.currentPosition,
+      totalLength: ttsService.totalLength,
+      progress: ttsService.progress,
     );
   }
+
+  void _onProgressChanged(double progress) {
+    updateState(
+      progress: progress,
+      currentPosition: ttsService.currentPosition,
+      totalLength: ttsService.totalLength,
+    );
+  }
+
 
   void updateState({
     bool? isLoading,
@@ -55,6 +68,11 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
     bool? isPlaying,
     bool? isPaused,
     bool? isStopped,
+    int? currentPosition,
+    int? totalLength,
+    double? progress,
+    String? selectedVoiceId,
+    List<Map<String, String>>? availableVoices,
   }) {
     state = state.copyWith(
       isLoading: isLoading,
@@ -68,6 +86,11 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       isPlaying: isPlaying,
       isPaused: isPaused,
       isStopped: isStopped,
+      currentPosition: currentPosition,
+      totalLength: totalLength,
+      progress: progress,
+      selectedVoiceId: selectedVoiceId,
+      availableVoices: availableVoices,
     );
   }
 
@@ -249,12 +272,25 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
     if (devotional == null) return;
 
     try {
+      if (state.isPaused) {
+        final success = await ttsService.resume();
+        if (success) {
+          updateState(
+            isPlaying: true,
+            isPaused: false,
+            isStopped: false,
+          );
+        }
+        return;
+      }
+
       final userLang = authProvider.user?.lang?.name ?? 'en';
       final languageSet = await ttsService.setLanguage(userLang);
       
       if (!languageSet) {
         devLogger('Failed to set TTS language');
       }
+
 
       final text = _formatDevotionalText(devotional, userLang);
       if (text.isEmpty) {
@@ -268,6 +304,9 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
           isPlaying: true,
           isPaused: false,
           isStopped: false,
+          totalLength: ttsService.totalLength,
+          currentPosition: 0,
+          progress: 0.0,
         );
       } else {
         updateState(
@@ -309,6 +348,8 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
           isPlaying: false,
           isPaused: false,
           isStopped: true,
+          currentPosition: 0,
+          progress: 0.0,
         );
       }
     } catch (e) {
@@ -317,13 +358,59 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
         isPlaying: false,
         isPaused: false,
         isStopped: true,
+        currentPosition: 0,
+        progress: 0.0,
       );
     }
   }
 
+  Future<void> seekToPosition(double progress) async {
+    try {
+      if (state.totalLength == 0) return;
+
+      final position = (progress * state.totalLength).round();
+      final wasPlaying = state.isPlaying || state.isPaused;
+      
+      updateState(
+        isPlaying: true,
+        isPaused: false,
+        isStopped: false,
+      );
+
+      final success = await ttsService.seekToPosition(position);
+      if (success) {
+        updateState(
+          isPlaying: true,
+          isPaused: false,
+          isStopped: false,
+          currentPosition: position,
+          progress: progress,
+        );
+      } else if (wasPlaying) {
+        updateState(
+          isPlaying: false,
+          isPaused: true,
+          isStopped: false,
+        );
+      }
+    } catch (e) {
+      devLogger('Error seeking TTS: $e');
+      final wasPlaying = state.isPlaying || state.isPaused;
+      if (wasPlaying) {
+        updateState(
+          isPlaying: false,
+          isPaused: true,
+          isStopped: false,
+        );
+      }
+    }
+  }
+
+
   @override
   void dispose() {
     ttsService.onStateChanged = null;
+    ttsService.onProgressChanged = null;
     ttsService.stop();
     super.dispose();
   }
