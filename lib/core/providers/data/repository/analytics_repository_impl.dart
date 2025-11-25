@@ -22,10 +22,23 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
   Future<Analytics?> getUserAnalytics(
     int userId,
     String startDate,
-    String endDate,
-  ) async {
+    String endDate, {
+    bool forceRefresh = false,
+  }) async {
     try {
-      devLogger('AnalyticsRepository.getUserAnalytics() called - userId: $userId, startDate: $startDate, endDate: $endDate');
+      devLogger('AnalyticsRepository.getUserAnalytics() called - userId: $userId, startDate: $startDate, endDate: $endDate, forceRefresh: $forceRefresh');
+      
+      // Check cache first if not forcing refresh
+      if (!forceRefresh) {
+        final cachedAnalytics = await analyticsDao.getAnalytics(startDate, endDate);
+        if (cachedAnalytics != null) {
+          devLogger('AnalyticsRepository.getUserAnalytics() - returning cached data');
+          return cachedAnalytics;
+        }
+        devLogger('AnalyticsRepository.getUserAnalytics() - no cached data found, fetching from API');
+      }
+      
+      // Fetch from API
       final result = await analyticsService.getUserAnalytics(
         userId,
         startDate,

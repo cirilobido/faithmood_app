@@ -84,7 +84,14 @@ class SettingsViewModel extends StateNotifier<SettingsState> {
       );
 
       await authProvider.signOut();
-      await Purchases.logOut();
+      
+      // Log out from Purchases, handle anonymous user gracefully
+      try {
+        await Purchases.logOut();
+      } catch (e) {
+        devLogger('⚠️ Purchases logOut failed (user may be anonymous): $e');
+        // Continue even if Purchases logout fails
+      }
 
       firebaseAnalyticProvider.logEvent(
         name: 'user_logout_success',

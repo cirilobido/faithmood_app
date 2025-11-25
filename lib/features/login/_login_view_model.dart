@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../core/core_exports.dart';
 import '../../dev_utils/dev_utils_exports.dart';
@@ -38,6 +39,17 @@ class LoginViewModel extends StateNotifier<LoginState> {
       if (result != null) {
         await _getIsFirstTimeOpen();
         await _setIsFirstTimeOpenFalse();
+
+        // Log in to Purchases if user ID is available
+        if (result.id != null) {
+          try {
+            await Purchases.logIn(result.id.toString());
+          } catch (e) {
+            devLogger('⚠️ Purchases logIn failed: $e');
+            // Continue even if Purchases login fails
+          }
+        }
+
         updateState(isLoading: false);
         firebaseAnalyticProvider.logEvent(
           name: 'user_login_successfully',

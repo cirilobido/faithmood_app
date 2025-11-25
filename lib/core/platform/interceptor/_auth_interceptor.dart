@@ -88,7 +88,14 @@ class AuthInterceptor implements Interceptor {
         ref.invalidate(homeViewModelProvider);
         ref.invalidate(profileViewModelProvider);
         ref.invalidate(journalViewModelProvider);
-        await Purchases.logOut();
+        
+        // Log out from Purchases, handle anonymous user gracefully
+        try {
+          await Purchases.logOut();
+        } catch (e) {
+          // User may be anonymous, continue with logout flow
+        }
+        
         WidgetsBinding.instance.addPostFrameCallback((_) {
           final router = GoRouter.of(
             AppRoutes.rootNavigatorKey.currentContext!,

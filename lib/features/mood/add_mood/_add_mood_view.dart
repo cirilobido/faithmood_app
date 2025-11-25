@@ -11,6 +11,7 @@ import '../../../widgets/widgets_exports.dart';
 import '../../../features/journal/_journal_view_model.dart';
 import '_add_mood_view_model.dart';
 import 'widgets/_mood_page_switcher.dart';
+import '../../../features/home/_home_view_model.dart';
 
 class AddMoodView extends ConsumerStatefulWidget {
   final Mood? preSelectedMood;
@@ -168,6 +169,12 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
                     if (sessionId != null && context.mounted) {
                       triggerHapticFeedback(HapticsType.success, context: context);
                       ref.read(journalViewModelProvider.notifier).refreshMoodSessionsIfNeeded();
+                      // Refresh week moods in home screen
+                      try {
+                        ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
+                      } catch (_) {
+                        // Home view model might not be available if user is not on home screen
+                      }
                       
                       if (!hasAddedMood) {
                         _showSuccessModal(context, theme, lang, sessionId);

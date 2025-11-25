@@ -339,7 +339,12 @@ class HomeViewModel extends StateNotifier<HomeState> {
       final startDate = DateHelper.formatForApi(weekStart);
       final endDate = DateHelper.formatForApi(weekEnd);
 
-      final result = await analyticsUseCase.getUserAnalytics(userId, startDate, endDate);
+      final result = await analyticsUseCase.getUserAnalytics(
+        userId,
+        startDate,
+        endDate,
+        forceRefresh: forceRefresh,
+      );
 
       switch (result) {
         case Success(value: final analytics):

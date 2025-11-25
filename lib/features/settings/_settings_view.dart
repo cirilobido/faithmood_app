@@ -334,10 +334,25 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       iconPath: AppIcons.sadPetImage,
       buttonTitle: lang.logOut,
       onPrimaryTap: () async {
+        // Close the confirmation dialog first
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+        
+        // Show loading dialog
+        if (context.mounted) {
+          LoadingDialog.show(context: context, message: lang.logOut);
+        }
+        
         final viewModel = ref.read(settingsViewModelProvider.notifier);
         final result = await viewModel.logOut();
 
-        if (result) {
+        // Hide loading dialog
+        if (context.mounted) {
+          LoadingDialog.hide(context);
+        }
+
+        if (result && context.mounted) {
           ref.invalidate(homeViewModelProvider);
           ref.invalidate(profileViewModelProvider);
           context.go(Routes.initialPath);

@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '_mood.dart';
+import '../verse/_verse.dart';
 
 part '_mood_session_details.g.dart';
 
@@ -20,6 +21,8 @@ class MoodSessionDetails {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final Mood? mood;
+  @JsonKey(name: 'aiVerse')
+  final Verse? aiVerse;
 
   MoodSessionDetails({
     this.id,
@@ -36,6 +39,7 @@ class MoodSessionDetails {
     this.createdAt,
     this.updatedAt,
     this.mood,
+    this.aiVerse,
   });
 
   factory MoodSessionDetails.fromJson(Map<String, dynamic> json) =>

@@ -4,7 +4,8 @@ abstract class AnalyticsRepository {
   Future<Analytics?> getUserAnalytics(
     int userId,
     String startDate,
-    String endDate,
-  );
+    String endDate, {
+    bool forceRefresh = false,
+  });
 }
 

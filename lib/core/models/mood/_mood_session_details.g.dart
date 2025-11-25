@@ -28,6 +28,9 @@ MoodSessionDetails _$MoodSessionDetailsFromJson(Map<String, dynamic> json) =>
       mood: json['mood'] == null
           ? null
           : Mood.fromJson(json['mood'] as Map<String, dynamic>),
+      aiVerse: json['aiVerse'] == null
+          ? null
+          : Verse.fromJson(json['aiVerse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MoodSessionDetailsToJson(MoodSessionDetails instance) =>
@@ -48,4 +51,5 @@ Map<String, dynamic> _$MoodSessionDetailsToJson(MoodSessionDetails instance) =>
       if (instance.updatedAt?.toIso8601String() case final value?)
         'updatedAt': value,
       if (instance.mood case final value?) 'mood': value,
+      if (instance.aiVerse case final value?) 'aiVerse': value,
     };

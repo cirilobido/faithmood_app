@@ -92,22 +92,28 @@ class _EmotionalMoodSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(lang.emotionalMoodSummary, style: theme.textTheme.titleLarge),
-        Row(
-          children: [
-            Text(lang.youFeltMostOften, style: theme.textTheme.bodyMedium),
-            const SizedBox(width: AppSizes.spacingXSmall),
-            ImageFiltered(
-              imageFilter: isPremium
-                  ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
-                  : ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-              child: Text(
-                "${(isPremium ? (predominantMood?.icon ?? '') : '💚')}${(predominantMood?.name ?? '')}",
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: theme.textTheme.titleSmall?.fontWeight,
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: lang.youFeltMostOften,
+                style: theme.textTheme.bodyMedium,
+              ),
+              WidgetSpan(
+                child: ImageFiltered(
+                  imageFilter: isPremium
+                      ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
+                      : ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  child: Text(
+                    "${(isPremium ? (predominantMood?.icon ?? '') : '💚')}${(predominantMood?.name ?? '')}",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: theme.textTheme.titleSmall?.fontWeight,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         if (isWeek) const SizedBox(height: AppSizes.spacingSmall),
         if (isWeek)
@@ -163,22 +169,24 @@ class _SpiritualMoodSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(lang.spiritualMoodSummary, style: theme.textTheme.titleLarge),
-        Row(
-          children: [
-            Text(
-              lang.predominantSpiritualMood,
-              style: theme.textTheme.bodyMedium,
-            ),
-            const SizedBox(width: AppSizes.spacingXSmall),
-            Text(
-              "${(isPremium ? (predominantMood?.icon ?? '') : '💜')}${(predominantMood?.name ?? '')}",
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: theme.textTheme.titleSmall?.fontWeight,
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(text: lang.predominantSpiritualMood, style: theme.textTheme.bodyMedium),
+              WidgetSpan(child: ImageFiltered(
+                imageFilter: isPremium
+                  ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
+                  : ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: Text(
+                  "${(isPremium ? (predominantMood?.icon ?? '') : '💜')}${(predominantMood?.name ?? '')}",
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: theme.textTheme.titleSmall?.fontWeight,
+                  ),
+                ),
               ),
-            ),
-          ],
+            )],
+          ),
         ),
-
         if (isWeek) const SizedBox(height: AppSizes.spacingSmall),
         if (isWeek)
           DailyTrackingCard(

@@ -19,17 +19,6 @@ class HomeView extends ConsumerStatefulWidget {
 
 class _HomeViewState extends ConsumerState<HomeView> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final state = ref.read(homeViewModelProvider);
-    if (state.weekMoodSessions.isEmpty && !state.isLoadingWeekMoods) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     final vm = ref.read(homeViewModelProvider.notifier);
     final state = ref.watch(homeViewModelProvider);

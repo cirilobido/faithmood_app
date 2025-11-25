@@ -9,6 +9,7 @@ import '../../../widgets/widgets_exports.dart';
 import '../../../features/journal/_journal_view_model.dart';
 import '_devotional_details_view_model.dart';
 import '_devotional_details_state.dart';
+import '../../../features/home/_home_view_model.dart';
 
 class DevotionalDetailsView extends ConsumerStatefulWidget {
   final int devotionalId;
@@ -223,6 +224,12 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 ref
                     .read(journalViewModelProvider.notifier)
                     .refreshDevotionalLogsIfNeeded();
+                // Refresh week moods in home screen
+                try {
+                  ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
+                } catch (_) {
+                  // Home view model might not be available if user is not on home screen
+                }
                 CustomSnackBar.show(
                   context,
                   message: lang.noteSavedSuccessfully,

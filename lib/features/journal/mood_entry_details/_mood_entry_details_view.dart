@@ -247,7 +247,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
 
     final aiReflection =
         session.emotional?.aiReflection ?? session.spiritual?.aiReflection;
-    final aiVerse = session.aiVerse;
+    final aiVerse = session.emotional?.aiVerse;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingMedium),
@@ -256,7 +256,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
         children: [
           if (aiVerse != null) ...[
             VerseContent(
-              verse: session.aiVerse!,
+              verse: aiVerse,
               useStyledContainer: true,
               userLang: userLang,
             ),

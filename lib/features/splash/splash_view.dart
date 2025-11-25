@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -78,6 +79,15 @@ class _SplashViewState extends ConsumerState<SplashView> {
       }
       final user = auth.user;
       if (user != null) {
+        // Log in to Purchases if user ID is available
+        if (user.id != null) {
+          try {
+            await Purchases.logIn(user.id.toString());
+          } catch (e) {
+            devLogger('⚠️ Purchases logIn failed: $e');
+            // Continue even if Purchases login fails
+          }
+        }
         context.go(Routes.home);
         return;
       }

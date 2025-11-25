@@ -79,22 +79,22 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
   String _formatMoodEntryText(MoodSession session, String userLang) {
     final buffer = StringBuffer();
 
-    if (session.aiVerse != null) {
-      final verse = session.aiVerse!;
-      final verseRef = verse.getFormattedRef();
-      if (verseRef.isNotEmpty) {
+    if (session.emotional?.aiVerse != null) {
+      final verse = session.emotional?.aiVerse;
+      final verseRef = verse?.getFormattedRef();
+      if (verseRef?.isNotEmpty == true) {
         buffer.writeln(verseRef);
       }
 
       VerseTranslation? translation;
-      if (verse.translations != null && verse.translations!.isNotEmpty) {
-        translation = verse.translations!.firstWhere(
+      if (verse?.translations != null && verse?.translations?.isNotEmpty == true) {
+        translation = verse?.translations?.firstWhere(
           (t) => t.lang == userLang,
-          orElse: () => verse.translations!.first,
+          orElse: () => verse.translations?.first ?? VerseTranslation(),
         );
       }
 
-      final verseText = translation?.text ?? verse.text ?? '';
+      final verseText = translation?.text ?? verse?.text ?? '';
       if (verseText.isNotEmpty) {
         buffer.writeln(verseText);
       }
@@ -273,27 +273,27 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
     required S lang,
   }) async {
     final session = state.moodSession;
-    if (session == null || session.aiVerse == null) return;
+    if (session == null || session.emotional?.aiVerse == null) return;
 
     try {
       final userLang = authProvider.user?.lang?.name ?? Lang.en;
       final settings = ref.read(settingsProvider);
       final shareUrl = settings.settings?.shareUrl;
-      final verse = session.aiVerse!;
+      final verse = session.emotional?.aiVerse;
 
       final emotionalMood = session.emotional?.mood;
       final moodName = getMoodName(emotionalMood);
       
       VerseTranslation? translation;
-      if (verse.translations != null && verse.translations!.isNotEmpty) {
-        translation = verse.translations!.firstWhere(
+      if (verse?.translations != null && verse?.translations?.isNotEmpty == true) {
+        translation = verse?.translations?.firstWhere(
           (t) => t.lang == userLang,
           orElse: () => verse.translations!.first,
         );
       }
 
-      final verseText = translation?.text ?? verse.text ?? '';
-      final verseRef = translation?.ref ?? verse.ref;
+      final verseText = translation?.text ?? verse?.text ?? '';
+      final verseRef = translation?.ref ?? verse?.ref;
       
       if (verseText.isEmpty) {
         devLogger('No verse text to share');
@@ -487,7 +487,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
                 note: updatedNote,
                 emotional: currentSession.emotional,
                 spiritual: currentSession.spiritual,
-                aiVerse: currentSession.aiVerse,
+                aiVerse: currentSession.emotional?.aiVerse,
               );
               updateState(
                 isUpdating: false,
