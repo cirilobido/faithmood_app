@@ -45,7 +45,6 @@ class WelcomeView extends ConsumerWidget {
                   onNext: () {
                     final error = vm.validatePage(pageIndex, context);
                     if (error != null) {
-                      triggerHapticFeedback(HapticsType.error, context: context);
                       CustomSnackBar.show(
                         context,
                         backgroundColor: theme.colorScheme.error,

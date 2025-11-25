@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+
+import '../../core/core_exports.dart';
 
 class CustomSnackBar {
   static void show(
@@ -10,10 +13,24 @@ class CustomSnackBar {
     TextStyle? textStyle,
   }) {
     final theme = Theme.of(context);
+    final bgColor = backgroundColor ?? theme.colorScheme.primary;
+    final isError = bgColor == theme.colorScheme.error;
+    final isPrimary = bgColor == theme.colorScheme.primary;
+
+    HapticsType hapticType;
+    if (isError) {
+      hapticType = HapticsType.error;
+    } else if (isPrimary) {
+      hapticType = HapticsType.success;
+    } else {
+      hapticType = HapticsType.warning;
+    }
+
+    triggerHapticFeedback(hapticType, context: context);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: backgroundColor ?? theme.colorScheme.primary,
+        backgroundColor: bgColor,
         content: Text(message, style: textStyle ?? theme.textTheme.bodyLarge),
         behavior: behavior,
         duration: duration,
