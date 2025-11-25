@@ -19,4 +19,8 @@ abstract class LocalStorageRepository {
   Future<String?> getThemeMode();
 
   Future<void> setThemeMode(String mode);
+
+  Future<bool> getHapticFeedbackEnabled();
+
+  Future<void> setHapticFeedbackEnabled(bool enabled);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../../../core/core_exports.dart';
 import '../../../../generated/l10n.dart';
@@ -55,7 +56,10 @@ class PageEmotionalMoods extends ConsumerWidget {
                 final isSelected = state.selectedEmotionalMood?.id == mood.id;
 
                 return InkWell(
-                  onTap: () => onMoodSelected(mood),
+                  onTap: () {
+                    triggerHapticFeedback(HapticsType.selection, context: context);
+                    onMoodSelected(mood);
+                  },
                   borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
                   child: Container(
                     decoration: BoxDecoration(

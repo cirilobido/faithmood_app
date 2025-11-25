@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:url_strategy/url_strategy.dart';
@@ -64,7 +67,9 @@ Future<void> _initializeCore() async {
 
   // Firebase setup
   try {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     final notifications = LocalNotificationsService.instance();
     await notifications.init();
 
@@ -80,6 +85,13 @@ Future<void> _initializeCore() async {
     );
   } catch (e, s) {
     devLogger('⚠️ Firebase or Notifications initialization failed: $e\n$s');
+  }
+
+  try {
+    await initializeRevenueCat();
+  } catch (e, s) {
+    devLogger('⚠️ RevenueCat initialization failed: $e\n$s');
+    devLogger(e.toString());
   }
 
   // Google Ads setup
@@ -103,6 +115,18 @@ Future<void> _initializeCore() async {
     );
   } catch (e, s) {
     devLogger('⚠️ Google Ads initialization failed: $e\n$s');
+  }
+}
+
+Future<void> initializeRevenueCat({String? appUserId}) async {
+  PurchasesConfiguration? configuration;
+  if (Platform.isAndroid) {
+    configuration = PurchasesConfiguration('TEST_KEY')
+      ..shouldShowInAppMessagesAutomatically = false
+      ..appUserID = appUserId;
+  }
+  if (configuration != null) {
+    await Purchases.configure(configuration);
   }
 }
 

@@ -2729,6 +2729,16 @@ class S {
     );
   }
 
+  /// `Haptic Feedback`
+  String get hapticFeedback {
+    return Intl.message(
+      'Haptic Feedback',
+      name: 'hapticFeedback',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Light`
   String get light {
     return Intl.message('Light', name: 'light', desc: '', args: []);
@@ -3147,6 +3157,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Vibration`
+  String get vibration {
+    return Intl.message('Vibration', name: 'vibration', desc: '', args: []);
   }
 }
 

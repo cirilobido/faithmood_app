@@ -52,6 +52,7 @@ abstract class AppIcons {
   static const spiritIcon = 'assets/icons/ic_spirit.svg';
   static const heartIcon = 'assets/icons/ic_heart.svg';
   static const settingsIcon = 'assets/icons/ic_settings.svg';
+  static const vibrationIcon = 'assets/icons/ic_vibrate.svg';
   static const safeBoxIcon = 'assets/icons/ic_safe_box.svg';
   static const diamondIcon = 'assets/icons/ic_diamond.svg';
   static const bellIcon = 'assets/icons/ic_bell.svg';

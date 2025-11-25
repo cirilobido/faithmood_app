@@ -10,6 +10,7 @@ class Constant {
   static const isFirstTimeOpenKey = 'is_first_time_open';
   static const appLanguageKey = 'app_language';
   static const themeModeKey = 'theme_mode';
+  static const hapticFeedbackEnabledKey = 'haptic_feedback_enabled';
   static const dailyNotificationHourKey = 'daily_hour';
   static const dailyNotificationMinuteKey = 'daily_minute';
   static const reminderTimeKey = 'reminder_time';

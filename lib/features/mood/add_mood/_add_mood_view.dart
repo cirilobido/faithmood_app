@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
@@ -118,6 +119,7 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
               child: CustomButton(
                 title: state.currentPage < 2 ? lang.next : lang.addToMyJournal,
                 type: ButtonType.primary,
+                hapticsType: state.currentPage >= 2 ? HapticsType.rigid : null,
                 onTap: () async {
                   if (state.currentPage < 2) {
                     if (vm.canProceedToNextPage()) {
@@ -164,6 +166,7 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
                     }
 
                     if (sessionId != null && context.mounted) {
+                      triggerHapticFeedback(HapticsType.success, context: context);
                       ref.read(journalViewModelProvider.notifier).refreshMoodSessionsIfNeeded();
                       
                       if (!hasAddedMood) {

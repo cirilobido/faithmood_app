@@ -328,6 +328,7 @@
   "appLanguage": "Idioma de la Aplicación",
   "appTheme": "Tema de la Aplicación",
   "selectYourTheme": "Selecciona tu Tema",
+  "hapticFeedback": "Vibración Háptica",
   "light": "Claro",
   "dark": "Oscuro",
   "system": "Sistema",
@@ -390,5 +391,6 @@
   "finishAccountSetup": "Completa la configuración de tu cuenta",
   "finishAccountSetupMessage": "Completa tu perfil agregando tu correo electrónico y contraseña.",
   "downloadFaithmoodApp": "Download FaithMood App: ###",
-  "whenYouFeelLookAtThisVerse": "When you feel ###, look at this verse:"
+  "whenYouFeelLookAtThisVerse": "When you feel ###, look at this verse:",
+  "vibration": "Vibration"
 }

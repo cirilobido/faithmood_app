@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+
 import '../../../core/core_exports.dart';
 
 class RadioListSelector extends StatefulWidget {
@@ -28,7 +30,8 @@ class _RadioListSelectorState extends State<RadioListSelector> {
     _selectedKey = widget.initialSelectedKey;
   }
 
-  void _onItemTap(String key) {
+  void _onItemTap(String key, BuildContext context) {
+    triggerHapticFeedback(HapticsType.selection, context: context);
     setState(() => _selectedKey = key);
     widget.onChanged(key);
   }
@@ -77,7 +80,7 @@ class _RadioListSelectorState extends State<RadioListSelector> {
           key: ValueKey(key),
           value: key,
           groupValue: _selectedKey,
-          onChanged: (_) => _onItemTap(key),
+          onChanged: (_) => _onItemTap(key, context),
           title: Text(
             label,
             style: theme.textTheme.titleMedium?.copyWith(

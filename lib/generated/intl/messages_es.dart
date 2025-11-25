@@ -254,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
       "📖 Have you ever followed a guided plan to strengthen your faith?",
     ),
+    "hapticFeedback": MessageLookupByLibrary.simpleMessage("Vibración Háptica"),
     "heyHowAreYouFeelingToday": MessageLookupByLibrary.simpleMessage(
       "Hey ###, how are you feeling today?",
     ),
@@ -746,6 +747,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "verseForTheDay": MessageLookupByLibrary.simpleMessage("Versículo del Día"),
     "verseOfTheDay": MessageLookupByLibrary.simpleMessage("Verse of the day"),
+    "vibration": MessageLookupByLibrary.simpleMessage("Vibration"),
     "viewMore": MessageLookupByLibrary.simpleMessage("View More"),
     "weWillSendYouAnEmailWithACodeTo": MessageLookupByLibrary.simpleMessage(
       "Te enviaremos un correo con un código para restablecer tu contraseña.",

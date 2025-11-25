@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+
 import '../../../core/core_exports.dart';
 
 class CheckBoxListSelector extends StatefulWidget {
@@ -31,7 +33,8 @@ class _CheckBoxListSelectorState extends State<CheckBoxListSelector> {
     };
   }
 
-  void _onItemTap(String key, bool value) {
+  void _onItemTap(String key, bool value, BuildContext context) {
+    triggerHapticFeedback(HapticsType.selection, context: context);
     setState(() => _selected[key] = value);
     widget.onChanged(
       _selected.entries
@@ -86,7 +89,7 @@ class _CheckBoxListSelectorState extends State<CheckBoxListSelector> {
           checkboxScaleFactor: 1.1,
           key: ValueKey(key),
           value: selected,
-          onChanged: (value) => _onItemTap(key, value ?? false),
+          onChanged: (value) => _onItemTap(key, value ?? false, context),
           title: Text(
             label,
             style: theme.textTheme.titleMedium?.copyWith(

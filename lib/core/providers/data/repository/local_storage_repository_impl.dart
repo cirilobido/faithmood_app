@@ -83,4 +83,19 @@ class LocalStorageRepositoryImpl implements LocalStorageRepository {
   Future<void> setThemeMode(String mode) async {
     await preferences.saveValue(key: Constant.themeModeKey, value: mode);
   }
+
+  @override
+  Future<bool> getHapticFeedbackEnabled() async {
+    final result = await preferences.getValue(key: Constant.hapticFeedbackEnabledKey);
+    if (result == null) return true;
+    return result == 'true';
+  }
+
+  @override
+  Future<void> setHapticFeedbackEnabled(bool enabled) async {
+    await preferences.saveValue(
+      key: Constant.hapticFeedbackEnabledKey,
+      value: enabled.toString(),
+    );
+  }
 }

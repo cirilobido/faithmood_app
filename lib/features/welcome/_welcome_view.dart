@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../core/core_exports.dart';
 import '../../widgets/widgets_exports.dart';
@@ -44,6 +45,7 @@ class WelcomeView extends ConsumerWidget {
                   onNext: () {
                     final error = vm.validatePage(pageIndex, context);
                     if (error != null) {
+                      triggerHapticFeedback(HapticsType.error, context: context);
                       CustomSnackBar.show(
                         context,
                         backgroundColor: theme.colorScheme.error,
@@ -56,16 +58,19 @@ class WelcomeView extends ConsumerWidget {
                   onPrimaryTapOverride: pageIndex == 7
                       ? () {
                           vm.requestNotificationPermission().whenComplete(() {
+                            triggerHapticFeedback(HapticsType.success, context: context);
                             vm.goToNextOrFinish(context);
                           });
                         }
                       : pageIndex == 11
                           ? () {
+                              triggerHapticFeedback(HapticsType.success, context: context);
                               vm.rateApp(context);
                             }
                           : null,
                   onSecondaryTap: (pageIndex == 7 || pageIndex == 11)
                       ? () {
+                          triggerHapticFeedback(HapticsType.success, context: context);
                           vm.goToNextOrFinish(context);
                         }
                       : null,

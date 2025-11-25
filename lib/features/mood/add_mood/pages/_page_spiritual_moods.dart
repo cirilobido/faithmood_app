@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../../../core/core_exports.dart';
 import '../../../../generated/l10n.dart';
@@ -72,7 +73,10 @@ class PageSpiritualMoods extends StatelessWidget {
                       key: ValueKey(moodId),
                       value: moodId,
                       groupValue: isSelected ? moodId : null,
-                      onChanged: (_) => onMoodSelected(mood),
+                      onChanged: (_) {
+                        triggerHapticFeedback(HapticsType.selection, context: context);
+                        onMoodSelected(mood);
+                      },
                       title: Row(
                         children: [
                           if (mood.icon != null && mood.icon!.isNotEmpty) ...[

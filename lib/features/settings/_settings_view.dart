@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/core_exports.dart';
@@ -134,6 +135,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                                     themeProvider.setThemeMode(value);
                                   }
                                 },
+                              );
+                            },
+                          ),
+                          SettingItem(
+                            lang.vibration,
+                            AppIcons.vibrationIcon,
+                            showArrow: false,
+                            isSwitch: true,
+                            switchValue: ref.watch(hapticFeedbackProvider).isEnabled,
+                            onSwitchChanged: (value) {
+                              ref
+                                  .read(hapticFeedbackProvider)
+                                  .setEnabled(value);
+                              triggerHapticFeedback(
+                                HapticsType.error,
+                                context: context,
                               );
                             },
                           ),
@@ -298,6 +315,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               icon: e.icon,
               onTap: e.onTap ?? () {},
               showArrow: e.showArrow,
+              isSwitch: e.isSwitch,
+              switchValue: e.switchValue,
+              onSwitchChanged: e.onSwitchChanged,
             ),
           ),
         ],
@@ -344,6 +364,9 @@ class SettingItem {
   final String icon;
   final bool showArrow;
   final VoidCallback? onTap;
+  final bool isSwitch;
+  final bool? switchValue;
+  final ValueChanged<bool>? onSwitchChanged;
 
   SettingItem(
     this.title,
@@ -351,6 +374,9 @@ class SettingItem {
     this.subtitle,
     this.onTap,
     this.showArrow = true,
+    this.isSwitch = false,
+    this.switchValue,
+    this.onSwitchChanged,
   });
 }
 
@@ -360,6 +386,9 @@ class _CardItem extends StatelessWidget {
   final String icon;
   final VoidCallback onTap;
   final bool showArrow;
+  final bool isSwitch;
+  final bool? switchValue;
+  final ValueChanged<bool>? onSwitchChanged;
 
   const _CardItem({
     required this.title,
@@ -367,6 +396,9 @@ class _CardItem extends StatelessWidget {
     required this.icon,
     required this.onTap,
     this.showArrow = true,
+    this.isSwitch = false,
+    this.switchValue,
+    this.onSwitchChanged,
   });
 
   @override
@@ -412,7 +444,17 @@ class _CardItem extends StatelessWidget {
                 ],
               ),
             ),
-            if (showArrow)
+            if (isSwitch && switchValue != null && onSwitchChanged != null)
+              Switch(
+                activeColor: theme.colorScheme.onSurface,
+                activeTrackColor: theme.colorScheme.primary,
+                inactiveTrackColor: theme.colorScheme.onSurface,
+                inactiveThumbColor: theme.colorScheme.primary,
+                trackOutlineWidth: WidgetStatePropertyAll(AppSizes.borderWithSmall),
+                value: switchValue!,
+                onChanged: onSwitchChanged,
+              )
+            else if (showArrow)
               SvgPicture.asset(
                 AppIcons.arrowRightIcon,
                 height: AppSizes.iconSizeRegular,

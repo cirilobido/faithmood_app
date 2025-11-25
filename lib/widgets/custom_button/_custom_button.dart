@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../../core/core_exports.dart';
 
@@ -22,7 +24,7 @@ class _ButtonColorScheme {
   });
 }
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends ConsumerWidget {
   final String title;
   final ButtonType type;
   final CustomStyle style;
@@ -30,6 +32,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool isLoading;
   final bool isShortText;
+  final HapticsType? hapticsType;
 
   const CustomButton({
     super.key,
@@ -40,6 +43,7 @@ class CustomButton extends StatelessWidget {
     this.style = CustomStyle.filled,
     this.isLoading = false,
     this.isShortText = false,
+    this.hapticsType,
   });
 
   _ButtonColorScheme _resolveColors(ButtonType type, bool isDark) {
@@ -134,8 +138,15 @@ class CustomButton extends StatelessWidget {
     return Row(mainAxisSize: MainAxisSize.min, children: [...widgets]);
   }
 
+  void _handleTap(BuildContext context) {
+    if (hapticsType != null) {
+      triggerHapticFeedback(hapticsType!, context: context);
+    }
+    onTap();
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final textTheme = isShortText
@@ -149,7 +160,7 @@ class CustomButton extends StatelessWidget {
             BorderSide(color: _getBorderColor(isDark), width: 1.5),
           ),
         ),
-        onPressed: isLoading ? null : onTap,
+        onPressed: isLoading ? null : () => _handleTap(context),
         icon: _getIconWidget(isDark),
         label: Center(
           child: Text(
@@ -169,7 +180,7 @@ class CustomButton extends StatelessWidget {
         foregroundColor: WidgetStatePropertyAll(_getForegroundColor(isDark)),
       ),
       icon: _getIconWidget(isDark),
-      onPressed: isLoading ? null : onTap,
+      onPressed: isLoading ? null : () => _handleTap(context),
       label: Center(
         child: Text(
           title,

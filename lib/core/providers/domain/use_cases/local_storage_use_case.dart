@@ -52,6 +52,14 @@ class LocalStorageUseCase extends FutureUseCase<dynamic, dynamic> {
     return _repository.setThemeMode(mode);
   }
 
+  Future<bool> getHapticFeedbackEnabled() async {
+    return _repository.getHapticFeedbackEnabled();
+  }
+
+  Future<void> setHapticFeedbackEnabled(bool enabled) async {
+    return _repository.setHapticFeedbackEnabled(enabled);
+  }
+
   @override
   Future<Result<dynamic, Exception>> run(params) {
     throw UnimplementedError();

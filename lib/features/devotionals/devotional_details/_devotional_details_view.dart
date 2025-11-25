@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
@@ -214,9 +215,11 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
             title: lang.saveNotes,
             type: ButtonType.primary,
             isLoading: state.isSaving,
+            hapticsType: HapticsType.rigid,
             onTap: () async {
               final success = await vm.saveReflection();
               if (success && context.mounted) {
+                triggerHapticFeedback(HapticsType.success, context: context);
                 ref
                     .read(journalViewModelProvider.notifier)
                     .refreshDevotionalLogsIfNeeded();
