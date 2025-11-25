@@ -344,6 +344,24 @@
   "unlockPremiumFeatures": "Unlock Premium Features",
   "shareFaithMoodApp": "FaithMood App",
   "shareFaithMoodAppMessage": "FaithMood App \nFaithMood helps you track your emotions, deepen your spiritual life, and receive personalized daily devotionals. \nYou should try it 👉 ###",
+  "shareDevotional": "Share Devotional",
+  "shareMoodVerse": "Share Verse",
+  "whenYouFeelMoodLookAtThisVerse": "When you feel {mood}, look at this verse:",
+  "@whenYouFeelMoodLookAtThisVerse": {
+    "placeholders": {
+      "mood": {
+        "type": "String"
+      }
+    }
+  },
+  "downloadFaithMoodApp": "Download FaithMood App: {url}",
+  "@downloadFaithMoodApp": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
   "localeName": "English",
   "appName": "Your name",
   "thisUsedForAllYourNewDreamAnalysis": "This is used for all your new dream analysis",
@@ -370,5 +388,7 @@
   "yourDailyReminderIsSet": "Your daily reminder is set",
   "reminderDeleted": "Reminder deleted successfully",
   "finishAccountSetup": "Finish Account Setup",
-  "finishAccountSetupMessage": "Complete your profile by adding your email and password."
+  "finishAccountSetupMessage": "Complete your profile by adding your email and password.",
+  "downloadFaithmoodApp": "Download FaithMood App: ###",
+  "whenYouFeelLookAtThisVerse": "When you feel ###, look at this verse:"
 }

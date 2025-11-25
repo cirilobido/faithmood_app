@@ -1,4 +1,6 @@
+import 'package:faithmood_app/generated/l10n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../core/providers/domain/use_cases/devotional_use_case.dart';
@@ -222,6 +224,71 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
 
   void toggleFavorite() {
     updateState(isFavorite: !state.isFavorite);
+  }
+
+  Future<void> shareDevotional({required S lang}) async {
+    final devotional = state.devotional;
+    if (devotional == null) return;
+
+    try {
+      final userLang = authProvider.user?.lang?.name ?? Lang.en;
+      final settings = ref.read(settingsProvider);
+      final shareUrl = settings.settings?.shareUrl;
+      
+      final buffer = StringBuffer();
+
+      if (devotional.title != null && devotional.title!.isNotEmpty) {
+        buffer.writeln(devotional.title!);
+        buffer.writeln();
+      }
+
+      if (devotional.verses != null && devotional.verses!.isNotEmpty) {
+        for (final verse in devotional.verses!) {
+          final verseRef = verse.getFormattedRef();
+          if (verseRef.isNotEmpty) {
+            buffer.writeln(verseRef);
+          }
+
+          VerseTranslation? translation;
+          if (verse.translations != null && verse.translations!.isNotEmpty) {
+            translation = verse.translations!.firstWhere(
+              (t) => t.lang == userLang,
+              orElse: () => verse.translations!.first,
+            );
+          }
+
+          final verseText = translation?.text ?? verse.text ?? '';
+          if (verseText.isNotEmpty) {
+            buffer.writeln(verseText);
+          }
+          buffer.writeln();
+        }
+      }
+
+      if (devotional.reflection != null && devotional.reflection!.isNotEmpty) {
+        buffer.writeln(devotional.reflection!);
+      }
+      
+      if (buffer.toString().trim().isEmpty) {
+        devLogger('No content to share');
+        return;
+      }
+
+      if (shareUrl != null && shareUrl.isNotEmpty) {
+        buffer.writeln();
+        final downloadText = lang.downloadFaithmoodApp;
+        buffer.writeln(downloadText.replaceAll('###', shareUrl));
+      }
+
+      await SharePlus.instance.share(
+        ShareParams(
+          title: devotional.title ?? lang.devotional,
+          text: buffer.toString().trim(),
+        ),
+      );
+    } catch (e) {
+      devLogger('Error sharing devotional: $e');
+    }
   }
 
   String _formatDevotionalText(Devotional devotional, String userLang) {

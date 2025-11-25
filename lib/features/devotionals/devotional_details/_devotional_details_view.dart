@@ -8,7 +8,6 @@ import '../../../widgets/widgets_exports.dart';
 import '../../../features/journal/_journal_view_model.dart';
 import '_devotional_details_view_model.dart';
 import '_devotional_details_state.dart';
-import '../../../widgets/tts_player_dialog/_tts_player_dialog.dart';
 
 class DevotionalDetailsView extends ConsumerStatefulWidget {
   final int devotionalId;
@@ -110,6 +109,9 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                     );
                   }
                 },
+                onShare: () => vm.shareDevotional(
+                  lang: lang,
+                ),
               ),
             ),
             Expanded(

@@ -240,6 +240,7 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
   final bool isPaused;
   final VoidCallback onToggleFavorite;
   final VoidCallback onTtsTap;
+  final VoidCallback? onShare;
 
   DevotionalOptionsHeaderAction({
     required this.isFavorite,
@@ -247,6 +248,7 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
     required this.isPaused,
     required this.onToggleFavorite,
     required this.onTtsTap,
+    this.onShare,
   });
 
   @override
@@ -274,6 +276,8 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
               onTtsTap();
             } else if (value == 'favorite') {
               onToggleFavorite();
+            } else if (value == 'share' && onShare != null) {
+              onShare!();
             }
           },
           itemBuilder: (BuildContext context) => [
@@ -318,6 +322,26 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
                 ],
               ),
             ),
+            if (onShare != null)
+              PopupMenuItem<String>(
+                value: 'share',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.share,
+                      size: AppSizes.iconSizeNormal,
+                      color: theme.iconTheme.color,
+                    ),
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      'Share',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
           ],
         ),
       ),
@@ -331,6 +355,7 @@ class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
   final bool isPlaying;
   final bool isPaused;
   final VoidCallback onTtsTap;
+  final VoidCallback? onShare;
 
   MoodEntryOptionsHeaderAction({
     this.onEdit,
@@ -338,6 +363,7 @@ class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
     required this.isPlaying,
     required this.isPaused,
     required this.onTtsTap,
+    this.onShare,
   });
 
   @override
@@ -368,6 +394,8 @@ class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
               onEdit!();
             } else if (value == 'delete' && onDelete != null) {
               onDelete!();
+            } else if (value == 'share' && onShare != null) {
+              onShare!();
             }
           },
           itemBuilder: (BuildContext context) => [
@@ -390,6 +418,26 @@ class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
                 ],
               ),
             ),
+            if (onShare != null)
+              PopupMenuItem<String>(
+                value: 'share',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.share,
+                      size: AppSizes.iconSizeNormal,
+                      color: theme.iconTheme.color,
+                    ),
+                    const SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      'Share',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             if (onEdit != null)
               PopupMenuItem<String>(
                 value: 'edit',

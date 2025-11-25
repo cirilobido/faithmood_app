@@ -1,14 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../core/providers/domain/use_cases/mood_use_case.dart';
 import '../../../dev_utils/dev_utils_exports.dart';
+import '../../../generated/l10n.dart';
 import '_mood_entry_details_state.dart';
 
 final moodEntryDetailsViewModelProvider =
     StateNotifierProvider.autoDispose.family<MoodEntryDetailsViewModel, MoodEntryDetailsState, String>(
   (ref, sessionId) {
     final viewModel = MoodEntryDetailsViewModel(
+      ref,
       ref.read(moodUseCaseProvider),
       ref.read(authProvider),
       ref.read(ttsServiceProvider),
@@ -23,6 +26,7 @@ final moodEntryDetailsViewModelProvider =
 );
 
 class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
+  final Ref ref;
   final MoodUseCase moodUseCase;
   final AuthProvider authProvider;
   final TtsService ttsService;
@@ -30,6 +34,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
   bool _mounted = true;
 
   MoodEntryDetailsViewModel(
+    this.ref,
     this.moodUseCase,
     this.authProvider,
     this.ttsService,
@@ -255,6 +260,75 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
           isStopped: false,
         );
       }
+    }
+  }
+
+      
+  String getMoodName(Mood? mood) {
+    if (mood == null) return '';
+    return mood.translations?.first.name ?? mood.name ?? '';
+  }
+
+  Future<void> shareMoodVerse({
+    required S lang,
+  }) async {
+    final session = state.moodSession;
+    if (session == null || session.aiVerse == null) return;
+
+    try {
+      final userLang = authProvider.user?.lang?.name ?? Lang.en;
+      final settings = ref.read(settingsProvider);
+      final shareUrl = settings.settings?.shareUrl;
+      final verse = session.aiVerse!;
+
+      final emotionalMood = session.emotional?.mood;
+      final moodName = getMoodName(emotionalMood);
+      
+      VerseTranslation? translation;
+      if (verse.translations != null && verse.translations!.isNotEmpty) {
+        translation = verse.translations!.firstWhere(
+          (t) => t.lang == userLang,
+          orElse: () => verse.translations!.first,
+        );
+      }
+
+      final verseText = translation?.text ?? verse.text ?? '';
+      final verseRef = translation?.ref ?? verse.ref;
+      
+      if (verseText.isEmpty) {
+        devLogger('No verse text to share');
+        return;
+      }
+
+      final buffer = StringBuffer();
+      if (moodName.isNotEmpty) {
+        final feelText = lang.whenYouFeelLookAtThisVerse;
+        buffer.writeln(feelText.replaceAll('###', moodName));
+        buffer.writeln();
+      }
+
+      if (verseRef != null && verseRef.isNotEmpty) {
+        buffer.writeln(verseRef);
+      }
+      buffer.writeln(verseText);
+
+      buffer.writeln();
+      buffer.writeln(session.emotional?.aiReflection ?? '');
+      
+      if (shareUrl != null && shareUrl.isNotEmpty) {
+        buffer.writeln();
+        final downloadText = lang.downloadFaithmoodApp;
+        buffer.writeln(downloadText.replaceAll('###', shareUrl));
+      }
+
+      await SharePlus.instance.share(
+        ShareParams(
+          title: lang.appName,
+          text: buffer.toString().trim(),
+        ),
+      );
+    } catch (e) {
+      devLogger('Error sharing mood verse: $e');
     }
   }
 

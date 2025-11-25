@@ -2839,6 +2839,46 @@ class S {
     );
   }
 
+  /// `Share Devotional`
+  String get shareDevotional {
+    return Intl.message(
+      'Share Devotional',
+      name: 'shareDevotional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share Verse`
+  String get shareMoodVerse {
+    return Intl.message(
+      'Share Verse',
+      name: 'shareMoodVerse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When you feel {mood}, look at this verse:`
+  String whenYouFeelMoodLookAtThisVerse(String mood) {
+    return Intl.message(
+      'When you feel $mood, look at this verse:',
+      name: 'whenYouFeelMoodLookAtThisVerse',
+      desc: '',
+      args: [mood],
+    );
+  }
+
+  /// `Download FaithMood App: {url}`
+  String downloadFaithMoodApp(String url) {
+    return Intl.message(
+      'Download FaithMood App: $url',
+      name: 'downloadFaithMoodApp',
+      desc: '',
+      args: [url],
+    );
+  }
+
   /// `English`
   String get localeName {
     return Intl.message('English', name: 'localeName', desc: '', args: []);
@@ -3084,6 +3124,26 @@ class S {
     return Intl.message(
       'Complete your profile by adding your email and password.',
       name: 'finishAccountSetupMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download FaithMood App: ###`
+  String get downloadFaithmoodApp {
+    return Intl.message(
+      'Download FaithMood App: ###',
+      name: 'downloadFaithmoodApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When you feel ###, look at this verse:`
+  String get whenYouFeelLookAtThisVerse {
+    return Intl.message(
+      'When you feel ###, look at this verse:',
+      name: 'whenYouFeelLookAtThisVerse',
       desc: '',
       args: [],
     );

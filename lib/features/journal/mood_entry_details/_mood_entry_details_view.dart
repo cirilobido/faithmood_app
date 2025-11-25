@@ -83,6 +83,14 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
                     );
                   }
                 },
+                onShare: () {
+                  final vm = ref.read(
+                    moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                  );
+                  vm.shareMoodVerse(
+                    lang: lang,
+                  );
+                },
               ),
             ),
             Expanded(

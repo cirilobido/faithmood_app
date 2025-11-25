@@ -20,7 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
-  static String m0(days) => "Has registrado entradas en ${days} días";
+  static String m0(url) => "Descarga la aplicación FaithMood: ${url}";
+
+  static String m1(mood) => "Cuando te sientes ${mood}, mira este versículo:";
+
+  static String m2(days) => "Has registrado entradas en ${days} días";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -144,6 +148,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
     "discoverPremium": MessageLookupByLibrary.simpleMessage(
       "Descubrir Premium",
+    ),
+    "downloadFaithMoodApp": m0,
+    "downloadFaithmoodApp": MessageLookupByLibrary.simpleMessage(
+      "Download FaithMood App: ###",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("Editar"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -539,9 +547,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "setReminder": MessageLookupByLibrary.simpleMessage("Activar recordatorio"),
     "settings": MessageLookupByLibrary.simpleMessage("Configuración"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Compartir Aplicación"),
+    "shareDevotional": MessageLookupByLibrary.simpleMessage(
+      "Compartir Devocional",
+    ),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
     "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
       "FaithMood App \nFaithMood te ayuda a rastrear tus emociones, profundizar tu vida espiritual y recibir devocionales diarios personalizados. \nDeberías probarlo 👉 ###",
+    ),
+    "shareMoodVerse": MessageLookupByLibrary.simpleMessage(
+      "Compartir Versículo",
     ),
     "signIn": MessageLookupByLibrary.simpleMessage("Iniciar sesión"),
     "signInNow": MessageLookupByLibrary.simpleMessage("Iniciar sesión ahora"),
@@ -764,6 +778,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "whatsYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "¿Cuál es tu número de teléfono?",
     ),
+    "whenYouFeelLookAtThisVerse": MessageLookupByLibrary.simpleMessage(
+      "When you feel ###, look at this verse:",
+    ),
+    "whenYouFeelMoodLookAtThisVerse": m1,
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
       "¿Dónde está tu corazón hoy?",
     ),
@@ -793,6 +811,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "yourWeekInEmotions": MessageLookupByLibrary.simpleMessage(
       "Your Week in Emotions",
     ),
-    "youveLoggedEntriesOnDays": m0,
+    "youveLoggedEntriesOnDays": m2,
   };
 }
