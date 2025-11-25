@@ -1834,30 +1834,30 @@ class S {
     );
   }
 
-  /// `Where is your heart today?`
+  /// `Your Spiritual Mood`
   String get whereIsYourHeartToday {
     return Intl.message(
-      'Where is your heart today?',
+      'Your Spiritual Mood',
       name: 'whereIsYourHeartToday',
       desc: '',
       args: [],
     );
   }
 
-  /// `Choose the mood that best reflects your heart right now.`
+  /// `Select how you feel right now. Be honest with yourself.`
   String get chooseMoodThatBestReflects {
     return Intl.message(
-      'Choose the mood that best reflects your heart right now.',
+      'Select how you feel right now. Be honest with yourself.',
       name: 'chooseMoodThatBestReflects',
       desc: '',
       args: [],
     );
   }
 
-  /// `Select the state that resonates with your spiritual side.`
+  /// `Choose the mood of your heart before God.`
   String get selectStateThatResonates {
     return Intl.message(
-      'Select the state that resonates with your spiritual side.',
+      'Choose the mood of your heart before God.',
       name: 'selectStateThatResonates',
       desc: '',
       args: [],

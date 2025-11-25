@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "changeTime": MessageLookupByLibrary.simpleMessage("Change Time"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
-      "Choose the mood that best reflects your heart right now.",
+      "Select how you feel right now. Be honest with yourself.",
     ),
     "chooseYourNextStep": MessageLookupByLibrary.simpleMessage(
       "Choose Your Next Step",
@@ -507,7 +507,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectAPeriod": MessageLookupByLibrary.simpleMessage("Select a Period"),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
-      "Select the state that resonates with your spiritual side.",
+      "Choose the mood of your heart before God.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
@@ -747,7 +747,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "whenYouFeelMoodLookAtThisVerse": m1,
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
-      "Where is your heart today?",
+      "Your Spiritual Mood",
     ),
     "withNote": MessageLookupByLibrary.simpleMessage("With Note"),
     "withNotes": MessageLookupByLibrary.simpleMessage("With Notes"),

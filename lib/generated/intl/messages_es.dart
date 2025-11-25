@@ -88,7 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "category": MessageLookupByLibrary.simpleMessage("Categoría"),
     "changeTime": MessageLookupByLibrary.simpleMessage("Cambiar hora"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
-      "Elige el estado de ánimo que mejor refleje tu corazón en este momento.",
+      "Selecciona cómo te sientes en este momento. Sé honesto contigo mismo",
     ),
     "chooseYourNextStep": MessageLookupByLibrary.simpleMessage(
       "Choose Your Next Step",
@@ -535,7 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
-      "Selecciona el estado que resuene con tu lado espiritual.",
+      "Escoge el estado de tu corazón delante de Dios.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
@@ -785,7 +785,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "whenYouFeelMoodLookAtThisVerse": m1,
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
-      "¿Dónde está tu corazón hoy?",
+      "Tu Estado Espiritual",
     ),
     "withNote": MessageLookupByLibrary.simpleMessage("Con Nota"),
     "withNotes": MessageLookupByLibrary.simpleMessage("With Notes"),

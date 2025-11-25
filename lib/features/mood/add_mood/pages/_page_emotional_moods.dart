@@ -27,10 +27,26 @@ class PageEmotionalMoods extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            lang.heyHowAreYouFeelingToday.replaceAll('###', userName),
-            style: theme.textTheme.titleLarge,
+          RichText(
             textAlign: TextAlign.center,
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: lang.heyHowAreYouFeelingToday.split('###').first,
+                  style: theme.textTheme.titleLarge,
+                ),
+                TextSpan(
+                  text: userName,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                TextSpan(
+                  text: lang.heyHowAreYouFeelingToday.split('###').last,
+                  style: theme.textTheme.titleLarge,
+                )
+              ],
+            ),
           ),
           const SizedBox(height: AppSizes.spacingSmall),
           Text(
