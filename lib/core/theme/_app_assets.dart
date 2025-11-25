@@ -66,6 +66,16 @@ abstract class AppIcons {
 }
 
 abstract class AppAnimations {
-  // Animations
-  // static const exampleAnimation = 'assets/animations/example.json';
+  static const happy = 'assets/animations/an_happy.gif';
+  static const sad = 'assets/animations/an_sad.gif';
+  static const grateful = 'assets/animations/an_grateful.gif';
+  static const worried = 'assets/animations/an_worried.gif';
+  static const anxious = 'assets/animations/an_anxious.gif';
+  static const confused = 'assets/animations/an_confused.gif';
+  static const hopeful = 'assets/animations/an_hopeful.gif';
+  static const lonely = 'assets/animations/an_lonely.gif';
+  static const motivated = 'assets/animations/an_motivated.gif';
+  static const peaceful = 'assets/animations/an_peaceful.gif';
+  static const thoughtful = 'assets/animations/an_thoughtful.gif';
+  static const tired = 'assets/animations/an_tired.gif';
 }

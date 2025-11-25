@@ -16,7 +16,6 @@ class PageEmotionalMoods extends ConsumerWidget {
     required this.onMoodSelected,
   });
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
@@ -57,7 +56,10 @@ class PageEmotionalMoods extends ConsumerWidget {
 
                 return InkWell(
                   onTap: () {
-                    triggerHapticFeedback(HapticsType.selection, context: context);
+                    triggerHapticFeedback(
+                      HapticsType.selection,
+                      context: context,
+                    );
                     onMoodSelected(mood);
                   },
                   borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
@@ -66,7 +68,9 @@ class PageEmotionalMoods extends ConsumerWidget {
                       color: isSelected
                           ? theme.colorScheme.secondary.withValues(alpha: 0.2)
                           : theme.colorScheme.onSurface,
-                      borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+                      borderRadius: BorderRadius.circular(
+                        AppSizes.radiusNormal,
+                      ),
                       border: Border.all(
                         color: isSelected
                             ? theme.colorScheme.secondary
@@ -77,11 +81,7 @@ class PageEmotionalMoods extends ConsumerWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (mood.icon != null && mood.icon!.isNotEmpty)
-                          Text(
-                            mood.icon!,
-                            style: theme.textTheme.headlineMedium,
-                          ),
+                        PageEmotionalMoods._buildMoodIcon(mood, theme),
                         const SizedBox(height: AppSizes.spacingXSmall),
                         Text(
                           mood.name ?? '',
@@ -103,5 +103,32 @@ class PageEmotionalMoods extends ConsumerWidget {
       ),
     );
   }
-}
 
+  static Widget _buildMoodIcon(Mood mood, ThemeData theme) {
+    final animationPath = MoodAnimation.getAnimationPath(mood.key);
+
+    if (animationPath != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(AppSizes.radiusFull),
+        child: Image.asset(
+          animationPath,
+          width: AppSizes.iconSizeXXLarge,
+          height: AppSizes.iconSizeXXLarge,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            return PageEmotionalMoods._buildEmojiFallback(mood, theme);
+          },
+        ),
+      );
+    }
+
+    return PageEmotionalMoods._buildEmojiFallback(mood, theme);
+  }
+
+  static Widget _buildEmojiFallback(Mood mood, ThemeData theme) {
+    if (mood.icon != null && mood.icon!.isNotEmpty) {
+      return Text(mood.icon!, style: theme.textTheme.headlineMedium);
+    }
+    return const SizedBox();
+  }
+}

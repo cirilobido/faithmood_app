@@ -22,9 +22,7 @@ class HomeMoodSelector extends ConsumerWidget {
     if (state.isLoadingMoods) {
       return const SizedBox(
         height: 200,
-        child: Center(
-          child: LoadingIndicator(),
-        ),
+        child: Center(child: LoadingIndicator()),
       );
     }
 
@@ -60,11 +58,16 @@ class HomeMoodSelector extends ConsumerWidget {
               return Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(
-                    right: index < state.moods.length - 1 ? AppSizes.spacingXSmall : 0,
+                    right: index < state.moods.length - 1
+                        ? AppSizes.spacingXSmall
+                        : 0,
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      triggerHapticFeedback(HapticsType.selection, context: context);
+                      triggerHapticFeedback(
+                        HapticsType.selection,
+                        context: context,
+                      );
                       if (isSelected) {
                         vm.selectMood(null);
                       } else {
@@ -79,7 +82,9 @@ class HomeMoodSelector extends ConsumerWidget {
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? theme.colorScheme.secondary
-                                : theme.colorScheme.secondary.withValues(alpha: 0.2),
+                                : theme.colorScheme.secondary.withValues(
+                                    alpha: 0.2,
+                                  ),
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: isSelected
@@ -89,12 +94,7 @@ class HomeMoodSelector extends ConsumerWidget {
                             ),
                           ),
                           child: Center(
-                            child: mood.icon != null && mood.icon!.isNotEmpty
-                                ? Text(
-                                    mood.icon!,
-                                    style: theme.textTheme.headlineMedium,
-                                  )
-                                : const SizedBox(),
+                            child: HomeMoodSelector._buildMoodIcon(mood, theme),
                           ),
                         ),
                         const SizedBox(height: AppSizes.spacingXSmall),
@@ -131,5 +131,32 @@ class HomeMoodSelector extends ConsumerWidget {
       ),
     );
   }
-}
 
+  static Widget _buildMoodIcon(Mood mood, ThemeData theme) {
+    final animationPath = MoodAnimation.getAnimationPath(mood.key);
+
+    if (animationPath != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(AppSizes.radiusFull),
+        child: Image.asset(
+          animationPath,
+          width: AppSizes.iconSizeXLarge,
+          height: AppSizes.iconSizeXLarge,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            return HomeMoodSelector._buildEmojiFallback(mood, theme);
+          },
+        ),
+      );
+    }
+
+    return HomeMoodSelector._buildEmojiFallback(mood, theme);
+  }
+
+  static Widget _buildEmojiFallback(Mood mood, ThemeData theme) {
+    if (mood.icon != null && mood.icon!.isNotEmpty) {
+      return Text(mood.icon!, style: theme.textTheme.headlineSmall);
+    }
+    return const SizedBox();
+  }
+}

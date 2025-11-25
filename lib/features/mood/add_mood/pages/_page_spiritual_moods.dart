@@ -79,11 +79,9 @@ class PageSpiritualMoods extends StatelessWidget {
                       },
                       title: Row(
                         children: [
-                          if (mood.icon != null && mood.icon!.isNotEmpty) ...[
-                            Text(
-                              mood.icon!,
-                              style: theme.textTheme.headlineSmall,
-                            ),
+                          if (mood.icon != null && mood.icon!.isNotEmpty ||
+                              MoodAnimation.getAnimationPath(mood.key) != null) ...[
+                            PageSpiritualMoods._buildMoodIcon(mood, theme),
                             const SizedBox(width: AppSizes.spacingSmall),
                           ],
                           Expanded(
@@ -135,6 +133,34 @@ class PageSpiritualMoods extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  static Widget _buildMoodIcon(Mood mood, ThemeData theme) {
+    final animationPath = MoodAnimation.getAnimationPath(mood.key);
+    
+    if (animationPath != null) {
+      return Image.asset(
+        animationPath,
+        width: 32,
+        height: 32,
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) {
+          return PageSpiritualMoods._buildEmojiFallback(mood, theme);
+        },
+      );
+    }
+    
+    return PageSpiritualMoods._buildEmojiFallback(mood, theme);
+  }
+
+  static Widget _buildEmojiFallback(Mood mood, ThemeData theme) {
+    if (mood.icon != null && mood.icon!.isNotEmpty) {
+      return Text(
+        mood.icon!,
+        style: theme.textTheme.headlineSmall,
+      );
+    }
+    return const SizedBox();
   }
 }
 

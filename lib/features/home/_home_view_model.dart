@@ -208,7 +208,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
       switch (result) {
         case Success(value: final moods):
           {
-            final targetKeys = ['happy', 'grateful', 'peaceful', 'confused', 'sad'];
+            final targetKeys = ['happy', 'grateful', 'peaceful', 'worried', 'sad'];
             final filteredMoods = <Mood>[];
             
             for (final key in targetKeys) {

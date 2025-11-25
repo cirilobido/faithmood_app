@@ -96,7 +96,7 @@ flutter:
     # App Images
     - assets/img/
     # Animations
-    #- assets/animations/
+    - assets/animations/
 
   fonts:
     - family: Quicksand
