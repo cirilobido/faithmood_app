@@ -195,7 +195,11 @@ class _SpiritualMoodSection extends ConsumerWidget {
             isPremium: isPremium,
           ),
         const SizedBox(height: AppSizes.spacingSmall),
-        MoodSummaryCard(rangeStats: analytics?.rangeStats, isEmotional: false),
+        MoodSummaryCard(
+          rangeStats: analytics?.rangeStats,
+          isEmotional: false,
+          isPremium: isPremium,
+        ),
       ],
     );
   }

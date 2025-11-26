@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/core_exports.dart';
 import '../_profile_view_model.dart';
+import '../../../../generated/l10n.dart';
 
 class MoodSummaryCard extends ConsumerWidget {
   final RangeStats? rangeStats;
@@ -105,6 +106,7 @@ class _MoodStatRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final lang = S.of(context);
     final mood = stat.mood;
     final moodName = '${(isPremium ? mood?.icon ?? '' : '😊')} ${(mood?.name ?? '')}';
 
@@ -120,7 +122,7 @@ class _MoodStatRow extends StatelessWidget {
         Expanded(
           flex: 3,
           child: Text(
-            '${stat.entries} entries',
+            '${stat.entries} ${lang.moods}',
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium,
           ),
