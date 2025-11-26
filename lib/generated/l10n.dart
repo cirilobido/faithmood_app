@@ -2404,9 +2404,9 @@ class S {
     return Intl.message('English', name: 'localeName', desc: '', args: []);
   }
 
-  /// `Your name`
+  /// `FaithMood`
   String get appName {
-    return Intl.message('Your name', name: 'appName', desc: '', args: []);
+    return Intl.message('FaithMood', name: 'appName', desc: '', args: []);
   }
 
   /// `This is used for all your mood analysis.`
@@ -2924,16 +2924,6 @@ class S {
     return Intl.message(
       'Select Voice',
       name: 'selectVoice',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `FaithMood`
-  String get appDisplayName {
-    return Intl.message(
-      'FaithMood',
-      name: 'appDisplayName',
       desc: '',
       args: [],
     );

@@ -147,7 +147,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
                   vertical: AppSizes.paddingLarge,
                   horizontal: AppSizes.paddingMedium,
                 ),
-                child: Text(lang.appDisplayName, style: theme.textTheme.headlineMedium),
+                child: Text(lang.appName, style: theme.textTheme.headlineMedium),
               ),
             ),
           ],

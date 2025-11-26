@@ -51,9 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Permitir Notificações",
     ),
     "and": MessageLookupByLibrary.simpleMessage("e"),
-    "appDisplayName": MessageLookupByLibrary.simpleMessage("FaithMood"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("Idioma do App"),
-    "appName": MessageLookupByLibrary.simpleMessage("Seu nome"),
+    "appName": MessageLookupByLibrary.simpleMessage("FaithMood"),
     "appTheme": MessageLookupByLibrary.simpleMessage("Tema do App"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
       "Versão do App: ###",

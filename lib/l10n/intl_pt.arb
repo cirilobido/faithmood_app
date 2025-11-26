@@ -324,7 +324,7 @@
   "shareFaithMoodAppMessage": "FaithMood ajuda você a refletir sobre suas emoções, fortalecer sua vida espiritual e receber devocionais guiados feitos para sua jornada.\nExperimente 👉 ###",
 
   "localeName": "Português (Brasil)",
-  "appName": "Seu nome",
+  "appName": "FaithMood",
   "thisUsedForAllYourMoodAnalysis": "Isso será usado em todas as suas análises de moods.",
 
   "updateInformation": "Atualizar Informações",
@@ -390,7 +390,6 @@
   "removeFromFavorites": "Remover dos favoritos",
   "noVoicesAvailable": "Nenhuma voz disponível",
   "selectVoice": "Selecionar voz",
-  "appDisplayName": "FaithMood",
   "thisWeek": "Esta semana",
   "lastWeek": "Semana passada",
   "thisMonth": "Este mês",

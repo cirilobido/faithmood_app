@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../core/core_exports.dart';
 import '../../generated/l10n.dart';
@@ -83,11 +85,32 @@ class VerseOfDayCard extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          lang.verseOfTheDay,
-          style: theme.textTheme.titleMedium?.copyWith(
-            color: theme.textTheme.labelSmall?.color,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                lang.verseOfTheDay,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: theme.textTheme.labelSmall?.color,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () => _shareVerse(context, displayText, displayRef, lang),
+              splashColor: Colors.transparent,
+              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+              child: SvgPicture.asset(
+                AppIcons.shareIcon,
+                width: AppSizes.iconSizeRegular,
+                height: AppSizes.iconSizeRegular,
+                colorFilter: ColorFilter.mode(
+                  theme.iconTheme.color!,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: AppSizes.spacingSmall),
         if (displayText.isNotEmpty)
@@ -134,6 +157,19 @@ class VerseOfDayCard extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _shareVerse(BuildContext context, String verseText, String verseRef, S lang) {
+    if (verseText.isEmpty && verseRef.isEmpty) return;
+    final shareText = verseRef.isNotEmpty
+        ? '${lang.verseOfTheDay}\n\n"$verseText"\n$verseRef\n\n#${lang.appName}'
+        : '${lang.verseOfTheDay}\n\n"$verseText"\n\n#${lang.appName}';
+
+    SharePlus.instance.share(
+      ShareParams(
+        text: shareText,
+      ),
     );
   }
 }
