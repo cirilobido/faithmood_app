@@ -37,7 +37,21 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
     this.secureStorage,
     this.firebaseAnalyticProvider,
   ) : super(AddMoodState()) {
+    _resetState();
     _loadMoods();
+  }
+
+  void resetState() {
+    updateState(
+      currentPage: 0,
+      selectedEmotionalMood: null,
+      selectedSpiritualMood: null,
+      note: '',
+    );
+  }
+
+  void _resetState() {
+    resetState();
   }
 
   void updateState({
@@ -99,13 +113,39 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
 
   Future<void> _loadMoods() async {
     try {
-      updateState(isLoading: true, error: false);
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
+      
+      final cachedMoods = ref.read(cachedMoodsProvider);
+      final cachedNotifier = ref.read(cachedMoodsProvider.notifier);
+      
+      if (cachedMoods.isNotEmpty) {
+        final cachedLang = cachedNotifier.currentLang;
+        if (cachedLang == userLang) {
+          updateState(isLoading: false, error: false, moods: cachedMoods);
+          if (_preSelectedMood != null) {
+            _applyPreSelectedMood();
+          }
+          return;
+        } else {
+          await cachedNotifier.refreshMoods(userLang);
+          final refreshedMoods = ref.read(cachedMoodsProvider);
+          if (refreshedMoods.isNotEmpty) {
+            updateState(isLoading: false, error: false, moods: refreshedMoods);
+            if (_preSelectedMood != null) {
+              _applyPreSelectedMood();
+            }
+            return;
+          }
+        }
+      }
+
+      updateState(isLoading: true, error: false);
       final result = await moodUseCase.getMoods(userLang);
 
       switch (result) {
         case Success(value: final moods):
           {
+            ref.read(cachedMoodsProvider.notifier).setMoods(moods, userLang);
             updateState(isLoading: false, moods: moods);
             if (_preSelectedMood != null) {
               _applyPreSelectedMood();

@@ -7,6 +7,7 @@ import '../../core/providers/domain/use_cases/verse_use_case.dart';
 import '../../core/providers/domain/use_cases/devotional_use_case.dart';
 import '../../core/providers/domain/use_cases/mood_use_case.dart';
 import '../../core/providers/domain/use_cases/analytics_use_case.dart';
+import '../../core/providers/_auth_provider.dart' as auth_prov;
 import '../../dev_utils/dev_utils_exports.dart';
 import '_home_state.dart';
 
@@ -20,6 +21,7 @@ final homeViewModelProvider = StateNotifierProvider<HomeViewModel, HomeState>((
     ref.read(devotionalUseCaseProvider),
     ref.read(moodUseCaseProvider),
     ref.read(analyticsUseCaseProvider),
+    ref,
   );
 });
 
@@ -30,6 +32,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
   final DevotionalUseCase devotionalUseCase;
   final MoodUseCase moodUseCase;
   final AnalyticsUseCase analyticsUseCase;
+  final Ref ref;
 
   HomeViewModel(
     this.firebaseAnalyticProvider,
@@ -38,11 +41,24 @@ class HomeViewModel extends StateNotifier<HomeState> {
     this.devotionalUseCase,
     this.moodUseCase,
     this.analyticsUseCase,
+    this.ref,
   ) : super(HomeState()) {
     _loadDailyVerse();
     _loadDailyDevotional();
     _loadMoods();
     _loadWeekMoods();
+    _setupLanguageListeners();
+  }
+
+  void _setupLanguageListeners() {
+    ref.listen(auth_prov.authProvider, (previous, next) {
+      final previousLang = previous?.user?.lang?.name;
+      final currentLang = next.user?.lang?.name ?? Lang.en.name;
+      
+      if (previousLang != currentLang) {
+        _loadMoods();
+      }
+    });
   }
 
   void updateState({
@@ -250,6 +266,8 @@ class HomeViewModel extends StateNotifier<HomeState> {
       switch (result) {
         case Success(value: final moods):
           {
+            ref.read(cachedMoodsProvider.notifier).setMoods(moods, userLang);
+            
             final targetKeys = [
               'happy',
               'grateful',

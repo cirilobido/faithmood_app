@@ -27,8 +27,10 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      final vm = ref.read(addMoodViewModelProvider.notifier);
+      vm.resetState();
       if (widget.preSelectedMood != null) {
-        ref.read(addMoodViewModelProvider.notifier).setPreSelectedMood(widget.preSelectedMood);
+        vm.setPreSelectedMood(widget.preSelectedMood);
       }
     });
   }

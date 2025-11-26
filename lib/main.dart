@@ -141,6 +141,8 @@ class _AppState extends ConsumerState<FaithMoodApp> {
   Widget build(BuildContext context) {
     final appTheme = ref.watch(appThemeProvider);
     final appLang = ref.watch(appLanguageProvider);
+    
+    ref.read(moodsRefreshProvider);
 
     return MaterialApp.router(
       title: 'FaithMood',
