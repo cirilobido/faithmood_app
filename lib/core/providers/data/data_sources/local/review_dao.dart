@@ -32,12 +32,16 @@ class ReviewDaoImpl implements ReviewDao {
 
   @override
   Future<DateTime?> getAppInstallationDate() async {
-    final dateString = await secureStorage.getValue(
-      key: Constant.appInstallationDateKey,
-    );
-    if (dateString == null) return null;
     try {
-      return DateTime.parse(dateString);
+      final dateString = await secureStorage.getValue(
+        key: Constant.appInstallationDateKey,
+      );
+      if (dateString == null) return null;
+      try {
+        return DateTime.parse(dateString);
+      } catch (_) {
+        return null;
+      }
     } catch (_) {
       return null;
     }
@@ -45,20 +49,28 @@ class ReviewDaoImpl implements ReviewDao {
 
   @override
   Future<void> saveAppInstallationDate(DateTime date) async {
-    await secureStorage.saveValue(
-      key: Constant.appInstallationDateKey,
-      value: date.toIso8601String(),
-    );
+    try {
+      await secureStorage.saveValue(
+        key: Constant.appInstallationDateKey,
+        value: date.toIso8601String(),
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
+    }
   }
 
   @override
   Future<DateTime?> getLastReviewPromptDate() async {
-    final dateString = await secureStorage.getValue(
-      key: Constant.lastReviewPromptDateKey,
-    );
-    if (dateString == null) return null;
     try {
-      return DateTime.parse(dateString);
+      final dateString = await secureStorage.getValue(
+        key: Constant.lastReviewPromptDateKey,
+      );
+      if (dateString == null) return null;
+      try {
+        return DateTime.parse(dateString);
+      } catch (_) {
+        return null;
+      }
     } catch (_) {
       return null;
     }
@@ -66,90 +78,118 @@ class ReviewDaoImpl implements ReviewDao {
 
   @override
   Future<void> saveLastReviewPromptDate(DateTime date) async {
-    await secureStorage.saveValue(
-      key: Constant.lastReviewPromptDateKey,
-      value: date.toIso8601String(),
-    );
+    try {
+      await secureStorage.saveValue(
+        key: Constant.lastReviewPromptDateKey,
+        value: date.toIso8601String(),
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
+    }
   }
 
   @override
   Future<bool> getReviewNeverAsk() async {
-    final value = await secureStorage.getValue(
-      key: Constant.reviewNeverAskKey,
-    );
-    return value == 'true';
+    try {
+      final value = await secureStorage.getValue(
+        key: Constant.reviewNeverAskKey,
+      );
+      return value == 'true';
+    } catch (_) {
+      return false;
+    }
   }
 
   @override
   Future<void> setReviewNeverAsk(bool value) async {
-    await secureStorage.saveValue(
-      key: Constant.reviewNeverAskKey,
-      value: value.toString(),
-    );
+    try {
+      await secureStorage.saveValue(
+        key: Constant.reviewNeverAskKey,
+        value: value.toString(),
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
+    }
   }
 
   @override
   Future<bool> getReviewedInOnboarding() async {
-    final value = await secureStorage.getValue(
-      key: Constant.reviewedInOnboardingKey,
-    );
-    return value == 'true';
+    try {
+      final value = await secureStorage.getValue(
+        key: Constant.reviewedInOnboardingKey,
+      );
+      return value == 'true';
+    } catch (_) {
+      return false;
+    }
   }
 
   @override
   Future<void> setReviewedInOnboarding(bool value) async {
-    await secureStorage.saveValue(
-      key: Constant.reviewedInOnboardingKey,
-      value: value.toString(),
-    );
+    try {
+      await secureStorage.saveValue(
+        key: Constant.reviewedInOnboardingKey,
+        value: value.toString(),
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
+    }
   }
 
   @override
   Future<bool> shouldShowReviewPrompt() async {
-    final neverAsk = await getReviewNeverAsk();
-    if (neverAsk) return false;
+    try {
+      final neverAsk = await getReviewNeverAsk();
+      if (neverAsk) return false;
 
-    final reviewedInOnboarding = await getReviewedInOnboarding();
-    if (reviewedInOnboarding) return false;
+      final reviewedInOnboarding = await getReviewedInOnboarding();
+      if (reviewedInOnboarding) return false;
 
-    final now = DateTime.now();
-    final installationDate = await getAppInstallationDate();
-    final lastPromptDate = await getLastReviewPromptDate();
+      final now = DateTime.now();
+      final installationDate = await getAppInstallationDate();
+      final lastPromptDate = await getLastReviewPromptDate();
 
-    DateTime effectiveInstallationDate;
-    if (installationDate == null) {
-      effectiveInstallationDate = now;
-      await saveAppInstallationDate(now);
-      return false;
-    } else {
-      effectiveInstallationDate = installationDate;
-    }
+      DateTime effectiveInstallationDate;
+      if (installationDate == null) {
+        effectiveInstallationDate = now;
+        await saveAppInstallationDate(now);
+        return false;
+      } else {
+        effectiveInstallationDate = installationDate;
+      }
 
-    if (lastPromptDate == null) {
+      if (lastPromptDate == null) {
+        final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
+        return daysSinceInstall >= 3;
+      }
+
+      final daysSinceLastPrompt = now.difference(lastPromptDate).inDays;
       final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
-      return daysSinceInstall >= 3;
-    }
-
-    final daysSinceLastPrompt = now.difference(lastPromptDate).inDays;
-    final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
-    
-    if (daysSinceInstall < 10) {
-      return daysSinceLastPrompt >= 7;
-    } else if (daysSinceInstall < 25) {
-      return daysSinceLastPrompt >= 15;
-    } else {
-      return daysSinceLastPrompt >= 15;
+      
+      if (daysSinceInstall < 10) {
+        return daysSinceLastPrompt >= 7;
+      } else if (daysSinceInstall < 25) {
+        return daysSinceLastPrompt >= 15;
+      } else {
+        return daysSinceLastPrompt >= 15;
+      }
+    } catch (_) {
+      return false;
     }
   }
 
   @override
   Future<DateTime?> getLastPremiumPromptDate() async {
-    final dateString = await secureStorage.getValue(
-      key: Constant.lastPremiumPromptDateKey,
-    );
-    if (dateString == null) return null;
     try {
-      return DateTime.parse(dateString);
+      final dateString = await secureStorage.getValue(
+        key: Constant.lastPremiumPromptDateKey,
+      );
+      if (dateString == null) return null;
+      try {
+        return DateTime.parse(dateString);
+      } catch (_) {
+        return null;
+      }
     } catch (_) {
       return null;
     }
@@ -157,65 +197,85 @@ class ReviewDaoImpl implements ReviewDao {
 
   @override
   Future<void> saveLastPremiumPromptDate(DateTime date) async {
-    await secureStorage.saveValue(
-      key: Constant.lastPremiumPromptDateKey,
-      value: date.toIso8601String(),
-    );
+    try {
+      await secureStorage.saveValue(
+        key: Constant.lastPremiumPromptDateKey,
+        value: date.toIso8601String(),
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
+    }
   }
 
   @override
   Future<bool> shouldShowPremiumPrompt() async {
-    final now = DateTime.now();
-    final installationDate = await getAppInstallationDate();
-    final lastPromptDate = await getLastPremiumPromptDate();
+    try {
+      final now = DateTime.now();
+      final installationDate = await getAppInstallationDate();
+      final lastPromptDate = await getLastPremiumPromptDate();
 
-    DateTime effectiveInstallationDate;
-    if (installationDate == null) {
-      effectiveInstallationDate = now;
-      await saveAppInstallationDate(now);
-      return false;
-    } else {
-      effectiveInstallationDate = installationDate;
-    }
+      DateTime effectiveInstallationDate;
+      if (installationDate == null) {
+        effectiveInstallationDate = now;
+        await saveAppInstallationDate(now);
+        return false;
+      } else {
+        effectiveInstallationDate = installationDate;
+      }
 
-    if (lastPromptDate == null) {
+      if (lastPromptDate == null) {
+        final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
+        return daysSinceInstall >= 1;
+      }
+
+      final daysSinceLastPrompt = now.difference(lastPromptDate).inDays;
       final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
-      return daysSinceInstall >= 1;
-    }
-
-    final daysSinceLastPrompt = now.difference(lastPromptDate).inDays;
-    final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
-    
-    if (daysSinceInstall < 6) {
-      return daysSinceLastPrompt >= 5;
-    } else if (daysSinceInstall < 16) {
-      return daysSinceLastPrompt >= 10;
-    } else {
-      return daysSinceLastPrompt >= 10;
+      
+      if (daysSinceInstall < 6) {
+        return daysSinceLastPrompt >= 5;
+      } else if (daysSinceInstall < 16) {
+        return daysSinceLastPrompt >= 10;
+      } else {
+        return daysSinceLastPrompt >= 10;
+      }
+    } catch (_) {
+      return false;
     }
   }
 
   @override
   Future<String?> getLastPremiumModalType() async {
-    return await secureStorage.getValue(
-      key: Constant.lastPremiumModalTypeKey,
-    );
+    try {
+      return await secureStorage.getValue(
+        key: Constant.lastPremiumModalTypeKey,
+      );
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
   Future<void> saveLastPremiumModalType(String type) async {
-    await secureStorage.saveValue(
-      key: Constant.lastPremiumModalTypeKey,
-      value: type,
-    );
+    try {
+      await secureStorage.saveValue(
+        key: Constant.lastPremiumModalTypeKey,
+        value: type,
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
+    }
   }
 
   @override
   Future<String> getPremiumModalTypeToShow() async {
-    final lastType = await getLastPremiumModalType();
-    if (lastType == null || lastType == 'simple') {
-      return 'detailed';
-    } else {
+    try {
+      final lastType = await getLastPremiumModalType();
+      if (lastType == null || lastType == 'simple') {
+        return 'detailed';
+      } else {
+        return 'simple';
+      }
+    } catch (_) {
       return 'simple';
     }
   }

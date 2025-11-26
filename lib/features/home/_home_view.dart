@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/core_exports.dart';
+import '../../dev_utils/dev_utils_exports.dart';
 import '../../generated/l10n.dart';
 import '../../routes/app_routes_names.dart';
 import '../../widgets/widgets_exports.dart';
@@ -28,44 +29,55 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   Future<void> _checkAndShowModals() async {
     if (!mounted) return;
-    final vm = ref.read(homeViewModelProvider.notifier);
     
-    final shouldShowPremium = await vm.shouldShowPremiumModal();
-    if (shouldShowPremium && mounted) {
-      final modalType = await vm.getPremiumModalType();
-      if (modalType == 'detailed') {
-        PremiumRequestModal.show(
+    try {
+      final vm = ref.read(homeViewModelProvider.notifier);
+      
+      final shouldShowPremium = await vm.shouldShowPremiumModal();
+      if (shouldShowPremium && mounted) {
+        final modalType = await vm.getPremiumModalType();
+        if (!mounted) return;
+        
+        if (modalType == 'detailed') {
+          PremiumRequestModal.show(
+            context: context,
+            onPremium: () {
+              vm.onPremiumTapped(modalType: 'detailed');
+              if (mounted) {
+                context.push(Routes.subscription);
+              }
+            },
+            onMaybeLater: () {
+              vm.onPremiumTapped(modalType: 'detailed');
+            },
+          );
+        } else {
+          PremiumRequestSimpleModal.show(
+            context: context,
+            onPremium: () {
+              vm.onPremiumTapped(modalType: 'simple');
+              if (mounted) {
+                context.push(Routes.subscription);
+              }
+            },
+            onMaybeLater: () {
+              vm.onPremiumTapped(modalType: 'simple');
+            },
+          );
+        }
+        return;
+      }
+
+      final shouldShowReview = await vm.shouldShowReviewModal();
+      if (shouldShowReview && mounted) {
+        ReviewRequestModal.show(
           context: context,
-          onPremium: () {
-            vm.onPremiumTapped(modalType: 'detailed');
-            context.push(Routes.subscription);
-          },
-          onMaybeLater: () {
-            vm.onPremiumTapped(modalType: 'detailed');
-          },
-        );
-      } else {
-        PremiumRequestSimpleModal.show(
-          context: context,
-          onPremium: () {
-            vm.onPremiumTapped(modalType: 'simple');
-            context.push(Routes.subscription);
-          },
-          onMaybeLater: () {
-            vm.onPremiumTapped(modalType: 'simple');
-          },
+          onReview: () => vm.onReviewTapped(),
+          onNeverAsk: () => vm.onNeverAskTapped(),
         );
       }
-      return;
-    }
-
-    final shouldShowReview = await vm.shouldShowReviewModal();
-    if (shouldShowReview && mounted) {
-      ReviewRequestModal.show(
-        context: context,
-        onReview: () => vm.onReviewTapped(),
-        onNeverAsk: () => vm.onNeverAskTapped(),
-      );
+    } catch (e, s) {
+      devLogger('⚠️ Error checking modals: $e\n$s');
     }
   }
 

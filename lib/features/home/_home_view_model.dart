@@ -10,7 +10,7 @@ import '../../core/providers/domain/use_cases/devotional_use_case.dart';
 import '../../core/providers/domain/use_cases/mood_use_case.dart';
 import '../../core/providers/domain/use_cases/analytics_use_case.dart';
 import '../../core/providers/_auth_provider.dart' as auth_prov;
-import '../../core/providers/data/data_sources/local/review_dao.dart';
+import '../../core/providers/domain/use_cases/review_use_case.dart';
 import '../../dev_utils/dev_utils_exports.dart';
 import '_home_state.dart';
 
@@ -24,7 +24,7 @@ final homeViewModelProvider = StateNotifierProvider<HomeViewModel, HomeState>((
     ref.read(devotionalUseCaseProvider),
     ref.read(moodUseCaseProvider),
     ref.read(analyticsUseCaseProvider),
-    ref.read(reviewDaoProvider),
+    ref.read(reviewUseCaseProvider),
     ref,
   );
 });
@@ -36,7 +36,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
   final DevotionalUseCase devotionalUseCase;
   final MoodUseCase moodUseCase;
   final AnalyticsUseCase analyticsUseCase;
-  final ReviewDao reviewDao;
+  final ReviewUseCase reviewUseCase;
   final Ref ref;
 
   HomeViewModel(
@@ -46,7 +46,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
     this.devotionalUseCase,
     this.moodUseCase,
     this.analyticsUseCase,
-    this.reviewDao,
+    this.reviewUseCase,
     this.ref,
   ) : super(HomeState()) {
     _loadDailyVerse();
@@ -473,7 +473,13 @@ class HomeViewModel extends StateNotifier<HomeState> {
   }
 
   Future<bool> shouldShowReviewModal() async {
-    return await reviewDao.shouldShowReviewPrompt();
+    final result = await reviewUseCase.shouldShowReviewPrompt();
+    switch (result) {
+      case Success(value: final value):
+        return value;
+      case Failure():
+        return false;
+    }
   }
 
   Future<void> onReviewTapped() async {
@@ -492,7 +498,13 @@ class HomeViewModel extends StateNotifier<HomeState> {
         );
         await inAppReview.openStoreListing();
       }
-      await reviewDao.saveLastReviewPromptDate(DateTime.now());
+      final result = await reviewUseCase.saveLastReviewPromptDate(DateTime.now());
+      switch (result) {
+        case Success():
+          break;
+        case Failure(exception: final e):
+          devLogger('⚠️ Error saving review prompt date: $e');
+      }
     } catch (e, s) {
       devLogger('⚠️ Rate app failed: $e\n$s');
       firebaseAnalyticProvider.logEvent(
@@ -503,11 +515,20 @@ class HomeViewModel extends StateNotifier<HomeState> {
   }
 
   Future<void> onNeverAskTapped() async {
-    await reviewDao.setReviewNeverAsk(true);
-    firebaseAnalyticProvider.logEvent(
-      name: 'review_never_ask',
-      parameters: {'screen': 'home_screen'},
-    );
+    try {
+      final result = await reviewUseCase.setReviewNeverAsk(true);
+      switch (result) {
+        case Success():
+          firebaseAnalyticProvider.logEvent(
+            name: 'review_never_ask',
+            parameters: {'screen': 'home_screen'},
+          );
+        case Failure(exception: final e):
+          devLogger('⚠️ Error setting review never ask: $e');
+      }
+    } catch (e, s) {
+      devLogger('⚠️ Error setting review never ask: $e\n$s');
+    }
   }
 
   bool isUserPremium() {
@@ -517,19 +538,48 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<bool> shouldShowPremiumModal() async {
     if (isUserPremium()) return false;
-    return await reviewDao.shouldShowPremiumPrompt();
+    final result = await reviewUseCase.shouldShowPremiumPrompt();
+    switch (result) {
+      case Success(value: final value):
+        return value;
+      case Failure():
+        return false;
+    }
   }
 
   Future<String> getPremiumModalType() async {
-    return await reviewDao.getPremiumModalTypeToShow();
+    final result = await reviewUseCase.getPremiumModalTypeToShow();
+    switch (result) {
+      case Success(value: final value):
+        return value;
+      case Failure():
+        return 'simple';
+    }
   }
 
   Future<void> onPremiumTapped({required String modalType}) async {
-    await reviewDao.saveLastPremiumPromptDate(DateTime.now());
-    await reviewDao.saveLastPremiumModalType(modalType);
-    firebaseAnalyticProvider.logEvent(
-      name: 'premium_modal_tapped',
-      parameters: {'screen': 'home_screen', 'modal_type': modalType},
-    );
+    try {
+      final dateResult = await reviewUseCase.saveLastPremiumPromptDate(DateTime.now());
+      final typeResult = await reviewUseCase.saveLastPremiumModalType(modalType);
+      
+      switch (dateResult) {
+        case Success():
+          break;
+        case Failure(exception: final e):
+          devLogger('⚠️ Error saving premium prompt date: $e');
+      }
+      
+      switch (typeResult) {
+        case Success():
+          firebaseAnalyticProvider.logEvent(
+            name: 'premium_modal_tapped',
+            parameters: {'screen': 'home_screen', 'modal_type': modalType},
+          );
+        case Failure(exception: final e):
+          devLogger('⚠️ Error saving premium modal type: $e');
+      }
+    } catch (e, s) {
+      devLogger('⚠️ Error saving premium prompt: $e\n$s');
+    }
   }
 }
