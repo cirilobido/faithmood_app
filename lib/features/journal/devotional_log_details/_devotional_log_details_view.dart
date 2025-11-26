@@ -333,7 +333,6 @@ class _DevotionalLogDetailsViewState
               return NativeAdmobAd(isBigBanner: true);
             },
           ),
-          const SizedBox(height: AppSizes.spacingMedium),
           if (devotional?.reflection != null &&
               devotional!.reflection!.isNotEmpty) ...[
             ExpandableSection(

@@ -23,7 +23,6 @@ class DevotionalDetailsView extends ConsumerStatefulWidget {
 
 class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
   final TextEditingController _reflectionController = TextEditingController();
-  bool _isVersesExpanded = true;
   bool _isLearningsExpanded = false;
 
   @override
@@ -183,7 +182,6 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
               return NativeAdmobAd(isBigBanner: true);
             },
           ),
-          const SizedBox(height: AppSizes.spacingMedium),
           if (devotional.reflection != null &&
               devotional.reflection!.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingMedium),

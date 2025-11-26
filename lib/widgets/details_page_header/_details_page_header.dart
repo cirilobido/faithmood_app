@@ -301,28 +301,28 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
                 ],
               ),
             ),
-            PopupMenuItem<String>(
-              value: 'favorite',
-              child: Row(
-                children: [
-                  Icon(
-                    isFavorite ? Icons.bookmark : Icons.bookmark_border,
-                    size: AppSizes.iconSizeNormal,
-                    color: isFavorite
-                        ? theme.colorScheme.primary
-                        : theme.iconTheme.color,
-                  ),
-                  const SizedBox(width: AppSizes.spacingSmall),
-                  Text(
-                    isFavorite ? lang.removeFromFavorites : lang.addToFavorites,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: isFavorite ? theme.colorScheme.primary : null,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // PopupMenuItem<String>(
+            //   value: 'favorite',
+            //   child: Row(
+            //     children: [
+            //       Icon(
+            //         isFavorite ? Icons.bookmark : Icons.bookmark_border,
+            //         size: AppSizes.iconSizeNormal,
+            //         color: isFavorite
+            //             ? theme.colorScheme.primary
+            //             : theme.iconTheme.color,
+            //       ),
+            //       const SizedBox(width: AppSizes.spacingSmall),
+            //       Text(
+            //         isFavorite ? lang.removeFromFavorites : lang.addToFavorites,
+            //         style: theme.textTheme.bodyMedium?.copyWith(
+            //           fontWeight: FontWeight.w600,
+            //           color: isFavorite ? theme.colorScheme.primary : null,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             if (onShare != null)
               PopupMenuItem<String>(
                 value: 'share',

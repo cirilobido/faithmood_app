@@ -372,7 +372,6 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
               return NativeAdmobAd(isBigBanner: true);
             },
           ),
-          const SizedBox(height: AppSizes.spacingMedium),
           if (state.isLoadingLearning) ...[
             const SizedBox(height: AppSizes.spacingMedium),
             _buildLoadingPlaceholder(
