@@ -352,6 +352,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "Your name must be at least 3 characters long.",
     ),
+    "neverAskButton": MessageLookupByLibrary.simpleMessage("Don’t Ask Again"),
     "neverStored": MessageLookupByLibrary.simpleMessage("never stored"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -514,6 +515,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeReminder": MessageLookupByLibrary.simpleMessage("Remove Reminder"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+    "reviewButton": MessageLookupByLibrary.simpleMessage("Leave a Review"),
+    "reviewRequestContent": MessageLookupByLibrary.simpleMessage(
+      "Your feedback helps us improve and inspires others on their faith journey.",
+    ),
+    "reviewRequestTitle": MessageLookupByLibrary.simpleMessage(
+      "Enjoying your experience?",
+    ),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveNotes": MessageLookupByLibrary.simpleMessage("Save Note"),
     "saving": MessageLookupByLibrary.simpleMessage("Saving..."),

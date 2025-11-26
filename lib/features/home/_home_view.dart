@@ -19,6 +19,27 @@ class HomeView extends ConsumerStatefulWidget {
 
 class _HomeViewState extends ConsumerState<HomeView> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndShowReviewModal();
+    });
+  }
+
+  Future<void> _checkAndShowReviewModal() async {
+    if (!mounted) return;
+    final vm = ref.read(homeViewModelProvider.notifier);
+    final shouldShow = await vm.shouldShowReviewModal();
+    if (shouldShow && mounted) {
+      ReviewRequestModal.show(
+        context: context,
+        onReview: () => vm.onReviewTapped(),
+        onNeverAsk: () => vm.onNeverAskTapped(),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final vm = ref.read(homeViewModelProvider.notifier);
     final state = ref.watch(homeViewModelProvider);

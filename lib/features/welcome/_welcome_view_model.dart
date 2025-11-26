@@ -9,6 +9,7 @@ import '../../core/core_exports.dart';
 import '../../dev_utils/dev_utils_exports.dart';
 import '../../generated/l10n.dart';
 import '../../routes/app_routes_names.dart';
+import '../../core/providers/data/data_sources/local/review_dao.dart';
 import '_welcome_state.dart';
 
 final welcomeViewModelProvider =
@@ -17,6 +18,7 @@ final welcomeViewModelProvider =
         ref.read(firebaseAnalyticProvider),
         ref.read(authProvider),
         ref.read(settingsProvider),
+        ref.read(reviewDaoProvider),
       );
     });
 
@@ -24,11 +26,13 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
   final FirebaseAnalyticProvider firebaseAnalyticProvider;
   final AuthProvider authProvider;
   final SettingsProvider settingsProvider;
+  final ReviewDao reviewDao;
 
   WelcomeViewModel(
     this.firebaseAnalyticProvider,
     this.authProvider,
     this.settingsProvider,
+    this.reviewDao,
   ) : super(WelcomeState()) {
     _initializeBackendPageOrder();
   }
@@ -324,6 +328,7 @@ class WelcomeViewModel extends StateNotifier<WelcomeState> {
         );
         await inAppReview.openStoreListing();
       }
+      await reviewDao.setReviewedInOnboarding(true);
     } catch (e, s) {
       devLogger('⚠️ Rate app failed: $e\n$s');
       firebaseAnalyticProvider.logEvent(

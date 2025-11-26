@@ -38,3 +38,4 @@ export 'tags_modal/_tags_modal.dart';
 export 'section_header/_section_header.dart';
 export 'account_setup_alert/_account_setup_alert.dart';
 export 'ads_banner/_admob_native.dart';
+export 'review_request_modal/_review_request_modal.dart';

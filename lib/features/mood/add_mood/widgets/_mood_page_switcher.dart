@@ -24,7 +24,7 @@ class MoodPageSwitcher extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 600),
       switchInCurve: Curves.easeInOut,
       child: _buildPage(context, ref, state.currentPage),
     );

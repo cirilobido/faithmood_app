@@ -393,5 +393,9 @@
   "thisWeek": "Esta semana",
   "lastWeek": "Semana passada",
   "thisMonth": "Este mês",
-  "lastMonth": "Mês passado"
+  "lastMonth": "Mês passado",
+  "reviewRequestTitle": "Gostando da sua experiência?",
+  "reviewRequestContent": "Seu feedback nos ajuda a melhorar e inspira outras pessoas em sua jornada de fé.",
+  "reviewButton": "Avaliar",
+  "neverAskButton": "Não Perguntar Mais"
 }

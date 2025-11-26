@@ -344,5 +344,9 @@
   "thisWeek": "This Week",
   "lastWeek": "Last Week",
   "thisMonth": "This Month",
-  "lastMonth": "Last Month"
+  "lastMonth": "Last Month",
+  "reviewRequestTitle": "Enjoying your experience?",
+  "reviewRequestContent": "Your feedback helps us improve and inspires others on their faith journey.",
+  "reviewButton": "Leave a Review",
+  "neverAskButton": "Don’t Ask Again"
 }

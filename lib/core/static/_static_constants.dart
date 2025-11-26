@@ -33,6 +33,11 @@ class Constant {
   static const hasAddedMoodKey = 'has_added_mood';
   static const analyticsKeyPrefix = 'analytics';
 
+  static const appInstallationDateKey = 'app_installation_date';
+  static const lastReviewPromptDateKey = 'last_review_prompt_date';
+  static const reviewNeverAskKey = 'review_never_ask';
+  static const reviewedInOnboardingKey = 'reviewed_in_onboarding';
+
   
   static const admobBannerAdUnitId = 'ca-app-pub-3940256099942544/9214589741';
   static const admobNativeAdUnitId = 'ca-app-pub-3940256099942544/2247696110';

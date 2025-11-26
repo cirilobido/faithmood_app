@@ -2948,6 +2948,46 @@ class S {
   String get lastMonth {
     return Intl.message('Last Month', name: 'lastMonth', desc: '', args: []);
   }
+
+  /// `Enjoying your experience?`
+  String get reviewRequestTitle {
+    return Intl.message(
+      'Enjoying your experience?',
+      name: 'reviewRequestTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your feedback helps us improve and inspires others on their faith journey.`
+  String get reviewRequestContent {
+    return Intl.message(
+      'Your feedback helps us improve and inspires others on their faith journey.',
+      name: 'reviewRequestContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leave a Review`
+  String get reviewButton {
+    return Intl.message(
+      'Leave a Review',
+      name: 'reviewButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t Ask Again`
+  String get neverAskButton {
+    return Intl.message(
+      'Don’t Ask Again',
+      name: 'neverAskButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

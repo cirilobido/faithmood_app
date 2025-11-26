@@ -342,5 +342,9 @@
   "thisWeek": "Esta Semana",
   "lastWeek": "Semana Pasada",
   "thisMonth": "Este Mes",
-  "lastMonth": "Mes Pasado"
+  "lastMonth": "Mes Pasado",
+  "reviewRequestTitle": "¿Disfrutando tu experiencia?",
+  "reviewRequestContent": "Tu opinión nos ayuda a mejorar e inspira a otros en su jornada de fe.",
+  "reviewButton": "Calificar",
+  "neverAskButton": "No Preguntar Más"
 }

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import 'package:in_app_review/in_app_review.dart';
+
 import '../../core/core_exports.dart';
 import '../../generated/l10n.dart';
 import '../../core/providers/domain/use_cases/verse_use_case.dart';
@@ -8,6 +10,7 @@ import '../../core/providers/domain/use_cases/devotional_use_case.dart';
 import '../../core/providers/domain/use_cases/mood_use_case.dart';
 import '../../core/providers/domain/use_cases/analytics_use_case.dart';
 import '../../core/providers/_auth_provider.dart' as auth_prov;
+import '../../core/providers/data/data_sources/local/review_dao.dart';
 import '../../dev_utils/dev_utils_exports.dart';
 import '_home_state.dart';
 
@@ -21,6 +24,7 @@ final homeViewModelProvider = StateNotifierProvider<HomeViewModel, HomeState>((
     ref.read(devotionalUseCaseProvider),
     ref.read(moodUseCaseProvider),
     ref.read(analyticsUseCaseProvider),
+    ref.read(reviewDaoProvider),
     ref,
   );
 });
@@ -32,6 +36,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
   final DevotionalUseCase devotionalUseCase;
   final MoodUseCase moodUseCase;
   final AnalyticsUseCase analyticsUseCase;
+  final ReviewDao reviewDao;
   final Ref ref;
 
   HomeViewModel(
@@ -41,6 +46,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
     this.devotionalUseCase,
     this.moodUseCase,
     this.analyticsUseCase,
+    this.reviewDao,
     this.ref,
   ) : super(HomeState()) {
     _loadDailyVerse();
@@ -464,5 +470,43 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<void> refreshMoods() async {
     await _loadMoods();
+  }
+
+  Future<bool> shouldShowReviewModal() async {
+    return await reviewDao.shouldShowReviewPrompt();
+  }
+
+  Future<void> onReviewTapped() async {
+    try {
+      final InAppReview inAppReview = InAppReview.instance;
+      if (await inAppReview.isAvailable()) {
+        firebaseAnalyticProvider.logEvent(
+          name: 'request_review',
+          parameters: {'screen': 'home_screen'},
+        );
+        await inAppReview.requestReview();
+      } else {
+        firebaseAnalyticProvider.logEvent(
+          name: 'open_store_listing_review',
+          parameters: {'screen': 'home_screen'},
+        );
+        await inAppReview.openStoreListing();
+      }
+      await reviewDao.saveLastReviewPromptDate(DateTime.now());
+    } catch (e, s) {
+      devLogger('⚠️ Rate app failed: $e\n$s');
+      firebaseAnalyticProvider.logEvent(
+        name: 'error_request_review',
+        parameters: {'screen': 'home_screen', 'error': e.toString()},
+      );
+    }
+  }
+
+  Future<void> onNeverAskTapped() async {
+    await reviewDao.setReviewNeverAsk(true);
+    firebaseAnalyticProvider.logEvent(
+      name: 'review_never_ask',
+      parameters: {'screen': 'home_screen'},
+    );
   }
 }
