@@ -130,17 +130,12 @@ class TtsService {
           return;
       }
 
-      devLogger('Looking for specific voice: $targetVoiceName with locale: $targetLocale for language: $languageCode');
-      
       for (final voice in voices) {
         if (voice is Map) {
           final voiceName = voice['name']?.toString() ?? '';
           final locale = voice['locale']?.toString() ?? '';
           
-          devLogger('Checking voice: $voiceName, locale: $locale');
-          
           if (voiceName == targetVoiceName && locale == targetLocale) {
-            devLogger('Found exact match! Setting voice: $voiceName, locale: $locale');
             await _flutterTts!.setVoice({
               'name': voiceName,
               'locale': locale,
@@ -148,13 +143,10 @@ class TtsService {
             
             _selectedVoiceName = voiceName;
             _selectedVoiceLocale = locale;
-            devLogger('Voice set successfully: $_selectedVoiceName, locale: $_selectedVoiceLocale');
             return;
           }
         }
       }
-      
-      devLogger('Target voice $targetVoiceName with locale $targetLocale not found');
     } catch (e) {
       devLogger('Error setting default voice: $e');
     }
@@ -191,7 +183,6 @@ class TtsService {
       await _flutterTts!.stop();
       
       if (_selectedVoiceName != null && _selectedVoiceLocale != null) {
-        devLogger('Applying voice before speak: $_selectedVoiceName, locale: $_selectedVoiceLocale');
         await _flutterTts!.setVoice({
           'name': _selectedVoiceName!,
           'locale': _selectedVoiceLocale!,
@@ -362,8 +353,6 @@ class TtsService {
         }
       }
 
-      devLogger('All voices for $languageCode: ${allVoices.map((v) => '${v['name']} (${v['gender']})').join(', ')}');
-
       final List<Map<String, String>> filteredVoices = [];
       
       Map<String, String>? maleVoice;
@@ -425,8 +414,6 @@ class TtsService {
         }
       }
 
-      devLogger('Filtered voices: ${filteredVoices.map((v) => v['name']).join(', ')}');
-
       return filteredVoices;
     } catch (e) {
       devLogger('Error getting voices: $e');
@@ -469,8 +456,6 @@ class TtsService {
       await _initialize();
       if (_flutterTts == null) return false;
 
-      devLogger('Setting voice: $voiceName, locale: $locale');
-      
       await _flutterTts!.setVoice({
         'name': voiceName,
         'locale': locale,

@@ -65,7 +65,6 @@ class LoginViewModel extends StateNotifier<LoginState> {
         name: 'user_login_failed',
         parameters: {'screen': 'login_screen', 'error': e.toString()},
       );
-      devLogger(e.toString());
       return false;
     }
   }
@@ -79,7 +78,6 @@ class LoginViewModel extends StateNotifier<LoginState> {
         name: 'is_first_time_open_failed',
         parameters: {'screen': 'login_screen', 'error': e.toString()},
       );
-      devLogger(e.toString());
     }
   }
 
@@ -92,7 +90,6 @@ class LoginViewModel extends StateNotifier<LoginState> {
         parameters: {'screen': 'login_screen'},
       );
     } catch (e) {
-      devLogger(e.toString());
       firebaseAnalyticProvider.logEvent(
         name: 'is_first_time_open_failed',
         parameters: {'screen': 'login_screen', 'error': e.toString()},
@@ -116,7 +113,6 @@ class LoginViewModel extends StateNotifier<LoginState> {
         name: 'otp_send_failed',
         parameters: {'screen': 'login_screen', 'error': e.toString()},
       );
-      devLogger(e.toString());
       return false;
     }
   }

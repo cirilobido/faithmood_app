@@ -91,7 +91,6 @@ Future<void> _initializeCore() async {
     await initializeRevenueCat();
   } catch (e, s) {
     devLogger('⚠️ RevenueCat initialization failed: $e\n$s');
-    devLogger(e.toString());
   }
 
   // Google Ads setup

@@ -110,7 +110,6 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       updateState(isLoading: false);
     } catch (e) {
       updateState(isLoading: false, error: true);
-      devLogger(e.toString());
       firebaseAnalyticProvider.logEvent(
         name: 'load_data_failed',
         parameters: {'screen': 'profile_screen', 'error': e.toString()},
@@ -180,7 +179,6 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       );
       throw Exception('Error getting user limitations!');
     } catch (e) {
-      devLogger(e.toString());
       firebaseAnalyticProvider.logEvent(
         name: 'get_user_limitations_failed',
         parameters: {'screen': 'profile_screen', 'error': e.toString()},
@@ -261,7 +259,6 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       }
     } catch (e) {
       updateState(isLoading: false, error: true);
-      devLogger(e.toString());
       firebaseAnalyticProvider.logEvent(
         name: 'error_getting_analytics',
         parameters: {

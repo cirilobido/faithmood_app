@@ -235,7 +235,6 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
       switch (result) {
         case Success(value: final response):
           {
-            devLogger('Mood session created successfully: ${response?.sessionId}');
             await secureStorage.saveValue(
               key: Constant.hasAddedMoodKey,
               value: 'true',

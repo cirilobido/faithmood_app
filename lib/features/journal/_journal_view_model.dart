@@ -364,18 +364,15 @@ class JournalViewModel extends StateNotifier<JournalState> {
   Future<void> loadDevotionalLogs() async {
     try {
       if (!_mounted) return;
-      devLogger('Loading devotional logs...');
       updateState(isLoadingDevotionalLogs: true, devotionalLogsError: false, devotionalLogsPage: 1);
       final userId = authProvider.user?.id;
       if (userId == null) {
-        devLogger('Error: User ID is null');
         if (!_mounted) return;
         updateState(isLoadingDevotionalLogs: false, devotionalLogsError: true);
         return;
       }
 
       final queryParams = _buildDevotionalLogsQueryParams();
-      devLogger('Query params: $queryParams');
       final result = await devotionalUseCase.getDevotionalLogs(userId, queryParams);
 
       switch (result) {
@@ -383,7 +380,6 @@ class JournalViewModel extends StateNotifier<JournalState> {
           {
             if (!_mounted) return;
             final logs = response?.logs ?? [];
-            devLogger('Devotional logs loaded: ${logs.length} logs');
             final currentPage = response?.page ?? 1;
             final totalPages = response?.totalPages ?? 1;
             final hasMore = currentPage < totalPages;

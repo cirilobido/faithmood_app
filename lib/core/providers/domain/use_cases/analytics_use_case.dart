@@ -20,14 +20,12 @@ class AnalyticsUseCase extends FutureUseCase<dynamic, dynamic> {
     bool forceRefresh = false,
   }) async {
     try {
-      devLogger('AnalyticsUseCase.getUserAnalytics() called - userId: $userId, startDate: $startDate, endDate: $endDate, forceRefresh: $forceRefresh');
       final result = await repository.getUserAnalytics(
         userId,
         startDate,
         endDate,
         forceRefresh: forceRefresh,
       );
-      devLogger('AnalyticsUseCase.getUserAnalytics() - repository returned: ${result != null ? "data" : "null"}');
       return Success(result);
     } catch (e) {
       devLogger('AnalyticsUseCase.getUserAnalytics() - ERROR: $e');

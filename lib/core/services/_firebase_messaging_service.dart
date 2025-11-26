@@ -107,7 +107,6 @@ class FirebaseMessagingService {
 
   /// Handles messages received while the app is in the foreground
   void _onForegroundMessage(RemoteMessage message) {
-    devLogger('Foreground message received: ${message.data.toString()}');
     final notificationData = message.notification;
     if (notificationData != null) {
       // Display a local notification using the service
@@ -129,10 +128,6 @@ class FirebaseMessagingService {
       name: 'notification_opened_app',
       parameters: {'title': message.notification?.title ?? ''},
     );
-    devLogger(
-      'Notification caused the app to open: ${message.data.toString()}',
-    );
-    // TODO: Add navigation or specific handling based on message data
   }
 }
 
@@ -140,5 +135,4 @@ class FirebaseMessagingService {
 /// Handles messages when the app is fully terminated
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  devLogger('Background message received: ${message.data.toString()}');
 }

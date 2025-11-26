@@ -264,7 +264,6 @@ class HomeViewModel extends StateNotifier<HomeState> {
                 final mood = moods.firstWhere((m) => m.key == key);
                 filteredMoods.add(mood);
               } catch (e) {
-                devLogger('Mood with key $key not found');
               }
             }
 

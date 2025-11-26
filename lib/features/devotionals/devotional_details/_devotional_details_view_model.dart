@@ -270,7 +270,6 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       }
       
       if (buffer.toString().trim().isEmpty) {
-        devLogger('No content to share');
         return;
       }
 
@@ -352,16 +351,10 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
       }
 
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
-      final languageSet = await ttsService.setLanguage(userLang);
-      
-      if (!languageSet) {
-        devLogger('Failed to set TTS language');
-      }
-
+      await ttsService.setLanguage(userLang);
 
       final text = _formatDevotionalText(devotional, userLang);
       if (text.isEmpty) {
-        devLogger('No text to speak');
         return;
       }
 

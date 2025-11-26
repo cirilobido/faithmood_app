@@ -320,15 +320,10 @@ class DevotionalLogDetailsViewModel extends StateNotifier<DevotionalLogDetailsSt
       }
 
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
-      final languageSet = await ttsService.setLanguage(userLang);
-      
-      if (!languageSet) {
-        devLogger('Failed to set TTS language');
-      }
+      await ttsService.setLanguage(userLang);
 
       final text = _formatDevotionalLogText(log, userLang);
       if (text.isEmpty) {
-        devLogger('No text to speak');
         return;
       }
 

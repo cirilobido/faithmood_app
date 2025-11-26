@@ -69,13 +69,9 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       );
       
       if (saveFuture != null) {
-        devLogger('MoodEntryDetailsViewModel: saveFuture is not null, calling _handleSaveFuture()');
         _handleSaveFuture();
       } else if (!_sessionId.startsWith('temp_')) {
-        devLogger('MoodEntryDetailsViewModel: No saveFuture, starting polling directly');
         _startPollingForVerseAndLearning();
-      } else {
-        devLogger('MoodEntryDetailsViewModel: SessionId is temp, not starting polling yet');
       }
     } else {
       loadMoodSessionDetail();
@@ -85,33 +81,21 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
 
   Future<void> _handleSaveFuture() async {
     try {
-      devLogger('_handleSaveFuture: Starting to await saveFuture');
       final result = await saveFuture;
-      devLogger('_handleSaveFuture: saveFuture completed');
-      devLogger('_handleSaveFuture: result.sessionId = ${result?.sessionId}');
-      devLogger('_handleSaveFuture: result.partialSession = ${result?.partialSession != null}');
-      devLogger('_handleSaveFuture: _mounted = $_mounted');
       
       if (result != null && result.sessionId != null && result.partialSession != null && _mounted) {
-        devLogger('_handleSaveFuture: All conditions met, proceeding with details fetch');
         final realSessionId = result.sessionId!;
         _sessionId = realSessionId;
-        
-        devLogger('_handleSaveFuture: Mood session created successfully: $realSessionId');
         
         final userId = authProvider.user?.id;
         final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
         
-        devLogger('_handleSaveFuture: userId = $userId, userLang = $userLang');
-        
         if (userId != null) {
-          devLogger('_handleSaveFuture: Fetching mood session detail for sessionId: $realSessionId');
           final detailResult = await moodUseCase.getMoodSessionDetail(
             userId,
             realSessionId,
             userLang,
           );
-          devLogger('_handleSaveFuture: getMoodSessionDetail completed');
           
           switch (detailResult) {
             case Success(value: final session):
@@ -125,8 +109,6 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
                 final hasVerse = emotionalVerse != null;
                 final hasReflection = (emotionalReflection != null && emotionalReflection.isNotEmpty) || 
                                      (spiritualReflection != null && spiritualReflection.isNotEmpty);
-                
-                devLogger('_handleSaveFuture: Session details fetched - hasVerse: $hasVerse, hasReflection: $hasReflection');
                 
                 updateState(
                   moodSession: session,
@@ -148,13 +130,9 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
                   },
                 );
                 
-                // Only start polling if verse or learning are still missing
                 if (!hasVerse || !hasReflection) {
-                  devLogger('_handleSaveFuture: Starting polling for verse and learning (hasVerse: $hasVerse, hasReflection: $hasReflection)');
                   _pollAttempts = 0;
                   _startPollingForVerseAndLearning();
-                } else {
-                  devLogger('_handleSaveFuture: Verse and learning are already present, no need to poll');
                 }
               }
             case Failure(exception: final exception):
@@ -173,7 +151,6 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
               }
           }
         } else {
-          devLogger('_handleSaveFuture: userId is null, cannot fetch details');
           if (!_mounted) return;
           final partialSession = result.partialSession!;
           updateState(
@@ -301,15 +278,10 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       }
 
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
-      final languageSet = await ttsService.setLanguage(userLang);
+      await ttsService.setLanguage(userLang);
       
-      if (!languageSet) {
-        devLogger('Failed to set TTS language');
-      }
-
       final text = _formatMoodEntryText(session, userLang);
       if (text.isEmpty) {
-        devLogger('No text to speak');
         return;
       }
 
@@ -448,7 +420,6 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       final verseRef = translation?.ref ?? verse?.ref;
       
       if (verseText.isEmpty) {
-        devLogger('No verse text to share');
         return;
       }
 
@@ -525,19 +496,16 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
 
   Future<void> _startPollingForVerseAndLearning() async {
     if (!_mounted) {
-      devLogger('_startPollingForVerseAndLearning: Not mounted, returning');
       return;
     }
     
     final userId = authProvider.user?.id;
     if (userId == null) {
-      devLogger('_startPollingForVerseAndLearning: User ID is null');
       updateState(isLoadingVerse: false, isLoadingLearning: false, error: true);
       return;
     }
 
     final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
-    devLogger('_startPollingForVerseAndLearning: Starting polling with sessionId: $_sessionId');
     
     while (_pollAttempts < _maxPollAttempts && _mounted) {
       await Future.delayed(_pollInterval);
@@ -547,11 +515,8 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       
       try {
         if (_sessionId.startsWith('temp_')) {
-          devLogger('_startPollingForVerseAndLearning: SessionId is still temp, skipping poll attempt $_pollAttempts');
           continue;
         }
-        
-        devLogger('_startPollingForVerseAndLearning: Poll attempt $_pollAttempts for sessionId: $_sessionId');
         
         final result = await moodUseCase.getMoodSessionDetail(
           userId,

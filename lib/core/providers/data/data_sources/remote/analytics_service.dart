@@ -38,12 +38,12 @@ class AnalyticsServiceImpl implements AnalyticsService {
   ) async {
     try {
       final endpoint = Endpoints.getUserAnalytics(userId, startDate, endDate);
-      devLogger('AnalyticsService.getUserAnalytics() called - endpoint: $endpoint');
-      devLogger('AnalyticsService.getUserAnalytics() - full URL: ${httpClient.options.baseUrl}$endpoint');
+      // devLogger('AnalyticsService.getUserAnalytics() called - endpoint: $endpoint');
+      // devLogger('AnalyticsService.getUserAnalytics() - full URL: ${httpClient.options.baseUrl}$endpoint');
       final request = await requestProcessor.process(
         request: httpClient.get(endpoint),
         jsonMapper: (data) {
-          devLogger('AnalyticsService.getUserAnalytics() - response received, parsing...');
+          // devLogger('AnalyticsService.getUserAnalytics() - response received, parsing...');
           final response = AnalyticsResponse.fromJson(
             data as Map<String, dynamic>,
           );

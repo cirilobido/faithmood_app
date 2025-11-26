@@ -75,7 +75,6 @@ class SettingsViewModel extends StateNotifier<SettingsState> {
       );
     } catch (e) {
       updateState(isLoading: false, error: true);
-      devLogger(e.toString());
       firebaseAnalyticProvider.logEvent(
         name: 'settings_screen_load_failed',
         parameters: {'screen': 'settings_screen', 'error': e.toString()},
@@ -107,7 +106,6 @@ class SettingsViewModel extends StateNotifier<SettingsState> {
 
       return true;
     } catch (e) {
-      devLogger(e.toString());
       firebaseAnalyticProvider.logEvent(
         name: 'user_logout_failed',
         parameters: {'screen': 'settings_screen', 'error': e.toString()},
