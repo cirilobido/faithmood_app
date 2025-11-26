@@ -64,12 +64,15 @@ abstract class AppRoutes {
           GoRoute(
             path: Routes.home,
             pageBuilder: (context, state) =>
-                NoTransitionPage<void>(child: const HomeView()),
+                buildFadePage<void>(key: state.pageKey, child: const HomeView()),
           ),
           GoRoute(
             path: Routes.devotional,
             pageBuilder: (context, state) {
-              return NoTransitionPage<void>(child: const CategoriesView());
+              return buildFadePage<void>(
+                key: state.pageKey,
+                child: const CategoriesView(),
+              );
             },
           ),
           GoRoute(
@@ -99,13 +102,16 @@ abstract class AppRoutes {
           GoRoute(
             path: Routes.journal,
             pageBuilder: (context, state) {
-              return NoTransitionPage<void>(child: const JournalView());
+              return buildFadePage<void>(
+                key: state.pageKey,
+                child: const JournalView(),
+              );
             },
           ),
           GoRoute(
             path: Routes.profile,
             pageBuilder: (context, state) =>
-                NoTransitionPage<void>(child: const ProfileView()),
+                buildFadePage<void>(key: state.pageKey, child: const ProfileView()),
           ),
         ],
       ),
@@ -190,7 +196,7 @@ CustomTransitionPage<T> buildSlidePage<T>({
   required Widget child,
   bool isBottomSheet = true,
 }) {
-  const duration = Duration(milliseconds: 300);
+  const duration = Duration(milliseconds: 350);
   final offset = isBottomSheet ? Offset(0, 1) : Offset(1, 0);
   final tween = Tween<Offset>(
     begin: offset,
@@ -204,5 +210,39 @@ CustomTransitionPage<T> buildSlidePage<T>({
     reverseTransitionDuration: duration,
     transitionsBuilder: (context, animation, secondaryAnimation, child) =>
         SlideTransition(position: animation.drive(tween), child: child),
+  );
+}
+
+CustomTransitionPage<T> buildFadePage<T>({
+  required LocalKey key,
+  required Widget child,
+}) {
+  const duration = Duration(milliseconds: 450);
+  final curve = Curves.easeInOutCubic;
+  
+  final opacityTween = Tween<double>(
+    begin: 0.0,
+    end: 1.0,
+  ).chain(CurveTween(curve: curve));
+  
+  final scaleTween = Tween<double>(
+    begin: 0.96,
+    end: 1.0,
+  ).chain(CurveTween(curve: curve));
+
+  return CustomTransitionPage<T>(
+    key: key,
+    child: child,
+    transitionDuration: duration,
+    reverseTransitionDuration: duration,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: animation.drive(opacityTween),
+        child: ScaleTransition(
+          scale: animation.drive(scaleTween),
+          child: child,
+        ),
+      );
+    },
   );
 }

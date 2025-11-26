@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../core/core_exports.dart';
 import '../generated/l10n.dart';
 import '../routes/app_routes_names.dart';
-import '../widgets/widgets_exports.dart';
+import '../widgets/widgets_exports.dart' hide AnimatedContainer;
 
 class BottomNavScreen extends ConsumerStatefulWidget {
   final Widget child;
@@ -19,6 +19,7 @@ class BottomNavScreen extends ConsumerStatefulWidget {
 
 class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
   int _selectedIndex = 0;
+  bool _isMoving = false;
   static const List<String> _routes = [
     Routes.home,
     Routes.devotional,
@@ -41,6 +42,14 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
       context.go(_routes[index]);
       setState(() {
         _selectedIndex = index;
+        _isMoving = true;
+      });
+      Future.delayed(const Duration(milliseconds: 350), () {
+        if (mounted) {
+          setState(() {
+            _isMoving = false;
+          });
+        }
       });
     }
   }
@@ -48,14 +57,30 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
   void _getCurrentIndex(BuildContext context) {
     final routerDelegate = GoRouter.of(context).routerDelegate;
     String location = routerDelegate.currentConfiguration.uri.toString();
+    int newIndex = _selectedIndex;
+    
     if (location.startsWith(Routes.home)) {
-      _selectedIndex = 0;
+      newIndex = 0;
     } else if (location.startsWith(Routes.devotional)) {
-      _selectedIndex = 1;
+      newIndex = 1;
     } else if (location.startsWith(Routes.journal)) {
-      _selectedIndex = 3; // Journal is at index 3
+      newIndex = 3; // Journal is at index 3
     } else if (location.startsWith(Routes.profile)) {
-      _selectedIndex = 4;
+      newIndex = 4;
+    }
+    
+    if (newIndex != _selectedIndex) {
+      setState(() {
+        _selectedIndex = newIndex;
+        _isMoving = true;
+      });
+      Future.delayed(const Duration(milliseconds: 350), () {
+        if (mounted) {
+          setState(() {
+            _isMoving = false;
+          });
+        }
+      });
     }
   }
 
@@ -85,7 +110,6 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        // height: AppSizes.bottomNavHeight,
         decoration: BoxDecoration(
           color: theme.colorScheme.onSurface,
           border: Border(
@@ -95,38 +119,47 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
             ),
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Stack(
           children: [
-            _buildNavItem(
-              context: context,
-              icon: AppIcons.homeIcon,
-              label: lang.home,
-              isSelected: _selectedIndex == 0,
-              onTap: () => _onItemTapped(0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(
+                  context: context,
+                  icon: AppIcons.homeIcon,
+                  label: lang.home,
+                  isSelected: _selectedIndex == 0,
+                  onTap: () => _onItemTapped(0),
+                  index: 0,
+                ),
+                _buildNavItem(
+                  context: context,
+                  icon: AppIcons.openBookIcon,
+                  label: lang.faith,
+                  isSelected: _selectedIndex == 1,
+                  onTap: () => _onItemTapped(1),
+                  index: 1,
+                ),
+                _buildPlusButton(context: context),
+                _buildNavItem(
+                  context: context,
+                  icon: AppIcons.journalIcon,
+                  label: lang.journal,
+                  isSelected: _selectedIndex == 3,
+                  onTap: () => _onItemTapped(3),
+                  index: 3,
+                ),
+                _buildNavItem(
+                  context: context,
+                  icon: AppIcons.profileIcon,
+                  label: lang.profile,
+                  isSelected: _selectedIndex == 4,
+                  onTap: () => _onItemTapped(4),
+                  index: 4,
+                ),
+              ],
             ),
-            _buildNavItem(
-              context: context,
-              icon: AppIcons.openBookIcon,
-              label: lang.faith,
-              isSelected: _selectedIndex == 1,
-              onTap: () => _onItemTapped(1),
-            ),
-            _buildPlusButton(context: context),
-            _buildNavItem(
-              context: context,
-              icon: AppIcons.journalIcon,
-              label: lang.journal,
-              isSelected: _selectedIndex == 3,
-              onTap: () => _onItemTapped(3),
-            ),
-            _buildNavItem(
-              context: context,
-              icon: AppIcons.profileIcon,
-              label: lang.profile,
-              isSelected: _selectedIndex == 4,
-              onTap: () => _onItemTapped(4),
-            ),
+            _buildAnimatedIndicator(context: context),
           ],
         ),
       ),
@@ -139,14 +172,11 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
     required String label,
     required bool isSelected,
     required VoidCallback onTap,
+    required int index,
   }) {
     final theme = Theme.of(context);
-    final color = isSelected
-        ? theme.colorScheme.primary
-        : theme.textTheme.labelSmall?.color;
-    final textColor = isSelected
-        ? theme.colorScheme.primary
-        : theme.textTheme.labelSmall?.color;
+    final selectedColor = theme.colorScheme.primary;
+    final unselectedColor = theme.textTheme.labelSmall?.color ?? Colors.grey;
 
     return Expanded(
       child: InkWell(
@@ -155,32 +185,80 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: AppSizes.bottomNavSelectorWidth,
-              height: AppSizes.bottomNavSelectorHeight,
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? theme.colorScheme.primary
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
-              ),
-            ),
+            const SizedBox(height: AppSizes.bottomNavSelectorHeight),
             const SizedBox(height: AppSizes.spacingSmall),
-            SvgPicture.asset(
-              icon,
-              colorFilter: ColorFilter.mode(color!, BlendMode.srcIn),
-              width: AppSizes.iconSizeLarge,
-              height: AppSizes.iconSizeLarge,
-            ),
-            Text(
-              label,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: textColor,
-                fontWeight: FontWeight.w700,
+            TweenAnimationBuilder<Color?>(
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              tween: ColorTween(
+                begin: isSelected ? unselectedColor : selectedColor,
+                end: isSelected ? selectedColor : unselectedColor,
               ),
+              builder: (context, color, child) {
+                return SvgPicture.asset(
+                  icon,
+                  colorFilter: ColorFilter.mode(color ?? unselectedColor, BlendMode.srcIn),
+                  width: AppSizes.iconSizeLarge,
+                  height: AppSizes.iconSizeLarge,
+                );
+              },
+            ),
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: isSelected ? selectedColor : unselectedColor,
+                fontWeight: FontWeight.w700,
+              ) ?? const TextStyle(),
+              child: Text(label),
             ),
             const SizedBox(height: AppSizes.spacingMedium),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnimatedIndicator({required BuildContext context}) {
+    final theme = Theme.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final itemWidth = screenWidth / 5;
+    
+    double leftPosition;
+    if (_selectedIndex == 0) {
+      leftPosition = itemWidth / 2 - AppSizes.bottomNavSelectorWidth / 2;
+    } else if (_selectedIndex == 1) {
+      leftPosition = itemWidth * 1.5 - AppSizes.bottomNavSelectorWidth / 2;
+    } else if (_selectedIndex == 3) {
+      leftPosition = itemWidth * 3.5 - AppSizes.bottomNavSelectorWidth / 2;
+    } else if (_selectedIndex == 4) {
+      leftPosition = itemWidth * 4.5 - AppSizes.bottomNavSelectorWidth / 2;
+    } else {
+      leftPosition = 0;
+    }
+
+    final indicatorSize = _isMoving 
+        ? AppSizes.bottomNavSelectorHeight 
+        : AppSizes.bottomNavSelectorWidth;
+    final borderRadius = _isMoving 
+        ? BorderRadius.circular(AppSizes.bottomNavSelectorHeight / 2)
+        : BorderRadius.circular(AppSizes.radiusSmall);
+
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 350),
+      curve: Curves.easeInOut,
+      left: _isMoving 
+          ? leftPosition + (AppSizes.bottomNavSelectorWidth - AppSizes.bottomNavSelectorHeight) / 2
+          : leftPosition,
+      top: 0,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeInOut,
+        width: indicatorSize,
+        height: AppSizes.bottomNavSelectorHeight,
+        decoration: BoxDecoration(
+          color: theme.colorScheme.primary,
+          borderRadius: borderRadius,
         ),
       ),
     );
