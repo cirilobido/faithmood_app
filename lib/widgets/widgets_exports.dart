@@ -41,3 +41,4 @@ export 'ads_banner/_admob_native.dart';
 export 'review_request_modal/_review_request_modal.dart';
 export 'premium_request_modal/_premium_request_modal.dart';
 export 'premium_request_simple_modal/_premium_request_simple_modal.dart';
+export 'premium_banner/_premium_banner.dart';

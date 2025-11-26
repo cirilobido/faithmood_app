@@ -14,5 +14,7 @@ abstract class ReviewRepository {
   Future<String?> getLastPremiumModalType();
   Future<void> saveLastPremiumModalType(String type);
   Future<String> getPremiumModalTypeToShow();
+  Future<bool> getPremiumBannerDismissed();
+  Future<void> setPremiumBannerDismissed(bool value);
 }
 

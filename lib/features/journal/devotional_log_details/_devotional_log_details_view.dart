@@ -273,6 +273,7 @@ class _DevotionalLogDetailsViewState
             const SizedBox(height: AppSizes.spacingLarge),
           ],
           if (devotional?.title != null && devotional!.title!.isNotEmpty) ...[
+            const PremiumBannerConditional(),
             Text(devotional.title!, style: theme.textTheme.headlineMedium),
             const SizedBox(height: AppSizes.spacingSmall),
           ],

@@ -147,6 +147,24 @@ class ReviewUseCase extends FutureUseCase<dynamic, dynamic> {
     }
   }
 
+  Future<Result<bool, Exception>> getPremiumBannerDismissed() async {
+    try {
+      final result = await repository.getPremiumBannerDismissed();
+      return Success(result);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
+  Future<Result<void, Exception>> setPremiumBannerDismissed(bool value) async {
+    try {
+      await repository.setPremiumBannerDismissed(value);
+      return Success(null);
+    } catch (e) {
+      return Failure(Exception(e.toString()));
+    }
+  }
+
   @override
   Future<Result<dynamic, Exception>> run(params) {
     throw UnimplementedError();

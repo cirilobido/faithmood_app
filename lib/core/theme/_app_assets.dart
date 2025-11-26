@@ -68,6 +68,7 @@ abstract class AppIcons {
 }
 
 abstract class AppAnimations {
+  static const starsAnimation = 'assets/animations/an_stars.json';
   static const happy = 'assets/animations/an_happy.gif';
   static const sad = 'assets/animations/an_sad.gif';
   static const grateful = 'assets/animations/an_grateful.gif';

@@ -87,5 +87,15 @@ class ReviewRepositoryImpl implements ReviewRepository {
   Future<String> getPremiumModalTypeToShow() async {
     return await reviewDao.getPremiumModalTypeToShow();
   }
+
+  @override
+  Future<bool> getPremiumBannerDismissed() async {
+    return await reviewDao.getPremiumBannerDismissed();
+  }
+
+  @override
+  Future<void> setPremiumBannerDismissed(bool value) async {
+    await reviewDao.setPremiumBannerDismissed(value);
+  }
 }
 

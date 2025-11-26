@@ -312,6 +312,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
           ],
           ...[
             const SizedBox(height: AppSizes.spacingLarge),
+            const PremiumBannerConditional(),
             _buildFeelingAndSpiritCard(
               context,
               theme,

@@ -156,6 +156,7 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
             VerseContent(verses: devotional.verses!),
           ],
           const SizedBox(height: AppSizes.spacingLarge),
+          const PremiumBannerConditional(),
           Text(devotional.title ?? '', style: theme.textTheme.headlineMedium),
           if (devotional.tags != null && devotional.tags!.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingSmall),

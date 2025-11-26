@@ -23,6 +23,8 @@ abstract class ReviewDao {
   Future<String?> getLastPremiumModalType();
   Future<void> saveLastPremiumModalType(String type);
   Future<String> getPremiumModalTypeToShow();
+  Future<bool> getPremiumBannerDismissed();
+  Future<void> setPremiumBannerDismissed(bool value);
 }
 
 class ReviewDaoImpl implements ReviewDao {
@@ -277,6 +279,30 @@ class ReviewDaoImpl implements ReviewDao {
       }
     } catch (_) {
       return 'simple';
+    }
+  }
+
+  @override
+  Future<bool> getPremiumBannerDismissed() async {
+    try {
+      final value = await secureStorage.getValue(
+        key: Constant.premiumBannerDismissedKey,
+      );
+      return value == 'true';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<void> setPremiumBannerDismissed(bool value) async {
+    try {
+      await secureStorage.saveValue(
+        key: Constant.premiumBannerDismissedKey,
+        value: value.toString(),
+      );
+    } catch (_) {
+      // Silently fail - not critical for app functionality
     }
   }
 }

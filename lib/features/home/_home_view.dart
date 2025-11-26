@@ -106,13 +106,16 @@ class _HomeViewState extends ConsumerState<HomeView> {
               // Header Section
               _buildHeader(context, theme, greeting, greetingSubtitle, userName),
               const SizedBox(height: AppSizes.spacingLarge),
-
+              
               // Verse of the Day Section
               VerseOfDayCard(
                 isLoading: state.isLoading,
                 verse: state.dailyVerse,
               ),
-              const SizedBox(height: AppSizes.spacingXLarge),
+              const SizedBox(height: AppSizes.spacingLarge),
+
+              // Premium Banner
+              const PremiumBannerConditional(),
 
               // Account Setup Alert
               if (_shouldShowAccountSetupAlert(ref))

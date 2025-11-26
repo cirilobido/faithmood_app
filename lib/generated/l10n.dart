@@ -3078,6 +3078,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Go deeper with FaithMood Premium.`
+  String get premiumBanner1 {
+    return Intl.message(
+      'Go deeper with FaithMood Premium.',
+      name: 'premiumBanner1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unlock exclusive devotionals and full insights.`
+  String get premiumBanner2 {
+    return Intl.message(
+      'Unlock exclusive devotionals and full insights.',
+      name: 'premiumBanner2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premium: more clarity, more peace.`
+  String get premiumBanner3 {
+    return Intl.message(
+      'Premium: more clarity, more peace.',
+      name: 'premiumBanner3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your faith journey grows with Premium.`
+  String get premiumBanner4 {
+    return Intl.message(
+      'Your faith journey grows with Premium.',
+      name: 'premiumBanner4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Experience FaithMood without limits.`
+  String get premiumBanner5 {
+    return Intl.message(
+      'Experience FaithMood without limits.',
+      name: 'premiumBanner5',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

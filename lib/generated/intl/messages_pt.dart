@@ -443,6 +443,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "Mood espiritual predominante: ",
     ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
+    "premiumBanner1": MessageLookupByLibrary.simpleMessage(
+      "Aprofunde com o FaithMood Premium.",
+    ),
+    "premiumBanner2": MessageLookupByLibrary.simpleMessage(
+      "Desbloqueie devocionais exclusivos e insights completos.",
+    ),
+    "premiumBanner3": MessageLookupByLibrary.simpleMessage(
+      "Premium: mais clareza, mais paz.",
+    ),
+    "premiumBanner4": MessageLookupByLibrary.simpleMessage(
+      "Sua jornada de fé cresce com o Premium.",
+    ),
+    "premiumBanner5": MessageLookupByLibrary.simpleMessage(
+      "Viva o FaithMood sem limites.",
+    ),
     "premiumBenefit1Subtitle": MessageLookupByLibrary.simpleMessage(
       "Acesse devocionais premium.",
     ),
