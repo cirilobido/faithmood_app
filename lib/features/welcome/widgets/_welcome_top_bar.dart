@@ -52,7 +52,6 @@ class WelcomeTopBar extends StatelessWidget {
               if (isPaywallOrRating) ...[
                 Expanded(child: Container()),
                 InkWell(
-                  // TODO: FIX CLOSE BTN LOGIC
                   onTap: onBack,
                   overlayColor: const WidgetStatePropertyAll(
                     Colors.transparent,

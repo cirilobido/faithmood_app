@@ -66,7 +66,6 @@ class FirebaseMessagingService {
     FirebaseMessaging.instance.onTokenRefresh
         .listen((fcmToken) {
           devLogger('FCM token refreshed: $fcmToken');
-          // TODO: optionally send token to your server for targeting this device
         })
         .onError((error) {
           // Handle errors during token refresh

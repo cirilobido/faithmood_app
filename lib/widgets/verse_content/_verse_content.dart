@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/core_exports.dart';
-import '../../core/models/verse/_verse_translation.dart';
 
 class VerseContent extends ConsumerWidget {
   final Verse? verse;
