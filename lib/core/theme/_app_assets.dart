@@ -4,7 +4,6 @@ abstract class AppIcons {
   static const welcomePetImage = 'assets/img/img_welcome_pet.png';
   static const happyPetImage = 'assets/img/img_happy_pet.png';
   static const sadPetImage = 'assets/img/img_sad_pet.png';
-  static const greenGradientImage = 'assets/img/img_green_gradient.png';
   static const greenGradientOvalImage = 'assets/img/img_green_gradient_oval.png';
   static const greenChartImage = 'assets/img/img_chart.png';
   static const splashGradientImage = 'assets/img/im_gradient_splash.png';
@@ -33,7 +32,6 @@ abstract class AppIcons {
   static const profileIcon = 'assets/icons/ic_profile.svg';
   static const userIcon = 'assets/icons/ic_user.svg';
   static const googleIcon = 'assets/icons/ic_google.svg';
-  static const facebookIcon = 'assets/icons/ic_facebook.svg';
   static const appleIcon = 'assets/icons/ic_apple.svg';
   static const bellBlueIcon = 'assets/icons/ic_bell_blue.svg';
   static const greenFigureIcon = 'assets/icons/ic_green_figure.svg';
@@ -59,7 +57,6 @@ abstract class AppIcons {
   static const langIcon = 'assets/icons/ic_lang.svg';
   static const shareIcon = 'assets/icons/ic_share.svg';
   static const thumbsUpIcon = 'assets/icons/ic_thumbs_up.svg';
-  static const globeIcon = 'assets/icons/ic_globe.svg';
   static const shieldCheckIcon = 'assets/icons/ic_shield_check.svg';
   static const handshakeIcon = 'assets/icons/ic_handshake.svg';
   static const editIcon = 'assets/icons/ic_edit.svg';
