@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/core_exports.dart';
+import '../../generated/l10n.dart';
 
 class DevotionalItemCard extends StatelessWidget {
   final Devotional devotional;
@@ -20,9 +21,7 @@ class DevotionalItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isPremium = devotional.isPremium ?? false;
-    final tagIcon = isPremium
-        ? '🔒'
-        : devotional.iconEmoji ?? fallbackIcon;
+    final tagIcon = isPremium ? '🔒' : devotional.iconEmoji ?? fallbackIcon;
     final tags = devotional.tags ?? [];
     final hasTags = tags.isNotEmpty;
 
@@ -30,99 +29,110 @@ class DevotionalItemCard extends StatelessWidget {
       splashColor: Colors.transparent,
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(AppSizes.paddingMedium),
-        decoration: BoxDecoration(
-          color: isPremium
-              ? theme.colorScheme.tertiary.withValues(alpha: 0.4)
-              : theme.colorScheme.onSurface,
-          borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
-          border: Border.all(
-            color: theme.colorScheme.secondary,
-            width: AppSizes.borderWithSmall,
-          ),
-        ),
-        child: Row(
-          children: [
-            _buildIcon(context, theme, tagIcon, isPremium),
-            const SizedBox(width: AppSizes.spacingMedium),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    devotional.title ?? '',
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  Text(
-                    devotional.content ?? '',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.textTheme.labelSmall?.color,
-                    ),
-                  ),
-                  if (hasTags) ...[
-                    const SizedBox(height: AppSizes.spacingXSmall),
-                    SizedBox(
-                      height: AppSizes.tagChipCardHeight,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: tags.map((tag) {
-                          final tagName = tag.name ?? '';
-                          if (tagName.isEmpty) return const SizedBox.shrink();
-                          return Padding(
-                            padding: const EdgeInsets.only(right: AppSizes.spacingXSmall),
-                            child: Container(
-                              padding: const EdgeInsets.all(AppSizes.paddingXSmall),
-                              decoration: BoxDecoration(
-                                color: theme.colorScheme.secondary.withValues(
-                                  alpha: 0.2,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  AppSizes.radiusFull,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSizes.spacingXSmall,
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '${tag.icon ?? ''}$tagName',
-                                      style: theme.textTheme.labelMedium?.copyWith(
-                                        color: theme.textTheme.labelSmall?.color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(AppSizes.paddingMedium),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.onSurface,
+              borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+              border: Border.all(
+                color: theme.colorScheme.secondary,
+                width: AppSizes.borderWithSmall,
+              ),
+            ),
+            child: Row(
+              children: [
+                _buildIcon(context, theme, tagIcon, isPremium),
+                const SizedBox(width: AppSizes.spacingMedium),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (isPremium) SizedBox(height: AppSizes.spacingXSmall),
+                      Text(
+                        devotional.title ?? '',
+                        style: theme.textTheme.titleMedium,
                       ),
-                    ),
-                  ],
-                ],
-              ),
+                      Text(
+                        devotional.content ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.textTheme.labelSmall?.color,
+                        ),
+                      ),
+                      if (hasTags) ...[
+                        const SizedBox(height: AppSizes.spacingXSmall),
+                        SizedBox(
+                          height: AppSizes.tagChipCardHeight,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: tags.map((tag) {
+                              final tagName = tag.name ?? '';
+                              if (tagName.isEmpty)
+                                return const SizedBox.shrink();
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                  right: AppSizes.spacingXSmall,
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(
+                                    AppSizes.paddingXSmall,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: theme.colorScheme.secondary
+                                        .withValues(alpha: 0.2),
+                                    borderRadius: BorderRadius.circular(
+                                      AppSizes.radiusFull,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSizes.spacingXSmall,
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          '${tag.icon ?? ''}$tagName',
+                                          style: theme.textTheme.labelMedium
+                                              ?.copyWith(
+                                                color: theme
+                                                    .textTheme
+                                                    .labelSmall
+                                                    ?.color,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
             ),
-            SvgPicture.asset(
-              AppIcons.arrowRightIcon,
-              width: AppSizes.iconSizeMedium,
-              colorFilter: ColorFilter.mode(
-                theme.iconTheme.color!,
-                BlendMode.srcIn,
-              ),
-            ),
-          ],
-        ),
+          ),
+          // Premium badge
+          if (isPremium) _buildPremiumBadge(context, theme),
+        ],
       ),
     );
   }
 
-  Widget _buildIcon(BuildContext context, ThemeData theme, String? icon, bool isPremium) {
+  Widget _buildIcon(
+    BuildContext context,
+    ThemeData theme,
+    String? icon,
+    bool isPremium,
+  ) {
     // Prioritize coverImage, then fallback to iconEmoji
     if (devotional.coverImage != null && devotional.coverImage!.isNotEmpty) {
       return ClipOval(
@@ -131,8 +141,10 @@ class DevotionalItemCard extends StatelessWidget {
           width: AppSizes.iconSizeXXLarge,
           height: AppSizes.iconSizeXXLarge,
           fit: BoxFit.cover,
-          placeholder: (context, url) => _buildIconPlaceholder(context, theme, icon, isPremium),
-          errorWidget: (context, url, error) => _buildIconPlaceholder(context, theme, icon, isPremium),
+          placeholder: (context, url) =>
+              _buildIconPlaceholder(context, theme, icon, isPremium),
+          errorWidget: (context, url, error) =>
+              _buildIconPlaceholder(context, theme, icon, isPremium),
         ),
       );
     }
@@ -168,7 +180,12 @@ class DevotionalItemCard extends StatelessWidget {
     );
   }
 
-  Widget _buildIconPlaceholder(BuildContext context, ThemeData theme, String? icon, bool isPremium) {
+  Widget _buildIconPlaceholder(
+    BuildContext context,
+    ThemeData theme,
+    String? icon,
+    bool isPremium,
+  ) {
     return Container(
       width: AppSizes.iconSizeXXLarge,
       height: AppSizes.iconSizeXXLarge,
@@ -188,5 +205,47 @@ class DevotionalItemCard extends StatelessWidget {
           : null,
     );
   }
-}
 
+  Widget _buildPremiumBadge(BuildContext context, ThemeData theme) {
+    final lang = S.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    return Positioned(
+      right: 0,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingSmall,
+          vertical: AppSizes.paddingXSmall,
+        ),
+        decoration: BoxDecoration(
+          color: isDark ? theme.colorScheme.secondary : AppColors.dBackground,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(AppSizes.radiusFull),
+            bottomLeft: Radius.circular(AppSizes.radiusMedium),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              AppIcons.starIcon,
+              width: AppSizes.iconSizeSmall,
+              height: AppSizes.iconSizeSmall,
+              colorFilter: ColorFilter.mode(
+                theme.colorScheme.tertiary,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(width: AppSizes.spacingXXSmall),
+            Text(
+              lang.premium,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: isDark ? AppColors.textPrimary : AppColors.dTextPrimary,
+                fontWeight: theme.textTheme.titleSmall?.fontWeight,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

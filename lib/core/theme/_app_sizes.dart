@@ -32,6 +32,7 @@ abstract class AppSizes {
 
   //Border Radius
   static const radiusFull = 100.0;
+  static const radiusMedium = 50.0;
   static const radiusNormal = 25.0;
   static const radiusSmall = 12.0;
   static const radiusXSmall = 8.0;
