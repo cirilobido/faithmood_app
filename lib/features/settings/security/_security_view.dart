@@ -310,6 +310,13 @@ class _SecurityViewState extends ConsumerState<SecurityView> {
                       return;
                     }
 
+                    if (context.mounted) {
+                      LoadingDialog.show(
+                        context: context,
+                        message: lang.updateInformation,
+                      );
+                    }
+
                     final viewModel = ref.read(
                       securityViewModelProvider.notifier,
                     );
@@ -326,6 +333,8 @@ class _SecurityViewState extends ConsumerState<SecurityView> {
                     );
 
                     if (context.mounted) {
+                      LoadingDialog.hide(context);
+                      
                       if (isValid) {
                         setState(() {
                           isEditing = false;

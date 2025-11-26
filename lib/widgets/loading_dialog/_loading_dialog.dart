@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide AnimatedContainer;
 
 import '../../core/core_exports.dart';
 import '../../generated/l10n.dart';
@@ -11,6 +11,8 @@ class LoadingDialog {
   }) {
     final theme = Theme.of(context);
     final lang = S.of(context);
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final imageSize = screenWidth * 0.4;
 
     showDialog(
       context: context,
@@ -23,12 +25,24 @@ class LoadingDialog {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const LoadingIndicator(),
-                const SizedBox(height: AppSizes.spacingMedium),
+                AnimatedContainer(
+                  mode: AnimationMode.floating,
+                  duration: const Duration(seconds: 2),
+                  floatRange: 6,
+                  child: Image.asset(
+                    AppIcons.happyPetImage,
+                    width: imageSize,
+                    height: imageSize,
+                    fit: BoxFit.contain,
+                  ),
+                ),
                 Text(
                   message ?? lang.saving,
                   style: theme.textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: AppSizes.spacingMedium),
+                const LoadingIndicator(),
               ],
             ),
           ),

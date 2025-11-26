@@ -233,6 +233,13 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
                         ? null
                         : int.tryParse(_ageController.text.trim());
 
+                    if (context.mounted) {
+                      LoadingDialog.show(
+                        context: context,
+                        message: lang.updateInformation,
+                      );
+                    }
+
                     final viewModel = ref.read(
                       myInformationViewModelProvider.notifier,
                     );
@@ -247,6 +254,8 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
                     );
 
                     if (context.mounted) {
+                      LoadingDialog.hide(context);
+                      
                       if (isValid) {
                         setState(() {
                           isEditing = false;
@@ -301,10 +310,20 @@ class _MyInformationViewState extends ConsumerState<MyInformationView> {
       buttonTitle: lang.deleteAccount,
       buttonType: ButtonType.error,
       onPrimaryTap: () async {
+        if (context.mounted) {
+          Navigator.of(context).pop();
+          LoadingDialog.show(
+            context: context,
+            message: lang.deleting,
+          );
+        }
+
         final viewModel = ref.read(myInformationViewModelProvider.notifier);
         final result = await viewModel.deleteAccount();
 
         if (context.mounted) {
+          LoadingDialog.hide(context);
+          
           if (result) {
             if (context.mounted) {
               context.go(Routes.initialPath);

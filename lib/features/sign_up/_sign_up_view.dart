@@ -164,6 +164,14 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         _passConfirmController.text.trim().isEmpty) {
       return;
     }
+    
+    if (context.mounted) {
+      LoadingDialog.show(
+        context: context,
+        message: S.of(context).saving,
+      );
+    }
+    
     final viewModel = ref.read(signUpViewModelProvider.notifier);
     final success = await viewModel.registerUser(
       AuthRequest(
@@ -172,11 +180,16 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         newPassword: _passConfirmController.text.trim(),
       ),
     );
-    if (success && context.mounted) {
-      context.go(Routes.home);
-      return;
+    
+    if (context.mounted) {
+      LoadingDialog.hide(context);
+      
+      if (success) {
+        context.go(Routes.home);
+        return;
+      }
+      showErrorDialog();
     }
-    showErrorDialog();
   }
 
   void showErrorDialog() {
