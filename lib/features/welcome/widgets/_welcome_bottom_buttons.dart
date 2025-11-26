@@ -32,7 +32,7 @@ class WelcomeBottomButtons extends StatelessWidget {
         children: [
           if (index == 8) ...[
             Text(
-              lang.psaml231Verse,
+              lang.psalm231Verse,
               textAlign: TextAlign.center,
               style: theme.textTheme.titleLarge,
             ),

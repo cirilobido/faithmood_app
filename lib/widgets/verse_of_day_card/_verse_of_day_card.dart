@@ -68,7 +68,7 @@ class VerseOfDayCard extends ConsumerWidget {
     String? translationRef;
     
     if (verse!.translations != null && verse!.translations!.isNotEmpty) {
-      final userLangCode = userLang ?? ref.read(authProvider).user?.lang?.name ?? 'en';
+      final userLangCode = userLang ?? ref.read(authProvider).user?.lang?.name ?? Lang.en.name;
       final translation = verse!.translations!.firstWhere(
         (t) => t.lang == userLangCode,
         orElse: () => verse!.translations!.first,

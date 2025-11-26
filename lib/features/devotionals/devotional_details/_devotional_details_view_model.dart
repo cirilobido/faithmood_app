@@ -99,7 +99,7 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
   Future<void> _loadDevotional() async {
     try {
       updateState(isLoading: true, error: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await devotionalUseCase.getDevotionalById(devotionalId, userLang);
 
       switch (result) {
@@ -351,7 +351,7 @@ class DevotionalDetailsViewModel extends StateNotifier<DevotionalDetailsState> {
         return;
       }
 
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final languageSet = await ttsService.setLanguage(userLang);
       
       if (!languageSet) {

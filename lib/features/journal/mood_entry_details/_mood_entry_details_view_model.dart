@@ -100,7 +100,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
         devLogger('_handleSaveFuture: Mood session created successfully: $realSessionId');
         
         final userId = authProvider.user?.id;
-        final userLang = authProvider.user?.lang?.name ?? 'en';
+        final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
         
         devLogger('_handleSaveFuture: userId = $userId, userLang = $userLang');
         
@@ -300,7 +300,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
         return;
       }
 
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final languageSet = await ttsService.setLanguage(userLang);
       
       if (!languageSet) {
@@ -536,7 +536,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       return;
     }
 
-    final userLang = authProvider.user?.lang?.name ?? 'en';
+    final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
     devLogger('_startPollingForVerseAndLearning: Starting polling with sessionId: $_sessionId');
     
     while (_pollAttempts < _maxPollAttempts && _mounted) {
@@ -620,7 +620,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
   Future<void> loadMoodSessionDetail() async {
     try {
       final userId = authProvider.user?.id;
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       
       if (userId == null) {
         updateState(isLoading: false, error: true);
@@ -792,7 +792,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
         return;
       }
 
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       
       final request = MoodSessionRequest(
         userId: userId,

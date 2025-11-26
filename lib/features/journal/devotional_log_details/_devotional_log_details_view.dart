@@ -231,7 +231,7 @@ class _DevotionalLogDetailsViewState
       if (date == null || date.isEmpty) return '';
       try {
         final parsedDate = DateTime.parse(date);
-        return DateFormat('MMMM d, yyyy', 'en').format(parsedDate);
+        return DateFormat('MMMM d, yyyy', Lang.en.name).format(parsedDate);
       } catch (e) {
         return date;
       }

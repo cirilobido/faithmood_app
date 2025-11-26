@@ -93,7 +93,7 @@ class JournalViewModel extends StateNotifier<JournalState> {
   }
 
   Map<String, dynamic> _buildQueryParams() {
-    final userLang = authProvider.user?.lang?.name ?? 'en';
+    final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
     final params = <String, dynamic>{
       'lang': userLang,
       'sortBy': state.sortBy,
@@ -310,7 +310,7 @@ class JournalViewModel extends StateNotifier<JournalState> {
   Future<void> loadMoods() async {
     try {
       updateState(isLoadingMoods: true, moodsError: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await moodUseCase.getMoods(userLang);
 
       switch (result) {
@@ -342,7 +342,7 @@ class JournalViewModel extends StateNotifier<JournalState> {
   }
 
   Map<String, dynamic> _buildDevotionalLogsQueryParams() {
-    final userLang = authProvider.user?.lang?.name ?? 'en';
+    final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
     final params = <String, dynamic>{
       'lang': userLang,
       'page': state.devotionalLogsPage,

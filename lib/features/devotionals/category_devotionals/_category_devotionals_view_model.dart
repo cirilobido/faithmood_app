@@ -57,7 +57,7 @@ class CategoryDevotionalsViewModel extends StateNotifier<CategoryDevotionalsStat
   Future<void> _loadDevotionals() async {
     try {
       updateState(isLoading: true, error: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       Result<DevotionalsResponse, Exception> result;
 
       if (category != null) {
@@ -111,7 +111,7 @@ class CategoryDevotionalsViewModel extends StateNotifier<CategoryDevotionalsStat
 
     try {
       updateState(isLoadingMore: true);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final nextPage = state.page + 1;
       Result<DevotionalsResponse, Exception> result;
 

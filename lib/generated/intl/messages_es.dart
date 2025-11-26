@@ -20,245 +20,255 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
-  static String m0(url) => "Descarga la aplicación FaithMood: ${url}";
-
-  static String m1(mood) => "Cuando te sientes ${mood}, mira este versículo:";
-
-  static String m2(days) => "Has registrado entradas en ${days} días";
+  static String m0(days) => "Has registrado entradas en ${days} días";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Cuenta"),
-    "accountDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Tu cuenta se ha eliminado correctamente.",
-    ),
-    "activa": MessageLookupByLibrary.simpleMessage("Activa"),
-    "addMoodEntry": MessageLookupByLibrary.simpleMessage(
-      "Agregar Entrada de Estado de Ánimo",
-    ),
+    "addMoodEntry": MessageLookupByLibrary.simpleMessage("Agregar mood"),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage(
-      "Agregar a Mi Diario",
+      "Agregar a mi diario",
     ),
     "adfreeExperience": MessageLookupByLibrary.simpleMessage(
-      "🚫 Ad-Free Experience",
+      "🚫 Experiencia sin anuncios",
     ),
     "advanceProgressTracker": MessageLookupByLibrary.simpleMessage(
-      "✨ Advance Progress Tracker",
+      "✨ Seguimiento avanzado de progreso",
     ),
     "afterDeletingYourAccountYouWillLoseAllYourData":
         MessageLookupByLibrary.simpleMessage(
-          "Después de eliminar tu cuenta, perderás todos tus datos. Esta acción no se puede deshacer.",
+          "Al eliminar tu cuenta perderás todos tus datos. Esta acción no se puede deshacer.",
         ),
-    "age": MessageLookupByLibrary.simpleMessage("Age"),
-    "ageIsRequired": MessageLookupByLibrary.simpleMessage("Age is required!"),
+    "age": MessageLookupByLibrary.simpleMessage("Edad"),
+    "ageIsRequired": MessageLookupByLibrary.simpleMessage(
+      "La edad es obligatoria",
+    ),
     "all": MessageLookupByLibrary.simpleMessage("Todos"),
-    "allEntries": MessageLookupByLibrary.simpleMessage("Todas las Entradas"),
     "allowNotifications": MessageLookupByLibrary.simpleMessage(
-      "Allow Notifications",
+      "Permitir notificaciones",
     ),
     "and": MessageLookupByLibrary.simpleMessage("y"),
-    "appLanguage": MessageLookupByLibrary.simpleMessage(
-      "Idioma de la Aplicación",
-    ),
+    "appLanguage": MessageLookupByLibrary.simpleMessage("Idioma de la app"),
     "appName": MessageLookupByLibrary.simpleMessage("Tu nombre"),
-    "appTheme": MessageLookupByLibrary.simpleMessage("Tema de la Aplicación"),
+    "appTheme": MessageLookupByLibrary.simpleMessage("Tema de la app"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
-      "Versión de la Aplicación: ###",
+      "Versión de la app: ###",
     ),
-    "applyFilters": MessageLookupByLibrary.simpleMessage("Aplicar Filtros"),
+    "applyFilters": MessageLookupByLibrary.simpleMessage("Aplicar filtros"),
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
-      "¿Estás seguro de que quieres cerrar sesión?",
+      "¿Seguro que deseas cerrar sesión?",
     ),
     "ascending": MessageLookupByLibrary.simpleMessage("Ascendente"),
     "askNotificationSubtitle": MessageLookupByLibrary.simpleMessage(
-      "We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.",
+      "Te recordaremos suavemente tus reflexiones, oraciones y devocionales — solo cuando realmente importe.",
     ),
     "askNotificationTitle": MessageLookupByLibrary.simpleMessage(
-      "🔔 Stay connected with your purpose",
+      "🔔 Mantente conectado con tu propósito",
     ),
-    "back": MessageLookupByLibrary.simpleMessage("Atrás"),
-    "campains": MessageLookupByLibrary.simpleMessage("Campañas"),
-    "campainsUsage": MessageLookupByLibrary.simpleMessage("Campañas"),
+    "back": MessageLookupByLibrary.simpleMessage("Volver"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
-    "cancelada": MessageLookupByLibrary.simpleMessage("Cancelada"),
-    "cancelled": MessageLookupByLibrary.simpleMessage("Cancelado"),
     "captureYourThoughtsEachDay": MessageLookupByLibrary.simpleMessage(
-      "Capture your thoughts each day.",
+      "Captura tus pensamientos cada día.",
     ),
     "category": MessageLookupByLibrary.simpleMessage("Categoría"),
     "changeTime": MessageLookupByLibrary.simpleMessage("Cambiar hora"),
     "chooseMoodThatBestReflects": MessageLookupByLibrary.simpleMessage(
-      "Selecciona cómo te sientes en este momento. Sé honesto contigo mismo",
+      "Selecciona cómo te sientes en este momento. Sé honesto contigo.",
     ),
     "chooseYourNextStep": MessageLookupByLibrary.simpleMessage(
-      "Choose Your Next Step",
+      "Elige tu siguiente paso",
     ),
-    "clearFilters": MessageLookupByLibrary.simpleMessage("Limpiar Filtros"),
+    "clearFilters": MessageLookupByLibrary.simpleMessage("Limpiar filtros"),
     "committedPageTitle": MessageLookupByLibrary.simpleMessage(
-      "🙌 How committed are you with your faith?",
+      "🙌 ¿Qué tan comprometido estás con tu fe?",
     ),
-    "committedQ1": MessageLookupByLibrary.simpleMessage(
-      "🔥 Extremely committed",
+    "committedQ1": MessageLookupByLibrary.simpleMessage("🔥 Muy comprometido"),
+    "committedQ2": MessageLookupByLibrary.simpleMessage(
+      "💪 Bastante comprometido",
     ),
-    "committedQ2": MessageLookupByLibrary.simpleMessage("💪 Very committed"),
-    "committedQ3": MessageLookupByLibrary.simpleMessage(
-      "🌿 Somewhat committed",
-    ),
-    "committedQ4": MessageLookupByLibrary.simpleMessage("🌧️ A little"),
-    "committedQ5": MessageLookupByLibrary.simpleMessage("👀 Just exploring"),
+    "committedQ3": MessageLookupByLibrary.simpleMessage("🌿 Algo comprometido"),
+    "committedQ4": MessageLookupByLibrary.simpleMessage("🌧️ Un poco"),
+    "committedQ5": MessageLookupByLibrary.simpleMessage("👀 Solo explorando"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
-      "Confirmar Contraseña",
+      "Confirmar contraseña",
     ),
-    "contact": MessageLookupByLibrary.simpleMessage("Contact"),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contáctanos"),
     "continueText": MessageLookupByLibrary.simpleMessage("Continuar"),
     "continueWithoutNote": MessageLookupByLibrary.simpleMessage(
-      "Continuar Sin Nota",
+      "Continuar sin guardar",
     ),
     "createAnAccount": MessageLookupByLibrary.simpleMessage("Crear una cuenta"),
-    "createCampaign": MessageLookupByLibrary.simpleMessage("Crear Campaña"),
     "currentSubscription": MessageLookupByLibrary.simpleMessage(
-      "Suscripción Actual",
+      "Suscripción actual",
     ),
     "customization": MessageLookupByLibrary.simpleMessage("Personalización"),
     "dailyDreamReminder": MessageLookupByLibrary.simpleMessage(
-      "Recordatorio diario",
+      "Recordatorio diario de fe",
     ),
     "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
     "date": MessageLookupByLibrary.simpleMessage("Fecha"),
-    "dateRange": MessageLookupByLibrary.simpleMessage("Rango de Fechas"),
-    "days15": MessageLookupByLibrary.simpleMessage("15 Days"),
-    "days3": MessageLookupByLibrary.simpleMessage("3 Days"),
-    "days30": MessageLookupByLibrary.simpleMessage("30 Days"),
+    "dateRange": MessageLookupByLibrary.simpleMessage("Rango de fechas"),
+    "days15": MessageLookupByLibrary.simpleMessage("15 días"),
+    "days3": MessageLookupByLibrary.simpleMessage("3 días"),
+    "days30": MessageLookupByLibrary.simpleMessage("30 días"),
     "daysWithActivity": MessageLookupByLibrary.simpleMessage(
-      "Días Con Actividad",
+      "Días con actividad",
     ),
     "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
-    "deleteAccount": MessageLookupByLibrary.simpleMessage("Eliminar Cuenta"),
-    "deleteMoodEntry": MessageLookupByLibrary.simpleMessage(
-      "Eliminar Entrada del Estado de Ánimo",
-    ),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("Eliminar cuenta"),
+    "deleteMoodEntry": MessageLookupByLibrary.simpleMessage("Eliminar mood"),
     "deleteMoodEntryMessage": MessageLookupByLibrary.simpleMessage(
-      "¿Estás seguro de que quieres eliminar esta entrada del estado de ánimo? Esta acción no se puede deshacer.",
+      "¿Seguro que deseas eliminar este mood? Esta acción no se puede deshacer.",
     ),
     "deleting": MessageLookupByLibrary.simpleMessage("Eliminando..."),
     "descending": MessageLookupByLibrary.simpleMessage("Descendente"),
     "devotional": MessageLookupByLibrary.simpleMessage("Devocional"),
-    "devotionals": MessageLookupByLibrary.simpleMessage("Devotionals"),
-    "discoverPremium": MessageLookupByLibrary.simpleMessage(
-      "Descubrir Premium",
-    ),
-    "downloadFaithMoodApp": m0,
+    "devotionals": MessageLookupByLibrary.simpleMessage("Devocionales"),
+    "discoverPremium": MessageLookupByLibrary.simpleMessage("Descubre Premium"),
     "downloadFaithmoodApp": MessageLookupByLibrary.simpleMessage(
-      "Download FaithMood App: ###",
+      "Descargar FaithMood App: ###",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("Editar"),
-    "email": MessageLookupByLibrary.simpleMessage("Email"),
-    "emailPassword": MessageLookupByLibrary.simpleMessage("Email & Contraseña"),
-    "emotionalMood": MessageLookupByLibrary.simpleMessage("Estado Emocional"),
+    "email": MessageLookupByLibrary.simpleMessage("Correo"),
+    "emailPassword": MessageLookupByLibrary.simpleMessage(
+      "Correo y contraseña",
+    ),
+    "emotionalMood": MessageLookupByLibrary.simpleMessage("Mood emocional"),
     "emotionalMoodSummary": MessageLookupByLibrary.simpleMessage(
-      "Resumen de Estado Emocional",
+      "Resumen de moods emocionales",
     ),
     "emotions": MessageLookupByLibrary.simpleMessage("Emociones"),
-    "endDate": MessageLookupByLibrary.simpleMessage("Fecha Fin"),
-    "enterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
-      "Ingresa un número de teléfono válido",
-    ),
+    "endDate": MessageLookupByLibrary.simpleMessage("Fecha final"),
     "errorDeletingAccount": MessageLookupByLibrary.simpleMessage(
-      "Error al eliminar tu cuenta. Por favor intenta de nuevo.",
+      "Ocurrió un error al eliminar tu cuenta. Por favor intenta de nuevo.",
     ),
     "errorDeletingMoodEntry": MessageLookupByLibrary.simpleMessage(
-      "Error al eliminar la entrada del estado de ánimo",
+      "Ocurrió un error al eliminar el mood.",
     ),
     "errorSavingMood": MessageLookupByLibrary.simpleMessage(
-      "Error al guardar el estado de ánimo. Por favor intenta de nuevo.",
+      "Ocurrió un error al guardar el mood. Inténtalo nuevamente.",
     ),
     "errorSavingNote": MessageLookupByLibrary.simpleMessage(
-      "Error al guardar la nota",
+      "Ocurrió un error al guardar la nota.",
     ),
     "errorUpdatingInformation": MessageLookupByLibrary.simpleMessage(
-      "Error al actualizar tu información. Por favor intenta de nuevo.",
+      "Ocurrió un error al actualizar tu información. Por favor intenta de nuevo.",
     ),
     "errorUpdatingMoodEntry": MessageLookupByLibrary.simpleMessage(
-      "Error al actualizar la entrada del estado de ánimo",
+      "Ocurrió un error al actualizar el mood.",
     ),
     "everUsedBeforeQ1": MessageLookupByLibrary.simpleMessage(
-      "🙏 Yes, I have used one before",
+      "🙏 Sí, ya he usado una",
     ),
     "everUsedBeforeQ2": MessageLookupByLibrary.simpleMessage(
-      "✨ No, this is my first time",
+      "✨ No, es mi primera vez",
     ),
     "everUsedBeforeQ3": MessageLookupByLibrary.simpleMessage(
-      "🕊️ I’ve tried something similar",
+      "🕊️ He usado algo similar",
     ),
     "everUsedBeforeTitle": MessageLookupByLibrary.simpleMessage(
-      "🌿 Have you ever used a faith journal app before?",
+      "🌿 ¿Has usado antes una app de diario espiritual?",
     ),
     "experiencePageTitle": MessageLookupByLibrary.simpleMessage(
-      "💭 What would you like to find in this experience?",
+      "💭 ¿Qué te gustaría vivir en esta experiencia?",
     ),
     "experienceQ1": MessageLookupByLibrary.simpleMessage(
-      "🕊️ Find inner peace ",
+      "🕊️ Encontrar paz interior",
     ),
     "experienceQ2": MessageLookupByLibrary.simpleMessage(
-      "💭 Learn to manage my emotions",
+      "💭 Aprender a comprender tus moods",
     ),
-    "experienceQ3": MessageLookupByLibrary.simpleMessage(
-      "🙏 Strengthen my faith",
-    ),
+    "experienceQ3": MessageLookupByLibrary.simpleMessage("🙏 Fortalecer tu fe"),
     "experienceQ4": MessageLookupByLibrary.simpleMessage(
-      "✨ Have a moment with God every day",
+      "✨ Tener un encuentro diario con Dios",
     ),
-    "expirada": MessageLookupByLibrary.simpleMessage("Expirada"),
-    "explore": MessageLookupByLibrary.simpleMessage("Explore"),
-    "fechaInicio": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
+    "explore": MessageLookupByLibrary.simpleMessage("Explorar"),
     "feeling": MessageLookupByLibrary.simpleMessage("Sentimiento"),
-    "ffollowGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
-      "Follow guided daily devotionals",
-    ),
-    "files": MessageLookupByLibrary.simpleMessage("Archivos"),
-    "filterByMood": MessageLookupByLibrary.simpleMessage(
-      "Filtrar por Estado de Ánimo",
-    ),
+    "filterByMood": MessageLookupByLibrary.simpleMessage("Filtrar por mood"),
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
-      "Find a plan that fits your journey.",
+      "Encuentra un plan que se adapte a tu camino.",
     ),
     "finishAccountSetup": MessageLookupByLibrary.simpleMessage(
-      "Completa la configuración de tu cuenta",
+      "Completar configuración",
     ),
     "finishAccountSetupMessage": MessageLookupByLibrary.simpleMessage(
-      "Completa tu perfil agregando tu correo electrónico y contraseña.",
+      "Completa tu perfil agregando tu correo y contraseña.",
     ),
     "firstName": MessageLookupByLibrary.simpleMessage("Nombre"),
+    "followGuidedDailyDevotionals": MessageLookupByLibrary.simpleMessage(
+      "Sigue devocionales guiados cada día",
+    ),
     "followUs": MessageLookupByLibrary.simpleMessage("Síguenos"),
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
       "¿Olvidaste tu contraseña?",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("Comenzar"),
-    "goToJournal": MessageLookupByLibrary.simpleMessage("Ir al Diario"),
-    "growInFaith": MessageLookupByLibrary.simpleMessage("Grow in Faith"),
-    "growWithGuidance": MessageLookupByLibrary.simpleMessage(
-      "Grow with Guidance",
+    "goToJournal": MessageLookupByLibrary.simpleMessage("Ir al diario"),
+    "greetingAfternoon": MessageLookupByLibrary.simpleMessage("Buenas tardes"),
+    "greetingAfternoonSubtitle1": MessageLookupByLibrary.simpleMessage(
+      "Mantente firme — Dios camina contigo.",
     ),
+    "greetingAfternoonSubtitle2": MessageLookupByLibrary.simpleMessage(
+      "Deja que la paz guíe tu tarde.",
+    ),
+    "greetingAfternoonSubtitle3": MessageLookupByLibrary.simpleMessage(
+      "Tu jornada continúa con gracia.",
+    ),
+    "greetingAfternoonSubtitle4": MessageLookupByLibrary.simpleMessage(
+      "Toma un momento para respirar y recentrarte.",
+    ),
+    "greetingAfternoonSubtitle5": MessageLookupByLibrary.simpleMessage(
+      "Fuerzas para el resto de tu día.",
+    ),
+    "greetingEvening": MessageLookupByLibrary.simpleMessage("Buenas noches"),
+    "greetingEveningSubtitle1": MessageLookupByLibrary.simpleMessage(
+      "Suelta tus cargas — Dios guarda tu noche.",
+    ),
+    "greetingEveningSubtitle2": MessageLookupByLibrary.simpleMessage(
+      "Descansa tu corazón en Su presencia.",
+    ),
+    "greetingEveningSubtitle3": MessageLookupByLibrary.simpleMessage(
+      "Terminaste el día — respira profundamente.",
+    ),
+    "greetingEveningSubtitle4": MessageLookupByLibrary.simpleMessage(
+      "Encuentra paz en la quietud de esta noche.",
+    ),
+    "greetingEveningSubtitle5": MessageLookupByLibrary.simpleMessage(
+      "Deja que tu alma descanse en el cuidado de Dios.",
+    ),
+    "greetingMorning": MessageLookupByLibrary.simpleMessage("Buenos días"),
+    "greetingMorningSubtitle1": MessageLookupByLibrary.simpleMessage(
+      "Empieza tu día con un corazón en calma.",
+    ),
+    "greetingMorningSubtitle2": MessageLookupByLibrary.simpleMessage(
+      "Dios está cerca — respira y recibe la mañana.",
+    ),
+    "greetingMorningSubtitle3": MessageLookupByLibrary.simpleMessage(
+      "Que Su paz guíe tus primeros pasos hoy.",
+    ),
+    "greetingMorningSubtitle4": MessageLookupByLibrary.simpleMessage(
+      "Tu corazón despierta con propósito.",
+    ),
+    "greetingMorningSubtitle5": MessageLookupByLibrary.simpleMessage(
+      "Que esta mañana traiga luz a tu alma.",
+    ),
+    "growInFaith": MessageLookupByLibrary.simpleMessage("Crecer en la fe"),
+    "growWithGuidance": MessageLookupByLibrary.simpleMessage("Crece con guía"),
     "guidedFaithPlans": MessageLookupByLibrary.simpleMessage(
-      "📖 Guided Faith Plans",
+      "📖 Planes de fe guiados",
     ),
-    "guidedPlanQ1": MessageLookupByLibrary.simpleMessage(
-      "🙏 Yes, several times",
-    ),
-    "guidedPlanQ2": MessageLookupByLibrary.simpleMessage("📘 Once or twice"),
+    "guidedPlanQ1": MessageLookupByLibrary.simpleMessage("🙏 Sí, varias veces"),
+    "guidedPlanQ2": MessageLookupByLibrary.simpleMessage("📘 Una o dos veces"),
     "guidedPlanQ3": MessageLookupByLibrary.simpleMessage(
-      "🌱 No, it’ll be my first time",
+      "🌱 No, será mi primera vez",
     ),
     "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
-      "📖 Have you ever followed a guided plan to strengthen your faith?",
+      "📖 ¿Has seguido antes un plan guiado de fe?",
     ),
-    "hapticFeedback": MessageLookupByLibrary.simpleMessage("Vibración Háptica"),
     "heyHowAreYouFeelingToday": MessageLookupByLibrary.simpleMessage(
-      "Hey ###, how are you feeling today?",
+      "Hola ###, ¿cómo te sientes hoy?",
     ),
-    "history": MessageLookupByLibrary.simpleMessage("Historial"),
     "home": MessageLookupByLibrary.simpleMessage("Inicio"),
     "howAreYouFeeling": MessageLookupByLibrary.simpleMessage(
       "¿Cómo te sientes?",
@@ -267,7 +277,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "¿Cómo describirías tu día?",
     ),
     "iAgreeToChangeMyPassword": MessageLookupByLibrary.simpleMessage(
-      "¡Acepto cambiar mi contraseña!",
+      "Acepto cambiar mi contraseña",
     ),
     "iHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "Ya tengo una cuenta",
@@ -277,243 +287,212 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "inTheApp": MessageLookupByLibrary.simpleMessage("en la app."),
     "informationSafeMessage": MessageLookupByLibrary.simpleMessage(
-      "Tu información se mantendrá segura.",
+      "Tu información permanecerá privada y segura.",
     ),
     "informationUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Tu información se ha actualizado correctamente.",
+      "Tu información ha sido actualizada.",
     ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
-      "Correo electrónico inválido",
+      "Por favor ingresa un correo válido.",
     ),
-    "invalidEmailOrPasswordPleaseTryAgain":
-        MessageLookupByLibrary.simpleMessage(
-          "Correo electrónico o contraseña inválidos. Inténtalo de nuevo.",
-        ),
+    "invalidEmailOrPasswordPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
+      "El correo o la contraseña no parecen correctos. Revisa tus datos e inténtalo de nuevo.",
+    ),
     "joinOthersSubtitle": MessageLookupByLibrary.simpleMessage(
-      "+80% of those who use FaithMood feel their faith grow within 30 days.",
+      "Más del 80% de quienes usan FaithMood sienten que su fe crece en los primeros 30 días.",
     ),
     "joinOthersTitle": MessageLookupByLibrary.simpleMessage(
-      "🌱 Join others growing stronger in faith",
+      "🌱 Únete a quienes están creciendo en su fe",
     ),
-    "journalEntry": MessageLookupByLibrary.simpleMessage("Entrada del Diario"),
+    "journalEntry": MessageLookupByLibrary.simpleMessage("Entrada del diario"),
     "just449PerMonthCancelAnytime": MessageLookupByLibrary.simpleMessage(
-      "Just ### per month - Cancel anytime",
+      "Solo ### al mes — cancela cuando quieras",
     ),
-    "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizajes Clave"),
-    "language": MessageLookupByLibrary.simpleMessage("Language"),
-    "lastName": MessageLookupByLibrary.simpleMessage("Apellido"),
-    "lastNameMustBeAtLeast3CharactersLong":
-        MessageLookupByLibrary.simpleMessage(
-          "El nombre debe tener al menos 3 caracteres",
-        ),
-    "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
+    "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizajes clave"),
+    "language": MessageLookupByLibrary.simpleMessage("Idioma"),
+    "leaveRating": MessageLookupByLibrary.simpleMessage("Dejar valoración"),
     "light": MessageLookupByLibrary.simpleMessage("Claro"),
     "localeName": MessageLookupByLibrary.simpleMessage("Español"),
-    "logMood": MessageLookupByLibrary.simpleMessage(
-      "Registrar Estado de Ánimo",
-    ),
-    "logOut": MessageLookupByLibrary.simpleMessage("Cerrar Sesión"),
+    "logMood": MessageLookupByLibrary.simpleMessage("Registrar mood"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
     "loginErrorMessage": MessageLookupByLibrary.simpleMessage(
-      "Tu correo o contraseña no coinciden. Verifica tus datos e inténtalo de nuevo.",
+      "El correo o la contraseña no coinciden. Por favor revisa tus datos e inténtalo nuevamente.",
     ),
     "loginGreetingMessage": MessageLookupByLibrary.simpleMessage(
-      "Hola, bienvenido de nuevo!",
+      "Hola, ¡bienvenido de nuevo!",
     ),
-    "manually": MessageLookupByLibrary.simpleMessage("Manualmente"),
-    "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
-    "message": MessageLookupByLibrary.simpleMessage("Mensaje"),
-    "metodoDePago": MessageLookupByLibrary.simpleMessage("Método de pago"),
+    "maybeLater": MessageLookupByLibrary.simpleMessage("Quizás después"),
     "moodAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Felicitaciones",
+      "¡Felicidades!",
     ),
     "moodAddedSuccessfullyMessage": MessageLookupByLibrary.simpleMessage(
-      "Has registrado exitosamente tu primer estado de ánimo.",
+      "Has registrado tu primer mood correctamente.",
     ),
     "moodEntryDeleted": MessageLookupByLibrary.simpleMessage(
-      "Entrada del estado de ánimo eliminada exitosamente",
+      "Mood eliminado correctamente.",
     ),
     "moodEntryUpdated": MessageLookupByLibrary.simpleMessage(
-      "Entrada del estado de ánimo actualizada exitosamente",
+      "Mood actualizado correctamente.",
     ),
-    "moods": MessageLookupByLibrary.simpleMessage("Estados de Ánimo"),
-    "moreFilters": MessageLookupByLibrary.simpleMessage("Más Filtros"),
-    "myEmotion": MessageLookupByLibrary.simpleMessage("Mi Emoción"),
-    "myJournal": MessageLookupByLibrary.simpleMessage("Mi Diario"),
-    "myReflection": MessageLookupByLibrary.simpleMessage("Mi Reflexión"),
-    "mySpirit": MessageLookupByLibrary.simpleMessage("Mi Espíritu"),
-    "myThoughts": MessageLookupByLibrary.simpleMessage("Mis Pensamientos"),
+    "moods": MessageLookupByLibrary.simpleMessage("Moods"),
+    "moreFilters": MessageLookupByLibrary.simpleMessage("Más filtros"),
+    "myEmotion": MessageLookupByLibrary.simpleMessage("Mi emoción"),
+    "myJournal": MessageLookupByLibrary.simpleMessage("Mi diario"),
+    "myReflection": MessageLookupByLibrary.simpleMessage("Mi reflexión"),
+    "mySpirit": MessageLookupByLibrary.simpleMessage("Mi espíritu"),
+    "myThoughts": MessageLookupByLibrary.simpleMessage("Mis pensamientos"),
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
-      "El nombre debe tener al menos 3 caracteres",
+      "Tu nombre debe tener al menos 3 caracteres.",
     ),
-    "neverStored": MessageLookupByLibrary.simpleMessage("NUNCA SE ALMACENA"),
+    "neverStored": MessageLookupByLibrary.simpleMessage("nunca almacenada"),
     "newPassword": MessageLookupByLibrary.simpleMessage("Nueva contraseña"),
     "next": MessageLookupByLibrary.simpleMessage("Siguiente"),
-    "noCampaignsYet": MessageLookupByLibrary.simpleMessage(
-      "Aún no hay campañas disponibles.",
-    ),
-    "noCategoriesAvailable": MessageLookupByLibrary.simpleMessage(
-      "No hay categorías disponibles",
-    ),
     "noDevotionalsAvailable": MessageLookupByLibrary.simpleMessage(
       "No hay devocionales disponibles",
     ),
     "noEmotionalMoodsAvailable": MessageLookupByLibrary.simpleMessage(
-      "No emotional moods available",
+      "No hay moods emocionales disponibles.",
     ),
     "noJournalEntries": MessageLookupByLibrary.simpleMessage(
-      "No hay entradas en el diario",
+      "No hay entradas en tu diario.",
     ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
-      "✔️ No payment required now",
-    ),
-    "noSearchResults": MessageLookupByLibrary.simpleMessage(
-      "No se encontraron resultados",
+      "✔️ No se requiere pago ahora",
     ),
     "noSpiritualMoodsAvailable": MessageLookupByLibrary.simpleMessage(
-      "No spiritual moods available",
+      "No hay moods espirituales disponibles.",
     ),
     "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
       "No hay etiquetas disponibles",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Nota guardada exitosamente",
+      "Nota guardada correctamente.",
     ),
     "optional": MessageLookupByLibrary.simpleMessage("(Opcional)"),
-    "or": MessageLookupByLibrary.simpleMessage("o"),
-    "orLoginWith": MessageLookupByLibrary.simpleMessage("O inicia session con"),
+    "orLoginWith": MessageLookupByLibrary.simpleMessage("O iniciar sesión con"),
     "order": MessageLookupByLibrary.simpleMessage("Orden"),
-    "otpCode": MessageLookupByLibrary.simpleMessage("Código OTP"),
-    "ourApp": MessageLookupByLibrary.simpleMessage("Nuestra Aplicación"),
+    "otpCode": MessageLookupByLibrary.simpleMessage("Código"),
+    "ourApp": MessageLookupByLibrary.simpleMessage("Nuestra app"),
     "passMinCharacters": MessageLookupByLibrary.simpleMessage("6 caracteres"),
-    "passOneLetter": MessageLookupByLibrary.simpleMessage("1 letra"),
-    "passOneNumber": MessageLookupByLibrary.simpleMessage("1 número"),
+    "passOneLetter": MessageLookupByLibrary.simpleMessage("Una letra"),
+    "passOneNumber": MessageLookupByLibrary.simpleMessage("Un número"),
     "passOneUppercaseLetter": MessageLookupByLibrary.simpleMessage(
-      "1 letra mayúscula",
+      "Una letra mayúscula",
     ),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "passwordDontMatch": MessageLookupByLibrary.simpleMessage(
-      "La contraseña no coincide",
+      "Las contraseñas no coinciden",
     ),
     "passwordMustContainAtLeast": MessageLookupByLibrary.simpleMessage(
-      "La contraseña debe contener al menos:",
+      "Tu contraseña debe contener al menos:",
     ),
     "passwordRestored": MessageLookupByLibrary.simpleMessage(
-      "Contraseña restaurada",
+      "Contraseña restablecida",
     ),
     "passwordRestoredSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Tu contraseña ha sido restaurada correctamente.",
+      "Tu contraseña ha sido restablecida correctamente.",
     ),
-    "paypal": MessageLookupByLibrary.simpleMessage("Paypal"),
     "paywallSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Discover a calm, ad-free space made to nurture your faith through reflection and growth.",
+      "Descubre un espacio sereno, sin anuncios, creado para nutrir tu fe con reflexión y crecimiento.",
     ),
     "paywallTitle": MessageLookupByLibrary.simpleMessage(
-      "✨ Your journey is just beginning",
+      "✨ Tu camino apenas comienza",
     ),
-    "pending": MessageLookupByLibrary.simpleMessage("Pendiente"),
     "personalInformation": MessageLookupByLibrary.simpleMessage(
-      "Información Personal",
+      "Información personal",
     ),
-    "phone": MessageLookupByLibrary.simpleMessage("Teléfono"),
     "phoneNumberDigitsError": MessageLookupByLibrary.simpleMessage(
-      "El teléfono solo puede contener dígitos",
+      "El número de teléfono solo puede contener dígitos.",
     ),
     "phoneNumberLengthError": MessageLookupByLibrary.simpleMessage(
-      "El teléfono debe tener entre 10 y 15 dígitos",
+      "El número de teléfono debe tener entre 10 y 15 dígitos.",
     ),
-    "plan": MessageLookupByLibrary.simpleMessage("Plan"),
     "pleaseFillAllTheFieldsWithValidData": MessageLookupByLibrary.simpleMessage(
-      "Por favor completa todos los campos con datos válidos",
+      "Completa todos los campos con datos válidos.",
     ),
     "pleaseSelectEmotionalMood": MessageLookupByLibrary.simpleMessage(
-      "Por favor selecciona un estado de ánimo emocional",
+      "Selecciona un mood emocional.",
     ),
     "pleaseSelectSpiritualMood": MessageLookupByLibrary.simpleMessage(
-      "Por favor selecciona un estado de ánimo espiritual",
+      "Selecciona un mood espiritual.",
     ),
     "predominantSpiritualMood": MessageLookupByLibrary.simpleMessage(
-      "Estado espiritual predominante: ",
+      "Mood espiritual predominante: ",
     ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
+    "preparingLearning": MessageLookupByLibrary.simpleMessage(
+      "Preparando tu guía...",
+    ),
     "preparingPageSubtitle": MessageLookupByLibrary.simpleMessage(
-      "The Lord gives you strength when you need it most.",
+      "El Señor da fuerzas cuando más se necesitan.",
     ),
     "preparingPageT1": MessageLookupByLibrary.simpleMessage(
-      "Personalizing your profile...",
+      "Personalizando tu perfil...",
     ),
     "preparingPageT2": MessageLookupByLibrary.simpleMessage(
-      "Setting up your emotions journey...",
+      "Preparando tu camino emocional...",
     ),
     "preparingPageT3": MessageLookupByLibrary.simpleMessage(
-      "Final touches for your experience...",
+      "Agregando los últimos detalles...",
     ),
     "preparingPageTitle": MessageLookupByLibrary.simpleMessage(
-      "🙏 We’re preparing your space...",
+      "🙏 Estamos preparando tu espacio...",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage(
       "Política de privacidad",
     ),
     "privacySecurity": MessageLookupByLibrary.simpleMessage(
-      "Privacidad y Seguridad",
-    ),
-    "privacyTerms": MessageLookupByLibrary.simpleMessage(
-      "Privacidad y Términos",
+      "Privacidad y seguridad",
     ),
     "privacyText1": MessageLookupByLibrary.simpleMessage(
-      "Al continuar, aceptas nuestra",
+      "Al continuar aceptas nuestra",
     ),
     "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
     "profilePageSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Tell us a little about yourself.",
+      "Cuéntanos un poco sobre ti.",
     ),
     "profilePageTitle": MessageLookupByLibrary.simpleMessage(
-      "Let’s Build Your Profile",
+      "Construyamos tu perfil.",
     ),
-    "proximoCobro": MessageLookupByLibrary.simpleMessage("Próximo cobro"),
-    "psalm231": MessageLookupByLibrary.simpleMessage("Psalm 23:1"),
-    "psaml231Verse": MessageLookupByLibrary.simpleMessage(
-      "The Lord is my shepherd; I shall not want.",
+    "psalm231": MessageLookupByLibrary.simpleMessage("Salmo 23:1"),
+    "psalm231Verse": MessageLookupByLibrary.simpleMessage(
+      "El Señor es mi pastor; nada me faltará.",
     ),
     "rateUs": MessageLookupByLibrary.simpleMessage("Califícanos"),
     "ratingContentDesc": MessageLookupByLibrary.simpleMessage(
-      "FaithMood was made for people like you",
+      "FaithMood fue creado para personas como tú",
     ),
     "ratingContentP4Rating": MessageLookupByLibrary.simpleMessage(
-      "It’s my favorite moment of the day — just me and God.",
+      "Es mi momento favorito del día — solo Dios y yo.",
     ),
     "ratingContentSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Share your thoughts — your feedback inspires others 🙏",
+      "Tu opinión puede inspirar a otros 🙏",
     ),
     "ratingContentTitle": MessageLookupByLibrary.simpleMessage(
-      "🎉 ¿Disfrutando tu experiencia hasta ahora?",
+      "🎉 ¿Estás disfrutando la experiencia?",
     ),
-    "recipient": MessageLookupByLibrary.simpleMessage("Destinatario"),
-    "reflectNow": MessageLookupByLibrary.simpleMessage("Reflect Now"),
     "registrationErrorMessage": MessageLookupByLibrary.simpleMessage(
-      "No pudimos completar tu registro en este momento. Inténtalo de nuevo y si el problema persiste, vuelve más tarde.",
-    ),
-    "relevantVerses": MessageLookupByLibrary.simpleMessage(
-      "Versículos Relevantes",
+      "No pudimos completar tu registro esta vez. Intenta de nuevo y, si el error continúa, vuelve más tarde.",
     ),
     "reminder": MessageLookupByLibrary.simpleMessage("Recordatorio"),
     "reminderAlert": MessageLookupByLibrary.simpleMessage("Recordatorio"),
     "reminderDeleted": MessageLookupByLibrary.simpleMessage(
-      "Recordatorio eliminado ⏳",
+      "Recordatorio eliminado con éxito",
     ),
     "reminderMessage": MessageLookupByLibrary.simpleMessage(
-      "Elige la hora ideal para pausar, reflexionar y acercarte a Dios cada día. ✨",
+      "Configura un recordatorio diario para mantenerte conectado con tu camino de fe.",
     ),
     "reminderNoSetMessage": MessageLookupByLibrary.simpleMessage(
-      "Mantén tu ritmo — activa un recordatorio para no dejar pasar tu momento con Dios. 🙏",
+      "Aún no tienes un recordatorio configurado. Actívalo para recibir avisos diarios.",
     ),
     "reminderNotificationMessage": MessageLookupByLibrary.simpleMessage(
-      "Tómate un instante para escribir cómo te sientes hoy. 📖",
+      "Tómate un instante tranquilo para reflexionar, orar o registrar tu mood de hoy.",
     ),
     "reminderNotificationTitle": MessageLookupByLibrary.simpleMessage(
-      "Momento con Dios 🙏",
+      "Momento de reflexionar 🙏",
     ),
     "reminderSetMessage": MessageLookupByLibrary.simpleMessage(
-      "¡Perfecto! Te avisaremos a esta hora para que registres tu sentir. ✝️",
+      "Tu recordatorio diario ha sido configurado para esta hora.",
     ),
     "removeReminder": MessageLookupByLibrary.simpleMessage(
       "Eliminar recordatorio",
@@ -522,101 +501,80 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
     ),
-    "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
     "save": MessageLookupByLibrary.simpleMessage("Guardar"),
-    "saveNotes": MessageLookupByLibrary.simpleMessage("Guardar Nota"),
+    "saveNotes": MessageLookupByLibrary.simpleMessage("Guardar nota"),
     "saving": MessageLookupByLibrary.simpleMessage("Guardando..."),
-    "search": MessageLookupByLibrary.simpleMessage("Search..."),
-    "searchJournals": MessageLookupByLibrary.simpleMessage(
-      "Buscar en el diario...",
+    "search": MessageLookupByLibrary.simpleMessage("Buscar..."),
+    "searchingForVerse": MessageLookupByLibrary.simpleMessage(
+      "Buscando el versículo preparado para ti...",
     ),
     "selectAPeriod": MessageLookupByLibrary.simpleMessage(
-      "Seleccionar un Período",
+      "Selecciona un período",
     ),
-    "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),
+    "selectAnOption": MessageLookupByLibrary.simpleMessage(
+      "Selecciona una opción",
+    ),
     "selectStateThatResonates": MessageLookupByLibrary.simpleMessage(
-      "Escoge el estado de tu corazón delante de Dios.",
+      "Elige el mood de tu corazón delante de Dios.",
     ),
-    "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
+    "selectTag": MessageLookupByLibrary.simpleMessage("Seleccionar etiqueta"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
-      "Select your Language",
+      "Selecciona tu idioma",
     ),
     "selectYourTheme": MessageLookupByLibrary.simpleMessage(
-      "Selecciona tu Tema",
+      "Selecciona tu tema",
     ),
-    "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
-    "setReminder": MessageLookupByLibrary.simpleMessage("Activar recordatorio"),
-    "settings": MessageLookupByLibrary.simpleMessage("Configuración"),
-    "shareApp": MessageLookupByLibrary.simpleMessage("Compartir Aplicación"),
-    "shareDevotional": MessageLookupByLibrary.simpleMessage(
-      "Compartir Devocional",
+    "setReminder": MessageLookupByLibrary.simpleMessage(
+      "Configurar recordatorio",
     ),
+    "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
+    "shareApp": MessageLookupByLibrary.simpleMessage("Compartir app"),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
     "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
-      "FaithMood App \nFaithMood te ayuda a rastrear tus emociones, profundizar tu vida espiritual y recibir devocionales diarios personalizados. \nDeberías probarlo 👉 ###",
-    ),
-    "shareMoodVerse": MessageLookupByLibrary.simpleMessage(
-      "Compartir Versículo",
+      "FaithMood App\nFaithMood te ayuda a reflexionar sobre tus emociones, fortalecer tu vida espiritual y recibir devocionales guiados para tu día.\nDeberías probarla 👉 ###",
     ),
     "signIn": MessageLookupByLibrary.simpleMessage("Iniciar sesión"),
     "signInNow": MessageLookupByLibrary.simpleMessage("Iniciar sesión ahora"),
-    "signUp": MessageLookupByLibrary.simpleMessage("Crear cuenta"),
     "signUpEmailMessage": MessageLookupByLibrary.simpleMessage(
-      "Casi terminas, solo agrega tus credenciales para iniciar sesion.",
+      "Ya casi terminas — solo agrega tus credenciales para iniciar sesión.",
     ),
-    "signUpNameMessage": MessageLookupByLibrary.simpleMessage(
-      "Lo usaremos para dirigirnos a ti.",
-    ),
-    "signUpPhoneMessage": MessageLookupByLibrary.simpleMessage(
-      "esta será una forma rápida para contactarte.",
-    ),
-    "skip": MessageLookupByLibrary.simpleMessage("Saltar"),
-    "sms": MessageLookupByLibrary.simpleMessage("SMS"),
     "socialDiscoverQ10": MessageLookupByLibrary.simpleMessage(
-      "Church / community",
+      "Iglesia / comunidad",
     ),
     "socialDiscoverQ11": MessageLookupByLibrary.simpleMessage(
-      "Searching for Christian apps",
+      "Buscando apps cristianas",
     ),
     "socialDiscoverQ9": MessageLookupByLibrary.simpleMessage(
-      "A friend’s recommendation",
+      "Recomendación de un amigo",
     ),
     "socialDiscoverTitle": MessageLookupByLibrary.simpleMessage(
-      "⭐ How did you hear about the app?",
+      "⭐ ¿Cómo escuchaste sobre la app?",
     ),
     "somethingWentWrongWhileSendingTheOtpCodePleaseTry":
         MessageLookupByLibrary.simpleMessage(
-          "Ocurrió un error al enviar el código OTP. Inténtalo de nuevo más tarde.",
+          "Ocurrió un error al enviar el código. Por favor intenta más tarde.",
         ),
-    "sorryAboutThis": MessageLookupByLibrary.simpleMessage("Lo sentimos"),
+    "sorryAboutThis": MessageLookupByLibrary.simpleMessage("Lamentamos esto"),
     "sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry":
         MessageLookupByLibrary.simpleMessage(
-          "Lo sentimos, algo salió mal al actualizar tu información. Por favor intenta de nuevo.",
+          "Ocurrió un error al actualizar tu información. Por favor inténtalo nuevamente.",
         ),
-    "sortBy": MessageLookupByLibrary.simpleMessage("Ordenar Por"),
-    "sortByDate": MessageLookupByLibrary.simpleMessage("Ordenar por Fecha"),
+    "sortBy": MessageLookupByLibrary.simpleMessage("Ordenar por"),
     "spirit": MessageLookupByLibrary.simpleMessage("Espíritu"),
-    "spiritualMood": MessageLookupByLibrary.simpleMessage("Estado Espiritual"),
+    "spiritualMood": MessageLookupByLibrary.simpleMessage("Mood espiritual"),
     "spiritualMoodSummary": MessageLookupByLibrary.simpleMessage(
-      "Resumen de Estado Espiritual",
+      "Resumen de moods espirituales",
     ),
-    "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
-    "startDate": MessageLookupByLibrary.simpleMessage("Fecha Inicio"),
-    "startFreeTrial": MessageLookupByLibrary.simpleMessage("Start For Free"),
+    "startDate": MessageLookupByLibrary.simpleMessage("Fecha inicial"),
+    "startFreeTrial": MessageLookupByLibrary.simpleMessage("Comenzar gratis"),
     "startLoggingYourMoodsToSeeYourStats": MessageLookupByLibrary.simpleMessage(
-      "Comienza a registrar tus estados de ánimo para ver tus estadísticas",
+      "Comienza a registrar tus moods para ver tus estadísticas.",
     ),
-    "status": MessageLookupByLibrary.simpleMessage("Estado"),
-    "storage": MessageLookupByLibrary.simpleMessage("Storage"),
-    "storageUsage": MessageLookupByLibrary.simpleMessage(
-      "Uso de Almacenamiento",
-    ),
-    "streakDays": MessageLookupByLibrary.simpleMessage("Días de Racha"),
     "streakStatusConstantGrowth": MessageLookupByLibrary.simpleMessage(
       "Crecimiento constante",
     ),
     "streakStatusDisciplineInPrayer": MessageLookupByLibrary.simpleMessage(
-      "Disciplina en oración",
+      "Disciplina en la oración",
     ),
     "streakStatusExpandingFaith": MessageLookupByLibrary.simpleMessage(
       "Fe en expansión",
@@ -651,168 +609,128 @@ class MessageLookup extends MessageLookupByLibrary {
     "streakStatusVictoryOfTheMonth": MessageLookupByLibrary.simpleMessage(
       "Victoria del mes",
     ),
-    "stripe": MessageLookupByLibrary.simpleMessage("Stripe"),
-    "subscriptionUsage": MessageLookupByLibrary.simpleMessage("Subscription"),
     "support": MessageLookupByLibrary.simpleMessage("Soporte"),
-    "suscripcionActual": MessageLookupByLibrary.simpleMessage(
-      "Suscripción actual",
-    ),
     "system": MessageLookupByLibrary.simpleMessage("Sistema"),
     "tags": MessageLookupByLibrary.simpleMessage("Etiquetas"),
     "termsConditions": MessageLookupByLibrary.simpleMessage(
-      "Términos y Condiciones",
+      "Términos y condiciones",
     ),
     "termsOfUse": MessageLookupByLibrary.simpleMessage("Términos de uso."),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
-      "Este campo es obligatorio",
+      "Este campo es obligatorio.",
     ),
     "thisUsedForAllYourMoodAnalysis": MessageLookupByLibrary.simpleMessage(
-      "Esto se usa para todos tus análisis de estado de ánimo.",
-    ),
-    "thisUsedForAllYourNewDreamAnalysis": MessageLookupByLibrary.simpleMessage(
-      "Esto se usa para todos tus nuevos análisis de sueños",
+      "Esto se usará para analizar tus moods.",
     ),
     "tip": MessageLookupByLibrary.simpleMessage("Consejo"),
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
-      "Aliento de Hoy",
+      "Ánimo para hoy",
     ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
-    "unableToLoadCategories": MessageLookupByLibrary.simpleMessage(
-      "Unable to load categories",
-    ),
     "unableToLoadDevotional": MessageLookupByLibrary.simpleMessage(
-      "Unable to load devotional",
+      "No pudimos cargar el devocional.",
     ),
     "unableToLoadDevotionals": MessageLookupByLibrary.simpleMessage(
-      "No se pudieron cargar las devocionales",
+      "No pudimos cargar los devocionales.",
     ),
     "unableToLoadJournalEntries": MessageLookupByLibrary.simpleMessage(
-      "No se pudieron cargar las entradas del diario",
+      "No pudimos cargar las entradas.",
     ),
     "unableToLoadMoodEntry": MessageLookupByLibrary.simpleMessage(
-      "No se pudo cargar la entrada del estado de ánimo",
+      "No pudimos cargar esta entrada.",
     ),
     "unableToLoadMoods": MessageLookupByLibrary.simpleMessage(
-      "No se pudieron cargar los estados de ánimo",
+      "No pudimos cargar los moods.",
     ),
     "unableToLoadVersePleaseTryAgainLater":
         MessageLookupByLibrary.simpleMessage(
-          "Unable to load verse. Please try again later.",
+          "No pudimos cargar el versículo. Por favor intenta más tarde.",
         ),
     "unlimitedMoodTrack": MessageLookupByLibrary.simpleMessage(
-      "💭 Unlimited Mood Track",
+      "💭 Registro ilimitado de moods",
     ),
     "unlockMoreDevotionalsAdvanceStats": MessageLookupByLibrary.simpleMessage(
-      "Desbloquea más devocionales, estadísticas avanzadas y una experiencia sin anuncios.",
+      "Desbloquea más devocionales, estadísticas profundas y una experiencia sin anuncios.",
     ),
-    "unlockNow": MessageLookupByLibrary.simpleMessage("Unlock Now"),
+    "unlockNow": MessageLookupByLibrary.simpleMessage("Desbloquear ahora"),
     "unlockPremiumFeatures": MessageLookupByLibrary.simpleMessage(
-      "Desbloquear Funciones Premium",
+      "Desbloquear funciones Premium",
     ),
     "unlockPremiumToGetAccessToAllStatsAndFeatures":
         MessageLookupByLibrary.simpleMessage(
-          "Desbloquea Premium para acceder a todas las estadísticas y funciones",
+          "Desbloquea Premium para acceder a todas las estadísticas y funciones.",
         ),
     "unsavedNoteMessage": MessageLookupByLibrary.simpleMessage(
-      "Tienes una nota sin guardar. ¿Te gustaría guardarla antes de salir?",
+      "Tienes una nota sin guardar. ¿Deseas guardarla antes de salir?",
     ),
     "unsavedNoteTitle": MessageLookupByLibrary.simpleMessage(
-      "Nota Sin Guardar",
+      "Nota sin guardar",
     ),
     "update": MessageLookupByLibrary.simpleMessage("Actualizar"),
     "updateAvailable": MessageLookupByLibrary.simpleMessage(
       "Actualización disponible",
     ),
     "updateAvailableMessage": MessageLookupByLibrary.simpleMessage(
-      "Hay una nueva versión de la app disponible. Actualiza para continuar usando todas las funciones.",
+      "Hay una nueva versión disponible. Actualiza para continuar disfrutando todas las funciones.",
     ),
     "updateInformation": MessageLookupByLibrary.simpleMessage(
-      "Actualizar Información",
+      "Actualizar información",
     ),
-    "user": MessageLookupByLibrary.simpleMessage("Usuario"),
-    "usosYEstadisticas": MessageLookupByLibrary.simpleMessage(
-      "Usos y estadísticas",
-    ),
-    "vencida": MessageLookupByLibrary.simpleMessage("Vencida"),
-    "verHistorial": MessageLookupByLibrary.simpleMessage("Ver Historial"),
+    "user": MessageLookupByLibrary.simpleMessage("Perfil"),
     "verificationFailed": MessageLookupByLibrary.simpleMessage(
-      "Verificación fallida",
+      "La verificación falló",
     ),
     "verificationFailedMessage": MessageLookupByLibrary.simpleMessage(
-      "El proceso de verificación falló. Inténtalo de nuevo.",
+      "No pudimos verificar tu código. Por favor revísalo e inténtalo de nuevo.",
     ),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verificar código"),
     "verifyCodeMessage": MessageLookupByLibrary.simpleMessage(
-      "Se ha enviado un código de 6 dígitos al correo proporcionado. Este código expirará en 5 minutos.",
+      "Enviamos un código de 6 dígitos al correo que proporcionaste. Este código expirará en 5 minutos.",
     ),
-    "verseForTheDay": MessageLookupByLibrary.simpleMessage("Versículo del Día"),
-    "verseOfTheDay": MessageLookupByLibrary.simpleMessage("Verse of the day"),
-    "vibration": MessageLookupByLibrary.simpleMessage("Vibration"),
-    "viewMore": MessageLookupByLibrary.simpleMessage("View More"),
+    "verseOfTheDay": MessageLookupByLibrary.simpleMessage("Versículo del día"),
+    "vibration": MessageLookupByLibrary.simpleMessage("Vibración"),
+    "viewMore": MessageLookupByLibrary.simpleMessage("Ver más"),
     "weWillSendYouAnEmailWithACodeTo": MessageLookupByLibrary.simpleMessage(
-      "Te enviaremos un correo con un código para restablecer tu contraseña.",
-    ),
-    "welcome": MessageLookupByLibrary.simpleMessage("Bienvenido"),
-    "welcomeMessage1": MessageLookupByLibrary.simpleMessage(
-      "Vive la #innovación# empresarial.",
-    ),
-    "welcomeMessage2": MessageLookupByLibrary.simpleMessage(
-      "Optimiza tu tiempo y multiplica tus #ventas.#",
-    ),
-    "welcomeMessage3": MessageLookupByLibrary.simpleMessage(
-      "#Automatiza hoy# y haz crecer tu empresa.",
+      "Te enviaremos un código a tu correo para que puedas restablecer la contraseña.",
     ),
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
-      "A place to connect with yourself and with God every day.",
+      "Un lugar para conectar con tu corazón y con Dios cada día.",
     ),
     "welcomeTitle": MessageLookupByLibrary.simpleMessage(
-      "Welcome to your new space of faith",
+      "Bienvenido a tu nuevo espacio de fe",
     ),
-    "welcomeTitle1": MessageLookupByLibrary.simpleMessage("Innovar"),
-    "welcomeTitle2": MessageLookupByLibrary.simpleMessage("Impulsar"),
-    "welcomeTitle3": MessageLookupByLibrary.simpleMessage("Escalar"),
     "whatsOnYourHeartToday": MessageLookupByLibrary.simpleMessage(
       "¿Qué hay en tu corazón hoy?",
     ),
-    "whatsYourName": MessageLookupByLibrary.simpleMessage(
-      "¿Cuál es tu nombre?",
-    ),
-    "whatsYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
-      "¿Cuál es tu número de teléfono?",
-    ),
     "whenYouFeelLookAtThisVerse": MessageLookupByLibrary.simpleMessage(
-      "When you feel ###, look at this verse:",
+      "Cuando te sientas ###, reflexiona en este versículo:",
     ),
-    "whenYouFeelMoodLookAtThisVerse": m1,
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
-      "Tu Estado Espiritual",
+      "Tu mood espiritual",
     ),
-    "withNote": MessageLookupByLibrary.simpleMessage("Con Nota"),
-    "withNotes": MessageLookupByLibrary.simpleMessage("With Notes"),
-    "withoutNote": MessageLookupByLibrary.simpleMessage("Sin Nota"),
     "writeWhatsOnYourHeart": MessageLookupByLibrary.simpleMessage(
-      "Escribe lo que hay en tu corazón: cómo te sentiste, qué aprendiste o por qué oraste hoy.",
+      "Escribe lo que hay en tu corazón — tus sentimientos, tus oraciones o lo que aprendiste hoy.",
     ),
     "youCanRevisitThisNote": MessageLookupByLibrary.simpleMessage(
-      "Puedes revisar esta nota más tarde en tu Diario.",
+      "Puedes volver a esta nota en cualquier momento desde tu diario.",
     ),
     "youFeltMostOften": MessageLookupByLibrary.simpleMessage(
-      "Te sentiste más a menudo: ",
+      "El mood que sentiste con más frecuencia: ",
     ),
     "youHaveToEnterAValidEmail": MessageLookupByLibrary.simpleMessage(
-      "Debes ingresar un correo electrónico válido.",
+      "Debes ingresar un correo válido.",
     ),
     "yourDailyReminderIsSet": MessageLookupByLibrary.simpleMessage(
-      "Tu recordatorio diario está listo 🙏",
+      "Tu recordatorio diario ha sido configurado",
     ),
-    "yourJournal": MessageLookupByLibrary.simpleMessage("Your Journal"),
+    "yourJournal": MessageLookupByLibrary.simpleMessage("Tu diario"),
     "yourJourneyBeginsToday": MessageLookupByLibrary.simpleMessage(
-      "✨ Tu viaje comienza hoy",
+      "✨ Tu camino comienza hoy",
     ),
-    "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Tu contraseña "),
+    "yourPasswordIs": MessageLookupByLibrary.simpleMessage("Tu contraseña es"),
     "yourWeekInEmotions": MessageLookupByLibrary.simpleMessage(
-      "Your Week in Emotions",
+      "Tu semana en emociones",
     ),
-    "youveLoggedEntriesOnDays": m2,
+    "youveLoggedEntriesOnDays": m0,
   };
 }

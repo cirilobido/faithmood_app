@@ -11,14 +11,14 @@ class DevotionalLogCard extends StatelessWidget {
 
   String _formatDate(DateTime? date) {
     if (date == null) return '';
-    return DateFormat('MMM d, yyyy', 'en').format(date);
+    return DateFormat('MMM d, yyyy', Lang.en.name).format(date);
   }
 
   String _formatDateString(String? date) {
     if (date == null || date.isEmpty) return '';
     try {
       final parsedDate = DateTime.parse(date);
-      return DateFormat('MMM d, yyyy', 'en').format(parsedDate);
+      return DateFormat('MMM d, yyyy', Lang.en.name).format(parsedDate);
     } catch (e) {
       return date;
     }

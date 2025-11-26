@@ -120,7 +120,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
 
   Future<void> loadMoods() async {
     try {
-      final userLang = _authProvider.user?.lang?.name ?? 'en';
+      final userLang = _authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await _moodUseCase.getMoods(userLang);
 
       switch (result) {

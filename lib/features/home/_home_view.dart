@@ -26,7 +26,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
     final isDark = theme.brightness == Brightness.dark;
     final lang = S.of(context);
     final userName = vm.getUserName() ?? '';
-    final greeting = vm.getGreeting();
+    final greeting = vm.getGreeting(lang);
+    final greetingSubtitle = vm.getGreetingSubtitle(lang);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -40,7 +41,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Section
-              _buildHeader(context, theme, greeting, userName),
+              _buildHeader(context, theme, greeting, greetingSubtitle, userName),
               const SizedBox(height: AppSizes.spacingLarge),
 
               // Verse of the Day Section
@@ -103,6 +104,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     BuildContext context,
     ThemeData theme,
     String greeting,
+    String greetingSubtitle,
     String userName,
   ) {
     return Column(
@@ -122,6 +124,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             ],
           ),
         ),
+        Text(greetingSubtitle, style: theme.textTheme.bodyMedium),
       ],
     );
   }
@@ -279,7 +282,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
         const SizedBox(height: AppSizes.spacingMedium),
         ActionCard(
           title: lang.growWithGuidance,
-          description: lang.ffollowGuidedDailyDevotionals,
+          description: lang.followGuidedDailyDevotionals,
           color: theme.colorScheme.tertiary,
           icon: AppIcons.openBookIcon,
           onTap: () {

@@ -1,6 +1,7 @@
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/core_exports.dart';
 import '../../dev_utils/dev_utils_exports.dart';
 
 final ttsServiceProvider = Provider<TtsService>((ref) {
@@ -344,7 +345,7 @@ class TtsService {
       final voices = await _flutterTts!.getVoices;
       if (voices == null) return [];
 
-      final supportedLanguages = ['en', 'es', 'pt'];
+      final supportedLanguages = [Lang.en.name, Lang.es.name, Lang.pt.name];
       if (!supportedLanguages.contains(languageCode)) {
         return [];
       }

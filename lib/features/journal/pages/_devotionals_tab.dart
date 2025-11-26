@@ -53,7 +53,7 @@ class _DevotionalsTabState extends ConsumerState<DevotionalsTab> {
 
   String _formatDate(DateTime? date) {
     if (date == null) return '';
-    return DateFormat('MMM d, yyyy', 'en').format(date);
+    return DateFormat('MMM d, yyyy', Lang.en.name).format(date);
   }
 
   @override

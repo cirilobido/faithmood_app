@@ -73,7 +73,7 @@ class CategoriesViewModel extends StateNotifier<CategoriesState> {
   Future<void> _loadCategories() async {
     try {
       updateState(isLoading: true, error: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await categoryUseCase.getCategories(userLang);
 
       switch (result) {
@@ -99,7 +99,7 @@ class CategoriesViewModel extends StateNotifier<CategoriesState> {
   Future<void> _loadTags() async {
     try {
       updateState(isLoadingTags: true);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await tagUseCase.getTags(userLang);
 
       switch (result) {
@@ -122,7 +122,7 @@ class CategoriesViewModel extends StateNotifier<CategoriesState> {
   Future<void> _loadDevotionals() async {
     try {
       updateState(isLoading: true, error: false, page: 1);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final tagsParam = state.selectedTags
           .where((tag) => tag.key != null && tag.key!.isNotEmpty)
           .map((tag) => tag.key!)
@@ -171,7 +171,7 @@ class CategoriesViewModel extends StateNotifier<CategoriesState> {
 
     try {
       updateState(isLoadingMore: true);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final nextPage = state.page + 1;
       final tagsParam = state.selectedTags
           .where((tag) => tag.key != null && tag.key!.isNotEmpty)

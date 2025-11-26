@@ -100,7 +100,7 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
   Future<void> _loadMoods() async {
     try {
       updateState(isLoading: true, error: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await moodUseCase.getMoods(userLang);
 
       switch (result) {
@@ -214,7 +214,7 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
       final emotionalMood = state.selectedEmotionalMood;
       final spiritualMood = state.selectedSpiritualMood;
       final note = state.note.trim().isEmpty ? null : state.note.trim();
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
 
       if (emotionalMoodId == null || spiritualMoodId == null) {
         devLogger('Error: Mood IDs are missing');

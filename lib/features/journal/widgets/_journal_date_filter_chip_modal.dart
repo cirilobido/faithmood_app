@@ -46,7 +46,7 @@ class _JournalDateFilterChipModalState
 
   String _formatDate(DateTime? date) {
     if (date == null) return '';
-    return DateFormat('MMM d, yyyy', 'en').format(date);
+    return DateFormat('MMM d, yyyy', Lang.en.name).format(date);
   }
 
   Future<void> _selectStartDate(BuildContext context) async {

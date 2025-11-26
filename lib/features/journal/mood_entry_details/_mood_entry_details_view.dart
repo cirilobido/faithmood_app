@@ -264,7 +264,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     S lang,
   ) {
     final auth = ref.read(authProvider);
-    final userLang = auth.user?.lang?.name ?? 'en';
+    final userLang = auth.user?.lang?.name ?? Lang.en.name;
     final session = state.moodSession!;
     final emotionalMood = session.emotional?.mood;
     final spiritualMood = session.spiritual?.mood;
@@ -285,7 +285,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
 
     String formatDateTime(DateTime? date) {
       if (date == null) return '';
-      return DateFormat('MMMM d, yyyy', 'en').format(date);
+      return DateFormat('MMMM d, yyyy', Lang.en.name).format(date);
     }
 
     final aiReflection =
@@ -540,7 +540,7 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
           ),
           const SizedBox(height: AppSizes.spacingMedium),
           CustomButton(
-            title: lang.retrySaveMood,
+            title: lang.tryAgain,
             type: ButtonType.primary,
             isShortText: true,
             onTap: () {

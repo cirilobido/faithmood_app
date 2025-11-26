@@ -54,75 +54,30 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Innovate`
-  String get welcomeTitle1 {
-    return Intl.message('Innovate', name: 'welcomeTitle1', desc: '', args: []);
-  }
-
-  /// `Boost`
-  String get welcomeTitle2 {
-    return Intl.message('Boost', name: 'welcomeTitle2', desc: '', args: []);
-  }
-
-  /// `Scale`
-  String get welcomeTitle3 {
-    return Intl.message('Scale', name: 'welcomeTitle3', desc: '', args: []);
-  }
-
-  /// `#Automate today# and grow your business.`
-  String get welcomeMessage3 {
-    return Intl.message(
-      '#Automate today# and grow your business.',
-      name: 'welcomeMessage3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Optimize your time and multiply your #sales.#`
-  String get welcomeMessage2 {
-    return Intl.message(
-      'Optimize your time and multiply your #sales.#',
-      name: 'welcomeMessage2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Experience #innovation# in business.`
-  String get welcomeMessage1 {
-    return Intl.message(
-      'Experience #innovation# in business.',
-      name: 'welcomeMessage1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `This field is required`
+  /// `This field is required.`
   String get thisFieldIsRequired {
     return Intl.message(
-      'This field is required',
+      'This field is required.',
       name: 'thisFieldIsRequired',
       desc: '',
       args: [],
     );
   }
 
-  /// `Invalid email`
+  /// `Please enter a valid email address.`
   String get invalidEmail {
     return Intl.message(
-      'Invalid email',
+      'Please enter a valid email address.',
       name: 'invalidEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Password must contain at least:`
+  /// `Your password must contain at least:`
   String get passwordMustContainAtLeast {
     return Intl.message(
-      'Password must contain at least:',
+      'Your password must contain at least:',
       name: 'passwordMustContainAtLeast',
       desc: '',
       args: [],
@@ -159,30 +114,30 @@ class S {
     );
   }
 
-  /// `You have to enter a valid email.`
+  /// `Please enter a valid email address.`
   String get youHaveToEnterAValidEmail {
     return Intl.message(
-      'You have to enter a valid email.',
+      'Please enter a valid email address.',
       name: 'youHaveToEnterAValidEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Name must be at least 3 characters long`
+  /// `Your name must be at least 3 characters long.`
   String get nameMustBeAtLeast3CharactersLong {
     return Intl.message(
-      'Name must be at least 3 characters long',
+      'Your name must be at least 3 characters long.',
       name: 'nameMustBeAtLeast3CharactersLong',
       desc: '',
       args: [],
     );
   }
 
-  /// `Invalid email or password. Please try again.`
+  /// `Your email or password seems incorrect. Please check your details and try again.`
   String get invalidEmailOrPasswordPleaseTryAgain {
     return Intl.message(
-      'Invalid email or password. Please try again.',
+      'Your email or password seems incorrect. Please check your details and try again.',
       name: 'invalidEmailOrPasswordPleaseTryAgain',
       desc: '',
       args: [],
@@ -229,20 +184,20 @@ class S {
     );
   }
 
-  /// `Forgot Your Password?`
+  /// `Forgot your password?`
   String get forgotYourPassword {
     return Intl.message(
-      'Forgot Your Password?',
+      'Forgot your password?',
       name: 'forgotYourPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `We will send you an email with a code to reset your password.`
+  /// `We'll send a code to your email so you can reset your password.`
   String get weWillSendYouAnEmailWithACodeTo {
     return Intl.message(
-      'We will send you an email with a code to reset your password.',
+      'We\'ll send a code to your email so you can reset your password.',
       name: 'weWillSendYouAnEmailWithACodeTo',
       desc: '',
       args: [],
@@ -279,10 +234,10 @@ class S {
     return Intl.message('Verify Code', name: 'verifyCode', desc: '', args: []);
   }
 
-  /// `A 6-digit code has been sent to the email you provided. This code will expire in 5 minutes.`
+  /// `We’ve sent a 6-digit code to the email you provided. This code will expire in 5 minutes.`
   String get verifyCodeMessage {
     return Intl.message(
-      'A 6-digit code has been sent to the email you provided. This code will expire in 5 minutes.',
+      'We’ve sent a 6-digit code to the email you provided. This code will expire in 5 minutes.',
       name: 'verifyCodeMessage',
       desc: '',
       args: [],
@@ -304,10 +259,10 @@ class S {
     );
   }
 
-  /// `Your password has been restored successfully.`
+  /// `Your password has been reset successfully.`
   String get passwordRestoredSuccessfully {
     return Intl.message(
-      'Your password has been restored successfully.',
+      'Your password has been reset successfully.',
       name: 'passwordRestoredSuccessfully',
       desc: '',
       args: [],
@@ -324,10 +279,10 @@ class S {
     );
   }
 
-  /// `The verification process failed. Please try again.`
+  /// `We couldn’t verify your code. Please check it and try again.`
   String get verificationFailedMessage {
     return Intl.message(
-      'The verification process failed. Please try again.',
+      'We couldn’t verify your code. Please check it and try again.',
       name: 'verificationFailedMessage',
       desc: '',
       args: [],
@@ -369,10 +324,10 @@ class S {
     );
   }
 
-  /// `NEVER STORED`
+  /// `never stored`
   String get neverStored {
     return Intl.message(
-      'NEVER STORED',
+      'never stored',
       name: 'neverStored',
       desc: '',
       args: [],
@@ -384,9 +339,9 @@ class S {
     return Intl.message('in the app.', name: 'inTheApp', desc: '', args: []);
   }
 
-  /// `Try again`
+  /// `Try Again`
   String get tryAgain {
-    return Intl.message('Try again', name: 'tryAgain', desc: '', args: []);
+    return Intl.message('Try Again', name: 'tryAgain', desc: '', args: []);
   }
 
   /// `Sign In`
@@ -399,15 +354,10 @@ class S {
     return Intl.message('Back', name: 'back', desc: '', args: []);
   }
 
-  /// `Sign Up`
-  String get signUp {
-    return Intl.message('Sign Up', name: 'signUp', desc: '', args: []);
-  }
-
-  /// `Your email or password doesn’t seem to match. Please check your details and try again.`
+  /// `Your email or password doesn’t match. Please review your details and try again.`
   String get loginErrorMessage {
     return Intl.message(
-      'Your email or password doesn’t seem to match. Please check your details and try again.',
+      'Your email or password doesn’t match. Please review your details and try again.',
       name: 'loginErrorMessage',
       desc: '',
       args: [],
@@ -422,16 +372,6 @@ class S {
   /// `Continue`
   String get continueText {
     return Intl.message('Continue', name: 'continueText', desc: '', args: []);
-  }
-
-  /// `Start`
-  String get start {
-    return Intl.message('Start', name: 'start', desc: '', args: []);
-  }
-
-  /// `Skip`
-  String get skip {
-    return Intl.message('Skip', name: 'skip', desc: '', args: []);
   }
 
   /// `Update available`
@@ -457,26 +397,6 @@ class S {
   /// `Update`
   String get update {
     return Intl.message('Update', name: 'update', desc: '', args: []);
-  }
-
-  /// `What’s Your Name?`
-  String get whatsYourName {
-    return Intl.message(
-      'What’s Your Name?',
-      name: 'whatsYourName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Privacy & Terms`
-  String get privacyTerms {
-    return Intl.message(
-      'Privacy & Terms',
-      name: 'privacyTerms',
-      desc: '',
-      args: [],
-    );
   }
 
   /// `By continuing, you agree to our`
@@ -514,10 +434,10 @@ class S {
     );
   }
 
-  /// `Your information will be kept safe and secure.`
+  /// `Your information will remain private and secure.`
   String get informationSafeMessage {
     return Intl.message(
-      'Your information will be kept safe and secure.',
+      'Your information will remain private and secure.',
       name: 'informationSafeMessage',
       desc: '',
       args: [],
@@ -554,321 +474,86 @@ class S {
     );
   }
 
-  /// `Nombre`
+  /// `First Name`
   String get firstName {
-    return Intl.message('Nombre', name: 'firstName', desc: '', args: []);
+    return Intl.message('First Name', name: 'firstName', desc: '', args: []);
   }
 
-  /// `Apellido`
-  String get lastName {
-    return Intl.message('Apellido', name: 'lastName', desc: '', args: []);
-  }
-
-  /// `El nombre debe tener al menos 3 caracteres`
-  String get lastNameMustBeAtLeast3CharactersLong {
-    return Intl.message(
-      'El nombre debe tener al menos 3 caracteres',
-      name: 'lastNameMustBeAtLeast3CharactersLong',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Teléfono`
-  String get phone {
-    return Intl.message('Teléfono', name: 'phone', desc: '', args: []);
-  }
-
-  /// `¿Cuál es tu número de teléfono?`
-  String get whatsYourPhoneNumber {
-    return Intl.message(
-      '¿Cuál es tu número de teléfono?',
-      name: 'whatsYourPhoneNumber',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ingresa un número de teléfono válido`
-  String get enterAValidPhoneNumber {
-    return Intl.message(
-      'Ingresa un número de teléfono válido',
-      name: 'enterAValidPhoneNumber',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `El teléfono solo puede contener dígitos`
+  /// `The phone number can only contain digits.`
   String get phoneNumberDigitsError {
     return Intl.message(
-      'El teléfono solo puede contener dígitos',
+      'The phone number can only contain digits.',
       name: 'phoneNumberDigitsError',
       desc: '',
       args: [],
     );
   }
 
-  /// `El teléfono debe tener entre 10 y 15 dígitos`
+  /// `The phone number must be between 10 and 15 digits long.`
   String get phoneNumberLengthError {
     return Intl.message(
-      'El teléfono debe tener entre 10 y 15 dígitos',
+      'The phone number must be between 10 and 15 digits long.',
       name: 'phoneNumberLengthError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Confirmar Contraseña`
+  /// `Confirm Password`
   String get confirmPassword {
     return Intl.message(
-      'Confirmar Contraseña',
+      'Confirm Password',
       name: 'confirmPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `La contraseña no coincide`
+  /// `Passwords do not match`
   String get passwordDontMatch {
     return Intl.message(
-      'La contraseña no coincide',
+      'Passwords do not match',
       name: 'passwordDontMatch',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lo usaremos para dirigirnos a ti.`
-  String get signUpNameMessage {
-    return Intl.message(
-      'Lo usaremos para dirigirnos a ti.',
-      name: 'signUpNameMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `esta será una forma rápida para contactarte.`
-  String get signUpPhoneMessage {
-    return Intl.message(
-      'esta será una forma rápida para contactarte.',
-      name: 'signUpPhoneMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Casi terminas, solo agrega tus credenciales para iniciar sesion.`
+  /// `You’re almost there — just add your credentials to sign in.`
   String get signUpEmailMessage {
     return Intl.message(
-      'Casi terminas, solo agrega tus credenciales para iniciar sesion.',
+      'You’re almost there — just add your credentials to sign in.',
       name: 'signUpEmailMessage',
       desc: '',
       args: [],
     );
   }
 
-  /// `o`
-  String get or {
-    return Intl.message('o', name: 'or', desc: '', args: []);
-  }
-
-  /// `O inicia session con`
+  /// `Or sign in with`
   String get orLoginWith {
     return Intl.message(
-      'O inicia session con',
+      'Or sign in with',
       name: 'orLoginWith',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hola, bienvenido de nuevo!`
+  /// `Hello, welcome back!`
   String get loginGreetingMessage {
     return Intl.message(
-      'Hola, bienvenido de nuevo!',
+      'Hello, welcome back!',
       name: 'loginGreetingMessage',
       desc: '',
       args: [],
     );
   }
 
-  /// `1 letra mayúscula`
+  /// `One uppercase letter`
   String get passOneUppercaseLetter {
     return Intl.message(
-      '1 letra mayúscula',
+      'One uppercase letter',
       name: 'passOneUppercaseLetter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Campañas`
-  String get campains {
-    return Intl.message('Campañas', name: 'campains', desc: '', args: []);
-  }
-
-  /// `Bienvenido`
-  String get welcome {
-    return Intl.message('Bienvenido', name: 'welcome', desc: '', args: []);
-  }
-
-  /// `Suscripción actual`
-  String get suscripcionActual {
-    return Intl.message(
-      'Suscripción actual',
-      name: 'suscripcionActual',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Plan`
-  String get plan {
-    return Intl.message('Plan', name: 'plan', desc: '', args: []);
-  }
-
-  /// `Fecha Inicio`
-  String get fechaInicio {
-    return Intl.message(
-      'Fecha Inicio',
-      name: 'fechaInicio',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Próximo cobro`
-  String get proximoCobro {
-    return Intl.message(
-      'Próximo cobro',
-      name: 'proximoCobro',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Método de pago`
-  String get metodoDePago {
-    return Intl.message(
-      'Método de pago',
-      name: 'metodoDePago',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Estado`
-  String get status {
-    return Intl.message('Estado', name: 'status', desc: '', args: []);
-  }
-
-  /// `Usos y estadísticas`
-  String get usosYEstadisticas {
-    return Intl.message(
-      'Usos y estadísticas',
-      name: 'usosYEstadisticas',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Uso de Almacenamiento`
-  String get storageUsage {
-    return Intl.message(
-      'Uso de Almacenamiento',
-      name: 'storageUsage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Storage`
-  String get storage {
-    return Intl.message('Storage', name: 'storage', desc: '', args: []);
-  }
-
-  /// `Archivos`
-  String get files {
-    return Intl.message('Archivos', name: 'files', desc: '', args: []);
-  }
-
-  /// `Cancelado`
-  String get cancelled {
-    return Intl.message('Cancelado', name: 'cancelled', desc: '', args: []);
-  }
-
-  /// `Pendiente`
-  String get pending {
-    return Intl.message('Pendiente', name: 'pending', desc: '', args: []);
-  }
-
-  /// `Enviado`
-  String get sent {
-    return Intl.message('Enviado', name: 'sent', desc: '', args: []);
-  }
-
-  /// `Campañas`
-  String get campainsUsage {
-    return Intl.message('Campañas', name: 'campainsUsage', desc: '', args: []);
-  }
-
-  /// `Subscription`
-  String get subscriptionUsage {
-    return Intl.message(
-      'Subscription',
-      name: 'subscriptionUsage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Activa`
-  String get activa {
-    return Intl.message('Activa', name: 'activa', desc: '', args: []);
-  }
-
-  /// `Cancelada`
-  String get cancelada {
-    return Intl.message('Cancelada', name: 'cancelada', desc: '', args: []);
-  }
-
-  /// `Expirada`
-  String get expirada {
-    return Intl.message('Expirada', name: 'expirada', desc: '', args: []);
-  }
-
-  /// `Vencida`
-  String get vencida {
-    return Intl.message('Vencida', name: 'vencida', desc: '', args: []);
-  }
-
-  /// `Revisión`
-  String get revision {
-    return Intl.message('Revisión', name: 'revision', desc: '', args: []);
-  }
-
-  /// `Paypal`
-  String get paypal {
-    return Intl.message('Paypal', name: 'paypal', desc: '', args: []);
-  }
-
-  /// `Stripe`
-  String get stripe {
-    return Intl.message('Stripe', name: 'stripe', desc: '', args: []);
-  }
-
-  /// `Manualmente`
-  String get manually {
-    return Intl.message('Manualmente', name: 'manually', desc: '', args: []);
-  }
-
-  /// `Ver Historial`
-  String get verHistorial {
-    return Intl.message(
-      'Ver Historial',
-      name: 'verHistorial',
       desc: '',
       args: [],
     );
@@ -879,54 +564,9 @@ class S {
     return Intl.message('Search...', name: 'search', desc: '', args: []);
   }
 
-  /// `Crear Campaña`
-  String get createCampaign {
-    return Intl.message(
-      'Crear Campaña',
-      name: 'createCampaign',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Historial`
-  String get history {
-    return Intl.message('Historial', name: 'history', desc: '', args: []);
-  }
-
-  /// `Mensaje`
-  String get message {
-    return Intl.message('Mensaje', name: 'message', desc: '', args: []);
-  }
-
-  /// `Destinatario`
-  String get recipient {
-    return Intl.message('Destinatario', name: 'recipient', desc: '', args: []);
-  }
-
-  /// `Contact`
-  String get contact {
-    return Intl.message('Contact', name: 'contact', desc: '', args: []);
-  }
-
   /// `Date`
   String get date {
     return Intl.message('Date', name: 'date', desc: '', args: []);
-  }
-
-  /// `Aún no hay campañas disponibles.`
-  String get noCampaignsYet {
-    return Intl.message(
-      'Aún no hay campañas disponibles.',
-      name: 'noCampaignsYet',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `SMS`
-  String get sms {
-    return Intl.message('SMS', name: 'sms', desc: '', args: []);
   }
 
   /// `Welcome to your new space of faith`
@@ -939,20 +579,20 @@ class S {
     );
   }
 
-  /// `A place to connect with yourself and with God every day.`
+  /// `A place to connect with your heart and with God every day.`
   String get welcomeSubtitle {
     return Intl.message(
-      'A place to connect with yourself and with God every day.',
+      'A place to connect with your heart and with God every day.',
       name: 'welcomeSubtitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s Build Your Profile`
+  /// `Let's build your profile.`
   String get profilePageTitle {
     return Intl.message(
-      'Let’s Build Your Profile',
+      'Let\'s build your profile.',
       name: 'profilePageTitle',
       desc: '',
       args: [],
@@ -974,10 +614,10 @@ class S {
     return Intl.message('Age', name: 'age', desc: '', args: []);
   }
 
-  /// `💭 What would you like to find in this experience?`
+  /// `💭 What would you like to experience on this journey?`
   String get experiencePageTitle {
     return Intl.message(
-      '💭 What would you like to find in this experience?',
+      '💭 What would you like to experience on this journey?',
       name: 'experiencePageTitle',
       desc: '',
       args: [],
@@ -989,50 +629,50 @@ class S {
     return Intl.message('Language', name: 'language', desc: '', args: []);
   }
 
-  /// `Select your Language`
+  /// `Select your language`
   String get selectYourLanguage {
     return Intl.message(
-      'Select your Language',
+      'Select your language',
       name: 'selectYourLanguage',
       desc: '',
       args: [],
     );
   }
 
-  /// `🕊️ Find inner peace `
+  /// `🕊️ Find inner peace`
   String get experienceQ1 {
     return Intl.message(
-      '🕊️ Find inner peace ',
+      '🕊️ Find inner peace',
       name: 'experienceQ1',
       desc: '',
       args: [],
     );
   }
 
-  /// `💭 Learn to manage my emotions`
+  /// `💭 Learn to understand your moods`
   String get experienceQ2 {
     return Intl.message(
-      '💭 Learn to manage my emotions',
+      '💭 Learn to understand your moods',
       name: 'experienceQ2',
       desc: '',
       args: [],
     );
   }
 
-  /// `🙏 Strengthen my faith`
+  /// `🙏 Strengthen your faith`
   String get experienceQ3 {
     return Intl.message(
-      '🙏 Strengthen my faith',
+      '🙏 Strengthen your faith',
       name: 'experienceQ3',
       desc: '',
       args: [],
     );
   }
 
-  /// `✨ Have a moment with God every day`
+  /// `✨ Have a daily moment with God`
   String get experienceQ4 {
     return Intl.message(
-      '✨ Have a moment with God every day',
+      '✨ Have a daily moment with God',
       name: 'experienceQ4',
       desc: '',
       args: [],
@@ -1089,10 +729,10 @@ class S {
     );
   }
 
-  /// `🙌 How committed are you with your faith?`
+  /// `🙌 How committed are you to your faith?`
   String get committedPageTitle {
     return Intl.message(
-      '🙌 How committed are you with your faith?',
+      '🙌 How committed are you to your faith?',
       name: 'committedPageTitle',
       desc: '',
       args: [],
@@ -1109,20 +749,20 @@ class S {
     );
   }
 
-  /// `🌿 Have you ever used a faith journal app before?`
+  /// `🌿 Have you used a faith journal app before?`
   String get everUsedBeforeTitle {
     return Intl.message(
-      '🌿 Have you ever used a faith journal app before?',
+      '🌿 Have you used a faith journal app before?',
       name: 'everUsedBeforeTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `🙏 Yes, I have used one before`
+  /// `🙏 Yes, I have used one`
   String get everUsedBeforeQ1 {
     return Intl.message(
-      '🙏 Yes, I have used one before',
+      '🙏 Yes, I have used one',
       name: 'everUsedBeforeQ1',
       desc: '',
       args: [],
@@ -1184,20 +824,20 @@ class S {
     return Intl.message('30 Days', name: 'days30', desc: '', args: []);
   }
 
-  /// `+80% of those who use FaithMood feel their faith grow within 30 days.`
+  /// `Over 80% of those who use FaithMood feel their faith grow within 30 days.`
   String get joinOthersSubtitle {
     return Intl.message(
-      '+80% of those who use FaithMood feel their faith grow within 30 days.',
+      'Over 80% of those who use FaithMood feel their faith grow within 30 days.',
       name: 'joinOthersSubtitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `📖 Have you ever followed a guided plan to strengthen your faith?`
+  /// `📖 Have you ever followed a guided faith plan?`
   String get guidedPlanTitle {
     return Intl.message(
-      '📖 Have you ever followed a guided plan to strengthen your faith?',
+      '📖 Have you ever followed a guided faith plan?',
       name: 'guidedPlanTitle',
       desc: '',
       args: [],
@@ -1244,10 +884,10 @@ class S {
     );
   }
 
-  /// `We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.`
+  /// `We’ll gently remind you of your reflections, prayers, and devotionals — only when it truly matters.`
   String get askNotificationSubtitle {
     return Intl.message(
-      'We’ll remind you of your daily reflection, prayers, and guided plans — only when it truly matters.',
+      'We’ll gently remind you of your reflections, prayers, and devotionals — only when it truly matters.',
       name: 'askNotificationSubtitle',
       desc: '',
       args: [],
@@ -1299,10 +939,10 @@ class S {
     );
   }
 
-  /// `The Lord gives you strength when you need it most.`
+  /// `The Lord gives strength when it’s needed most.`
   String get preparingPageSubtitle {
     return Intl.message(
-      'The Lord gives you strength when you need it most.',
+      'The Lord gives strength when it’s needed most.',
       name: 'preparingPageSubtitle',
       desc: '',
       args: [],
@@ -1329,10 +969,10 @@ class S {
     );
   }
 
-  /// `Final touches for your experience...`
+  /// `Adding final touches...`
   String get preparingPageT3 {
     return Intl.message(
-      'Final touches for your experience...',
+      'Adding final touches...',
       name: 'preparingPageT3',
       desc: '',
       args: [],
@@ -1349,10 +989,10 @@ class S {
     );
   }
 
-  /// `Just ### per month - Cancel anytime`
+  /// `Just ### per month — cancel anytime`
   String get just449PerMonthCancelAnytime {
     return Intl.message(
-      'Just ### per month - Cancel anytime',
+      'Just ### per month — cancel anytime',
       name: 'just449PerMonthCancelAnytime',
       desc: '',
       args: [],
@@ -1369,10 +1009,10 @@ class S {
     );
   }
 
-  /// `Discover a calm, ad-free space made to nurture your faith through reflection and growth.`
+  /// `Discover a calm, ad-free space designed to nurture your faith with reflection and growth.`
   String get paywallSubtitle {
     return Intl.message(
-      'Discover a calm, ad-free space made to nurture your faith through reflection and growth.',
+      'Discover a calm, ad-free space designed to nurture your faith with reflection and growth.',
       name: 'paywallSubtitle',
       desc: '',
       args: [],
@@ -1420,10 +1060,10 @@ class S {
   }
 
   /// `The Lord is my shepherd; I shall not want.`
-  String get psaml231Verse {
+  String get psalm231Verse {
     return Intl.message(
       'The Lord is my shepherd; I shall not want.',
-      name: 'psaml231Verse',
+      name: 'psalm231Verse',
       desc: '',
       args: [],
     );
@@ -1454,10 +1094,10 @@ class S {
     );
   }
 
-  /// `✨ Advance Progress Tracker`
+  /// `✨ Advanced Progress Tracker`
   String get advanceProgressTracker {
     return Intl.message(
-      '✨ Advance Progress Tracker',
+      '✨ Advanced Progress Tracker',
       name: 'advanceProgressTracker',
       desc: '',
       args: [],
@@ -1484,10 +1124,10 @@ class S {
     );
   }
 
-  /// `Unlock more devotionals, advance stats, and an ad-free experience.`
+  /// `Unlock more devotionals, deeper stats, and an ad-free experience.`
   String get unlockMoreDevotionalsAdvanceStats {
     return Intl.message(
-      'Unlock more devotionals, advance stats, and an ad-free experience.',
+      'Unlock more devotionals, deeper stats, and an ad-free experience.',
       name: 'unlockMoreDevotionalsAdvanceStats',
       desc: '',
       args: [],
@@ -1514,10 +1154,10 @@ class S {
     );
   }
 
-  /// `Share your thoughts — your feedback inspires others 🙏`
+  /// `Your feedback can inspire others 🙏`
   String get ratingContentSubtitle {
     return Intl.message(
-      'Share your thoughts — your feedback inspires others 🙏',
+      'Your feedback can inspire others 🙏',
       name: 'ratingContentSubtitle',
       desc: '',
       args: [],
@@ -1579,26 +1219,6 @@ class S {
     return Intl.message('Select Tag', name: 'selectTag', desc: '', args: []);
   }
 
-  /// `Unable to load categories`
-  String get unableToLoadCategories {
-    return Intl.message(
-      'Unable to load categories',
-      name: 'unableToLoadCategories',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No categories available`
-  String get noCategoriesAvailable {
-    return Intl.message(
-      'No categories available',
-      name: 'noCategoriesAvailable',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Category`
   String get category {
     return Intl.message('Category', name: 'category', desc: '', args: []);
@@ -1619,11 +1239,6 @@ class S {
     return Intl.message('Unlock Now', name: 'unlockNow', desc: '', args: []);
   }
 
-  /// `Reflect Now`
-  String get reflectNow {
-    return Intl.message('Reflect Now', name: 'reflectNow', desc: '', args: []);
-  }
-
   /// `Explore`
   String get explore {
     return Intl.message('Explore', name: 'explore', desc: '', args: []);
@@ -1639,20 +1254,20 @@ class S {
     );
   }
 
-  /// `Verse of the day`
+  /// `Verse of the Day`
   String get verseOfTheDay {
     return Intl.message(
-      'Verse of the day',
+      'Verse of the Day',
       name: 'verseOfTheDay',
       desc: '',
       args: [],
     );
   }
 
-  /// `Unable to load verse. Please try again later.`
+  /// `Unable to load the verse right now. Please try again later.`
   String get unableToLoadVersePleaseTryAgainLater {
     return Intl.message(
-      'Unable to load verse. Please try again later.',
+      'Unable to load the verse right now. Please try again later.',
       name: 'unableToLoadVersePleaseTryAgainLater',
       desc: '',
       args: [],
@@ -1690,10 +1305,10 @@ class S {
   }
 
   /// `Follow guided daily devotionals`
-  String get ffollowGuidedDailyDevotionals {
+  String get followGuidedDailyDevotionals {
     return Intl.message(
       'Follow guided daily devotionals',
-      name: 'ffollowGuidedDailyDevotionals',
+      name: 'followGuidedDailyDevotionals',
       desc: '',
       args: [],
     );
@@ -1709,10 +1324,10 @@ class S {
     );
   }
 
-  /// `Unable to load devotionals`
+  /// `Unable to load devotionals.`
   String get unableToLoadDevotionals {
     return Intl.message(
-      'Unable to load devotionals',
+      'Unable to load devotionals.',
       name: 'unableToLoadDevotionals',
       desc: '',
       args: [],
@@ -1744,16 +1359,6 @@ class S {
     return Intl.message(
       'Key Learnings',
       name: 'keyLearnings',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Relevant Verses`
-  String get relevantVerses {
-    return Intl.message(
-      'Relevant Verses',
-      name: 'relevantVerses',
       desc: '',
       args: [],
     );
@@ -1814,20 +1419,20 @@ class S {
     );
   }
 
-  /// `Note saved successfully`
+  /// `Note saved successfully.`
   String get noteSavedSuccessfully {
     return Intl.message(
-      'Note saved successfully',
+      'Note saved successfully.',
       name: 'noteSavedSuccessfully',
       desc: '',
       args: [],
     );
   }
 
-  /// `Error saving note`
+  /// `Error saving your note.`
   String get errorSavingNote {
     return Intl.message(
-      'Error saving note',
+      'Error saving your note.',
       name: 'errorSavingNote',
       desc: '',
       args: [],
@@ -1874,10 +1479,10 @@ class S {
     );
   }
 
-  /// `Write what's on your heart — how you felt, what you learned, or what you prayed for today.`
+  /// `Write what’s on your heart — your feelings, your prayers, or what you learned today.`
   String get writeWhatsOnYourHeart {
     return Intl.message(
-      'Write what\'s on your heart — how you felt, what you learned, or what you prayed for today.',
+      'Write what’s on your heart — your feelings, your prayers, or what you learned today.',
       name: 'writeWhatsOnYourHeart',
       desc: '',
       args: [],
@@ -1899,20 +1504,20 @@ class S {
     return Intl.message('Tip', name: 'tip', desc: '', args: []);
   }
 
-  /// `You can revisit this note later in your Journal.`
+  /// `You can revisit this note anytime in your Journal.`
   String get youCanRevisitThisNote {
     return Intl.message(
-      'You can revisit this note later in your Journal.',
+      'You can revisit this note anytime in your Journal.',
       name: 'youCanRevisitThisNote',
       desc: '',
       args: [],
     );
   }
 
-  /// `Unable to load moods`
+  /// `Unable to load moods.`
   String get unableToLoadMoods {
     return Intl.message(
-      'Unable to load moods',
+      'Unable to load moods.',
       name: 'unableToLoadMoods',
       desc: '',
       args: [],
@@ -1959,20 +1564,20 @@ class S {
     return Intl.message('Log Mood', name: 'logMood', desc: '', args: []);
   }
 
-  /// `Please select an emotional mood`
+  /// `Select an emotional mood.`
   String get pleaseSelectEmotionalMood {
     return Intl.message(
-      'Please select an emotional mood',
+      'Select an emotional mood.',
       name: 'pleaseSelectEmotionalMood',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please select a spiritual mood`
+  /// `Select a spiritual mood.`
   String get pleaseSelectSpiritualMood {
     return Intl.message(
-      'Please select a spiritual mood',
+      'Select a spiritual mood.',
       name: 'pleaseSelectSpiritualMood',
       desc: '',
       args: [],
@@ -2014,31 +1619,21 @@ class S {
     );
   }
 
-  /// `Searching for the right verse for you...`
+  /// `Finding the verse meant for your moment...`
   String get searchingForVerse {
     return Intl.message(
-      'Searching for the right verse for you...',
+      'Finding the verse meant for your moment...',
       name: 'searchingForVerse',
       desc: '',
       args: [],
     );
   }
 
-  /// `Preparing the learning...`
+  /// `Preparing your guidance...`
   String get preparingLearning {
     return Intl.message(
-      'Preparing the learning...',
+      'Preparing your guidance...',
       name: 'preparingLearning',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Retry Saving Mood`
-  String get retrySaveMood {
-    return Intl.message(
-      'Retry Saving Mood',
-      name: 'retrySaveMood',
       desc: '',
       args: [],
     );
@@ -2059,24 +1654,9 @@ class S {
     return Intl.message('My Journal', name: 'myJournal', desc: '', args: []);
   }
 
-  /// `Search journals...`
-  String get searchJournals {
-    return Intl.message(
-      'Search journals...',
-      name: 'searchJournals',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Moods`
   String get moods {
     return Intl.message('Moods', name: 'moods', desc: '', args: []);
-  }
-
-  /// `Sort by Date`
-  String get sortByDate {
-    return Intl.message('Sort by Date', name: 'sortByDate', desc: '', args: []);
   }
 
   /// `Filter by Mood`
@@ -2089,25 +1669,20 @@ class S {
     );
   }
 
-  /// `All Entries`
-  String get allEntries {
-    return Intl.message('All Entries', name: 'allEntries', desc: '', args: []);
-  }
-
-  /// `No journal entries`
+  /// `No journal entries.`
   String get noJournalEntries {
     return Intl.message(
-      'No journal entries',
+      'No journal entries.',
       name: 'noJournalEntries',
       desc: '',
       args: [],
     );
   }
 
-  /// `Unable to load journal entries`
+  /// `Unable to load journal entries.`
   String get unableToLoadJournalEntries {
     return Intl.message(
-      'Unable to load journal entries',
+      'Unable to load journal entries.',
       name: 'unableToLoadJournalEntries',
       desc: '',
       args: [],
@@ -2189,21 +1764,6 @@ class S {
     return Intl.message('All', name: 'all', desc: '', args: []);
   }
 
-  /// `With Note`
-  String get withNote {
-    return Intl.message('With Note', name: 'withNote', desc: '', args: []);
-  }
-
-  /// `Without Note`
-  String get withoutNote {
-    return Intl.message(
-      'Without Note',
-      name: 'withoutNote',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `More Filters`
   String get moreFilters {
     return Intl.message(
@@ -2224,39 +1784,24 @@ class S {
     return Intl.message('Date Range', name: 'dateRange', desc: '', args: []);
   }
 
-  /// `No emotional moods available`
+  /// `No emotional moods available.`
   String get noEmotionalMoodsAvailable {
     return Intl.message(
-      'No emotional moods available',
+      'No emotional moods available.',
       name: 'noEmotionalMoodsAvailable',
       desc: '',
       args: [],
     );
   }
 
-  /// `No spiritual moods available`
+  /// `No spiritual moods available.`
   String get noSpiritualMoodsAvailable {
     return Intl.message(
-      'No spiritual moods available',
+      'No spiritual moods available.',
       name: 'noSpiritualMoodsAvailable',
       desc: '',
       args: [],
     );
-  }
-
-  /// `No results found`
-  String get noSearchResults {
-    return Intl.message(
-      'No results found',
-      name: 'noSearchResults',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `With Notes`
-  String get withNotes {
-    return Intl.message('With Notes', name: 'withNotes', desc: '', args: []);
   }
 
   /// `Journal Entry`
@@ -2284,16 +1829,6 @@ class S {
     return Intl.message('My Thoughts', name: 'myThoughts', desc: '', args: []);
   }
 
-  /// `Verse for the Day`
-  String get verseForTheDay {
-    return Intl.message(
-      'Verse for the Day',
-      name: 'verseForTheDay',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Today's Encouragement`
   String get todayEncouragement {
     return Intl.message(
@@ -2304,10 +1839,10 @@ class S {
     );
   }
 
-  /// `Unable to load mood entry`
+  /// `Unable to load mood entry.`
   String get unableToLoadMoodEntry {
     return Intl.message(
-      'Unable to load mood entry',
+      'Unable to load mood entry.',
       name: 'unableToLoadMoodEntry',
       desc: '',
       args: [],
@@ -2359,20 +1894,20 @@ class S {
     return Intl.message('Deleting...', name: 'deleting', desc: '', args: []);
   }
 
-  /// `Mood entry deleted successfully`
+  /// `Mood entry deleted successfully.`
   String get moodEntryDeleted {
     return Intl.message(
-      'Mood entry deleted successfully',
+      'Mood entry deleted successfully.',
       name: 'moodEntryDeleted',
       desc: '',
       args: [],
     );
   }
 
-  /// `Error deleting mood entry`
+  /// `Error deleting mood entry.`
   String get errorDeletingMoodEntry {
     return Intl.message(
-      'Error deleting mood entry',
+      'Error deleting mood entry.',
       name: 'errorDeletingMoodEntry',
       desc: '',
       args: [],
@@ -2389,20 +1924,20 @@ class S {
     return Intl.message('Saving...', name: 'saving', desc: '', args: []);
   }
 
-  /// `Mood entry updated successfully`
+  /// `Mood entry updated successfully.`
   String get moodEntryUpdated {
     return Intl.message(
-      'Mood entry updated successfully',
+      'Mood entry updated successfully.',
       name: 'moodEntryUpdated',
       desc: '',
       args: [],
     );
   }
 
-  /// `Error updating mood entry`
+  /// `Error updating mood entry.`
   String get errorUpdatingMoodEntry {
     return Intl.message(
-      'Error updating mood entry',
+      'Error updating mood entry.',
       name: 'errorUpdatingMoodEntry',
       desc: '',
       args: [],
@@ -2439,11 +1974,6 @@ class S {
     return Intl.message('My Spirit', name: 'mySpirit', desc: '', args: []);
   }
 
-  /// `Streak Days`
-  String get streakDays {
-    return Intl.message('Streak Days', name: 'streakDays', desc: '', args: []);
-  }
-
   /// `Days With Activity`
   String get daysWithActivity {
     return Intl.message(
@@ -2454,10 +1984,10 @@ class S {
     );
   }
 
-  /// `Start logging your moods to see your stats`
+  /// `Start logging your moods to see your stats.`
   String get startLoggingYourMoodsToSeeYourStats {
     return Intl.message(
-      'Start logging your moods to see your stats',
+      'Start logging your moods to see your stats.',
       name: 'startLoggingYourMoodsToSeeYourStats',
       desc: '',
       args: [],
@@ -2479,9 +2009,9 @@ class S {
     return Intl.message('Premium', name: 'premium', desc: '', args: []);
   }
 
-  /// `User`
+  /// `Profile`
   String get user {
-    return Intl.message('User', name: 'user', desc: '', args: []);
+    return Intl.message('Profile', name: 'user', desc: '', args: []);
   }
 
   /// `Emotional Mood Summary`
@@ -2524,10 +2054,10 @@ class S {
     );
   }
 
-  /// `Unlock Premium to get access to all stats and features`
+  /// `Unlock Premium to access all statistics and features.`
   String get unlockPremiumToGetAccessToAllStatsAndFeatures {
     return Intl.message(
-      'Unlock Premium to get access to all stats and features',
+      'Unlock Premium to access all statistics and features.',
       name: 'unlockPremiumToGetAccessToAllStatsAndFeatures',
       desc: '',
       args: [],
@@ -2664,10 +2194,10 @@ class S {
     );
   }
 
-  /// `Unable to load devotional`
+  /// `Unable to load devotional.`
   String get unableToLoadDevotional {
     return Intl.message(
-      'Unable to load devotional',
+      'Unable to load devotional.',
       name: 'unableToLoadDevotional',
       desc: '',
       args: [],
@@ -2749,21 +2279,11 @@ class S {
     return Intl.message('App Theme', name: 'appTheme', desc: '', args: []);
   }
 
-  /// `Select Your Theme`
+  /// `Select your theme`
   String get selectYourTheme {
     return Intl.message(
-      'Select Your Theme',
+      'Select your theme',
       name: 'selectYourTheme',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Haptic Feedback`
-  String get hapticFeedback {
-    return Intl.message(
-      'Haptic Feedback',
-      name: 'hapticFeedback',
       desc: '',
       args: [],
     );
@@ -2869,53 +2389,13 @@ class S {
     );
   }
 
-  /// `FaithMood App \nFaithMood helps you track your emotions, deepen your spiritual life, and receive personalized daily devotionals. \nYou should try it 👉 ###`
+  /// `FaithMood App\nFaithMood helps you reflect on your emotions, strengthen your spiritual life, and receive guided devotionals made for your journey.\nYou should try it 👉 ###`
   String get shareFaithMoodAppMessage {
     return Intl.message(
-      'FaithMood App \nFaithMood helps you track your emotions, deepen your spiritual life, and receive personalized daily devotionals. \nYou should try it 👉 ###',
+      'FaithMood App\nFaithMood helps you reflect on your emotions, strengthen your spiritual life, and receive guided devotionals made for your journey.\nYou should try it 👉 ###',
       name: 'shareFaithMoodAppMessage',
       desc: '',
       args: [],
-    );
-  }
-
-  /// `Share Devotional`
-  String get shareDevotional {
-    return Intl.message(
-      'Share Devotional',
-      name: 'shareDevotional',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Share Verse`
-  String get shareMoodVerse {
-    return Intl.message(
-      'Share Verse',
-      name: 'shareMoodVerse',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `When you feel {mood}, look at this verse:`
-  String whenYouFeelMoodLookAtThisVerse(String mood) {
-    return Intl.message(
-      'When you feel $mood, look at this verse:',
-      name: 'whenYouFeelMoodLookAtThisVerse',
-      desc: '',
-      args: [mood],
-    );
-  }
-
-  /// `Download FaithMood App: {url}`
-  String downloadFaithMoodApp(String url) {
-    return Intl.message(
-      'Download FaithMood App: $url',
-      name: 'downloadFaithMoodApp',
-      desc: '',
-      args: [url],
     );
   }
 
@@ -2927,16 +2407,6 @@ class S {
   /// `Your name`
   String get appName {
     return Intl.message('Your name', name: 'appName', desc: '', args: []);
-  }
-
-  /// `This is used for all your new dream analysis`
-  String get thisUsedForAllYourNewDreamAnalysis {
-    return Intl.message(
-      'This is used for all your new dream analysis',
-      name: 'thisUsedForAllYourNewDreamAnalysis',
-      desc: '',
-      args: [],
-    );
   }
 
   /// `This is used for all your mood analysis.`
@@ -2969,20 +2439,20 @@ class S {
     );
   }
 
-  /// `Please fill all the fields with valid data`
+  /// `Please fill all fields with valid information.`
   String get pleaseFillAllTheFieldsWithValidData {
     return Intl.message(
-      'Please fill all the fields with valid data',
+      'Please fill all fields with valid information.',
       name: 'pleaseFillAllTheFieldsWithValidData',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sorry, something went wrong while updating your information. Please try again.`
+  /// `Something went wrong while updating your information. Please try again.`
   String get sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry {
     return Intl.message(
-      'Sorry, something went wrong while updating your information. Please try again.',
+      'Something went wrong while updating your information. Please try again.',
       name: 'sorrySomethingWentWrongWhileUpdatingYourInformationPleaseTry',
       desc: '',
       args: [],
@@ -3004,16 +2474,6 @@ class S {
     return Intl.message(
       'Your information has been updated successfully.',
       name: 'informationUpdatedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your account has been deleted successfully.`
-  String get accountDeletedSuccessfully {
-    return Intl.message(
-      'Your account has been deleted successfully.',
-      name: 'accountDeletedSuccessfully',
       desc: '',
       args: [],
     );
@@ -3044,30 +2504,30 @@ class S {
     return Intl.message('Reminder', name: 'reminder', desc: '', args: []);
   }
 
-  /// `Set a daily reminder to help you stay connected with your faith journey.`
+  /// `Set a daily reminder to stay connected with your faith journey.`
   String get reminderMessage {
     return Intl.message(
-      'Set a daily reminder to help you stay connected with your faith journey.',
+      'Set a daily reminder to stay connected with your faith journey.',
       name: 'reminderMessage',
       desc: '',
       args: [],
     );
   }
 
-  /// `Daily Dream Reminder`
+  /// `Daily Faith Reminder`
   String get dailyDreamReminder {
     return Intl.message(
-      'Daily Dream Reminder',
+      'Daily Faith Reminder',
       name: 'dailyDreamReminder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your reminder is set for this time every day.`
+  /// `Your daily reminder is set for this time each day.`
   String get reminderSetMessage {
     return Intl.message(
-      'Your reminder is set for this time every day.',
+      'Your daily reminder is set for this time each day.',
       name: 'reminderSetMessage',
       desc: '',
       args: [],
@@ -3089,10 +2549,10 @@ class S {
     );
   }
 
-  /// `You don't have a reminder set yet. Set one to receive daily notifications.`
+  /// `You don’t have a reminder set yet. Set one to receive gentle daily prompts.`
   String get reminderNoSetMessage {
     return Intl.message(
-      'You don\'t have a reminder set yet. Set one to receive daily notifications.',
+      'You don’t have a reminder set yet. Set one to receive gentle daily prompts.',
       name: 'reminderNoSetMessage',
       desc: '',
       args: [],
@@ -3109,20 +2569,20 @@ class S {
     );
   }
 
-  /// `Dream time 🌙`
+  /// `Time to reflect 🙏`
   String get reminderNotificationTitle {
     return Intl.message(
-      'Dream time 🌙',
+      'Time to reflect 🙏',
       name: 'reminderNotificationTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Write your dreams before they fade away.`
+  /// `Take a quiet moment to reflect, pray, or journal your mood for today.`
   String get reminderNotificationMessage {
     return Intl.message(
-      'Write your dreams before they fade away.',
+      'Take a quiet moment to reflect, pray, or journal your mood for today.',
       name: 'reminderNotificationMessage',
       desc: '',
       args: [],
@@ -3179,10 +2639,10 @@ class S {
     );
   }
 
-  /// `When you feel ###, look at this verse:`
+  /// `When you feel ###, reflect on this verse:`
   String get whenYouFeelLookAtThisVerse {
     return Intl.message(
-      'When you feel ###, look at this verse:',
+      'When you feel ###, reflect on this verse:',
       name: 'whenYouFeelLookAtThisVerse',
       desc: '',
       args: [],
@@ -3192,6 +2652,186 @@ class S {
   /// `Vibration`
   String get vibration {
     return Intl.message('Vibration', name: 'vibration', desc: '', args: []);
+  }
+
+  /// `Good morning`
+  String get greetingMorning {
+    return Intl.message(
+      'Good morning',
+      name: 'greetingMorning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Good afternoon`
+  String get greetingAfternoon {
+    return Intl.message(
+      'Good afternoon',
+      name: 'greetingAfternoon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Good evening`
+  String get greetingEvening {
+    return Intl.message(
+      'Good evening',
+      name: 'greetingEvening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start your day with a calm heart.`
+  String get greetingMorningSubtitle1 {
+    return Intl.message(
+      'Start your day with a calm heart.',
+      name: 'greetingMorningSubtitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `God is near — breathe and welcome the morning.`
+  String get greetingMorningSubtitle2 {
+    return Intl.message(
+      'God is near — breathe and welcome the morning.',
+      name: 'greetingMorningSubtitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let His peace guide your first steps today.`
+  String get greetingMorningSubtitle3 {
+    return Intl.message(
+      'Let His peace guide your first steps today.',
+      name: 'greetingMorningSubtitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your heart awakens with purpose.`
+  String get greetingMorningSubtitle4 {
+    return Intl.message(
+      'Your heart awakens with purpose.',
+      name: 'greetingMorningSubtitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `May this morning bring light to your soul.`
+  String get greetingMorningSubtitle5 {
+    return Intl.message(
+      'May this morning bring light to your soul.',
+      name: 'greetingMorningSubtitle5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay steady — God walks with you.`
+  String get greetingAfternoonSubtitle1 {
+    return Intl.message(
+      'Stay steady — God walks with you.',
+      name: 'greetingAfternoonSubtitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let peace lead your afternoon.`
+  String get greetingAfternoonSubtitle2 {
+    return Intl.message(
+      'Let peace lead your afternoon.',
+      name: 'greetingAfternoonSubtitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your journey continues with grace.`
+  String get greetingAfternoonSubtitle3 {
+    return Intl.message(
+      'Your journey continues with grace.',
+      name: 'greetingAfternoonSubtitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a moment to breathe and recentre.`
+  String get greetingAfternoonSubtitle4 {
+    return Intl.message(
+      'Take a moment to breathe and recentre.',
+      name: 'greetingAfternoonSubtitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Strength for the rest of your day.`
+  String get greetingAfternoonSubtitle5 {
+    return Intl.message(
+      'Strength for the rest of your day.',
+      name: 'greetingAfternoonSubtitle5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release your worries — God holds your night.`
+  String get greetingEveningSubtitle1 {
+    return Intl.message(
+      'Release your worries — God holds your night.',
+      name: 'greetingEveningSubtitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rest your heart in His presence.`
+  String get greetingEveningSubtitle2 {
+    return Intl.message(
+      'Rest your heart in His presence.',
+      name: 'greetingEveningSubtitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You made it through today — breathe deeply.`
+  String get greetingEveningSubtitle3 {
+    return Intl.message(
+      'You made it through today — breathe deeply.',
+      name: 'greetingEveningSubtitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find peace in the quiet of this evening.`
+  String get greetingEveningSubtitle4 {
+    return Intl.message(
+      'Find peace in the quiet of this evening.',
+      name: 'greetingEveningSubtitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let your soul unwind in God’s care.`
+  String get greetingEveningSubtitle5 {
+    return Intl.message(
+      'Let your soul unwind in God’s care.',
+      name: 'greetingEveningSubtitle5',
+      desc: '',
+      args: [],
+    );
   }
 }
 

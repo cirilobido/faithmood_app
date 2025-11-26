@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/core_exports.dart';
+import '../../generated/l10n.dart';
 import '../../core/providers/domain/use_cases/verse_use_case.dart';
 import '../../core/providers/domain/use_cases/devotional_use_case.dart';
 import '../../core/providers/domain/use_cases/mood_use_case.dart';
@@ -9,17 +10,18 @@ import '../../core/providers/domain/use_cases/analytics_use_case.dart';
 import '../../dev_utils/dev_utils_exports.dart';
 import '_home_state.dart';
 
-final homeViewModelProvider =
-    StateNotifierProvider<HomeViewModel, HomeState>((ref) {
-      return HomeViewModel(
-        ref.read(firebaseAnalyticProvider),
-        ref.read(authProvider),
-        ref.read(verseUseCaseProvider),
-        ref.read(devotionalUseCaseProvider),
-        ref.read(moodUseCaseProvider),
-        ref.read(analyticsUseCaseProvider),
-      );
-    });
+final homeViewModelProvider = StateNotifierProvider<HomeViewModel, HomeState>((
+  ref,
+) {
+  return HomeViewModel(
+    ref.read(firebaseAnalyticProvider),
+    ref.read(authProvider),
+    ref.read(verseUseCaseProvider),
+    ref.read(devotionalUseCaseProvider),
+    ref.read(moodUseCaseProvider),
+    ref.read(analyticsUseCaseProvider),
+  );
+});
 
 class HomeViewModel extends StateNotifier<HomeState> {
   final FirebaseAnalyticProvider firebaseAnalyticProvider;
@@ -75,15 +77,58 @@ class HomeViewModel extends StateNotifier<HomeState> {
     );
   }
 
-  String getGreeting() {
+  String getGreeting(S lang) {
     final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Good morning';
-    } else if (hour < 17) {
-      return 'Good afternoon';
+
+    if (hour >= 4 && hour < 12) {
+      return lang.greetingMorning;
+    } else if (hour >= 12 && hour <= 18) {
+      return lang.greetingAfternoon;
     } else {
-      return 'Good evening';
+      return lang.greetingEvening;
     }
+  }
+
+  String getGreetingSubtitle(S lang) {
+    final hour = DateTime.now().hour;
+
+    // Usamos arrays del idioma correspondiente
+    final morning = [
+      lang.greetingMorningSubtitle1,
+      lang.greetingMorningSubtitle2,
+      lang.greetingMorningSubtitle3,
+      lang.greetingMorningSubtitle4,
+      lang.greetingMorningSubtitle5,
+    ];
+
+    final afternoon = [
+      lang.greetingAfternoonSubtitle1,
+      lang.greetingAfternoonSubtitle2,
+      lang.greetingAfternoonSubtitle3,
+      lang.greetingAfternoonSubtitle4,
+      lang.greetingAfternoonSubtitle5,
+    ];
+
+    final evening = [
+      lang.greetingEveningSubtitle1,
+      lang.greetingEveningSubtitle2,
+      lang.greetingEveningSubtitle3,
+      lang.greetingEveningSubtitle4,
+      lang.greetingEveningSubtitle5,
+    ];
+
+    List<String> selected;
+
+    if (hour >= 4 && hour < 12) {
+      selected = morning;
+    } else if (hour >= 12 && hour <= 18) {
+      selected = afternoon;
+    } else {
+      selected = evening;
+    }
+
+    final index = DateTime.now().day % selected.length;
+    return selected[index];
   }
 
   String? getUserName() {
@@ -93,17 +138,14 @@ class HomeViewModel extends StateNotifier<HomeState> {
   Future<void> _loadDailyVerse() async {
     try {
       updateState(isLoading: true, error: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await verseUseCase.getDailyVerse(userLang);
-      
+
       switch (result) {
         case Success(value: final verse):
           {
             if (verse != null) {
-              updateState(
-                isLoading: false,
-                dailyVerse: verse,
-              );
+              updateState(isLoading: false, dailyVerse: verse);
             } else {
               updateState(isLoading: false, error: true);
             }
@@ -133,7 +175,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
   String getVerseRef() {
     final verse = state.dailyVerse;
     if (verse == null) return '';
-    
+
     // Use the formatted reference: "Book Name Chapter:Verse"
     return verse.getFormattedRef();
   }
@@ -141,9 +183,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
   Future<void> _loadDailyDevotional() async {
     try {
       updateState(isLoadingDevotional: true, errorDevotional: false);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await devotionalUseCase.getDailyDevotional(userLang);
-      
+
       switch (result) {
         case Success(value: final devotional):
           {
@@ -202,15 +244,21 @@ class HomeViewModel extends StateNotifier<HomeState> {
   Future<void> _loadMoods() async {
     try {
       updateState(isLoadingMoods: true);
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await moodUseCase.getMoods(userLang);
-      
+
       switch (result) {
         case Success(value: final moods):
           {
-            final targetKeys = ['happy', 'grateful', 'peaceful', 'worried', 'sad'];
+            final targetKeys = [
+              'happy',
+              'grateful',
+              'peaceful',
+              'worried',
+              'sad',
+            ];
             final filteredMoods = <Mood>[];
-            
+
             for (final key in targetKeys) {
               try {
                 final mood = moods.firstWhere((m) => m.key == key);
@@ -219,7 +267,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
                 devLogger('Mood with key $key not found');
               }
             }
-            
+
             updateState(isLoadingMoods: false, moods: filteredMoods);
           }
         case Failure(exception: final exception):
@@ -251,14 +299,18 @@ class HomeViewModel extends StateNotifier<HomeState> {
     final today = DateTime(now.year, now.month, now.day);
     final weekday = today.weekday;
     final monday = today.subtract(Duration(days: weekday - 1));
-    final weekDates = List.generate(7, (index) => monday.add(Duration(days: index)));
+    final weekDates = List.generate(
+      7,
+      (index) => monday.add(Duration(days: index)),
+    );
     return weekDates;
   }
 
   String getDayName(DateTime date, Lang? lang) {
-    final locale = lang?.name ?? 'en';
+    final locale = lang?.name ?? Lang.en.name;
     final dateFormat = DateFormat('E', locale);
-    return toBeginningOfSentenceCase(dateFormat.format(date)) ?? dateFormat.format(date);
+    return toBeginningOfSentenceCase(dateFormat.format(date)) ??
+        dateFormat.format(date);
   }
 
   String getDayNumber(DateTime date) {
@@ -267,7 +319,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<List<Mood>> _loadMoodsForAnalytics() async {
     try {
-      final userLang = authProvider.user?.lang?.name ?? 'en';
+      final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final moods = await moodUseCase.getMoods(userLang);
       switch (moods) {
         case Success(value: final moodList):
@@ -288,7 +340,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
     if (analytics?.dailyStats == null) return groupedSessions;
 
     for (final dailyStat in analytics!.dailyStats!) {
-      if (dailyStat.date == null || dailyStat.moodCount == null || dailyStat.moodCount! == 0) {
+      if (dailyStat.date == null ||
+          dailyStat.moodCount == null ||
+          dailyStat.moodCount! == 0) {
         continue;
       }
 
@@ -335,7 +389,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
       final weekDates = getCurrentWeekDates();
       final weekStart = weekDates.first;
-      final weekEnd = weekDates.last.add(Duration(days: 1)).subtract(Duration(seconds: 1));
+      final weekEnd = weekDates.last
+          .add(Duration(days: 1))
+          .subtract(Duration(seconds: 1));
       final startDate = DateHelper.formatForApi(weekStart);
       final endDate = DateHelper.formatForApi(weekEnd);
 
@@ -354,7 +410,10 @@ class HomeViewModel extends StateNotifier<HomeState> {
               if (moods.isEmpty) {
                 moods = await _loadMoodsForAnalytics();
               }
-              final groupedSessions = _convertAnalyticsToMoodSessions(analytics, moods);
+              final groupedSessions = _convertAnalyticsToMoodSessions(
+                analytics,
+                moods,
+              );
               updateState(
                 isLoadingWeekMoods: false,
                 weekMoodSessions: groupedSessions,
@@ -381,4 +440,3 @@ class HomeViewModel extends StateNotifier<HomeState> {
     await _loadWeekMoods(forceRefresh: true);
   }
 }
-

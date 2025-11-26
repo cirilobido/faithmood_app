@@ -28,7 +28,7 @@ class VerseContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final lang = userLang ?? ref.read(authProvider).user?.lang?.name ?? 'en';
+    final lang = userLang ?? ref.read(authProvider).user?.lang?.name ?? Lang.en.name;
 
     if (verse != null) {
       return _buildSingleVerse(context, theme, verse!, lang);
