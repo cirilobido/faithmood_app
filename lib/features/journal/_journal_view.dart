@@ -8,15 +8,35 @@ import 'pages/_moods_tab.dart';
 import 'pages/_devotionals_tab.dart';
 import 'widgets/_journal_tab_selector.dart';
 
-class JournalView extends ConsumerWidget {
+class JournalView extends ConsumerStatefulWidget {
   const JournalView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<JournalView> createState() => _JournalViewState();
+}
+
+class _JournalViewState extends ConsumerState<JournalView> {
+  int _previousTab = 0;
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(journalViewModelProvider);
     final vm = ref.read(journalViewModelProvider.notifier);
     final theme = Theme.of(context);
     final lang = S.of(context);
+
+    // Capture previous tab before updating
+    final previousTab = _previousTab;
+    final currentTab = state.selectedTab;
+    
+    // Determine slide direction based on tab change
+    final isMovingRight = currentTab > previousTab;
+    final slideOffset = isMovingRight ? const Offset(-0.1, 0.0) : const Offset(0.1, 0.0);
+
+    // Update previous tab for next build
+    if (_previousTab != currentTab) {
+      _previousTab = currentTab;
+    }
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -46,9 +66,29 @@ class JournalView extends ConsumerWidget {
               ),
             ),
             Expanded(
-              child: state.selectedTab == 0
-                  ? const MoodsTab()
-                  : const DevotionalsTab(),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                switchInCurve: Curves.easeInOut,
+                switchOutCurve: Curves.easeInOut,
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: SlideTransition(
+                      position: Tween<Offset>(
+                        begin: slideOffset,
+                        end: Offset.zero,
+                      ).animate(CurvedAnimation(
+                        parent: animation,
+                        curve: Curves.easeInOut,
+                      )),
+                      child: child,
+                    ),
+                  );
+                },
+                child: state.selectedTab == 0
+                    ? const MoodsTab(key: ValueKey('moods'))
+                    : const DevotionalsTab(key: ValueKey('devotionals')),
+              ),
             ),
           ],
         ),
