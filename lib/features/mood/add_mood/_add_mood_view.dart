@@ -135,64 +135,53 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
                       );
                     }
                   } else {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext dialogContext) {
-                        return PopScope(
-                          canPop: false,
-                          child: AlertDialog(
-                            backgroundColor: theme.colorScheme.surface,
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const LoadingIndicator(),
-                                const SizedBox(height: AppSizes.spacingMedium),
-                                Text(
-                                  lang.saving,
-                                  style: theme.textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-
                     final hasAddedMood = await ref.read(hasAddedMoodProvider.future);
-                    final sessionId = await vm.saveMood();
-
-                    if (context.mounted) {
-                      context.pop();
-                    }
-
-                    if (sessionId != null && context.mounted) {
-                      triggerHapticFeedback(HapticsType.success, context: context);
-                      ref.read(journalViewModelProvider.notifier).refreshMoodSessionsIfNeeded();
-                      // Refresh week moods in home screen
-                      try {
-                        ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
-                      } catch (_) {
-                        // Home view model might not be available if user is not on home screen
-                      }
-                      
-                      if (!hasAddedMood) {
-                        _showSuccessModal(context, theme, lang, sessionId);
-                      } else {
-                        context.pushWithAd(
-                          ref,
-                          Routes.moodEntryDetails,
-                          extra: {'sessionId': sessionId},
-                          forceShow: true,
-                          popBeforePush: true,
-                        );
-                      }
-                    } else if (context.mounted) {
+                    
+                    final partialSession = vm.createPartialSession();
+                    if (partialSession == null && context.mounted) {
                       CustomSnackBar.show(
                         context,
                         message: lang.errorSavingMood,
                         backgroundColor: theme.colorScheme.error,
                       );
+                      return;
+                    }
+
+                    triggerHapticFeedback(HapticsType.success, context: context);
+                    
+                    if (!hasAddedMood) {
+                      final result = await vm.saveMood();
+                      if (result.sessionId != null && result.partialSession != null && context.mounted) {
+                        _showSuccessModal(context, theme, lang, result.sessionId!, result.partialSession!);
+                      } else if (context.mounted) {
+                        CustomSnackBar.show(
+                          context,
+                          message: lang.errorSavingMood,
+                          backgroundColor: theme.colorScheme.error,
+                        );
+                      }
+                    } else {
+                      if (context.mounted) {
+                        final saveFuture = vm.saveMood();
+                        context.pushWithAd(
+                          ref,
+                          Routes.moodEntryDetails,
+                          extra: {
+                            'sessionId': partialSession!.sessionId ?? '',
+                            'initialSession': partialSession,
+                            'saveFuture': saveFuture,
+                          },
+                          forceShow: true,
+                          popBeforePush: true,
+                        );
+                      }
+                    }
+                    
+                    ref.read(journalViewModelProvider.notifier).refreshMoodSessionsIfNeeded();
+                    try {
+                      ref.read(homeViewModelProvider.notifier).refreshWeekMoods();
+                    } catch (_) {
+                      // Home view model might not be available if user is not on home screen
                     }
                   }
                 },
@@ -204,7 +193,7 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
     );
   }
 
-  void _showSuccessModal(BuildContext context, ThemeData theme, S lang, String sessionId) {
+  void _showSuccessModal(BuildContext context, ThemeData theme, S lang, String sessionId, MoodSession partialSession) {
     CustomDialogModal.show(
       context: context,
       title: lang.moodAddedSuccessfully,
@@ -216,7 +205,10 @@ class _AddMoodViewState extends ConsumerState<AddMoodView> {
         context.pushWithAd(
           ref,
           Routes.moodEntryDetails,
-          extra: {'sessionId': sessionId},
+          extra: {
+            'sessionId': sessionId,
+            'initialSession': partialSession,
+          },
           forceShow: true,
         );
       },

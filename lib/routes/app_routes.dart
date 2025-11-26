@@ -114,11 +114,17 @@ abstract class AppRoutes {
         pageBuilder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
           final sessionId = extra?['sessionId'] as String?;
+          final initialSession = extra?['initialSession'] as MoodSession?;
+          final saveFuture = extra?['saveFuture'] as Future<({MoodSession? partialSession, String? sessionId})>?;
           if (sessionId == null) {
             return NoTransitionPage<void>(child: Container());
           }
           return NoTransitionPage<void>(
-            child: MoodEntryDetailsView(sessionId: sessionId),
+            child: MoodEntryDetailsView(
+              sessionId: sessionId,
+              initialSession: initialSession,
+              saveFuture: saveFuture,
+            ),
           );
         },
       ),

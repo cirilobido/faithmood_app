@@ -14,6 +14,9 @@ class MoodEntryDetailsState {
   final int currentPosition;
   final int totalLength;
   final double progress;
+  final bool isLoadingVerse;
+  final bool isLoadingLearning;
+  final bool saveError;
 
   MoodEntryDetailsState({
     this.isLoading = false,
@@ -29,6 +32,9 @@ class MoodEntryDetailsState {
     this.currentPosition = 0,
     this.totalLength = 0,
     this.progress = 0.0,
+    this.isLoadingVerse = false,
+    this.isLoadingLearning = false,
+    this.saveError = false,
   });
 
   MoodEntryDetailsState copyWith({
@@ -45,6 +51,9 @@ class MoodEntryDetailsState {
     int? currentPosition,
     int? totalLength,
     double? progress,
+    bool? isLoadingVerse,
+    bool? isLoadingLearning,
+    bool? saveError,
   }) {
     return MoodEntryDetailsState(
       isLoading: isLoading ?? this.isLoading,
@@ -60,6 +69,9 @@ class MoodEntryDetailsState {
       currentPosition: currentPosition ?? this.currentPosition,
       totalLength: totalLength ?? this.totalLength,
       progress: progress ?? this.progress,
+      isLoadingVerse: isLoadingVerse ?? this.isLoadingVerse,
+      isLoadingLearning: isLoadingLearning ?? this.isLoadingLearning,
+      saveError: saveError ?? this.saveError,
     );
   }
 }

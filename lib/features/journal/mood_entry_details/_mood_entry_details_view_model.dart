@@ -8,14 +8,17 @@ import '../../../generated/l10n.dart';
 import '_mood_entry_details_state.dart';
 
 final moodEntryDetailsViewModelProvider =
-    StateNotifierProvider.autoDispose.family<MoodEntryDetailsViewModel, MoodEntryDetailsState, String>(
-  (ref, sessionId) {
+    StateNotifierProvider.autoDispose.family<MoodEntryDetailsViewModel, MoodEntryDetailsState, ({MoodSession? initialSession, Future<({MoodSession? partialSession, String? sessionId})>? saveFuture, String sessionId})>(
+  (ref, params) {
     final viewModel = MoodEntryDetailsViewModel(
       ref,
       ref.read(moodUseCaseProvider),
       ref.read(authProvider),
       ref.read(ttsServiceProvider),
-      sessionId,
+      ref.read(firebaseAnalyticProvider),
+      params.sessionId,
+      params.initialSession,
+      params.saveFuture,
     );
     ref.onDispose(() {
       viewModel._mounted = false;
@@ -30,18 +33,167 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
   final MoodUseCase moodUseCase;
   final AuthProvider authProvider;
   final TtsService ttsService;
-  final String sessionId;
+  final FirebaseAnalyticProvider firebaseAnalyticProvider;
+  String _sessionId;
+  String get sessionId => _sessionId;
+  final MoodSession? initialSession;
+  final Future<({MoodSession? partialSession, String? sessionId})>? saveFuture;
   bool _mounted = true;
+  int _pollAttempts = 0;
+  static const int _maxPollAttempts = 20;
+  static const Duration _pollInterval = Duration(seconds: 3);
 
   MoodEntryDetailsViewModel(
     this.ref,
     this.moodUseCase,
     this.authProvider,
     this.ttsService,
-    this.sessionId,
-  ) : super(MoodEntryDetailsState()) {
-    loadMoodSessionDetail();
+    this.firebaseAnalyticProvider,
+    String sessionId,
+    this.initialSession,
+    this.saveFuture,
+  ) : _sessionId = sessionId,
+        super(MoodEntryDetailsState()) {
+    if (initialSession != null) {
+      final session = initialSession;
+      final emotionalReflection = session?.emotional?.aiReflection;
+      final spiritualReflection = session?.spiritual?.aiReflection;
+      final hasReflection = (emotionalReflection != null && emotionalReflection.isNotEmpty) || 
+                           (spiritualReflection != null && spiritualReflection.isNotEmpty);
+      final hasVerse = session?.emotional?.aiVerse != null;
+      
+      updateState(
+        moodSession: session,
+        isLoadingVerse: !hasVerse,
+        isLoadingLearning: !hasReflection,
+      );
+      
+      if (saveFuture != null) {
+        devLogger('MoodEntryDetailsViewModel: saveFuture is not null, calling _handleSaveFuture()');
+        _handleSaveFuture();
+      } else if (!_sessionId.startsWith('temp_')) {
+        devLogger('MoodEntryDetailsViewModel: No saveFuture, starting polling directly');
+        _startPollingForVerseAndLearning();
+      } else {
+        devLogger('MoodEntryDetailsViewModel: SessionId is temp, not starting polling yet');
+      }
+    } else {
+      loadMoodSessionDetail();
+    }
     _syncTtsState();
+  }
+
+  Future<void> _handleSaveFuture() async {
+    try {
+      devLogger('_handleSaveFuture: Starting to await saveFuture');
+      final result = await saveFuture;
+      devLogger('_handleSaveFuture: saveFuture completed');
+      devLogger('_handleSaveFuture: result.sessionId = ${result?.sessionId}');
+      devLogger('_handleSaveFuture: result.partialSession = ${result?.partialSession != null}');
+      devLogger('_handleSaveFuture: _mounted = $_mounted');
+      
+      if (result != null && result.sessionId != null && result.partialSession != null && _mounted) {
+        devLogger('_handleSaveFuture: All conditions met, proceeding with details fetch');
+        final realSessionId = result.sessionId!;
+        _sessionId = realSessionId;
+        
+        devLogger('_handleSaveFuture: Mood session created successfully: $realSessionId');
+        
+        final userId = authProvider.user?.id;
+        final userLang = authProvider.user?.lang?.name ?? 'en';
+        
+        devLogger('_handleSaveFuture: userId = $userId, userLang = $userLang');
+        
+        if (userId != null) {
+          devLogger('_handleSaveFuture: Fetching mood session detail for sessionId: $realSessionId');
+          final detailResult = await moodUseCase.getMoodSessionDetail(
+            userId,
+            realSessionId,
+            userLang,
+          );
+          devLogger('_handleSaveFuture: getMoodSessionDetail completed');
+          
+          switch (detailResult) {
+            case Success(value: final session):
+              {
+                if (!_mounted) return;
+                
+                final emotionalVerse = session?.emotional?.aiVerse;
+                final emotionalReflection = session?.emotional?.aiReflection;
+                final spiritualReflection = session?.spiritual?.aiReflection;
+                
+                final hasVerse = emotionalVerse != null;
+                final hasReflection = (emotionalReflection != null && emotionalReflection.isNotEmpty) || 
+                                     (spiritualReflection != null && spiritualReflection.isNotEmpty);
+                
+                devLogger('_handleSaveFuture: Session details fetched - hasVerse: $hasVerse, hasReflection: $hasReflection');
+                
+                updateState(
+                  moodSession: session,
+                  saveError: false,
+                  isLoadingVerse: !hasVerse,
+                  isLoadingLearning: !hasReflection,
+                );
+                
+                firebaseAnalyticProvider.logEvent(
+                  name: 'mood_session_created',
+                  parameters: {
+                    'session_id': realSessionId,
+                    'screen': 'mood_entry_details_screen',
+                    'emotional_mood_id': session?.emotional?.moodId?.toString() ?? '',
+                    'spiritual_mood_id': session?.spiritual?.moodId?.toString() ?? '',
+                    'has_verse': hasVerse ? 'true' : 'false',
+                    'has_reflection': hasReflection ? 'true' : 'false',
+                    'has_note': (session?.note != null && session!.note!.isNotEmpty) ? 'true' : 'false',
+                  },
+                );
+                
+                // Only start polling if verse or learning are still missing
+                if (!hasVerse || !hasReflection) {
+                  devLogger('_handleSaveFuture: Starting polling for verse and learning (hasVerse: $hasVerse, hasReflection: $hasReflection)');
+                  _pollAttempts = 0;
+                  _startPollingForVerseAndLearning();
+                } else {
+                  devLogger('_handleSaveFuture: Verse and learning are already present, no need to poll');
+                }
+              }
+            case Failure(exception: final exception):
+              {
+                devLogger('Error fetching mood session detail: $exception');
+                if (!_mounted) return;
+                final partialSession = result.partialSession!;
+                updateState(
+                  moodSession: partialSession,
+                  saveError: false,
+                  isLoadingVerse: true,
+                  isLoadingLearning: true,
+                );
+                _pollAttempts = 0;
+                _startPollingForVerseAndLearning();
+              }
+          }
+        } else {
+          devLogger('_handleSaveFuture: userId is null, cannot fetch details');
+          if (!_mounted) return;
+          final partialSession = result.partialSession!;
+          updateState(
+            moodSession: partialSession,
+            saveError: false,
+            isLoadingVerse: true,
+            isLoadingLearning: true,
+          );
+          _pollAttempts = 0;
+          _startPollingForVerseAndLearning();
+        }
+      } else if (_mounted) {
+        updateState(saveError: true);
+      }
+    } catch (e) {
+      devLogger('Error handling save future: $e');
+      if (_mounted) {
+        updateState(saveError: true);
+      }
+    }
   }
 
   @override
@@ -346,6 +498,9 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
     int? currentPosition,
     int? totalLength,
     double? progress,
+    bool? isLoadingVerse,
+    bool? isLoadingLearning,
+    bool? saveError,
   }) {
     if (!_mounted) return;
     state = state.copyWith(
@@ -362,7 +517,104 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       currentPosition: currentPosition,
       totalLength: totalLength,
       progress: progress,
+      isLoadingVerse: isLoadingVerse,
+      isLoadingLearning: isLoadingLearning,
+      saveError: saveError,
     );
+  }
+
+  Future<void> _startPollingForVerseAndLearning() async {
+    if (!_mounted) {
+      devLogger('_startPollingForVerseAndLearning: Not mounted, returning');
+      return;
+    }
+    
+    final userId = authProvider.user?.id;
+    if (userId == null) {
+      devLogger('_startPollingForVerseAndLearning: User ID is null');
+      updateState(isLoadingVerse: false, isLoadingLearning: false, error: true);
+      return;
+    }
+
+    final userLang = authProvider.user?.lang?.name ?? 'en';
+    devLogger('_startPollingForVerseAndLearning: Starting polling with sessionId: $_sessionId');
+    
+    while (_pollAttempts < _maxPollAttempts && _mounted) {
+      await Future.delayed(_pollInterval);
+      _pollAttempts++;
+      
+      if (!_mounted) return;
+      
+      try {
+        if (_sessionId.startsWith('temp_')) {
+          devLogger('_startPollingForVerseAndLearning: SessionId is still temp, skipping poll attempt $_pollAttempts');
+          continue;
+        }
+        
+        devLogger('_startPollingForVerseAndLearning: Poll attempt $_pollAttempts for sessionId: $_sessionId');
+        
+        final result = await moodUseCase.getMoodSessionDetail(
+          userId,
+          _sessionId,
+          userLang,
+        );
+
+        switch (result) {
+          case Success(value: final session):
+            {
+              if (!_mounted) return;
+              
+              final emotionalVerse = session?.emotional?.aiVerse;
+              final emotionalReflection = session?.emotional?.aiReflection;
+              final spiritualReflection = session?.spiritual?.aiReflection;
+              
+              final hasVerse = emotionalVerse != null;
+              final hasReflection = (emotionalReflection != null && emotionalReflection.isNotEmpty) || 
+                                   (spiritualReflection != null && spiritualReflection.isNotEmpty);
+              
+              if (hasVerse && hasReflection) {
+                updateState(
+                  moodSession: session,
+                  isLoadingVerse: false,
+                  isLoadingLearning: false,
+                );
+                return;
+              } else {
+                final currentSession = state.moodSession;
+                if (currentSession != null) {
+                  final updatedSession = MoodSession(
+                    sessionId: currentSession.sessionId,
+                    date: currentSession.date,
+                    note: currentSession.note,
+                    emotional: session?.emotional ?? currentSession.emotional,
+                    spiritual: session?.spiritual ?? currentSession.spiritual,
+                    aiVerse: emotionalVerse ?? session?.aiVerse,
+                  );
+                  updateState(
+                    moodSession: updatedSession,
+                    isLoadingVerse: !hasVerse,
+                    isLoadingLearning: !hasReflection,
+                  );
+                }
+              }
+            }
+          case Failure(exception: final exception):
+            {
+              devLogger('Error polling mood session detail: $exception');
+            }
+        }
+      } catch (e) {
+        devLogger('Error polling mood session detail: $e');
+      }
+    }
+    
+    if (_mounted && (_pollAttempts >= _maxPollAttempts)) {
+      updateState(
+        isLoadingVerse: false,
+        isLoadingLearning: false,
+        error: true,
+      );
+    }
   }
 
   Future<void> loadMoodSessionDetail() async {
@@ -378,7 +630,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       updateState(isLoading: true, error: false);
       final result = await moodUseCase.getMoodSessionDetail(
         userId,
-        sessionId,
+        _sessionId,
         userLang,
       );
 
@@ -414,7 +666,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       }
 
       updateState(isDeleting: true);
-      final result = await moodUseCase.deleteMoodSession(userId, sessionId);
+      final result = await moodUseCase.deleteMoodSession(userId, _sessionId);
 
       switch (result) {
         case Success(value: final success):
@@ -472,7 +724,7 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
         emotionalMoodId: emotionalMoodId,
       );
 
-      final result = await moodUseCase.updateMoodSession(userId, sessionId, request);
+      final result = await moodUseCase.updateMoodSession(userId, _sessionId, request);
 
       switch (result) {
         case Success(value: final updatedSession):
@@ -518,6 +770,80 @@ class MoodEntryDetailsViewModel extends StateNotifier<MoodEntryDetailsState> {
       if (!_mounted) return false;
       updateState(isUpdating: false);
       return false;
+    }
+  }
+
+  Future<void> retrySave() async {
+    final session = state.moodSession;
+    if (session == null) return;
+
+    try {
+      final userId = authProvider.user?.id;
+      if (userId == null) {
+        updateState(saveError: true);
+        return;
+      }
+
+      final emotionalMoodId = session.emotional?.moodId;
+      final spiritualMoodId = session.spiritual?.moodId;
+
+      if (emotionalMoodId == null || spiritualMoodId == null) {
+        updateState(saveError: true);
+        return;
+      }
+
+      final userLang = authProvider.user?.lang?.name ?? 'en';
+      
+      final request = MoodSessionRequest(
+        userId: userId,
+        emotionalMoodId: emotionalMoodId,
+        spiritualMoodId: spiritualMoodId,
+        note: session.note,
+        emotionLevel: null,
+        lang: userLang,
+      );
+
+      updateState(saveError: false);
+      final result = await moodUseCase.createMoodSession(userId, request);
+
+      switch (result) {
+        case Success(value: final response):
+          {
+            if (!_mounted) return;
+            final newSessionId = response?.sessionId;
+            if (newSessionId != null) {
+              _sessionId = newSessionId;
+              final updatedSession = MoodSession(
+                sessionId: newSessionId,
+                date: session.date,
+                note: session.note,
+                emotional: session.emotional,
+                spiritual: session.spiritual,
+                aiVerse: null,
+              );
+              updateState(
+                moodSession: updatedSession,
+                saveError: false,
+                isLoadingVerse: true,
+                isLoadingLearning: true,
+              );
+              _pollAttempts = 0;
+              _startPollingForVerseAndLearning();
+            } else {
+              updateState(saveError: true);
+            }
+          }
+        case Failure(exception: final exception):
+          {
+            devLogger('Error retrying save: $exception');
+            if (!_mounted) return;
+            updateState(saveError: true);
+          }
+      }
+    } catch (e) {
+      devLogger('Error retrying save: $e');
+      if (!_mounted) return;
+      updateState(saveError: true);
     }
   }
 }

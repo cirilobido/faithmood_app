@@ -419,6 +419,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Predominant spiritual mood: ",
     ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
+    "preparingLearning": MessageLookupByLibrary.simpleMessage(
+      "Preparing the learning...",
+    ),
     "preparingPageSubtitle": MessageLookupByLibrary.simpleMessage(
       "The Lord gives you strength when you need it most.",
     ),
@@ -496,6 +499,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeReminder": MessageLookupByLibrary.simpleMessage("Remove Reminder"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+    "retrySaveMood": MessageLookupByLibrary.simpleMessage("Retry Saving Mood"),
     "revision": MessageLookupByLibrary.simpleMessage("Revisión"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveNotes": MessageLookupByLibrary.simpleMessage("Save Note"),
@@ -503,6 +507,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "searchJournals": MessageLookupByLibrary.simpleMessage(
       "Search journals...",
+    ),
+    "searchingForVerse": MessageLookupByLibrary.simpleMessage(
+      "Searching for the right verse for you...",
     ),
     "selectAPeriod": MessageLookupByLibrary.simpleMessage("Select a Period"),
     "selectAnOption": MessageLookupByLibrary.simpleMessage("Select an Option"),

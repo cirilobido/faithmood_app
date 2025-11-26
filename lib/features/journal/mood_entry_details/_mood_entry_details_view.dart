@@ -11,8 +11,15 @@ import '_mood_entry_details_view_model.dart';
 
 class MoodEntryDetailsView extends ConsumerStatefulWidget {
   final String sessionId;
+  final MoodSession? initialSession;
+  final Future<({String? sessionId, MoodSession? partialSession})>? saveFuture;
 
-  const MoodEntryDetailsView({super.key, required this.sessionId});
+  const MoodEntryDetailsView({
+    super.key,
+    required this.sessionId,
+    this.initialSession,
+    this.saveFuture,
+  });
 
   @override
   ConsumerState<MoodEntryDetailsView> createState() =>
@@ -39,7 +46,11 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(
-      moodEntryDetailsViewModelProvider(widget.sessionId),
+      moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )),
     );
     final theme = Theme.of(context);
     final lang = S.of(context);
@@ -53,7 +64,11 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
               title: lang.journalEntry,
               onBack: () async {
                 final vm = ref.read(
-                  moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                  moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
                 );
                 await vm.stopTTS();
                 if (context.mounted) {
@@ -67,7 +82,11 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
                 isPaused: state.isPaused,
                 onTtsTap: () async {
                   final vm = ref.read(
-                    moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                    moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
                   );
                   if (state.isPlaying) {
                     await vm.pauseTTS();
@@ -85,7 +104,11 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
                 },
                 onShare: () {
                   final vm = ref.read(
-                    moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                    moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
                   );
                   vm.shareMoodVerse(
                     lang: lang,
@@ -113,9 +136,17 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
 
   void _handleEdit(BuildContext context) {
     final vm = ref.read(
-      moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+      moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
     );
-    final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
+    final state = ref.read(moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )));
     vm.startEditing();
     _noteController.text = state.moodSession?.note ?? '';
   }
@@ -133,7 +164,11 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     S lang,
   ) async {
     final vm = ref.read(
-      moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+      moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
     );
     final journalVm = ref.read(journalViewModelProvider.notifier);
 
@@ -172,9 +207,17 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
     S lang,
   ) async {
     final vm = ref.read(
-      moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+      moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
     );
-    final state = ref.read(moodEntryDetailsViewModelProvider(widget.sessionId));
+    final state = ref.read(moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )));
     final journalVm = ref.read(journalViewModelProvider.notifier);
 
     final originalNote = state.moodSession?.note?.trim() ?? '';
@@ -254,7 +297,13 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (aiVerse != null) ...[
+          if (state.isLoadingVerse || aiVerse == null) ...[
+            _buildLoadingPlaceholder(
+              context,
+              theme,
+              lang.searchingForVerse,
+            ),
+          ] else ...[
             VerseContent(
               verse: aiVerse,
               useStyledContainer: true,
@@ -282,17 +331,29 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
               controller: _noteController,
               onChanged: (value) {
                 final vm = ref.read(
-                  moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                  moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
                 );
                 vm.updateEditedNote(value);
               },
               onSave: () => _performUpdate(context, theme, lang),
               onCancel: () {
                 final vm = ref.read(
-                  moodEntryDetailsViewModelProvider(widget.sessionId).notifier,
+                  moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )).notifier,
                 );
                 final state = ref.read(
-                  moodEntryDetailsViewModelProvider(widget.sessionId),
+                  moodEntryDetailsViewModelProvider((
+        sessionId: widget.sessionId,
+        initialSession: widget.initialSession,
+        saveFuture: widget.saveFuture,
+      )),
                 );
                 vm.cancelEditing();
                 _noteController.text = state.moodSession?.note ?? '';
@@ -312,7 +373,14 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
             },
           ),
           const SizedBox(height: AppSizes.spacingMedium),
-          if (aiReflection != null && aiReflection.isNotEmpty) ...[
+          if (state.isLoadingLearning) ...[
+            const SizedBox(height: AppSizes.spacingMedium),
+            _buildLoadingPlaceholder(
+              context,
+              theme,
+              lang.preparingLearning,
+            ),
+          ] else if (aiReflection != null && aiReflection.isNotEmpty) ...[
             const SizedBox(height: AppSizes.spacingMedium),
             ExpandableSection(
               title: lang.todayEncouragement,
@@ -329,6 +397,10 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
                 ),
               ),
             ),
+          ],
+          if (state.saveError) ...[
+            const SizedBox(height: AppSizes.spacingMedium),
+            _buildRetryButton(context, theme, lang),
           ],
           const SizedBox(height: AppSizes.spacingMedium),
           Align(
@@ -411,6 +483,79 @@ class _MoodEntryDetailsViewState extends ConsumerState<MoodEntryDetailsView> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildLoadingPlaceholder(
+    BuildContext context,
+    ThemeData theme,
+    String message,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.paddingMedium),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onSurface,
+        borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+      ),
+      child: Row(
+        children: [
+          const SizedBox(
+            width: AppSizes.iconSizeMedium,
+            height: AppSizes.iconSizeMedium,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          const SizedBox(width: AppSizes.spacingMedium),
+          Expanded(
+            child: Text(
+              message,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.textTheme.labelSmall?.color,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRetryButton(
+    BuildContext context,
+    ThemeData theme,
+    S lang,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.paddingMedium),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onSurface,
+        borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+      ),
+      child: Column(
+        children: [
+          Text(
+            lang.errorSavingMood,
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: theme.colorScheme.error,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AppSizes.spacingMedium),
+          CustomButton(
+            title: lang.retrySaveMood,
+            type: ButtonType.primary,
+            isShortText: true,
+            onTap: () {
+              final vm = ref.read(
+                moodEntryDetailsViewModelProvider((
+                  sessionId: widget.sessionId,
+                  initialSession: widget.initialSession,
+                  saveFuture: widget.saveFuture,
+                )).notifier,
+              );
+              vm.retrySave();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

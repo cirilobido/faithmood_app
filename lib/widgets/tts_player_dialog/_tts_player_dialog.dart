@@ -150,10 +150,18 @@ class TtsPlayerDialog {
         return Consumer(
           builder: (context, ref, child) {
             final state = ref.watch(
-              moodEntryDetailsViewModelProvider(sessionId),
+              moodEntryDetailsViewModelProvider((
+                sessionId: sessionId,
+                initialSession: null,
+                saveFuture: null,
+              )),
             );
             final vm = ref.read(
-              moodEntryDetailsViewModelProvider(sessionId).notifier,
+              moodEntryDetailsViewModelProvider((
+                sessionId: sessionId,
+                initialSession: null,
+                saveFuture: null,
+              )).notifier,
             );
             final theme = Theme.of(context);
             

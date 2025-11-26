@@ -2014,6 +2014,36 @@ class S {
     );
   }
 
+  /// `Searching for the right verse for you...`
+  String get searchingForVerse {
+    return Intl.message(
+      'Searching for the right verse for you...',
+      name: 'searchingForVerse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preparing the learning...`
+  String get preparingLearning {
+    return Intl.message(
+      'Preparing the learning...',
+      name: 'preparingLearning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry Saving Mood`
+  String get retrySaveMood {
+    return Intl.message(
+      'Retry Saving Mood',
+      name: 'retrySaveMood',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Go to Journal`
   String get goToJournal {
     return Intl.message(

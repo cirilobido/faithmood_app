@@ -19,6 +19,7 @@ final addMoodViewModelProvider =
     ref.read(moodUseCaseProvider),
     ref.read(authProvider),
     ref.read(secureStorageServiceProvider),
+    ref.read(firebaseAnalyticProvider),
   );
 });
 
@@ -27,12 +28,14 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
   final MoodUseCase moodUseCase;
   final AuthProvider authProvider;
   final SecureStorage secureStorage;
+  final FirebaseAnalyticProvider firebaseAnalyticProvider;
 
   AddMoodViewModel(
     this.ref,
     this.moodUseCase,
     this.authProvider,
     this.secureStorage,
+    this.firebaseAnalyticProvider,
   ) : super(AddMoodState()) {
     _loadMoods();
   }
@@ -159,14 +162,8 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
     updateState(note: text);
   }
 
-  Future<String?> saveMood() async {
+  MoodSession? createPartialSession() {
     try {
-      final userId = authProvider.user?.id;
-      if (userId == null) {
-        devLogger('Error: User ID is null');
-        return null;
-      }
-
       final emotionalMoodId = state.selectedEmotionalMood?.id;
       final spiritualMoodId = state.selectedSpiritualMood?.id;
 
@@ -175,13 +172,60 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
         return null;
       }
 
+      final temporarySessionId = 'temp_${DateTime.now().millisecondsSinceEpoch}';
+      
+      return MoodSession(
+        sessionId: temporarySessionId,
+        date: DateTime.now(),
+        note: state.note.trim().isEmpty ? null : state.note.trim(),
+        emotional: MoodSessionDetails(
+          moodId: emotionalMoodId,
+          mood: state.selectedEmotionalMood,
+          sessionId: temporarySessionId,
+          aiReflection: null,
+          aiVerse: null,
+        ),
+        spiritual: MoodSessionDetails(
+          moodId: spiritualMoodId,
+          mood: state.selectedSpiritualMood,
+          sessionId: temporarySessionId,
+          aiReflection: null,
+          aiVerse: null,
+        ),
+        aiVerse: null,
+      );
+    } catch (e) {
+      devLogger('Error creating partial session: $e');
+      return null;
+    }
+  }
+
+  Future<({MoodSession? partialSession, String? sessionId})> saveMood() async {
+    try {
+      // Capture all state values immediately to avoid accessing disposed state
+      final userId = authProvider.user?.id;
+      if (userId == null) {
+        devLogger('Error: User ID is null');
+        return (partialSession: null, sessionId: null);
+      }
+
+      final emotionalMoodId = state.selectedEmotionalMood?.id;
+      final spiritualMoodId = state.selectedSpiritualMood?.id;
+      final emotionalMood = state.selectedEmotionalMood;
+      final spiritualMood = state.selectedSpiritualMood;
+      final note = state.note.trim().isEmpty ? null : state.note.trim();
       final userLang = authProvider.user?.lang?.name ?? 'en';
+
+      if (emotionalMoodId == null || spiritualMoodId == null) {
+        devLogger('Error: Mood IDs are missing');
+        return (partialSession: null, sessionId: null);
+      }
       
       final request = MoodSessionRequest(
         userId: userId,
         emotionalMoodId: emotionalMoodId,
         spiritualMoodId: spiritualMoodId,
-        note: state.note.trim().isEmpty ? null : state.note.trim(),
+        note: note,
         emotionLevel: null,
         lang: userLang,
       );
@@ -197,17 +241,44 @@ class AddMoodViewModel extends StateNotifier<AddMoodState> {
               value: 'true',
             );
             ref.read(profileViewModelProvider.notifier).invalidateStats();
-            return response?.sessionId;
+            
+            final sessionId = response?.sessionId;
+            if (sessionId == null) {
+              return (partialSession: null, sessionId: null);
+            }
+
+            final partialSession = MoodSession(
+              sessionId: sessionId,
+              date: DateTime.now(),
+              note: note,
+              emotional: MoodSessionDetails(
+                moodId: emotionalMoodId,
+                mood: emotionalMood,
+                sessionId: sessionId,
+                aiReflection: null,
+                aiVerse: null,
+              ),
+              spiritual: MoodSessionDetails(
+                moodId: spiritualMoodId,
+                mood: spiritualMood,
+                sessionId: sessionId,
+                aiReflection: null,
+                aiVerse: null,
+              ),
+              aiVerse: null,
+            );
+
+            return (partialSession: partialSession, sessionId: sessionId);
           }
         case Failure(exception: final exception):
           {
             devLogger('Error saving mood: $exception');
-            return null;
+            return (partialSession: null, sessionId: null);
           }
       }
     } catch (e) {
       devLogger('Error saving mood: $e');
-      return null;
+      return (sessionId: null, partialSession: null);
     }
   }
 }
