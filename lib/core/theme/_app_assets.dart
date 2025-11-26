@@ -63,6 +63,8 @@ abstract class AppIcons {
   static const shieldCheckIcon = 'assets/icons/ic_shield_check.svg';
   static const handshakeIcon = 'assets/icons/ic_handshake.svg';
   static const editIcon = 'assets/icons/ic_edit.svg';
+  static const lineChartIcon = 'assets/icons/ic_line_chart.svg';
+  static const noAdsIcon = 'assets/icons/ic_no_ads.svg';
 }
 
 abstract class AppAnimations {

@@ -348,5 +348,17 @@
   "reviewRequestTitle": "Enjoying your experience?",
   "reviewRequestContent": "Your feedback helps us improve and inspires others on their faith journey.",
   "reviewButton": "Leave a Review",
-  "neverAskButton": "Don’t Ask Again"
+  "neverAskButton": "Don't Ask Again",
+  "premiumRequestTitle": "Elevate Your Spiritual Journey",
+  "premiumRequestSubtitle": "Experience deeper faith with exclusive premium features.",
+  "premiumStartNowButton": "Start Now",
+
+  "premiumBenefit1Title": "Exclusive Devotionals",
+  "premiumBenefit1Subtitle": "Access premium guided devotionals.",
+
+  "premiumBenefit2Title": "Full Mood Insights",
+  "premiumBenefit2Subtitle": "See full emotional and spiritual patterns.",
+
+  "premiumBenefit3Title": "Ad-Free Experience",
+  "premiumBenefit3Subtitle": "Enjoy a peaceful space with no interruptions."
 }

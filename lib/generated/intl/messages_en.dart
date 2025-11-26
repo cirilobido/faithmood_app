@@ -352,7 +352,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameMustBeAtLeast3CharactersLong": MessageLookupByLibrary.simpleMessage(
       "Your name must be at least 3 characters long.",
     ),
-    "neverAskButton": MessageLookupByLibrary.simpleMessage("Don’t Ask Again"),
+    "neverAskButton": MessageLookupByLibrary.simpleMessage("Don\'t Ask Again"),
     "neverStored": MessageLookupByLibrary.simpleMessage("never stored"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -437,6 +437,31 @@ class MessageLookup extends MessageLookupByLibrary {
       "Predominant spiritual mood: ",
     ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
+    "premiumBenefit1Subtitle": MessageLookupByLibrary.simpleMessage(
+      "Access premium guided devotionals.",
+    ),
+    "premiumBenefit1Title": MessageLookupByLibrary.simpleMessage(
+      "Exclusive Devotionals",
+    ),
+    "premiumBenefit2Subtitle": MessageLookupByLibrary.simpleMessage(
+      "See full emotional and spiritual patterns.",
+    ),
+    "premiumBenefit2Title": MessageLookupByLibrary.simpleMessage(
+      "Full Mood Insights",
+    ),
+    "premiumBenefit3Subtitle": MessageLookupByLibrary.simpleMessage(
+      "Enjoy a peaceful space with no interruptions.",
+    ),
+    "premiumBenefit3Title": MessageLookupByLibrary.simpleMessage(
+      "Ad-Free Experience",
+    ),
+    "premiumRequestSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Experience deeper faith with exclusive premium features.",
+    ),
+    "premiumRequestTitle": MessageLookupByLibrary.simpleMessage(
+      "Elevate Your Spiritual Journey",
+    ),
+    "premiumStartNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
     "preparingLearning": MessageLookupByLibrary.simpleMessage(
       "Preparing your guidance...",
     ),

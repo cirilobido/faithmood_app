@@ -17,6 +17,9 @@ abstract class ReviewDao {
   Future<bool> getReviewedInOnboarding();
   Future<void> setReviewedInOnboarding(bool value);
   Future<bool> shouldShowReviewPrompt();
+  Future<DateTime?> getLastPremiumPromptDate();
+  Future<void> saveLastPremiumPromptDate(DateTime date);
+  Future<bool> shouldShowPremiumPrompt();
 }
 
 class ReviewDaoImpl implements ReviewDao {
@@ -133,6 +136,59 @@ class ReviewDaoImpl implements ReviewDao {
       return daysSinceLastPrompt >= 15;
     } else {
       return daysSinceLastPrompt >= 15;
+    }
+  }
+
+  @override
+  Future<DateTime?> getLastPremiumPromptDate() async {
+    final dateString = await secureStorage.getValue(
+      key: Constant.lastPremiumPromptDateKey,
+    );
+    if (dateString == null) return null;
+    try {
+      return DateTime.parse(dateString);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> saveLastPremiumPromptDate(DateTime date) async {
+    await secureStorage.saveValue(
+      key: Constant.lastPremiumPromptDateKey,
+      value: date.toIso8601String(),
+    );
+  }
+
+  @override
+  Future<bool> shouldShowPremiumPrompt() async {
+    final now = DateTime.now();
+    final installationDate = await getAppInstallationDate();
+    final lastPromptDate = await getLastPremiumPromptDate();
+
+    DateTime effectiveInstallationDate;
+    if (installationDate == null) {
+      effectiveInstallationDate = now;
+      await saveAppInstallationDate(now);
+      return false;
+    } else {
+      effectiveInstallationDate = installationDate;
+    }
+
+    if (lastPromptDate == null) {
+      final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
+      return daysSinceInstall >= 1;
+    }
+
+    final daysSinceLastPrompt = now.difference(lastPromptDate).inDays;
+    final daysSinceInstall = now.difference(effectiveInstallationDate).inDays;
+    
+    if (daysSinceInstall < 6) {
+      return daysSinceLastPrompt >= 5;
+    } else if (daysSinceInstall < 16) {
+      return daysSinceLastPrompt >= 10;
+    } else {
+      return daysSinceLastPrompt >= 10;
     }
   }
 }

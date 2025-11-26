@@ -22,15 +22,31 @@ class _HomeViewState extends ConsumerState<HomeView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkAndShowReviewModal();
+      _checkAndShowModals();
     });
   }
 
-  Future<void> _checkAndShowReviewModal() async {
+  Future<void> _checkAndShowModals() async {
     if (!mounted) return;
     final vm = ref.read(homeViewModelProvider.notifier);
-    final shouldShow = await vm.shouldShowReviewModal();
-    if (shouldShow && mounted) {
+    
+    final shouldShowPremium = await vm.shouldShowPremiumModal();
+    if (shouldShowPremium && mounted) {
+      PremiumRequestModal.show(
+        context: context,
+        onPremium: () {
+          vm.onPremiumTapped();
+          context.push(Routes.subscription);
+        },
+        onMaybeLater: () {
+          vm.onPremiumTapped();
+        },
+      );
+      return;
+    }
+
+    final shouldShowReview = await vm.shouldShowReviewModal();
+    if (shouldShowReview && mounted) {
       ReviewRequestModal.show(
         context: context,
         onReview: () => vm.onReviewTapped(),

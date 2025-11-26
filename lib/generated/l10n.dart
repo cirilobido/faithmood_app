@@ -2979,11 +2979,101 @@ class S {
     );
   }
 
-  /// `Don’t Ask Again`
+  /// `Don't Ask Again`
   String get neverAskButton {
     return Intl.message(
-      'Don’t Ask Again',
+      'Don\'t Ask Again',
       name: 'neverAskButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Elevate Your Spiritual Journey`
+  String get premiumRequestTitle {
+    return Intl.message(
+      'Elevate Your Spiritual Journey',
+      name: 'premiumRequestTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Experience deeper faith with exclusive premium features.`
+  String get premiumRequestSubtitle {
+    return Intl.message(
+      'Experience deeper faith with exclusive premium features.',
+      name: 'premiumRequestSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Now`
+  String get premiumStartNowButton {
+    return Intl.message(
+      'Start Now',
+      name: 'premiumStartNowButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exclusive Devotionals`
+  String get premiumBenefit1Title {
+    return Intl.message(
+      'Exclusive Devotionals',
+      name: 'premiumBenefit1Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Access premium guided devotionals.`
+  String get premiumBenefit1Subtitle {
+    return Intl.message(
+      'Access premium guided devotionals.',
+      name: 'premiumBenefit1Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Mood Insights`
+  String get premiumBenefit2Title {
+    return Intl.message(
+      'Full Mood Insights',
+      name: 'premiumBenefit2Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See full emotional and spiritual patterns.`
+  String get premiumBenefit2Subtitle {
+    return Intl.message(
+      'See full emotional and spiritual patterns.',
+      name: 'premiumBenefit2Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ad-Free Experience`
+  String get premiumBenefit3Title {
+    return Intl.message(
+      'Ad-Free Experience',
+      name: 'premiumBenefit3Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enjoy a peaceful space with no interruptions.`
+  String get premiumBenefit3Subtitle {
+    return Intl.message(
+      'Enjoy a peaceful space with no interruptions.',
+      name: 'premiumBenefit3Subtitle',
       desc: '',
       args: [],
     );

@@ -509,4 +509,22 @@ class HomeViewModel extends StateNotifier<HomeState> {
       parameters: {'screen': 'home_screen'},
     );
   }
+
+  bool isUserPremium() {
+    final user = authProvider.user;
+    return user?.planType == PlanName.PREMIUM;
+  }
+
+  Future<bool> shouldShowPremiumModal() async {
+    if (isUserPremium()) return false;
+    return await reviewDao.shouldShowPremiumPrompt();
+  }
+
+  Future<void> onPremiumTapped() async {
+    await reviewDao.saveLastPremiumPromptDate(DateTime.now());
+    firebaseAnalyticProvider.logEvent(
+      name: 'premium_modal_tapped',
+      parameters: {'screen': 'home_screen'},
+    );
+  }
 }

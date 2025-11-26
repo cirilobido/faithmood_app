@@ -346,5 +346,17 @@
   "reviewRequestTitle": "¿Disfrutando tu experiencia?",
   "reviewRequestContent": "Tu opinión nos ayuda a mejorar e inspira a otros en su jornada de fe.",
   "reviewButton": "Calificar",
-  "neverAskButton": "No Preguntar Más"
+  "neverAskButton": "No Preguntar Más",
+  "premiumRequestTitle": "Eleva tu camino espiritual",
+  "premiumRequestSubtitle": "Vive una fe más profunda con funciones premium exclusivas.",
+  "premiumStartNowButton": "Comenzar ahora",
+
+  "premiumBenefit1Title": "Devocionales exclusivos",
+  "premiumBenefit1Subtitle": "Accede a devocionales premium.",
+
+  "premiumBenefit2Title": "Estadísticas completas",
+  "premiumBenefit2Subtitle": "Visualiza tus patrones emocionales y espirituales.",
+
+  "premiumBenefit3Title": "Sin anuncios",
+  "premiumBenefit3Subtitle": "Disfruta un espacio tranquilo sin interrupciones."
 }

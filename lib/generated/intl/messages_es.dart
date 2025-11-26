@@ -437,6 +437,33 @@ class MessageLookup extends MessageLookupByLibrary {
       "Mood espiritual predominante: ",
     ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
+    "premiumBenefit1Subtitle": MessageLookupByLibrary.simpleMessage(
+      "Accede a devocionales premium.",
+    ),
+    "premiumBenefit1Title": MessageLookupByLibrary.simpleMessage(
+      "Devocionales exclusivos",
+    ),
+    "premiumBenefit2Subtitle": MessageLookupByLibrary.simpleMessage(
+      "Visualiza tus patrones emocionales y espirituales.",
+    ),
+    "premiumBenefit2Title": MessageLookupByLibrary.simpleMessage(
+      "Estadísticas completas",
+    ),
+    "premiumBenefit3Subtitle": MessageLookupByLibrary.simpleMessage(
+      "Disfruta un espacio tranquilo sin interrupciones.",
+    ),
+    "premiumBenefit3Title": MessageLookupByLibrary.simpleMessage(
+      "Sin anuncios",
+    ),
+    "premiumRequestSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Vive una fe más profunda con funciones premium exclusivas.",
+    ),
+    "premiumRequestTitle": MessageLookupByLibrary.simpleMessage(
+      "Eleva tu camino espiritual",
+    ),
+    "premiumStartNowButton": MessageLookupByLibrary.simpleMessage(
+      "Comenzar ahora",
+    ),
     "preparingLearning": MessageLookupByLibrary.simpleMessage(
       "Preparando tu guía...",
     ),

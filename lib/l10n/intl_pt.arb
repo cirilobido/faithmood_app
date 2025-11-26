@@ -397,5 +397,17 @@
   "reviewRequestTitle": "Gostando da sua experiência?",
   "reviewRequestContent": "Seu feedback nos ajuda a melhorar e inspira outras pessoas em sua jornada de fé.",
   "reviewButton": "Avaliar",
-  "neverAskButton": "Não Perguntar Mais"
+  "neverAskButton": "Não Perguntar Mais",
+  "premiumRequestTitle": "Eleve sua jornada espiritual",
+  "premiumRequestSubtitle": "Viva uma fé mais profunda com recursos premium exclusivos.",
+  "premiumStartNowButton": "Começar agora",
+
+  "premiumBenefit1Title": "Devocionais exclusivos",
+  "premiumBenefit1Subtitle": "Acesse devocionais premium.",
+
+  "premiumBenefit2Title": "Insights completos",
+  "premiumBenefit2Subtitle": "Veja seus padrões emocionais e espirituais.",
+
+  "premiumBenefit3Title": "Sem anúncios",
+  "premiumBenefit3Subtitle": "Desfrute de um espaço tranquilo, sem interrupções."
 }
