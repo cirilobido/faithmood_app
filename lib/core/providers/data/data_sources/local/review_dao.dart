@@ -20,6 +20,9 @@ abstract class ReviewDao {
   Future<DateTime?> getLastPremiumPromptDate();
   Future<void> saveLastPremiumPromptDate(DateTime date);
   Future<bool> shouldShowPremiumPrompt();
+  Future<String?> getLastPremiumModalType();
+  Future<void> saveLastPremiumModalType(String type);
+  Future<String> getPremiumModalTypeToShow();
 }
 
 class ReviewDaoImpl implements ReviewDao {
@@ -189,6 +192,31 @@ class ReviewDaoImpl implements ReviewDao {
       return daysSinceLastPrompt >= 10;
     } else {
       return daysSinceLastPrompt >= 10;
+    }
+  }
+
+  @override
+  Future<String?> getLastPremiumModalType() async {
+    return await secureStorage.getValue(
+      key: Constant.lastPremiumModalTypeKey,
+    );
+  }
+
+  @override
+  Future<void> saveLastPremiumModalType(String type) async {
+    await secureStorage.saveValue(
+      key: Constant.lastPremiumModalTypeKey,
+      value: type,
+    );
+  }
+
+  @override
+  Future<String> getPremiumModalTypeToShow() async {
+    final lastType = await getLastPremiumModalType();
+    if (lastType == null || lastType == 'simple') {
+      return 'detailed';
+    } else {
+      return 'simple';
     }
   }
 }

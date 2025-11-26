@@ -32,16 +32,30 @@ class _HomeViewState extends ConsumerState<HomeView> {
     
     final shouldShowPremium = await vm.shouldShowPremiumModal();
     if (shouldShowPremium && mounted) {
-      PremiumRequestModal.show(
-        context: context,
-        onPremium: () {
-          vm.onPremiumTapped();
-          context.push(Routes.subscription);
-        },
-        onMaybeLater: () {
-          vm.onPremiumTapped();
-        },
-      );
+      final modalType = await vm.getPremiumModalType();
+      if (modalType == 'detailed') {
+        PremiumRequestModal.show(
+          context: context,
+          onPremium: () {
+            vm.onPremiumTapped(modalType: 'detailed');
+            context.push(Routes.subscription);
+          },
+          onMaybeLater: () {
+            vm.onPremiumTapped(modalType: 'detailed');
+          },
+        );
+      } else {
+        PremiumRequestSimpleModal.show(
+          context: context,
+          onPremium: () {
+            vm.onPremiumTapped(modalType: 'simple');
+            context.push(Routes.subscription);
+          },
+          onMaybeLater: () {
+            vm.onPremiumTapped(modalType: 'simple');
+          },
+        );
+      }
       return;
     }
 

@@ -38,6 +38,7 @@ class Constant {
   static const reviewNeverAskKey = 'review_never_ask';
   static const reviewedInOnboardingKey = 'reviewed_in_onboarding';
   static const lastPremiumPromptDateKey = 'last_premium_prompt_date';
+  static const lastPremiumModalTypeKey = 'last_premium_modal_type';
 
   
   static const admobBannerAdUnitId = 'ca-app-pub-3940256099942544/9214589741';

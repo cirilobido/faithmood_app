@@ -520,11 +520,16 @@ class HomeViewModel extends StateNotifier<HomeState> {
     return await reviewDao.shouldShowPremiumPrompt();
   }
 
-  Future<void> onPremiumTapped() async {
+  Future<String> getPremiumModalType() async {
+    return await reviewDao.getPremiumModalTypeToShow();
+  }
+
+  Future<void> onPremiumTapped({required String modalType}) async {
     await reviewDao.saveLastPremiumPromptDate(DateTime.now());
+    await reviewDao.saveLastPremiumModalType(modalType);
     firebaseAnalyticProvider.logEvent(
       name: 'premium_modal_tapped',
-      parameters: {'screen': 'home_screen'},
+      parameters: {'screen': 'home_screen', 'modal_type': modalType},
     );
   }
 }
