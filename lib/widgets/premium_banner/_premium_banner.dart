@@ -39,65 +39,83 @@ class _PremiumBannerConditionalState
   }
 
   Future<void> _checkShouldShow() async {
-    final auth = ref.read(auth_prov.authProvider);
-    final reviewUseCase = ref.read(reviewUseCaseProvider);
+    if (!mounted) return;
+    
+    try {
+      final auth = ref.read(auth_prov.authProvider);
+      if (!mounted) return;
+      
+      final isPremium = auth.user?.planType == PlanName.PREMIUM;
+      if (isPremium) {
+        if (mounted) {
+          setState(() {
+            _shouldShow = false;
+            _isLoading = false;
+          });
+        }
+        return;
+      }
 
-    final isPremium = auth.user?.planType == PlanName.PREMIUM;
-    if (isPremium) {
+      final reviewUseCase = ref.read(reviewUseCaseProvider);
+      if (!mounted) return;
+
+      final dismissedResult = await reviewUseCase.getPremiumBannerDismissed();
+      if (!mounted) return;
+      
+      bool isDismissed = false;
+      switch (dismissedResult) {
+        case Success(value: final value):
+          isDismissed = value;
+        case Failure():
+          break;
+      }
+      if (isDismissed) {
+        if (mounted) {
+          setState(() {
+            _shouldShow = false;
+            _isLoading = false;
+          });
+        }
+        return;
+      }
+
+      final installationDateResult = await reviewUseCase.getAppInstallationDate();
+      if (!mounted) return;
+      
+      DateTime? installationDate;
+      switch (installationDateResult) {
+        case Success(value: final value):
+          installationDate = value;
+        case Failure():
+          break;
+      }
+
+      if (installationDate == null) {
+        final now = DateTime.now();
+        await reviewUseCase.saveAppInstallationDate(now);
+        if (mounted) {
+          setState(() {
+            _shouldShow = false;
+            _isLoading = false;
+          });
+        }
+        return;
+      }
+
+      final daysSinceInstall = DateTime.now().difference(installationDate).inDays;
+      if (mounted) {
+        setState(() {
+          _shouldShow = daysSinceInstall >= 1;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
       if (mounted) {
         setState(() {
           _shouldShow = false;
           _isLoading = false;
         });
       }
-      return;
-    }
-
-    final dismissedResult = await reviewUseCase.getPremiumBannerDismissed();
-    bool isDismissed = false;
-    switch (dismissedResult) {
-      case Success(value: final value):
-        isDismissed = value;
-      case Failure():
-        break;
-    }
-    if (isDismissed) {
-      if (mounted) {
-        setState(() {
-          _shouldShow = false;
-          _isLoading = false;
-        });
-      }
-      return;
-    }
-
-    final installationDateResult = await reviewUseCase.getAppInstallationDate();
-    DateTime? installationDate;
-    switch (installationDateResult) {
-      case Success(value: final value):
-        installationDate = value;
-      case Failure():
-        break;
-    }
-
-    if (installationDate == null) {
-      final now = DateTime.now();
-      await reviewUseCase.saveAppInstallationDate(now);
-      if (mounted) {
-        setState(() {
-          _shouldShow = false;
-          _isLoading = false;
-        });
-      }
-      return;
-    }
-
-    final daysSinceInstall = DateTime.now().difference(installationDate).inDays;
-    if (mounted) {
-      setState(() {
-        _shouldShow = daysSinceInstall >= 1;
-        _isLoading = false;
-      });
     }
   }
 
@@ -134,39 +152,61 @@ class _PremiumBannerState extends ConsumerState<PremiumBanner> {
   }
 
   Future<void> _checkDismissalState() async {
-    final reviewUseCase = ref.read(reviewUseCaseProvider);
-    final result = await reviewUseCase.getPremiumBannerDismissed();
+    if (!mounted) return;
+    
+    try {
+      final reviewUseCase = ref.read(reviewUseCaseProvider);
+      if (!mounted) return;
+      
+      final result = await reviewUseCase.getPremiumBannerDismissed();
+      if (!mounted) return;
 
-    switch (result) {
-      case Success(value: final value):
-        if (mounted) {
-          setState(() {
-            _isDismissed = value;
-            _isLoading = false;
-          });
-        }
-      case Failure():
-        if (mounted) {
-          setState(() {
-            _isLoading = false;
-          });
-        }
+      switch (result) {
+        case Success(value: final value):
+          if (mounted) {
+            setState(() {
+              _isDismissed = value;
+              _isLoading = false;
+            });
+          }
+        case Failure():
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+          }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
   Future<void> _dismissBanner() async {
-    final reviewUseCase = ref.read(reviewUseCaseProvider);
-    final result = await reviewUseCase.setPremiumBannerDismissed(true);
+    if (!mounted) return;
+    
+    try {
+      final reviewUseCase = ref.read(reviewUseCaseProvider);
+      if (!mounted) return;
+      
+      final result = await reviewUseCase.setPremiumBannerDismissed(true);
+      if (!mounted) return;
 
-    switch (result) {
-      case Success():
-        if (mounted) {
-          setState(() {
-            _isDismissed = true;
-          });
-        }
-      case Failure():
-        break;
+      switch (result) {
+        case Success():
+          if (mounted) {
+            setState(() {
+              _isDismissed = true;
+            });
+          }
+        case Failure():
+          break;
+      }
+    } catch (e) {
+      // Silently handle errors during dismiss
     }
   }
 

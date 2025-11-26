@@ -82,6 +82,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
     DateTime? weekStartDate,
     DateTime? weekEndDate,
   }) {
+    if (!mounted) return;
     state = state.copyWith(
       isLoading: isLoading,
       error: error,
@@ -159,9 +160,11 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<void> _loadDailyVerse() async {
     try {
+      if (!mounted) return;
       updateState(isLoading: true, error: false);
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await verseUseCase.getDailyVerse(userLang);
+      if (!mounted) return;
 
       switch (result) {
         case Success(value: final verse):
@@ -180,7 +183,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
       }
     } catch (e) {
       devLogger('Error loading daily verse: $e');
-      updateState(isLoading: false, error: true);
+      if (mounted) {
+        updateState(isLoading: false, error: true);
+      }
     }
   }
 
@@ -204,9 +209,11 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<void> _loadDailyDevotional() async {
     try {
+      if (!mounted) return;
       updateState(isLoadingDevotional: true, errorDevotional: false);
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await devotionalUseCase.getDailyDevotional(userLang);
+      if (!mounted) return;
 
       switch (result) {
         case Success(value: final devotional):
@@ -228,7 +235,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
       }
     } catch (e) {
       devLogger('Error loading daily devotional: $e');
-      updateState(isLoadingDevotional: false, errorDevotional: true);
+      if (mounted) {
+        updateState(isLoadingDevotional: false, errorDevotional: true);
+      }
     }
   }
 
@@ -265,14 +274,19 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<void> _loadMoods() async {
     try {
+      if (!mounted) return;
       updateState(isLoadingMoods: true);
       final userLang = authProvider.user?.lang?.name ?? Lang.en.name;
       final result = await moodUseCase.getMoods(userLang);
+      if (!mounted) return;
 
       switch (result) {
         case Success(value: final moods):
           {
-            ref.read(cachedMoodsProvider.notifier).setMoods(moods, userLang);
+            if (mounted) {
+              ref.read(cachedMoodsProvider.notifier).setMoods(moods, userLang);
+            }
+            if (!mounted) return;
             
             final targetKeys = [
               'happy',
@@ -302,7 +316,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
       }
     } catch (e) {
       devLogger('Error loading moods: $e');
-      updateState(isLoadingMoods: false);
+      if (mounted) {
+        updateState(isLoadingMoods: false);
+      }
     }
   }
 
@@ -404,6 +420,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<void> _loadWeekMoods({bool forceRefresh = false}) async {
     try {
+      if (!mounted) return;
       updateState(isLoadingWeekMoods: true);
       final userId = authProvider.user?.id;
       if (userId == null) {
@@ -425,6 +442,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
         endDate,
         forceRefresh: forceRefresh,
       );
+      if (!mounted) return;
 
       switch (result) {
         case Success(value: final analytics):
@@ -433,6 +451,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
               List<Mood> moods = state.moods;
               if (moods.isEmpty) {
                 moods = await _loadMoodsForAnalytics();
+                if (!mounted) return;
               }
               final groupedSessions = _convertAnalyticsToMoodSessions(
                 analytics,
@@ -456,7 +475,9 @@ class HomeViewModel extends StateNotifier<HomeState> {
       }
     } catch (e) {
       devLogger('Error loading week moods: $e');
-      updateState(isLoadingWeekMoods: false);
+      if (mounted) {
+        updateState(isLoadingWeekMoods: false);
+      }
     }
   }
 
