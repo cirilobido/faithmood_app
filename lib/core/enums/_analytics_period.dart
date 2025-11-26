@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
+
 enum AnalyticsPeriod {
   thisWeek('this_week'),
   lastWeek('last_week'),
@@ -16,15 +18,17 @@ enum AnalyticsPeriod {
   }) {
     if (type == null) return null;
 
+    final lang = S.of(context);
+
     switch (type) {
       case AnalyticsPeriod.thisWeek:
-        return 'This Week';
+        return lang.thisWeek;
       case AnalyticsPeriod.lastWeek:
-        return 'Last Week';
+        return lang.lastWeek;
       case AnalyticsPeriod.thisMonth:
-        return 'This Month';
+        return lang.thisMonth;
       case AnalyticsPeriod.lastMonth:
-        return 'Last Month';
+        return lang.lastMonth;
     }
   }
 }

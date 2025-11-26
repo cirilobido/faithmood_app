@@ -439,4 +439,12 @@ class HomeViewModel extends StateNotifier<HomeState> {
   Future<void> refreshWeekMoods() async {
     await _loadWeekMoods(forceRefresh: true);
   }
+
+  Future<void> refreshDailyVerse() async {
+    await _loadDailyVerse();
+  }
+
+  Future<void> refreshMoods() async {
+    await _loadMoods();
+  }
 }

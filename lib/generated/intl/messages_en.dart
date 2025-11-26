@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Account"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage("Add Mood Entry"),
+    "addToFavorites": MessageLookupByLibrary.simpleMessage("Add to favorites"),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage("Add to My Journal"),
     "adfreeExperience": MessageLookupByLibrary.simpleMessage(
       "🚫 Ad-Free Experience",
@@ -44,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Allow Notifications",
     ),
     "and": MessageLookupByLibrary.simpleMessage("and"),
+    "appDisplayName": MessageLookupByLibrary.simpleMessage("FaithMood"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("App Language"),
     "appName": MessageLookupByLibrary.simpleMessage("Your name"),
     "appTheme": MessageLookupByLibrary.simpleMessage("App Theme"),
@@ -271,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
       "📖 Have you ever followed a guided faith plan?",
     ),
+    "hasNote": MessageLookupByLibrary.simpleMessage("Has Note"),
     "heyHowAreYouFeelingToday": MessageLookupByLibrary.simpleMessage(
       "Hey ###, how are you feeling today?",
     ),
@@ -314,6 +317,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Key Learnings"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "lastMonth": MessageLookupByLibrary.simpleMessage("Last Month"),
+    "lastWeek": MessageLookupByLibrary.simpleMessage("Last Week"),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Leave Rating"),
     "light": MessageLookupByLibrary.simpleMessage("Light"),
     "localeName": MessageLookupByLibrary.simpleMessage("English"),
@@ -360,6 +365,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noJournalEntries": MessageLookupByLibrary.simpleMessage(
       "No journal entries.",
     ),
+    "noMoodsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No moods available",
+    ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No payment required now",
     ),
@@ -368,6 +376,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
       "No tags available",
+    ),
+    "noVoicesAvailable": MessageLookupByLibrary.simpleMessage(
+      "No voices available",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Note saved successfully.",
@@ -396,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordRestoredSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Your password has been reset successfully.",
     ),
+    "pause": MessageLookupByLibrary.simpleMessage("Pause"),
     "paywallSubtitle": MessageLookupByLibrary.simpleMessage(
       "Discover a calm, ad-free space designed to nurture your faith with reflection and growth.",
     ),
@@ -411,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberLengthError": MessageLookupByLibrary.simpleMessage(
       "The phone number must be between 10 and 15 digits long.",
     ),
+    "play": MessageLookupByLibrary.simpleMessage("Play"),
     "pleaseFillAllTheFieldsWithValidData": MessageLookupByLibrary.simpleMessage(
       "Please fill all fields with valid information.",
     ),
@@ -496,6 +509,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderSetMessage": MessageLookupByLibrary.simpleMessage(
       "Your daily reminder is set for this time each day.",
     ),
+    "removeFromFavorites": MessageLookupByLibrary.simpleMessage(
+      "Remove from favorites",
+    ),
     "removeReminder": MessageLookupByLibrary.simpleMessage("Remove Reminder"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
@@ -512,6 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Choose the mood of your heart before God.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Select Tag"),
+    "selectVoice": MessageLookupByLibrary.simpleMessage("Select Voice"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Select your language",
     ),
@@ -520,6 +537,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "setReminder": MessageLookupByLibrary.simpleMessage("Set Reminder"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "share": MessageLookupByLibrary.simpleMessage("Share"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Share App"),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
     "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
@@ -611,9 +629,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required.",
     ),
+    "thisMonth": MessageLookupByLibrary.simpleMessage("This Month"),
     "thisUsedForAllYourMoodAnalysis": MessageLookupByLibrary.simpleMessage(
       "This is used for all your mood analysis.",
     ),
+    "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
     "tip": MessageLookupByLibrary.simpleMessage("Tip"),
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "Today\'s Encouragement",
@@ -696,6 +716,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
       "Your Spiritual Mood",
     ),
+    "withNote": MessageLookupByLibrary.simpleMessage("With Note"),
+    "withoutNote": MessageLookupByLibrary.simpleMessage("Without Note"),
     "writeWhatsOnYourHeart": MessageLookupByLibrary.simpleMessage(
       "Write what’s on your heart — your feelings, your prayers, or what you learned today.",
     ),

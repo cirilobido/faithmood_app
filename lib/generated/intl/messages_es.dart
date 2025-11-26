@@ -26,6 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Cuenta"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage("Agregar mood"),
+    "addToFavorites": MessageLookupByLibrary.simpleMessage(
+      "Agregar a favoritos",
+    ),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage(
       "Agregar a mi diario",
     ),
@@ -48,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Permitir notificaciones",
     ),
     "and": MessageLookupByLibrary.simpleMessage("y"),
+    "appDisplayName": MessageLookupByLibrary.simpleMessage("FaithMood"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("Idioma de la app"),
     "appName": MessageLookupByLibrary.simpleMessage("Tu nombre"),
     "appTheme": MessageLookupByLibrary.simpleMessage("Tema de la app"),
@@ -267,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
       "📖 ¿Has seguido antes un plan guiado de fe?",
     ),
+    "hasNote": MessageLookupByLibrary.simpleMessage("Tiene nota"),
     "heyHowAreYouFeelingToday": MessageLookupByLibrary.simpleMessage(
       "Hola ###, ¿cómo te sientes hoy?",
     ),
@@ -312,6 +317,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizajes clave"),
     "language": MessageLookupByLibrary.simpleMessage("Idioma"),
+    "lastMonth": MessageLookupByLibrary.simpleMessage("Mes Pasado"),
+    "lastWeek": MessageLookupByLibrary.simpleMessage("Semana Pasada"),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Dejar valoración"),
     "light": MessageLookupByLibrary.simpleMessage("Claro"),
     "localeName": MessageLookupByLibrary.simpleMessage("Español"),
@@ -358,6 +365,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noJournalEntries": MessageLookupByLibrary.simpleMessage(
       "No hay entradas en tu diario.",
     ),
+    "noMoodsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No hay moods disponibles",
+    ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ No se requiere pago ahora",
     ),
@@ -366,6 +376,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
       "No hay etiquetas disponibles",
+    ),
+    "noVoicesAvailable": MessageLookupByLibrary.simpleMessage(
+      "No hay voces disponibles",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Nota guardada correctamente.",
@@ -394,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordRestoredSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Tu contraseña ha sido restablecida correctamente.",
     ),
+    "pause": MessageLookupByLibrary.simpleMessage("Pausar"),
     "paywallSubtitle": MessageLookupByLibrary.simpleMessage(
       "Descubre un espacio sereno, sin anuncios, creado para nutrir tu fe con reflexión y crecimiento.",
     ),
@@ -409,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberLengthError": MessageLookupByLibrary.simpleMessage(
       "El número de teléfono debe tener entre 10 y 15 dígitos.",
     ),
+    "play": MessageLookupByLibrary.simpleMessage("Reproducir"),
     "pleaseFillAllTheFieldsWithValidData": MessageLookupByLibrary.simpleMessage(
       "Completa todos los campos con datos válidos.",
     ),
@@ -496,6 +511,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderSetMessage": MessageLookupByLibrary.simpleMessage(
       "Tu recordatorio diario ha sido configurado para esta hora.",
     ),
+    "removeFromFavorites": MessageLookupByLibrary.simpleMessage(
+      "Quitar de favoritos",
+    ),
     "removeReminder": MessageLookupByLibrary.simpleMessage(
       "Eliminar recordatorio",
     ),
@@ -520,6 +538,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Elige el mood de tu corazón delante de Dios.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Seleccionar etiqueta"),
+    "selectVoice": MessageLookupByLibrary.simpleMessage("Seleccionar voz"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Selecciona tu idioma",
     ),
@@ -530,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Configurar recordatorio",
     ),
     "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
+    "share": MessageLookupByLibrary.simpleMessage("Compartir"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Compartir app"),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
     "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
@@ -621,9 +641,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "Este campo es obligatorio.",
     ),
+    "thisMonth": MessageLookupByLibrary.simpleMessage("Este Mes"),
     "thisUsedForAllYourMoodAnalysis": MessageLookupByLibrary.simpleMessage(
       "Esto se usará para analizar tus moods.",
     ),
+    "thisWeek": MessageLookupByLibrary.simpleMessage("Esta Semana"),
     "tip": MessageLookupByLibrary.simpleMessage("Consejo"),
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "Ánimo para hoy",
@@ -710,6 +732,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
       "Tu mood espiritual",
     ),
+    "withNote": MessageLookupByLibrary.simpleMessage("Con nota"),
+    "withoutNote": MessageLookupByLibrary.simpleMessage("Sin nota"),
     "writeWhatsOnYourHeart": MessageLookupByLibrary.simpleMessage(
       "Escribe lo que hay en tu corazón — tus sentimientos, tus oraciones o lo que aprendiste hoy.",
     ),

@@ -6,11 +6,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/core_exports.dart';
 import '../../dev_utils/dev_utils_exports.dart';
+import '../../features/home/_home_view_model.dart';
+import '../../features/profile/_profile_view_model.dart';
+import '../../features/devotionals/categories/_categories_view_model.dart';
+import '../../features/journal/_journal_view_model.dart';
 import '_settings_state.dart';
 
 final settingsViewModelProvider =
     StateNotifierProvider<SettingsViewModel, SettingsState>((ref) {
   return SettingsViewModel(
+    ref,
     ref.read(firebaseAnalyticProvider),
     ref.read(authProvider),
     ref.read(settingsProvider),
@@ -19,12 +24,14 @@ final settingsViewModelProvider =
 });
 
 class SettingsViewModel extends StateNotifier<SettingsState> {
+  final Ref ref;
   final FirebaseAnalyticProvider firebaseAnalyticProvider;
   final AuthProvider authProvider;
   final SettingsProvider settingsProvider;
   final AppLanguageProvider appLanguageProvider;
 
   SettingsViewModel(
+    this.ref,
     this.firebaseAnalyticProvider,
     this.authProvider,
     this.settingsProvider,
@@ -150,6 +157,72 @@ class SettingsViewModel extends StateNotifier<SettingsState> {
         name: 'error_launch_url',
         parameters: {'screen': 'settings_screen', 'error': e.toString()},
       );
+    }
+  }
+
+  Future<void> handleLanguageChange(Lang newLang) async {
+    try {
+      final currentUser = authProvider.user;
+      final currentLang = currentUser?.lang;
+      final hasLanguageChanged = currentLang != newLang;
+
+      if (hasLanguageChanged) {
+        if (currentUser != null) {
+          final updatedUser = currentUser.copyWith(lang: newLang);
+          await authProvider.updateUserData(updatedUser);
+        }
+
+        _refreshLanguageDependentData();
+
+        firebaseAnalyticProvider.logEvent(
+          name: 'language_changed',
+          parameters: {
+            'screen': 'settings_screen',
+            'old_lang': currentLang?.name ?? 'unknown',
+            'new_lang': newLang.name,
+            'user_logged_in': currentUser != null ? 'true' : 'false',
+          },
+        );
+      }
+    } catch (e) {
+      devLogger('Error changing language: $e');
+      firebaseAnalyticProvider.logEvent(
+        name: 'language_change_failed',
+        parameters: {'screen': 'settings_screen', 'error': e.toString()},
+      );
+    }
+  }
+
+  void _refreshLanguageDependentData() {
+    try {
+      ref.invalidate(categoriesViewModelProvider);
+      
+      final homeViewModel = ref.read(homeViewModelProvider.notifier);
+      homeViewModel.refreshDailyVerse();
+      homeViewModel.refreshMoods();
+      
+      final profileViewModel = ref.read(profileViewModelProvider.notifier);
+      profileViewModel.loadMoods();
+      final profileState = ref.read(profileViewModelProvider);
+      if (profileState.thisWeekStats != null) {
+        profileViewModel.getAnalytics(AnalyticsPeriod.thisWeek, forceRefresh: true);
+      }
+      if (profileState.thisMonthStats != null) {
+        profileViewModel.getAnalytics(AnalyticsPeriod.thisMonth, forceRefresh: true);
+      }
+      if (profileState.lastWeekStats != null) {
+        profileViewModel.getAnalytics(AnalyticsPeriod.lastWeek, forceRefresh: true);
+      }
+      if (profileState.lastMonthStats != null) {
+        profileViewModel.getAnalytics(AnalyticsPeriod.lastMonth, forceRefresh: true);
+      }
+      
+      final journalViewModel = ref.read(journalViewModelProvider.notifier);
+      journalViewModel.refreshMoods();
+      journalViewModel.refreshMoodSessions();
+      journalViewModel.refreshDevotionalLogs();
+    } catch (e) {
+      devLogger('Error refreshing language-dependent data: $e');
     }
   }
 }

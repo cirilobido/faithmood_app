@@ -49,7 +49,7 @@ class _JournalSortChipModalState extends ConsumerState<JournalSortChipModal> {
           ),
           const SizedBox(height: AppSizes.spacingLarge),
           Text(
-            'Sort By',
+            lang.sortBy,
             style: theme.textTheme.titleMedium,
           ),
           const SizedBox(height: AppSizes.spacingSmall),

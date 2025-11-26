@@ -329,5 +329,21 @@
   "greetingEveningSubtitle4": "Find peace in the quiet of this evening.",
   "greetingEveningSubtitle5": "Let your soul unwind in God’s care.",
   "journal": "Journal",
-  "faith": "Faith"
+  "faith": "Faith",
+  "noMoodsAvailable": "No moods available",
+  "hasNote": "Has Note",
+  "withNote": "With Note",
+  "withoutNote": "Without Note",
+  "play": "Play",
+  "pause": "Pause",
+  "share": "Share",
+  "addToFavorites": "Add to favorites",
+  "removeFromFavorites": "Remove from favorites",
+  "noVoicesAvailable": "No voices available",
+  "selectVoice": "Select Voice",
+  "appDisplayName": "FaithMood",
+  "thisWeek": "This Week",
+  "lastWeek": "Last Week",
+  "thisMonth": "This Month",
+  "lastMonth": "Last Month"
 }

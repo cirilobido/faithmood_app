@@ -2843,6 +2843,121 @@ class S {
   String get faith {
     return Intl.message('Faith', name: 'faith', desc: '', args: []);
   }
+
+  /// `No moods available`
+  String get noMoodsAvailable {
+    return Intl.message(
+      'No moods available',
+      name: 'noMoodsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Has Note`
+  String get hasNote {
+    return Intl.message('Has Note', name: 'hasNote', desc: '', args: []);
+  }
+
+  /// `With Note`
+  String get withNote {
+    return Intl.message('With Note', name: 'withNote', desc: '', args: []);
+  }
+
+  /// `Without Note`
+  String get withoutNote {
+    return Intl.message(
+      'Without Note',
+      name: 'withoutNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play`
+  String get play {
+    return Intl.message('Play', name: 'play', desc: '', args: []);
+  }
+
+  /// `Pause`
+  String get pause {
+    return Intl.message('Pause', name: 'pause', desc: '', args: []);
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message('Share', name: 'share', desc: '', args: []);
+  }
+
+  /// `Add to favorites`
+  String get addToFavorites {
+    return Intl.message(
+      'Add to favorites',
+      name: 'addToFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove from favorites`
+  String get removeFromFavorites {
+    return Intl.message(
+      'Remove from favorites',
+      name: 'removeFromFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No voices available`
+  String get noVoicesAvailable {
+    return Intl.message(
+      'No voices available',
+      name: 'noVoicesAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Voice`
+  String get selectVoice {
+    return Intl.message(
+      'Select Voice',
+      name: 'selectVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FaithMood`
+  String get appDisplayName {
+    return Intl.message(
+      'FaithMood',
+      name: 'appDisplayName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This Week`
+  String get thisWeek {
+    return Intl.message('This Week', name: 'thisWeek', desc: '', args: []);
+  }
+
+  /// `Last Week`
+  String get lastWeek {
+    return Intl.message('Last Week', name: 'lastWeek', desc: '', args: []);
+  }
+
+  /// `This Month`
+  String get thisMonth {
+    return Intl.message('This Month', name: 'thisMonth', desc: '', args: []);
+  }
+
+  /// `Last Month`
+  String get lastMonth {
+    return Intl.message('Last Month', name: 'lastMonth', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

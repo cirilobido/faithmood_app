@@ -84,13 +84,13 @@ class _JournalFilterModalState extends ConsumerState<JournalFilterModal> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Emotional Mood',
+                      lang.emotionalMood,
                       style: theme.textTheme.titleMedium,
                     ),
                     const SizedBox(height: AppSizes.spacingSmall),
                     if (emotionalMoods.isEmpty)
                       Text(
-                        'No moods available',
+                        lang.noMoodsAvailable,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.textTheme.labelSmall?.color,
                         ),
@@ -110,13 +110,13 @@ class _JournalFilterModalState extends ConsumerState<JournalFilterModal> {
                       }),
                     const SizedBox(height: AppSizes.spacingMedium),
                     Text(
-                      'Spiritual Mood',
+                      lang.spiritualMood,
                       style: theme.textTheme.titleMedium,
                     ),
                     const SizedBox(height: AppSizes.spacingSmall),
                     if (spiritualMoods.isEmpty)
                       Text(
-                        'No moods available',
+                        lang.noMoodsAvailable,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.textTheme.labelSmall?.color,
                         ),
@@ -136,7 +136,7 @@ class _JournalFilterModalState extends ConsumerState<JournalFilterModal> {
                       }),
                     const SizedBox(height: AppSizes.spacingMedium),
                     Text(
-                      'Has Note',
+                      lang.hasNote,
                       style: theme.textTheme.titleMedium,
                     ),
                     const SizedBox(height: AppSizes.spacingSmall),
@@ -148,7 +148,7 @@ class _JournalFilterModalState extends ConsumerState<JournalFilterModal> {
                           _hasNote = value;
                         });
                       },
-                      title: const Text('All'),
+                      title: Text(lang.all),
                     ),
                     RadioListTile<bool?>(
                       value: true,
@@ -158,7 +158,7 @@ class _JournalFilterModalState extends ConsumerState<JournalFilterModal> {
                           _hasNote = value;
                         });
                       },
-                      title: const Text('With Note'),
+                      title: Text(lang.withNote),
                     ),
                     RadioListTile<bool?>(
                       value: false,
@@ -168,7 +168,7 @@ class _JournalFilterModalState extends ConsumerState<JournalFilterModal> {
                           _hasNote = value;
                         });
                       },
-                      title: const Text('Without Note'),
+                      title: Text(lang.withoutNote),
                     ),
                   ],
                 ),

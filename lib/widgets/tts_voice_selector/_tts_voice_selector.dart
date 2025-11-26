@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/core_exports.dart';
+import '../../generated/l10n.dart';
 
 class TtsVoiceSelector extends StatelessWidget {
   final List<Map<String, String>> voices;
@@ -19,11 +20,13 @@ class TtsVoiceSelector extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
+    final lang = S.of(context);
+    
     if (voices.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(AppSizes.paddingMedium),
         child: Text(
-          'No voices available',
+          lang.noVoicesAvailable,
           textAlign: TextAlign.center,
           style: theme.textTheme.bodyLarge,
         ),
@@ -72,12 +75,13 @@ class TtsVoiceSelector extends StatelessWidget {
     required Function(String name, String locale) onVoiceSelected,
   }) {
     final theme = Theme.of(context);
+    final lang = S.of(context);
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            'Select Voice',
+            lang.selectVoice,
             textAlign: TextAlign.center,
             style: theme.textTheme.titleLarge,
           ),

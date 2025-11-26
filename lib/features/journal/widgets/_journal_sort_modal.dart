@@ -47,7 +47,7 @@ class _JournalSortModalState extends ConsumerState<JournalSortModal> {
             ),
             const SizedBox(height: AppSizes.spacingLarge),
             Text(
-              'Sort By',
+              lang.sortBy,
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: AppSizes.spacingSmall),
@@ -59,7 +59,7 @@ class _JournalSortModalState extends ConsumerState<JournalSortModal> {
                   _sortBy = value!;
                 });
               },
-              title: const Text('Date'),
+              title: Text(lang.date),
             ),
             RadioListTile<String>(
               value: 'emotionalMoodId',
@@ -69,7 +69,7 @@ class _JournalSortModalState extends ConsumerState<JournalSortModal> {
                   _sortBy = value!;
                 });
               },
-              title: const Text('Emotional Mood'),
+              title: Text(lang.emotionalMood),
             ),
             RadioListTile<String>(
               value: 'spiritualMoodId',
@@ -79,7 +79,7 @@ class _JournalSortModalState extends ConsumerState<JournalSortModal> {
                   _sortBy = value!;
                 });
               },
-              title: const Text('Spiritual Mood'),
+              title: Text(lang.spiritualMood),
             ),
             const SizedBox(height: AppSizes.spacingMedium),
             Text(

@@ -378,5 +378,21 @@
   "greetingEveningSubtitle4": "Encontre paz no silêncio desta noite.",
   "greetingEveningSubtitle5": "Deixe sua alma descansar no cuidado de Deus.",
   "journal": "Diário",
-  "faith": "Fé"
+  "faith": "Fé",
+  "noMoodsAvailable": "Nenhum mood disponível",
+  "hasNote": "Tem nota",
+  "withNote": "Com nota",
+  "withoutNote": "Sem nota",
+  "play": "Reproduzir",
+  "pause": "Pausar",
+  "share": "Compartilhar",
+  "addToFavorites": "Adicionar aos favoritos",
+  "removeFromFavorites": "Remover dos favoritos",
+  "noVoicesAvailable": "Nenhuma voz disponível",
+  "selectVoice": "Selecionar voz",
+  "appDisplayName": "FaithMood",
+  "thisWeek": "Esta semana",
+  "lastWeek": "Semana passada",
+  "thisMonth": "Este mês",
+  "lastMonth": "Mês passado"
 }

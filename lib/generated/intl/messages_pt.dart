@@ -26,6 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Conta"),
     "addMoodEntry": MessageLookupByLibrary.simpleMessage("Adicionar Mood"),
+    "addToFavorites": MessageLookupByLibrary.simpleMessage(
+      "Adicionar aos favoritos",
+    ),
     "addToMyJournal": MessageLookupByLibrary.simpleMessage(
       "Adicionar ao Meu Diário",
     ),
@@ -48,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Permitir Notificações",
     ),
     "and": MessageLookupByLibrary.simpleMessage("e"),
+    "appDisplayName": MessageLookupByLibrary.simpleMessage("FaithMood"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("Idioma do App"),
     "appName": MessageLookupByLibrary.simpleMessage("Seu nome"),
     "appTheme": MessageLookupByLibrary.simpleMessage("Tema do App"),
@@ -275,6 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "guidedPlanTitle": MessageLookupByLibrary.simpleMessage(
       "📖 Você já seguiu um plano guiado de fé?",
     ),
+    "hasNote": MessageLookupByLibrary.simpleMessage("Tem nota"),
     "heyHowAreYouFeelingToday": MessageLookupByLibrary.simpleMessage(
       "Olá ###, como você está se sentindo hoje?",
     ),
@@ -318,6 +323,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "keyLearnings": MessageLookupByLibrary.simpleMessage("Aprendizados-chave"),
     "language": MessageLookupByLibrary.simpleMessage("Idioma"),
+    "lastMonth": MessageLookupByLibrary.simpleMessage("Mês passado"),
+    "lastWeek": MessageLookupByLibrary.simpleMessage("Semana passada"),
     "leaveRating": MessageLookupByLibrary.simpleMessage("Avaliar App"),
     "light": MessageLookupByLibrary.simpleMessage("Claro"),
     "localeName": MessageLookupByLibrary.simpleMessage("Português (Brasil)"),
@@ -362,6 +369,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noJournalEntries": MessageLookupByLibrary.simpleMessage(
       "Nenhum registro no diário.",
     ),
+    "noMoodsAvailable": MessageLookupByLibrary.simpleMessage(
+      "Nenhum mood disponível",
+    ),
     "noPaymentRequiredNow": MessageLookupByLibrary.simpleMessage(
       "✔️ Nenhum pagamento necessário agora",
     ),
@@ -370,6 +380,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noTagsAvailable": MessageLookupByLibrary.simpleMessage(
       "Nenhuma tag disponível",
+    ),
+    "noVoicesAvailable": MessageLookupByLibrary.simpleMessage(
+      "Nenhuma voz disponível",
     ),
     "noteSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Nota salva com sucesso.",
@@ -398,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordRestoredSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Sua senha foi redefinida com sucesso.",
     ),
+    "pause": MessageLookupByLibrary.simpleMessage("Pausar"),
     "paywallSubtitle": MessageLookupByLibrary.simpleMessage(
       "Descubra um espaço calmo, sem anúncios, feito para nutrir sua fé com reflexão e crescimento.",
     ),
@@ -413,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberLengthError": MessageLookupByLibrary.simpleMessage(
       "O número de telefone deve ter entre 10 e 15 dígitos.",
     ),
+    "play": MessageLookupByLibrary.simpleMessage("Reproduzir"),
     "pleaseFillAllTheFieldsWithValidData": MessageLookupByLibrary.simpleMessage(
       "Preencha todos os campos com informações válidas.",
     ),
@@ -500,6 +515,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "reminderSetMessage": MessageLookupByLibrary.simpleMessage(
       "Seu lembrete diário está definido para este horário todos os dias.",
     ),
+    "removeFromFavorites": MessageLookupByLibrary.simpleMessage(
+      "Remover dos favoritos",
+    ),
     "removeReminder": MessageLookupByLibrary.simpleMessage("Remover Lembrete"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Reenviar Código"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Redefinir Senha"),
@@ -520,6 +538,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Escolha o mood do seu coração diante de Deus.",
     ),
     "selectTag": MessageLookupByLibrary.simpleMessage("Selecionar Tag"),
+    "selectVoice": MessageLookupByLibrary.simpleMessage("Selecionar voz"),
     "selectYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Selecione seu idioma",
     ),
@@ -528,6 +547,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "setReminder": MessageLookupByLibrary.simpleMessage("Definir Lembrete"),
     "settings": MessageLookupByLibrary.simpleMessage("Configurações"),
+    "share": MessageLookupByLibrary.simpleMessage("Compartilhar"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Compartilhar App"),
     "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
     "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
@@ -619,9 +639,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "Este campo é obrigatório.",
     ),
+    "thisMonth": MessageLookupByLibrary.simpleMessage("Este mês"),
     "thisUsedForAllYourMoodAnalysis": MessageLookupByLibrary.simpleMessage(
       "Isso será usado em todas as suas análises de moods.",
     ),
+    "thisWeek": MessageLookupByLibrary.simpleMessage("Esta semana"),
     "tip": MessageLookupByLibrary.simpleMessage("Dica"),
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "Encorajamento de Hoje",
@@ -706,6 +728,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "whereIsYourHeartToday": MessageLookupByLibrary.simpleMessage(
       "Seu Mood Espiritual",
     ),
+    "withNote": MessageLookupByLibrary.simpleMessage("Com nota"),
+    "withoutNote": MessageLookupByLibrary.simpleMessage("Sem nota"),
     "writeWhatsOnYourHeart": MessageLookupByLibrary.simpleMessage(
       "Escreva o que está em seu coração — seus sentimentos, suas orações ou o que aprendeu hoje.",
     ),

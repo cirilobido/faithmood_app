@@ -253,6 +253,7 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
 
   @override
   Widget build(BuildContext context, ThemeData theme) {
+    final lang = S.of(context);
     return SizedBox(
       width: AppSizes.iconSizeNormal,
       height: AppSizes.iconSizeNormal,
@@ -292,7 +293,7 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
                   ),
                   const SizedBox(width: AppSizes.spacingSmall),
                   Text(
-                    isPlaying ? 'Pause' : 'Play',
+                    isPlaying ? lang.pause : lang.play,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -313,7 +314,7 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
                   ),
                   const SizedBox(width: AppSizes.spacingSmall),
                   Text(
-                    isFavorite ? 'Remove from favorites' : 'Add to favorites',
+                    isFavorite ? lang.removeFromFavorites : lang.addToFavorites,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: isFavorite ? theme.colorScheme.primary : null,
@@ -334,7 +335,7 @@ class DevotionalOptionsHeaderAction extends DetailsPageHeaderAction {
                     ),
                     const SizedBox(width: AppSizes.spacingSmall),
                     Text(
-                      'Share',
+                      lang.share,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -410,7 +411,7 @@ class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
                   ),
                   const SizedBox(width: AppSizes.spacingSmall),
                   Text(
-                    isPlaying ? 'Pause' : 'Play',
+                    isPlaying ? lang.pause : lang.play,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -430,7 +431,7 @@ class MoodEntryOptionsHeaderAction extends DetailsPageHeaderAction {
                     ),
                     const SizedBox(width: AppSizes.spacingSmall),
                     Text(
-                      'Share',
+                      lang.share,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -543,7 +544,7 @@ class DevotionalLogOptionsHeaderAction extends DetailsPageHeaderAction {
                   ),
                   const SizedBox(width: AppSizes.spacingSmall),
                   Text(
-                    isPlaying ? 'Pause' : 'Play',
+                    isPlaying ? lang.pause : lang.play,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),

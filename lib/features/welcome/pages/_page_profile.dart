@@ -54,8 +54,13 @@ class PageProfile extends ConsumerWidget {
                 context: context,
                 selectedLang: vm.selectedLang,
                 onChanged: (value) {
-                  vm.selectedLang = value ?? Lang.en;
-                  vm.langController.text = Lang.toTitle(value: value) ?? '';
+                  if (value != null) {
+                    vm.selectedLang = value;
+                    vm.langController.text = Lang.toTitle(value: value) ?? '';
+                    final appLangProvider = ref.read(appLanguageProvider);
+                    final locale = AppLanguageProvider.langToLocale(value);
+                    appLangProvider.changeLocale(locale);
+                  }
                 },
               );
             },

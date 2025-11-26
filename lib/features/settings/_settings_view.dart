@@ -109,11 +109,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                               await LanguageBottomSheet.show(
                                 context: context,
                                 selectedLang: selectedLang,
-                                onChanged: (value) {
+                                onChanged: (value) async {
                                   if (value != null) {
-                                    langProvider.changeLocale(
-                                      Locale(value.name),
-                                    );
+                                    final locale = Locale(value.name);
+                                    langProvider.changeLocale(locale);
+                                    await viewModel.handleLanguageChange(value);
                                   }
                                 },
                               );

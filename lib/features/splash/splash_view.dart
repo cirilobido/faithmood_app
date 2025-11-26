@@ -106,6 +106,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final lang = S.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final screenWidth = MediaQuery.sizeOf(context).width;
 
@@ -146,7 +147,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
                   vertical: AppSizes.paddingLarge,
                   horizontal: AppSizes.paddingMedium,
                 ),
-                child: Text('Faith Mood', style: theme.textTheme.headlineMedium),
+                child: Text(lang.appDisplayName, style: theme.textTheme.headlineMedium),
               ),
             ),
           ],

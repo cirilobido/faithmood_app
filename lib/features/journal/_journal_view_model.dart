@@ -467,5 +467,17 @@ class JournalViewModel extends StateNotifier<JournalState> {
       await loadDevotionalLogs();
     }
   }
+
+  Future<void> refreshMoods() async {
+    await loadMoods();
+  }
+
+  Future<void> refreshMoodSessions() async {
+    await loadMoodSessions();
+  }
+
+  Future<void> refreshDevotionalLogs() async {
+    await loadDevotionalLogs();
+  }
 }
 

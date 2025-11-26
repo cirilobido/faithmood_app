@@ -8,6 +8,7 @@ import '../widgets_exports.dart';
 import '../../features/devotionals/devotional_details/_devotional_details_view_model.dart';
 import '../../features/journal/mood_entry_details/_mood_entry_details_view_model.dart';
 import '../../features/journal/devotional_log_details/_devotional_log_details_view_model.dart';
+import '../../generated/l10n.dart';
 
 class TtsPlayerDialog {
   static Future<void> show({
@@ -164,6 +165,7 @@ class TtsPlayerDialog {
               )).notifier,
             );
             final theme = Theme.of(context);
+            final lang = S.of(context);
             
             if (state.moodSession == null) {
               return const SizedBox.shrink();
@@ -189,7 +191,7 @@ class TtsPlayerDialog {
                       const SizedBox(width: AppSizes.iconSizeRegular),
                       Expanded(
                         child: Text(
-                          'Journal Entry',
+                          lang.journalEntry,
                           style: theme.textTheme.titleMedium,
                           textAlign: TextAlign.center,
                           maxLines: 2,
@@ -255,6 +257,7 @@ class TtsPlayerDialog {
               devotionalLogDetailsViewModelProvider(id).notifier,
             );
             final theme = Theme.of(context);
+            final lang = S.of(context);
             
             if (state.devotionalLog?.devotional == null) {
               return const SizedBox.shrink();
@@ -277,7 +280,7 @@ class TtsPlayerDialog {
                       const SizedBox(width: AppSizes.iconSizeRegular),
                       Expanded(
                         child: Text(
-                          devotional.title ?? 'Journal Entry',
+                          devotional.title ?? lang.journalEntry,
                           style: theme.textTheme.titleMedium,
                           textAlign: TextAlign.center,
                           maxLines: 2,
