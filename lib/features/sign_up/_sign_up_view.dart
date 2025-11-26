@@ -346,7 +346,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
       },
       child: Text(
         text,
-          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.secondary),
+          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary),
       ),
     );
   }

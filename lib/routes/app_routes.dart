@@ -35,22 +35,23 @@ abstract class AppRoutes {
       ),
       GoRoute(
         path: Routes.signUp,
-        pageBuilder: (context, state) {
-          return const NoTransitionPage(child: SignUpView());
-        },
+        pageBuilder: (context, state) =>
+            buildSlidePage(key: state.pageKey, child: const SignUpView()),
       ),
       GoRoute(
         path: Routes.login,
-        pageBuilder: (context, state) {
-          return const NoTransitionPage(child: LoginView());
-        },
+        pageBuilder: (context, state) =>
+            buildSlidePage(key: state.pageKey, child: const LoginView()),
       ),
       GoRoute(
         path: Routes.forgotPassword,
         pageBuilder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
           final email = extra?['email'] as String?;
-          return NoTransitionPage(child: ForgotPasswordView(email: email));
+          return buildSlidePage(
+            key: state.pageKey,
+            child: ForgotPasswordView(email: email),
+          );
         },
       ),
 
@@ -63,8 +64,10 @@ abstract class AppRoutes {
         routes: [
           GoRoute(
             path: Routes.home,
-            pageBuilder: (context, state) =>
-                buildFadePage<void>(key: state.pageKey, child: const HomeView()),
+            pageBuilder: (context, state) => buildFadePage<void>(
+              key: state.pageKey,
+              child: const HomeView(),
+            ),
           ),
           GoRoute(
             path: Routes.devotional,
@@ -110,8 +113,10 @@ abstract class AppRoutes {
           ),
           GoRoute(
             path: Routes.profile,
-            pageBuilder: (context, state) =>
-                buildFadePage<void>(key: state.pageKey, child: const ProfileView()),
+            pageBuilder: (context, state) => buildFadePage<void>(
+              key: state.pageKey,
+              child: const ProfileView(),
+            ),
           ),
         ],
       ),
@@ -121,7 +126,11 @@ abstract class AppRoutes {
           final extra = state.extra as Map<String, dynamic>?;
           final sessionId = extra?['sessionId'] as String?;
           final initialSession = extra?['initialSession'] as MoodSession?;
-          final saveFuture = extra?['saveFuture'] as Future<({MoodSession? partialSession, String? sessionId})>?;
+          final saveFuture =
+              extra?['saveFuture']
+                  as Future<
+                    ({MoodSession? partialSession, String? sessionId})
+                  >?;
           if (sessionId == null) {
             return NoTransitionPage<void>(child: Container());
           }
@@ -219,12 +228,12 @@ CustomTransitionPage<T> buildFadePage<T>({
 }) {
   const duration = Duration(milliseconds: 450);
   final curve = Curves.easeInOutCubic;
-  
+
   final opacityTween = Tween<double>(
     begin: 0.0,
     end: 1.0,
   ).chain(CurveTween(curve: curve));
-  
+
   final scaleTween = Tween<double>(
     begin: 0.96,
     end: 1.0,
