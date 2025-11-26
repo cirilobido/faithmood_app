@@ -66,12 +66,33 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildHeader(context, theme, vm, state, lang),
-                  if (state.isSearchVisible) ...[
-                    const SizedBox(height: AppSizes.spacingSmall),
-                    _buildSearchBar(context, theme, vm, state, lang),
-                  ],
-                  const SizedBox(height: AppSizes.spacingMedium),
-                  _buildFilterChips(context, theme, vm, state, lang),
+                  AnimatedSize(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeOutCubic,
+                    alignment: Alignment.topCenter,
+                    child: state.isSearchVisible
+                        ? Column(
+                            key: const ValueKey('searchVisible'),
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: AppSizes.spacingSmall),
+                              _buildSearchBar(context, theme, vm, state, lang),
+                            ],
+                          )
+                        : const SizedBox.shrink(key: ValueKey('hidden')),
+                  ),
+                  AnimatedSize(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeOutCubic,
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: AppSizes.spacingMedium),
+                        _buildFilterChips(context, theme, vm, state, lang),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -117,12 +138,25 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
           onTap: () => vm.toggleSearchVisibility(),
           splashColor: Colors.transparent,
           overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-          child: SvgPicture.asset(
-            state.isSearchVisible ? AppIcons.closeIcon : AppIcons.searchIcon,
-            width: AppSizes.iconSizeLarge,
-            colorFilter: ColorFilter.mode(
-              theme.iconTheme.color!,
-              BlendMode.srcIn,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            transitionBuilder: (child, animation) {
+              return ScaleTransition(
+                scale: animation,
+                child: FadeTransition(
+                  opacity: animation,
+                  child: child,
+                ),
+              );
+            },
+            child: SvgPicture.asset(
+              state.isSearchVisible ? AppIcons.closeIcon : AppIcons.searchIcon,
+              key: ValueKey(state.isSearchVisible),
+              width: AppSizes.iconSizeLarge,
+              colorFilter: ColorFilter.mode(
+                theme.iconTheme.color!,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
@@ -137,11 +171,64 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
     CategoriesState state,
     S lang,
   ) {
-    return InputField(
-      hintText: lang.search,
-      textInputAction: TextInputAction.search,
-      initialValue: state.searchQuery,
-      onChanged: (value) => vm.updateSearchQuery(value),
+    // Input field height - matching TextFormField default height
+    const inputHeight = 56.0; // Standard Material Design input height
+    
+    return Stack(
+      alignment: Alignment.center,
+      clipBehavior: Clip.none,
+      children: [
+        // Wave animation - expanding from center (appears first)
+        TweenAnimationBuilder<double>(
+          duration: const Duration(milliseconds: 500),
+          tween: Tween<double>(begin: 0.0, end: 1.0),
+          curve: Curves.easeOutCubic,
+          builder: (context, waveValue, child) {
+            final secondaryColor = theme.colorScheme.secondary;
+            final screenWidth = MediaQuery.of(context).size.width;
+            final maxWidth = screenWidth - (AppSizes.paddingMedium * 2);
+            
+            return IgnorePointer(
+              child: Center(
+                child: Container(
+                  height: inputHeight,
+                  width: maxWidth * waveValue,
+                  decoration: BoxDecoration(
+                    color: secondaryColor.withValues(
+                      alpha: (1 - waveValue.clamp(0.0, 1.0)),
+                    ),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        // Search field (appears after wave starts)
+        TweenAnimationBuilder<double>(
+          duration: const Duration(milliseconds: 400),
+          tween: Tween<double>(begin: 0.0, end: 1.0),
+          curve: Curves.easeOutCubic,
+          builder: (context, fieldValue, child) {
+            return Opacity(
+              opacity: fieldValue,
+              child: Transform.scale(
+                scale: 0.9 + (0.1 * fieldValue),
+                child: child!,
+              ),
+            );
+          },
+          child: Container(
+            key: const ValueKey('searchBar'),
+            child: InputField(
+              hintText: lang.search,
+              textInputAction: TextInputAction.search,
+              initialValue: state.searchQuery,
+              onChanged: (value) => vm.updateSearchQuery(value),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

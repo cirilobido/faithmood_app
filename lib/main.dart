@@ -19,7 +19,6 @@ import 'dev_utils/_logger.dart';
 import 'firebase_options.dart';
 import 'routes/app_routes.dart';
 import 'generated/l10n.dart';
-// import 'firebase_options.dart';
 
 Future<void> main() async {
   // Global error handling
