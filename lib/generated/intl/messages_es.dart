@@ -184,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "✨ Tener un encuentro diario con Dios",
     ),
     "explore": MessageLookupByLibrary.simpleMessage("Explorar"),
+    "faith": MessageLookupByLibrary.simpleMessage("Fe"),
     "feeling": MessageLookupByLibrary.simpleMessage("Sentimiento"),
     "filterByMood": MessageLookupByLibrary.simpleMessage("Filtrar por mood"),
     "findAPlanThatFitsYourJourney": MessageLookupByLibrary.simpleMessage(
@@ -304,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "joinOthersTitle": MessageLookupByLibrary.simpleMessage(
       "🌱 Únete a quienes están creciendo en su fe",
     ),
+    "journal": MessageLookupByLibrary.simpleMessage("Diario"),
     "journalEntry": MessageLookupByLibrary.simpleMessage("Entrada del diario"),
     "just449PerMonthCancelAnytime": MessageLookupByLibrary.simpleMessage(
       "Solo ### al mes — cancela cuando quieras",

@@ -108,7 +108,7 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
             _buildNavItem(
               context: context,
               icon: AppIcons.openBookIcon,
-              label: 'Plans',
+              label: lang.faith,
               isSelected: _selectedIndex == 1,
               onTap: () => _onItemTapped(1),
             ),
@@ -116,7 +116,7 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
             _buildNavItem(
               context: context,
               icon: AppIcons.journalIcon,
-              label: 'Journal',
+              label: lang.journal,
               isSelected: _selectedIndex == 3,
               onTap: () => _onItemTapped(3),
             ),

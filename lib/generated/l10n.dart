@@ -2833,6 +2833,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Journal`
+  String get journal {
+    return Intl.message('Journal', name: 'journal', desc: '', args: []);
+  }
+
+  /// `Faith`
+  String get faith {
+    return Intl.message('Faith', name: 'faith', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -2842,6 +2852,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'es'),
+      Locale.fromSubtags(languageCode: 'pt'),
     ];
   }
 
