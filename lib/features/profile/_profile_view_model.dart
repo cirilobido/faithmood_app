@@ -254,7 +254,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
           }
         case Failure():
           {
-            updateState(isLoading: false, error: false);
+            updateState(isLoading: false, error: true);
           }
       }
     } catch (e) {

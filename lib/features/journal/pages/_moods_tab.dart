@@ -138,9 +138,18 @@ class _MoodsTabState extends ConsumerState<MoodsTab> {
     }
 
     if (state.error && state.moodSessions.isEmpty) {
-      return ErrorState(
-        message: lang.unableToLoadJournalEntries,
-        imagePath: AppIcons.sadPetImage,
+      return RefreshIndicator(
+        onRefresh: () => ref.read(journalViewModelProvider.notifier).loadMoodSessions(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: ErrorState(
+              message: lang.unableToLoadJournalEntries,
+              imagePath: AppIcons.sadPetImage,
+            ),
+          ),
+        ),
       );
     }
 
