@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/core_exports.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../routes/app_routes_names.dart';
 
 class PremiumUpsellCard extends StatelessWidget {
   const PremiumUpsellCard({super.key});
@@ -17,8 +19,10 @@ class PremiumUpsellCard extends StatelessWidget {
         InkWell(
           splashColor: Colors.transparent,
           onTap: () {
-            // TODO: Navigate to subscription screen
-            // context.push(Routes.subscription);
+            context.push(
+              Routes.subscription,
+              extra: PaywallEnum.welcome,
+            );
           },
           child: Container(
             width: double.infinity,

@@ -272,7 +272,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () {
-        context.push(Routes.subscription, extra: PaywallEnum.settingsPlacement);
+        context.push(Routes.subscription, extra: PaywallEnum.defaultId);
       },
       child: Container(
         width: double.infinity,

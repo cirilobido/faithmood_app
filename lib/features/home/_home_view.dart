@@ -29,22 +29,25 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   Future<void> _checkAndShowModals() async {
     if (!mounted) return;
-    
+
     try {
       final vm = ref.read(homeViewModelProvider.notifier);
-      
+
       final shouldShowPremium = await vm.shouldShowPremiumModal();
       if (shouldShowPremium && mounted) {
         final modalType = await vm.getPremiumModalType();
         if (!mounted) return;
-        
+
         if (modalType == 'detailed') {
           PremiumRequestModal.show(
             context: context,
             onPremium: () {
               vm.onPremiumTapped(modalType: 'detailed');
               if (mounted) {
-                context.push(Routes.subscription);
+                context.push(
+                  Routes.subscription,
+                  extra: PaywallEnum.defaultId,
+                );
               }
             },
             onMaybeLater: () {
@@ -57,7 +60,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
             onPremium: () {
               vm.onPremiumTapped(modalType: 'simple');
               if (mounted) {
-                context.push(Routes.subscription);
+                context.push(
+                  Routes.subscription,
+                  extra: PaywallEnum.defaultId,
+                );
               }
             },
             onMaybeLater: () {
@@ -104,9 +110,15 @@ class _HomeViewState extends ConsumerState<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Section
-              _buildHeader(context, theme, greeting, greetingSubtitle, userName),
+              _buildHeader(
+                context,
+                theme,
+                greeting,
+                greetingSubtitle,
+                userName,
+              ),
               const SizedBox(height: AppSizes.spacingLarge),
-              
+
               // Verse of the Day Section
               VerseOfDayCard(
                 isLoading: state.isLoading,
@@ -118,11 +130,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
               const PremiumBannerConditional(),
 
               // Account Setup Alert
-              if (_shouldShowAccountSetupAlert(ref))
-                ...[
-                  const AccountSetupAlert(),
-                  const SizedBox(height: AppSizes.spacingLarge),
-                ],
+              if (_shouldShowAccountSetupAlert(ref)) ...[
+                const AccountSetupAlert(),
+                const SizedBox(height: AppSizes.spacingLarge),
+              ],
 
               // Banner Carousel Section
               // DevotionalBanner(
@@ -149,16 +160,21 @@ class _HomeViewState extends ConsumerState<HomeView> {
               const SizedBox(height: AppSizes.spacingXLarge),
 
               // Premium Promotion Section
-              PremiumPromotionCard(
-                title: lang.yourJourneyBeginsToday,
-                description: lang.unlockMoreDevotionalsAdvanceStats,
-                buttonTitle: lang.discoverPremium,
-                imagePath: AppIcons.happyPetImage,
-                onButtonTap: () {
-                  context.push(Routes.subscription);
-                },
-              ),
-              const SizedBox(height: AppSizes.spacingLarge),
+              if (!vm.isUserPremium())
+                PremiumPromotionCard(
+                  title: lang.yourJourneyBeginsToday,
+                  description: lang.unlockMoreDevotionalsAdvanceStats,
+                  buttonTitle: lang.discoverPremium,
+                  imagePath: AppIcons.happyPetImage,
+                  onButtonTap: () {
+                    context.push(
+                      Routes.subscription,
+                      extra: PaywallEnum.defaultId,
+                    );
+                  },
+                ),
+              if (!vm.isUserPremium())
+                const SizedBox(height: AppSizes.spacingLarge),
             ],
           ),
         ),
@@ -256,7 +272,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   );
                 } else if (isFuture) {
                   backgroundColor = theme.colorScheme.onSurface;
-                } else{
+                } else {
                   backgroundColor = theme.colorScheme.primary.withValues(
                     alpha: 0.2,
                   );

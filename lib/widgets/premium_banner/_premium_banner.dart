@@ -40,11 +40,11 @@ class _PremiumBannerConditionalState
 
   Future<void> _checkShouldShow() async {
     if (!mounted) return;
-    
+
     try {
       final auth = ref.read(auth_prov.authProvider);
       if (!mounted) return;
-      
+
       final isPremium = auth.user?.planType == PlanName.PREMIUM;
       if (isPremium) {
         if (mounted) {
@@ -61,7 +61,7 @@ class _PremiumBannerConditionalState
 
       final dismissedResult = await reviewUseCase.getPremiumBannerDismissed();
       if (!mounted) return;
-      
+
       bool isDismissed = false;
       switch (dismissedResult) {
         case Success(value: final value):
@@ -79,9 +79,10 @@ class _PremiumBannerConditionalState
         return;
       }
 
-      final installationDateResult = await reviewUseCase.getAppInstallationDate();
+      final installationDateResult = await reviewUseCase
+          .getAppInstallationDate();
       if (!mounted) return;
-      
+
       DateTime? installationDate;
       switch (installationDateResult) {
         case Success(value: final value):
@@ -102,7 +103,9 @@ class _PremiumBannerConditionalState
         return;
       }
 
-      final daysSinceInstall = DateTime.now().difference(installationDate).inDays;
+      final daysSinceInstall = DateTime.now()
+          .difference(installationDate)
+          .inDays;
       if (mounted) {
         setState(() {
           _shouldShow = daysSinceInstall >= 1;
@@ -153,11 +156,11 @@ class _PremiumBannerState extends ConsumerState<PremiumBanner> {
 
   Future<void> _checkDismissalState() async {
     if (!mounted) return;
-    
+
     try {
       final reviewUseCase = ref.read(reviewUseCaseProvider);
       if (!mounted) return;
-      
+
       final result = await reviewUseCase.getPremiumBannerDismissed();
       if (!mounted) return;
 
@@ -187,11 +190,11 @@ class _PremiumBannerState extends ConsumerState<PremiumBanner> {
 
   Future<void> _dismissBanner() async {
     if (!mounted) return;
-    
+
     try {
       final reviewUseCase = ref.read(reviewUseCaseProvider);
       if (!mounted) return;
-      
+
       final result = await reviewUseCase.setPremiumBannerDismissed(true);
       if (!mounted) return;
 
@@ -216,16 +219,14 @@ class _PremiumBannerState extends ConsumerState<PremiumBanner> {
 
     final theme = Theme.of(context);
     final lang = S.of(context);
-    
-    if (_bannerText == null) {
-      _bannerText = _getRandomBannerText(lang);
-    }
 
+    _bannerText ??= _getRandomBannerText(lang);
+    
     return Container(
       margin: const EdgeInsets.only(bottom: AppSizes.spacingMedium),
       child: InkWell(
         onTap: () {
-          context.push(Routes.subscription);
+          context.push(Routes.subscription, extra: PaywallEnum.defaultId);
         },
         borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
         child: Container(

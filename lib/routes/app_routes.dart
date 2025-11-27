@@ -196,6 +196,17 @@ abstract class AppRoutes {
           child: const ReminderView(),
         ),
       ),
+      GoRoute(
+        path: Routes.subscription,
+        pageBuilder: (context, state) {
+          final extra = state.extra as PaywallEnum?;
+          final paywall = extra ?? PaywallEnum.defaultId;
+          return buildSlidePage(
+            key: state.pageKey,
+            child: SubscriptionView(paywall: paywall),
+          );
+        },
+      ),
     ],
   );
 }

@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/core_exports.dart';
 import '../../generated/l10n.dart';
+import '../../routes/app_routes_names.dart';
 import '../widgets_exports.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -34,7 +36,11 @@ class CategoryCard extends StatelessWidget {
     final buttonText = ctaText ?? (isPremium ? lang.unlockNow : lang.explore);
 
     return InkWell(
-      onTap: isPremium ? null : onTap,
+      onTap: isPremium
+          ? () {
+              context.push(Routes.subscription, extra: PaywallEnum.defaultId);
+            }
+          : onTap,
       borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppSizes.radiusNormal),
@@ -76,10 +82,7 @@ class CategoryCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (title != null && title!.isNotEmpty)
-                          Text(
-                            title!,
-                            style: theme.textTheme.titleLarge,
-                          ),
+                          Text(title!, style: theme.textTheme.titleLarge),
                         if (description != null && description!.isNotEmpty) ...[
                           const SizedBox(height: AppSizes.spacingXSmall),
                           Text(
@@ -98,7 +101,12 @@ class CategoryCard extends StatelessWidget {
                           isShortText: true,
                           icon: isPremium ? AppIcons.lockIcon : null,
                           onTap: () {
-                            if (!isPremium && onTap != null) {
+                            if (isPremium) {
+                              context.push(
+                                Routes.subscription,
+                                extra: PaywallEnum.defaultId,
+                              );
+                            } else if (onTap != null) {
                               onTap!();
                             }
                           },
@@ -125,4 +133,3 @@ class CategoryCard extends StatelessWidget {
     );
   }
 }
-
