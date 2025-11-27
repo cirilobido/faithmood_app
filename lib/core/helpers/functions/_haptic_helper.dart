@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 
 Future<void> triggerHapticFeedback(
   HapticsType type, {

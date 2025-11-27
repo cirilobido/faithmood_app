@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 
 part '_auth_request.g.dart';
 

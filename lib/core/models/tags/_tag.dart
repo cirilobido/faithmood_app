@@ -1,4 +1,4 @@
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part '_tag.g.dart';

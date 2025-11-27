@@ -1,4 +1,4 @@
-import 'package:faithmood_app/dev_utils/_logger.dart';
+import 'package:selah_app/dev_utils/_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';

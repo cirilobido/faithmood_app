@@ -1,4 +1,4 @@
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/repository/devotional_repository.dart';
 import '../data_sources/remote/devotional_service.dart';

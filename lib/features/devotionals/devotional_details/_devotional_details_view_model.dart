@@ -1,4 +1,4 @@
-import 'package:faithmood_app/generated/l10n.dart';
+import 'package:selah_app/generated/l10n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 

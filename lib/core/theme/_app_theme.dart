@@ -1,6 +1,6 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 
 // 🌎 Project imports:
 

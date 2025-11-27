@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "and": MessageLookupByLibrary.simpleMessage("y"),
     "appLanguage": MessageLookupByLibrary.simpleMessage("Idioma de la app"),
-    "appName": MessageLookupByLibrary.simpleMessage("FaithMood"),
+    "appName": MessageLookupByLibrary.simpleMessage("Selah"),
     "appTheme": MessageLookupByLibrary.simpleMessage("Tema de la app"),
     "appVersionStateappversion": MessageLookupByLibrary.simpleMessage(
       "Versión de la app: ###",
@@ -130,7 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "devotionals": MessageLookupByLibrary.simpleMessage("Devocionales"),
     "discoverPremium": MessageLookupByLibrary.simpleMessage("Descubre Premium"),
     "downloadFaithmoodApp": MessageLookupByLibrary.simpleMessage(
-      "Descargar FaithMood App: ###",
+      "Descargar Selah App: ###",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("Editar"),
     "email": MessageLookupByLibrary.simpleMessage("Correo"),
@@ -304,7 +304,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "El correo o la contraseña no parecen correctos. Revisa tus datos e inténtalo de nuevo.",
     ),
     "joinOthersSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Más del 80% de quienes usan FaithMood sienten que su fe crece en los primeros 30 días.",
+      "Más del 80% de quienes usan Selah sienten que su fe crece en los primeros 30 días.",
     ),
     "joinOthersTitle": MessageLookupByLibrary.simpleMessage(
       "🌱 Únete a quienes están creciendo en su fe",
@@ -438,7 +438,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
     "premiumBanner1": MessageLookupByLibrary.simpleMessage(
-      "Profundiza con FaithMood Premium.",
+      "Profundiza con Selah Premium.",
     ),
     "premiumBanner2": MessageLookupByLibrary.simpleMessage(
       "Desbloquea devocionales exclusivos y estadísticas completas.",
@@ -450,7 +450,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tu camino de fe crece con Premium.",
     ),
     "premiumBanner5": MessageLookupByLibrary.simpleMessage(
-      "Vive FaithMood sin límites.",
+      "Vive Selah sin límites.",
     ),
     "premiumBenefit1Subtitle": MessageLookupByLibrary.simpleMessage(
       "Accede a devocionales premium.",
@@ -519,7 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "rateUs": MessageLookupByLibrary.simpleMessage("Califícanos"),
     "ratingContentDesc": MessageLookupByLibrary.simpleMessage(
-      "FaithMood fue creado para personas como tú",
+      "Selah fue creado para personas como tú",
     ),
     "ratingContentP4Rating": MessageLookupByLibrary.simpleMessage(
       "Es mi momento favorito del día — solo Dios y yo.",
@@ -600,9 +600,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
     "share": MessageLookupByLibrary.simpleMessage("Compartir"),
     "shareApp": MessageLookupByLibrary.simpleMessage("Compartir app"),
-    "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("FaithMood App"),
+    "shareFaithMoodApp": MessageLookupByLibrary.simpleMessage("Selah App"),
     "shareFaithMoodAppMessage": MessageLookupByLibrary.simpleMessage(
-      "FaithMood App\nFaithMood te ayuda a reflexionar sobre tus emociones, fortalecer tu vida espiritual y recibir devocionales guiados para tu día.\nDeberías probarla 👉 ###",
+      "Selah App\nSelah te ayuda a reflexionar sobre tus emociones, fortalecer tu vida espiritual y recibir devocionales guiados para tu día.\nDeberías probarla 👉 ###",
     ),
     "signIn": MessageLookupByLibrary.simpleMessage("Iniciar sesión"),
     "signInNow": MessageLookupByLibrary.simpleMessage("Iniciar sesión ahora"),

@@ -1,4 +1,4 @@
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 
 abstract class AuthRepository {
   Future<User> registerUser(AuthRequest params);

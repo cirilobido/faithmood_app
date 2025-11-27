@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/core_exports.dart';
 import '../../../../dev_utils/dev_utils_exports.dart';
 import '../../domain/repository/analytics_repository.dart';
 import '../data_sources/remote/analytics_service.dart';

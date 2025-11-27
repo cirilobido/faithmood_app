@@ -1,6 +1,6 @@
-# faithmood_app
+# selah_app
 
-FaithMood
+Selah
 
 ## Getting Started
 

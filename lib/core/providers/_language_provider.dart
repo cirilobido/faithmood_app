@@ -1,8 +1,8 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:faithmood_app/core/providers/domain/use_cases/local_storage_use_case.dart';
-import 'package:faithmood_app/core/core_exports.dart';
+import 'package:selah_app/core/providers/domain/use_cases/local_storage_use_case.dart';
+import 'package:selah_app/core/core_exports.dart';
 
 final appLanguageProvider = ChangeNotifierProvider<AppLanguageProvider>((ref) {
   return AppLanguageProvider(ref.read(localStorageUseCaseProvider));

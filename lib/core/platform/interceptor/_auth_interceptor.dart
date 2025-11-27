@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:faithmood_app/features/journal/_journal_view_model.dart';
+import 'package:selah_app/features/journal/_journal_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:faithmood_app/core/core_exports.dart';
-import 'package:faithmood_app/routes/app_routes.dart';
-import 'package:faithmood_app/routes/app_routes_names.dart';
+import 'package:selah_app/core/core_exports.dart';
+import 'package:selah_app/routes/app_routes.dart';
+import 'package:selah_app/routes/app_routes_names.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../../features/home/_home_view_model.dart';

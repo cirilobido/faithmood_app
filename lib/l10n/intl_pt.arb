@@ -96,7 +96,7 @@
   "days3": "3 Dias",
   "days15": "15 Dias",
   "days30": "30 Dias",
-  "joinOthersSubtitle": "Mais de 80% dos usuários de FaithMood sentem sua fé crescer em 30 dias.",
+  "joinOthersSubtitle": "Mais de 80% dos usuários de Selah sentem sua fé crescer em 30 dias.",
 
   "guidedPlanTitle": "📖 Você já seguiu um plano guiado de fé?",
   "guidedPlanQ1": "🙏 Sim, várias vezes",
@@ -142,7 +142,7 @@
 
   "ratingContentTitle": "🎉 Está gostando da experiência?",
   "ratingContentSubtitle": "Seu feedback pode inspirar outros 🙏",
-  "ratingContentDesc": "FaithMood foi criado para pessoas como você",
+  "ratingContentDesc": "Selah foi criado para pessoas como você",
   "ratingContentP4Rating": "É meu momento favorito do dia — só eu e Deus.",
 
   "selectAnOption": "Selecione uma opção",
@@ -320,11 +320,11 @@
   "appVersionStateappversion": "Versão do App: ###",
   "unlockPremiumFeatures": "Desbloquear Recursos Premium",
 
-  "shareFaithMoodApp": "FaithMood App",
-  "shareFaithMoodAppMessage": "FaithMood ajuda você a refletir sobre suas emoções, fortalecer sua vida espiritual e receber devocionais guiados feitos para sua jornada.\nExperimente 👉 ###",
+  "shareFaithMoodApp": "Selah App",
+  "shareFaithMoodAppMessage": "Selah ajuda você a refletir sobre suas emoções, fortalecer sua vida espiritual e receber devocionais guiados feitos para sua jornada.\nExperimente 👉 ###",
 
   "localeName": "Português (Brasil)",
-  "appName": "FaithMood",
+  "appName": "Selah",
   "thisUsedForAllYourMoodAnalysis": "Isso será usado em todas as suas análises de moods.",
 
   "updateInformation": "Atualizar Informações",
@@ -351,7 +351,7 @@
 
   "finishAccountSetup": "Finalizar Configuração da Conta",
   "finishAccountSetupMessage": "Complete seu perfil adicionando e-mail e senha.",
-  "downloadFaithmoodApp": "Baixar o FaithMood App: ###",
+  "downloadFaithmoodApp": "Baixar o Selah App: ###",
 
   "whenYouFeelLookAtThisVerse": "Quando você sentir ###, reflita neste versículo:",
   "vibration": "Vibração",
@@ -411,10 +411,10 @@
   "premiumBenefit3Title": "Sem anúncios",
   "premiumBenefit3Subtitle": "Desfrute de um espaço tranquilo, sem interrupções.",
   
-  "premiumBanner1": "Aprofunde com o FaithMood Premium.",
+  "premiumBanner1": "Aprofunde com o Selah Premium.",
   "premiumBanner2": "Desbloqueie devocionais exclusivos e insights completos.",
   "premiumBanner3": "Premium: mais clareza, mais paz.",
   "premiumBanner4": "Sua jornada de fé cresce com o Premium.",
-  "premiumBanner5": "Viva o FaithMood sem limites."
+  "premiumBanner5": "Viva o Selah sem limites."
 
 }

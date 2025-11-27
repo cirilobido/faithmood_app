@@ -43,7 +43,7 @@ Future<void> main() async {
 
       FlutterNativeSplash.remove();
 
-      runApp(const ProviderScope(child: FaithMoodApp()));
+      runApp(const ProviderScope(child: SelahApp()));
     },
     (error, stack) {
       devLogger('🔥 Uncaught Zone Error: $error\n$stack');
@@ -132,14 +132,14 @@ Future<void> initializeRevenueCat({String? appUserId}) async {
   await Purchases.configure(configuration);
 }
 
-class FaithMoodApp extends ConsumerStatefulWidget {
-  const FaithMoodApp({super.key});
+class SelahApp extends ConsumerStatefulWidget {
+  const SelahApp({super.key});
 
   @override
-  ConsumerState<FaithMoodApp> createState() => _AppState();
+  ConsumerState<SelahApp> createState() => _AppState();
 }
 
-class _AppState extends ConsumerState<FaithMoodApp> {
+class _AppState extends ConsumerState<SelahApp> {
   @override
   Widget build(BuildContext context) {
     final appTheme = ref.watch(appThemeProvider);
@@ -148,7 +148,7 @@ class _AppState extends ConsumerState<FaithMoodApp> {
     ref.read(moodsRefreshProvider);
 
     return MaterialApp.router(
-      title: 'FaithMood',
+      title: 'Selah',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme(),
       darkTheme: AppTheme.darkTheme(),

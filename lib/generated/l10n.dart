@@ -824,10 +824,10 @@ class S {
     return Intl.message('30 Days', name: 'days30', desc: '', args: []);
   }
 
-  /// `Over 80% of those who use FaithMood feel their faith grow within 30 days.`
+  /// `Over 80% of those who use Selah feel their faith grow within 30 days.`
   String get joinOthersSubtitle {
     return Intl.message(
-      'Over 80% of those who use FaithMood feel their faith grow within 30 days.',
+      'Over 80% of those who use Selah feel their faith grow within 30 days.',
       name: 'joinOthersSubtitle',
       desc: '',
       args: [],
@@ -1164,10 +1164,10 @@ class S {
     );
   }
 
-  /// `FaithMood was made for people like you`
+  /// `Selah was made for people like you`
   String get ratingContentDesc {
     return Intl.message(
-      'FaithMood was made for people like you',
+      'Selah was made for people like you',
       name: 'ratingContentDesc',
       desc: '',
       args: [],
@@ -2379,20 +2379,20 @@ class S {
     );
   }
 
-  /// `FaithMood App`
+  /// `Selah App`
   String get shareFaithMoodApp {
     return Intl.message(
-      'FaithMood App',
+      'Selah App',
       name: 'shareFaithMoodApp',
       desc: '',
       args: [],
     );
   }
 
-  /// `FaithMood App\nFaithMood helps you reflect on your emotions, strengthen your spiritual life, and receive guided devotionals made for your journey.\nYou should try it 👉 ###`
+  /// `Selah App\nSelah helps you reflect on your emotions, strengthen your spiritual life, and receive guided devotionals made for your journey.\nYou should try it 👉 ###`
   String get shareFaithMoodAppMessage {
     return Intl.message(
-      'FaithMood App\nFaithMood helps you reflect on your emotions, strengthen your spiritual life, and receive guided devotionals made for your journey.\nYou should try it 👉 ###',
+      'Selah App\nSelah helps you reflect on your emotions, strengthen your spiritual life, and receive guided devotionals made for your journey.\nYou should try it 👉 ###',
       name: 'shareFaithMoodAppMessage',
       desc: '',
       args: [],
@@ -2404,9 +2404,9 @@ class S {
     return Intl.message('English', name: 'localeName', desc: '', args: []);
   }
 
-  /// `FaithMood`
+  /// `Selah`
   String get appName {
-    return Intl.message('FaithMood', name: 'appName', desc: '', args: []);
+    return Intl.message('Selah', name: 'appName', desc: '', args: []);
   }
 
   /// `This is used for all your mood analysis.`
@@ -2629,10 +2629,10 @@ class S {
     );
   }
 
-  /// `Download FaithMood App: ###`
+  /// `Download Selah App: ###`
   String get downloadFaithmoodApp {
     return Intl.message(
-      'Download FaithMood App: ###',
+      'Download Selah App: ###',
       name: 'downloadFaithmoodApp',
       desc: '',
       args: [],
@@ -3079,10 +3079,10 @@ class S {
     );
   }
 
-  /// `Go deeper with FaithMood Premium.`
+  /// `Go deeper with Selah Premium.`
   String get premiumBanner1 {
     return Intl.message(
-      'Go deeper with FaithMood Premium.',
+      'Go deeper with Selah Premium.',
       name: 'premiumBanner1',
       desc: '',
       args: [],
@@ -3119,10 +3119,10 @@ class S {
     );
   }
 
-  /// `Experience FaithMood without limits.`
+  /// `Experience Selah without limits.`
   String get premiumBanner5 {
     return Intl.message(
-      'Experience FaithMood without limits.',
+      'Experience Selah without limits.',
       name: 'premiumBanner5',
       desc: '',
       args: [],
