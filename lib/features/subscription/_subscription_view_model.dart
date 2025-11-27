@@ -85,7 +85,7 @@ class SubscriptionViewModel extends StateNotifier<SubscriptionState> {
   Future<void> updateUserToPremium({required CustomerInfo customerInfo}) async {
     try {
       final productId =
-          customerInfo.entitlements.active['pro']?.productIdentifier;
+          customerInfo.entitlements.active['Selah Premium']?.productIdentifier;
 
       await _authProvider.syncSubscription(customerInfo);
 

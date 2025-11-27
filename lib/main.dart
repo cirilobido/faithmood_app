@@ -118,14 +118,18 @@ Future<void> _initializeCore() async {
 
 Future<void> initializeRevenueCat({String? appUserId}) async {
   PurchasesConfiguration? configuration;
-  if (Platform.isAndroid) {
-    configuration = PurchasesConfiguration('TEST_KEY')
-      ..shouldShowInAppMessagesAutomatically = false
-      ..appUserID = appUserId;
+  String apiKey;
+  if (Platform.isIOS) {
+    apiKey = 'test_qsaUiprkCvENeNANLfuHXLupfwJ';
+  } else if (Platform.isAndroid) {
+    apiKey = 'test_qsaUiprkCvENeNANLfuHXLupfwJ';
+  } else {
+    throw UnsupportedError('Platform not supported');
   }
-  if (configuration != null) {
-    await Purchases.configure(configuration);
-  }
+  configuration = PurchasesConfiguration(apiKey)
+    ..shouldShowInAppMessagesAutomatically = false
+    ..appUserID = appUserId;
+  await Purchases.configure(configuration);
 }
 
 class FaithMoodApp extends ConsumerStatefulWidget {
@@ -140,7 +144,7 @@ class _AppState extends ConsumerState<FaithMoodApp> {
   Widget build(BuildContext context) {
     final appTheme = ref.watch(appThemeProvider);
     final appLang = ref.watch(appLanguageProvider);
-    
+
     ref.read(moodsRefreshProvider);
 
     return MaterialApp.router(
