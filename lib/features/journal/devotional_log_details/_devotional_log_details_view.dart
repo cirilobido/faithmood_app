@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
+import '../../../routes/app_routes_names.dart';
 import '../../../widgets/widgets_exports.dart';
 import '../_journal_view_model.dart';
 import '_devotional_log_details_state.dart';
@@ -72,6 +74,16 @@ class _DevotionalLogDetailsViewState
                 isPlaying: state.isPlaying,
                 isPaused: state.isPaused,
                 onTtsTap: () async {
+                  final auth = ref.read(authProvider);
+                  final isPremium = auth.user?.planType != PlanName.FREE;
+                  
+                  if (!isPremium) {
+                    if (context.mounted) {
+                      context.push(Routes.subscription, extra: PaywallEnum.defaultId);
+                    }
+                    return;
+                  }
+                  
                   final vm = ref.read(
                     devotionalLogDetailsViewModelProvider(widget.id).notifier,
                   );

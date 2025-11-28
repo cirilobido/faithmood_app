@@ -6,6 +6,7 @@ import 'package:haptic_feedback/haptic_feedback.dart';
 import '../../../core/core_exports.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/widgets_exports.dart';
+import '../../../routes/app_routes_names.dart';
 import '../../../features/journal/_journal_view_model.dart';
 import '_devotional_details_view_model.dart';
 import '_devotional_details_state.dart';
@@ -96,6 +97,16 @@ class _DevotionalDetailsViewState extends ConsumerState<DevotionalDetailsView> {
                 isPaused: state.isPaused,
                 onToggleFavorite: () => vm.toggleFavorite(),
                 onTtsTap: () async {
+                  final auth = ref.read(authProvider);
+                  final isPremium = auth.user?.planType != PlanName.FREE;
+                  
+                  if (!isPremium) {
+                    if (context.mounted) {
+                      context.push(Routes.subscription, extra: PaywallEnum.defaultId);
+                    }
+                    return;
+                  }
+                  
                   if (state.isPlaying) {
                     await vm.pauseTTS();
                   } else if (state.isPaused) {
